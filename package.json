@@ -1,0 +1,38 @@
+{
+  "name": "designisdead.github.io",
+  "version": "1.0.0",
+  "description": "Design is Dead website",
+  "author": "Sven Aarts",
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint"
+  },
+  "dependencies": {
+    "highlightjs": "^9.10.0",
+    "marked": "^0.4.0",
+    "moment": "^2.22.2",
+    "nuxt": "^1.0.0",
+    "nuxt-sass-resources-loader": "^2.0.0",
+    "storyblok-nuxt": "0.0.3",
+    "vue-lazyload": "^1.2.6",
+    "vuex-persistedstate": "^2.5.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.1",
+    "css-loader": "^0.28.11",
+    "eslint": "^4.15.0",
+    "eslint-friendly-formatter": "^4.0.1",
+    "eslint-loader": "^2.0.0",
+    "eslint-plugin-vue": "^4.0.0",
+    "node-sass": "^4.9.0",
+    "push-dir": "^0.4.1",
+    "sass-loader": "^7.0.1",
+    "vue-loader": "^13.7.2",
+    "vue-masonry-css": "^1.0.2"
+  }
+}

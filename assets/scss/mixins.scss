@@ -1,0 +1,25 @@
+.Formfield {
+  font-family: $font-primary;
+  font-size: 0.875rem;
+  border: 1px solid (color('medium'));
+  width: 100%;
+  height: 46px;
+  padding: 6px 10px;
+  background-color: transparent;
+  border-radius: 4px;
+  box-shadow: none;
+  display: block;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &:focus {
+    border-color: (color('medium'), 50%);
+    outline: 0;
+  }
+}
+
+.Label {
+  font-weight: normal;
+  font-size: 0.875rem;
+}

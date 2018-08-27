@@ -1,0 +1,39 @@
+.Button {
+  position: relative;
+  display: inline-block;
+  background-color: color('primary');
+  color: color('light');
+  border: 1px solid color('primary');
+  font-size: 1rem;
+  line-height: 1;
+  vertical-align: bottom;
+  padding: 14px 16px;
+  margin-bottom: $spacer/2;
+  overflow: hidden;
+  border-radius: 4px;
+  text-transform: uppercase;
+  user-select: none;
+  margin: 0 $spacer/4;
+  text-align: center;
+
+  &:disabled {
+    opacity: 0.1;
+  }
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  // Button sizes
+  &.fullWidth {
+    width: 100%;
+  }
+
+  // Button variations
+  &.outline {
+    background-color: transparent;
+    border-color: currentColor;
+    color: currentColor;
+  }
+}

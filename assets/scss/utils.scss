@@ -1,0 +1,66 @@
+.u-backgroundTopRight {
+  background-position: top right;
+}
+
+.u-backgroundTopLeft {
+  background-position: top left;
+}
+
+.u-backgroundCenterCenter {
+  background-position: center center;
+}
+
+.u-backgroundSizeContain {
+  background-size: contain;
+}
+
+.u-backgroundSizeCover {
+  background-size: cover;
+}
+
+.u-backgroundRepeatNone,
+.u-backgroundRepeatNoRepeat {
+  background-repeat: no-repeat;
+}
+
+.u-textAlignCenter {
+  text-align: center;
+  img {
+    margin: 0 auto;
+  }
+}
+
+.u-textAlignRight {
+  text-align: right;
+}
+
+.u-centered {
+  display: block;
+  margin: 0 auto;
+}
+
+.u-floatRight {
+  float: right;
+}
+
+.u-noListStyleType {
+  li {
+    padding-left: 0;
+    &:before {
+      display: none;
+    }
+  }
+}
+
+@each $key, $value in $colors {
+  .u-backgroundColor--#{$key} {
+    background-color: $value;
+  }
+
+  .u-color--#{$key} {
+    color: $value;
+    a {
+      color: $value;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+// SPACER
+$spacer: 40px;
+
+// GRID COLUMNS
+$grid-columns: 12;
+
+// FONTS
+$font-size: 16px;
+$font-primary: 'aaux-next', sans-serif;
+$font-secondary: 'Arial', sans-serif;
+$line-height: 1.5; // only for paragraphs, all other elements will have a line-height of 1
+
+// COLORS
+$colors: (
+  primary: #000,
+  secondary: #15275b,
+  light: #fff,
+  greyLight: #eee,
+  medium: #787878,
+  dark: #454545,
+  twitter: #55ACEE,
+  facebook: #3B5998,
+  linkedin: #0976B4,
+);
+
+@function color($key) {
+  @return map-get($colors, $key);
+}
+
+// SIZES / BREAKPOINTS
+$sizes: (
+  tiny: 330px,
+  small: 440px,
+  medium: 800px,
+  large: 1100px,
+  huge: 1400px
+);
+@function size($size) {
+  @return map-get($sizes, $size);
+}

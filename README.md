@@ -1,4 +1,4 @@
-# Nuxt.js + Storyblok starterkit
+# Design is Dead
 
 ## Build Setup
 

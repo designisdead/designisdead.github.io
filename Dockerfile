@@ -1,5 +1,7 @@
 FROM node:8
 
+ENV HOST 0.0.0.0
+
 # Create app directory
 WORKDIR /usr/src/app
 

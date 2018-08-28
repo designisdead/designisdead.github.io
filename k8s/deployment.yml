@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: did-website-node
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: did-website-node
+    spec:
+      containers:
+      - name: did-website-node
+        image: designisdead/website
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000

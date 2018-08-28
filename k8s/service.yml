@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: node-example
+  name: did-website-node
   labels:
-    app: node-example
+    app: did-website-node
 spec:
   selector:
-    app: node-example
+    app: did-website-node
   ports:
   - port: 3000
     protocol: TCP

@@ -25,6 +25,11 @@
     text-decoration: none;
   }
 
+  &.white {
+    color: black;
+    background-color: white;
+  }
+
   // Button sizes
   &.fullWidth {
     width: 100%;

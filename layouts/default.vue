@@ -31,7 +31,8 @@
             <div class="Navigation">
               <nuxt-link class="Navigation-link"
                          :key="index" v-for="(navitem, index) in $store.state.settings.primary_navigation"
-                         :to="'/' + navitem.link.cached_url">
+                         :to="'/' + navitem.link.cached_url"
+                         :class="{ 'Navigation-link--border': navitem.border }" >
                 {{ navitem.title }}
               </nuxt-link>
             </div>
@@ -322,25 +323,29 @@
   }
 
   .Navigation-link {
-    font-weight: bold;
     display: inline-block;
     padding: 7px 10px;
     margin: 0 5px;
     text-decoration: none !important;
     transition: 0.25s ease opacity;
-    opacity: 0.5;
+    opacity: 1;
     line-height: 1;
     text-transform: uppercase;
     font-size: 0.85rem;
-    border-radius: 20px;
+    border: 1px solid transparent;
 
     &.nuxt-link-active {
       opacity: 1;
+      font-weight: bold;
     }
 
     &:hover {
-      opacity: 1;
+      opacity: 0.5;
     }
+  }
+
+  .Navigation-link--border {
+    border-color: black;
   }
 
   .MobileNavigation-link {

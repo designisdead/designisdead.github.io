@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: did-website-node
+  labels:
+    app: did-website-node
+spec:
+  selector:
+    app: did-website-node
+  ports:
+  - port: 3000
+    protocol: TCP
+    nodePort: 30001
+  type: NodePort

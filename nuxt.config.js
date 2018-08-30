@@ -24,11 +24,15 @@ module.exports = {
     meta: [
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
-      {name: 'theme-color', content: '#000001'}, // Chrome tab color on android
-      {hid: 'description', name: 'description', content: 'Nuxt + Storyblok'}
+      {name: 'theme-color', content: '#fffffe'}, // Chrome tab color on android
+      {hid: 'description', name: 'description', content: 'Design is Dead'}
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
+      {rel: 'icon', type: 'image/png', href: '/favicon-32x32.png'},
+      {rel: 'icon', type: 'image/png', href: '/favicon-16x16.png'},
+      {rel: 'manifest', href: '/manifest.json'},
+      {rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5'},
       {
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css?family=Zilla+Slab:400,700'

@@ -23,6 +23,7 @@ import Spinner from '@/components/Spinner';
 import Buttons from '@/components/Buttons.vue';
 import Button from '@/components/Button.vue';
 import VideoBackground from '@/components/VideoBackground.vue';
+import Particles from '@/components/Particles.vue';
 
 
 Vue.component('author', Author)
@@ -49,3 +50,4 @@ Vue.component('spinner', Spinner)
 Vue.component('buttons', Buttons)
 Vue.component('vueButton', Button)
 Vue.component('videoBackground', VideoBackground)
+Vue.component('particles', Particles)

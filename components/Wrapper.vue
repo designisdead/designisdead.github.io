@@ -1,6 +1,6 @@
 <template>
   <div v-editable="Blok">
-    <div class="Wrapper" :class="[Blok.backgroundcolor, Blok.textcolor]">
+    <div class="Wrapper" :class="[Blok.backgroundcolor, Blok.textcolor, Blok.wrapperheight]">
       <div class="Wrapper-content" :class="[Size]">
         <component :key="Blok._uid" v-for="Blok in Blok.elements" :blok="Blok" :is="Blok.component"></component>
         <slot></slot>
@@ -16,7 +16,7 @@
           'u-backgroundSizeContain': Blok.backgroundsize == 'contain',
         }">
       </div>
-
+      <particles v-if="Blok.backgroundeffect == 'particles'"></particles>
       <video-background :src="Blok.backgroundvideosrc" :poster="Blok.backgroundimage" v-if="Blok.backgroundvideosrc && Blok.backgroundimage"></video-background>
     </div>
   </div>
@@ -43,6 +43,24 @@
 
   .Wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
+
+    &.halfscreen {
+      min-height: 50vh;
+    }
+
+    &.threequarterscreen {
+      min-height: 75vh;
+    }
+
+    &.fullscreen {
+      min-height: 100vh;
+    }
+
+    &.fullscreenMinusHeader {
+      min-height: calc(100vh - 70px);
+    }
   }
 
   .Wrapper-content {
@@ -50,6 +68,7 @@
     margin: 0 auto;
     padding: 0 $spacer/2;
     z-index: 1;
+    width: 100%;
 
     @each $key, $value in $sizes {
       &.#{$key} {

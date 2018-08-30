@@ -25,6 +25,11 @@
     text-decoration: none;
   }
 
+  &.black {
+    color: white;
+    background-color: black;
+  }
+
   &.white {
     color: black;
     background-color: white;

@@ -22,21 +22,11 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import VueParticles from 'vue-particles'
+  /*
+  import Vue from 'vue';
+  const VueParticles = require('vue-particles');
   Vue.use(VueParticles)
-
-  export default {
-    props: ['blok'],
-    mounted() {
-      /*
-      let targets = this.$el.querySelectorAll('code')
-      targets.forEach((target) => {
-        highlightjs.highlightBlock(target)
-      });
-      */
-    },
-  }
+  */
 </script>
 
 <style>

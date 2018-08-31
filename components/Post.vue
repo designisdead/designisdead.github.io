@@ -87,7 +87,6 @@ This component is used to render the Post content type on Storyblok
     perspective-origin: center top;
     transform-style: preserve-3d;
     overflow-x: hidden;
-    overflow-y: scroll;
     -webkit-overflow-scrolling: touch;
   }
 
@@ -100,7 +99,7 @@ This component is used to render the Post content type on Storyblok
       translateZ(-#{$scroll-factor * 2}px)
       scale(1 + $scroll-factor * 2);
 
-    height: 100vh;
+    height: calc(100vh - 70px);
     @media screen and (min-width: 600px) and (min-height: 600px)     {
       height: 50vh;
     }

@@ -83,10 +83,12 @@ This component is used to render the Post content type on Storyblok
   $scroll-factor : .5;
   .Post {
     height: calc(100vh - 70px);
-    overflow-x: hidden;
     perspective: 1px;
     perspective-origin: center top;
     transform-style: preserve-3d;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
   }
 
   .Post-header {

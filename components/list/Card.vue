@@ -8,11 +8,13 @@
         </div>
         <div class="Card-content">
           <header class="Card-header">
-            <h2 class="tiny">
-              <span v-if="post.content.published">Posted <time :datetime="dataTime">{{ fromNow }}</time></span><br />
-              <author v-if="post.content.author" :id="post.content.author"></author>
+            <p class="Card-author" v-if="post.content.author">
+              <author :id="post.content.author"></author>
+            </p>
+            <h2 class="Card-meta micro uppercase" v-if="post.content.published">
+              <time :datetime="dataTime">{{ formattedDate }}</time>
             </h2>
-            <h1 class="medium">{{ post.name }}</h1>
+            <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
           </header>
         </div>
       </article>
@@ -29,6 +31,9 @@
       dataTime() {
         return moment(this.post.content.published).format('YYYY-MM-DD HH:mm');
       },
+      formattedDate() {
+        return moment(this.post.content.published).format('dddd MMMM D, YYYY');
+      },
       fromNow() {
         return moment(this.post.content.published).fromNow();
       }
@@ -40,13 +45,25 @@
 
   .Card {
     background: white;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.15);
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
     padding: 0;
     margin: 0 $spacer/2 $spacer;
     list-style-type: none;
     > a:hover {
       text-decoration: none;
     }
+  }
+
+  .Card-title {
+    letter-spacing: 1.25px;
+  }
+
+  .Card-meta {
+    padding-bottom: 10px;
+  }
+
+  p.Card-author {
+    padding-bottom: 10px;
   }
 
   .Card-content {

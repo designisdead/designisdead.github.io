@@ -14,6 +14,7 @@
           'u-backgroundTopLeft': Blok.backgroundposition == 'top left',
           'u-backgroundSizeCover': Blok.backgroundsize == 'cover',
           'u-backgroundSizeContain': Blok.backgroundsize == 'contain',
+          'u-backgroundAttachmentFixed' : Blok.backgroundfixed == 'fixed'
         }">
       </div>
       <particles v-if="Blok.backgroundeffect == 'particles'"></particles>

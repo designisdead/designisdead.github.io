@@ -87,7 +87,7 @@ This component is used to render the Post content type on Storyblok
     perspective-origin: center top;
     transform-style: preserve-3d;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
+    // -webkit-overflow-scrolling: touch; 
   }
 
   .Post-header {

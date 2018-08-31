@@ -1,6 +1,6 @@
 <template>
   <div v-editable="Blok">
-    <div class="Wrapper" :class="[Blok.backgroundcolor, Blok.textcolor, Blok.wrapperheight]">
+    <div class="Wrapper" :class="[Blok.backgroundcolor, Blok.textcolor, Height]">
       <div class="Wrapper-content" :class="[Size]">
         <component :key="Blok._uid" v-for="Blok in Blok.elements" :blok="Blok" :is="Blok.component"></component>
         <slot></slot>
@@ -27,7 +27,8 @@
   export default {
     props: {
       blok: Object,
-      size: String
+      size: String,
+      height: String
     },
     computed: {
       Blok() {
@@ -35,6 +36,14 @@
       },
       Size() {
         return this.size || this.blok.size;
+      },
+      Height() {
+        if(this.height) {
+          return this.height;
+        }
+        if(this.blok && this.blok.wrapperheight) {
+          return this.blok.wrapperheight;
+        }
       }
     }
   }

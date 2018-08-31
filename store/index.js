@@ -5,23 +5,30 @@ import storyblokSettings from '~/plugins/storyblokSettings';
 const store = () => {
   return new Vuex.Store({
     state: {
+      settings: {},
       posts: [],
       post: {}
     },
     actions: {
-      async nuxtServerInit ({commit}, {params}) {
+      async nuxtServerInit ({commit}, context) {
+        let params = context.params;
+
         if(process.server) {
           if (params.folder && params.subslug) {
             return this.$storyapi.get(`cdn/stories/${params.folder}/${params.subslug}?cv=` + Date.now(), {
               version: storyblokSettings.version
             }).then((res) => {
               commit('setPost', res.data.story)
-            })
+            }).catch((res) => {
+              context.error({ statusCode: res.response.status, message: res.response.data.error })
+            });
           }
           else if(params.slug) {
             return this.$storyapi.get(`cdn/stories/${params.slug}?cv=` + Date.now(), {
               version: storyblokSettings.version
-            })
+            }).catch((res) => {
+              context.error({ statusCode: res.response.status, message: res.response.data.error })
+            });
           }
         }
       },

@@ -3,7 +3,7 @@
     <span class="Author-avatar">
       <img v-lazy="$options.filters.imageApi(Author.content.secondaryimage, 'tiny')" />
     </span>
-    <span class="Author-name Title micro uppercase">{{ Author.name }}</span>
+    <span class="Author-name">{{ Author.name }}</span>
   </span>
 </template>
 

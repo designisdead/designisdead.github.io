@@ -1,6 +1,9 @@
 <template>
   <li class="Card">
-    <nuxt-link :key="post.full_slug" :to="'/' + post.full_slug">
+    <nuxt-link
+      :key="post.full_slug"
+      :to="'/' + post.full_slug"
+      @mouseover.native="preloadHeader($options.filters.imageApi(post.content.primaryimage, 'large'))">
       <article>
         <div class="Card-image"
           v-if="post.content.primaryimage"
@@ -32,6 +35,12 @@
 
   export default {
     props: ['post'],
+    methods: {
+      preloadHeader(url) {
+        var img=new Image();
+        img.src=url;
+      }
+    },
     computed: {
       dataTime() {
         return moment(this.post.content.published).format('YYYY-MM-DD HH:mm');
@@ -72,10 +81,12 @@
 
   p.Card-author {
     padding-bottom: 10px;
+    font-size: 10px;
+    text-transform: uppercase;
   }
 
   .Card-content {
-    padding: $spacer/2 $spacer/2 0 $spacer/2;
+    padding: $spacer/2;
   }
 
   .Card-image {

@@ -43,32 +43,6 @@
             <nuxt/>
           </main>
         </div>
-        <div class="Page-footer">
-          <wrapper size="large">
-            <div class="Footer">
-              <div class="Footer-left">
-                <a href="https://twitter.com/designisdead" class="u-color--twitter">
-                  <icon type="twitter" />
-                </a>
-                &nbsp;
-                <a href="https://www.facebook.com/DesignisDead/" class="u-color--facebook">
-                  <icon type="facebook" />
-                </a>
-                &nbsp;
-                <a href="https://www.linkedin.com/company/design-is-dead" class="u-color--linkedin">
-                  <icon type="linkedin" />
-                </a>
-              </div>
-              <div class="Footer-right">
-                <span class="Footer-copyright">&copy;  2018</span>
-                &nbsp;
-                <span class="Footer-knuckles">
-              <icon type="knuckles" />
-          </span>
-              </div>
-            </div>
-          </wrapper>
-        </div>
       </div>
     </div>
     <svg style="display: none;">
@@ -278,7 +252,7 @@
   }
 
   .Page-header {
-    position: relative; // IE11
+    position: relative;
     position: sticky;
     width: 100%;
     height: $pageHeaderHeight;
@@ -421,3 +395,11 @@
     margin-left: 5px;
   }
 </style>
+
+<script>
+  export default {
+    mounted() {
+      console.log('mounted');
+    }
+  }
+</script>

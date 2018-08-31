@@ -24,6 +24,7 @@ import Buttons from '@/components/Buttons.vue';
 import Button from '@/components/Button.vue';
 import VideoBackground from '@/components/VideoBackground.vue';
 import Particles from '@/components/Particles.vue';
+import Doormat from '@/components/Doormat.vue';
 
 
 Vue.component('author', Author)
@@ -51,3 +52,4 @@ Vue.component('buttons', Buttons)
 Vue.component('vueButton', Button)
 Vue.component('videoBackground', VideoBackground)
 Vue.component('particles', Particles)
+Vue.component('doormat', Doormat)

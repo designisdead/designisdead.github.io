@@ -53,7 +53,7 @@ export default {
      * Get data for list components
      */
     async function getListContent(listObject) {
-      console.log('listObject');
+      // console.log('listObject');
       // console.log(listObject);
       return await context.app.$storyapi.get('cdn/stories' , {
         version: storyblokSettings.version,

@@ -11,7 +11,13 @@ This component is used to render the Post content type on Storyblok
           <h1>{{ pagetitle }}</h1>
         </wrapper>
         <div class="Title tiny uppercase" v-if="blok.published">
-          <small>Posted <time :datetime="dataTime">{{ fromNow }}</time> by <em><author v-if="blok.author" :id="blok.author"></author></em></small>
+          <span class="Post-tags" v-if="tags.length > 0">
+            <strong v-for="tag in tags">
+              {{ tag }}
+            </strong> |
+          </span>
+          <time :datetime="dataTime">{{ formattedDate }}</time><br>
+          <em><author v-if="blok.author" :id="blok.author"></author></em>
         </div>
         <spacer size="medium"></spacer>
       </header>
@@ -48,8 +54,14 @@ This component is used to render the Post content type on Storyblok
       dataTime() {
         return moment(this.blok.published).format('YYYY-MM-DD HH:mm');
       },
+      formattedDate() {
+        return moment(this.blok.published).format('dddd MMMM D, YYYY');
+      },
       fromNow() {
         return moment(this.blok.published).fromNow();
+      },
+      tags() {
+        return this.blok.tags && this.blok.tags.tags ? this.blok.tags.tags : {};
       }
     }
   }

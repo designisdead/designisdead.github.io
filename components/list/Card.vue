@@ -12,6 +12,11 @@
               <author :id="post.content.author"></author>
             </p>
             <h2 class="Card-meta micro uppercase" v-if="post.content.published">
+              <span class="Post-tags" v-if="tags.length > 0">
+                <strong v-for="tag in tags">
+                  {{ tag }}
+                </strong> |
+              </span>
               <time :datetime="dataTime">{{ formattedDate }}</time>
             </h2>
             <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
@@ -36,6 +41,9 @@
       },
       fromNow() {
         return moment(this.post.content.published).fromNow();
+      },
+      tags() {
+        return this.post.content.tags && this.post.content.tags.tags ? this.post.content.tags.tags : {};
       }
     }
   }

@@ -1,32 +1,94 @@
 <template>
   <div class="Particles">
-    <vue-particles
-      color="#ffffff"
-      :particleOpacity="0.3"
-      :particlesNumber="150"
-      shapeType="circle"
-      :particleSize="5"
-      linesColor="#ffffff"
-      :linesWidth="1"
-      :lineLinked="true"
-      :lineOpacity="0.2"
-      :linesDistance="150"
-      :moveSpeed="2"
-      :hoverEffect="true"
-      hoverMode="grab"
-      :clickEffect="true"
-      clickMode="push"
-    >
-    </vue-particles>
+    <div id="particles-js"></div>
   </div>
 </template>
 
 <script>
-  /*
-  import Vue from 'vue';
-  const VueParticles = require('vue-particles');
-  Vue.use(VueParticles)
-  */
+  export default {
+    name: 'vue-particles',
+    mounted () {
+      // import particle.js only on client-side
+      require('particles.js');
+      this.$nextTick(() => {
+        this.initParticleJS()
+      })
+    },
+    methods: {
+      initParticleJS () {
+        particlesJS('particles-js', {
+          "particles": {
+            "number": {
+              "value": 80,
+              "density": {
+                "enable": true,
+                "value_area": 800
+              }
+            },
+            "color": {
+              "value": "#ffffff"
+            },
+            "shape": {
+              "type": "circle",
+              "stroke": {
+                "width": 0,
+                "color": "#000000"
+              },
+              "polygon": {
+                "nb_sides": 5
+              },
+              "image": {
+                "src": "img/github.svg",
+                "width": 100,
+                "height": 100
+              }
+            },
+            "opacity": {
+              "value": 0.5,
+              "random": false,
+              "anim": {
+                "enable": false,
+                "speed": 1,
+                "opacity_min": 0.1,
+                "sync": false
+              }
+            },
+            "size": {
+              "value": 5,
+              "random": true,
+              "anim": {
+                "enable": false,
+                "speed": 40,
+                "size_min": 0.1,
+                "sync": false
+              }
+            },
+            "line_linked": {
+              "enable": true,
+              "distance": 150,
+              "color": "#ffffff",
+              "opacity": 0.2,
+              "width": 1
+            },
+            "move": {
+              "enable": true,
+              "speed": 2,
+              "direction": "none",
+              "random": false,
+              "straight": false,
+              "out_mode": "out",
+              "attract": {
+                "enable": false,
+                "rotateX": 600,
+                "rotateY": 1200
+              }
+            }
+          },
+          "retina_detect": true,
+        });
+      }
+    }
+  }
 </script>
 
 <style>

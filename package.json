@@ -30,10 +30,10 @@
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^4.0.0",
     "node-sass": "^4.9.0",
+    "particles.js": "^2.0.0",
     "push-dir": "^0.4.1",
     "sass-loader": "^7.0.1",
     "vue-loader": "^13.7.2",
-    "vue-masonry-css": "^1.0.2",
-    "vue-particles": "^1.0.9"
+    "vue-masonry-css": "^1.0.2"
   }
 }

@@ -395,11 +395,3 @@
     margin-left: 5px;
   }
 </style>
-
-<script>
-  export default {
-    mounted() {
-      console.log('mounted');
-    }
-  }
-</script>

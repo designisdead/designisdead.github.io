@@ -25,6 +25,7 @@ import Button from '@/components/Button.vue';
 import VideoBackground from '@/components/VideoBackground.vue';
 import Particles from '@/components/Particles.vue';
 import Doormat from '@/components/Doormat.vue';
+import TextRotator from '@/components/TextRotator.vue';
 
 
 Vue.component('author', Author)
@@ -53,3 +54,4 @@ Vue.component('vueButton', Button)
 Vue.component('videoBackground', VideoBackground)
 Vue.component('particles', Particles)
 Vue.component('doormat', Doormat)
+Vue.component('textrotator', TextRotator)

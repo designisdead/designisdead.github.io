@@ -12,6 +12,14 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'quick_toyregular';
+  src: url('~assets/fonts/quicktoy-webfont.woff2') format('woff2'),
+  url('~assets/fonts/quicktoy-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 // RESET
 @import "reset";
 

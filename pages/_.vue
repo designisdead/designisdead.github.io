@@ -57,8 +57,6 @@ export default {
      * Get data for list components
      */
     async function getListContent(listObject) {
-      // console.log('listObject');
-      // console.log(listObject);
       return await context.app.$storyapi.get('cdn/stories' , {
         version: storyblokSettings.version,
         cv: storyblokSettings.cv,
@@ -94,19 +92,22 @@ export default {
     }
 
     // Load page slug from the API
-    const slug = context.params.slug ? context.params.slug : '/home';
-    let page = await context.app.$storyapi.get(`cdn/stories/${slug}`, {
+    const slug = context.route.path == '/' || context.route.path == '' ? '/home' : context.route.path;
+    let page = await context.app.$storyapi.get(`cdn/stories${slug}`, {
       cv: moment().format('YYYYMMDDHHmm'),
       version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
     }).then((res) => {
       return res.data
     }).catch((res) => {
-      context.error({ statusCode: res.response.status, message: res.response.data })
+      context.error({ statusCode: res.response.status, message: res.response.data.error })
     });
 
-    page.story.content.body = await enrichJsonObject(page.story.content.body);
+    if(page && page.story.content.body) {
+      page.story.content.body = await enrichJsonObject(page.story.content.body);
+    }
 
     return page;
+
   }
 }
 </script>

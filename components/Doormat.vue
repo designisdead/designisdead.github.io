@@ -16,7 +16,7 @@
           </a>
         </div>
         <div class="Footer-right">
-          <span class="Footer-copyright">&copy; 2018</span>
+          <span class="Footer-copyright">&copy; {{ year }}</span>
           &nbsp;
           <span class="Footer-knuckles"><icon type="knuckles" /></span>
         </div>
@@ -24,3 +24,13 @@
     </wrapper>
   </div>
 </template>
+
+<script>
+  export default {
+    computed: {
+      year() {
+        return new Date().getFullYear();
+      }
+    }
+  }
+</script>

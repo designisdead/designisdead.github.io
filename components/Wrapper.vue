@@ -57,6 +57,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    will-change: min-height;
+    transition: 0.4s min-height ease-out;
 
     &.halfscreen {
       min-height: 50vh;
@@ -81,6 +83,8 @@
     padding: 0 $spacer/2;
     z-index: 1;
     width: 100%;
+    will-change: max-width;
+    transition: 0.25s max-width ease-out;
 
     @each $key, $value in $sizes {
       &.#{$key} {

@@ -3,15 +3,15 @@
     <header class="Brick-content">
       <div class="Brick-profileImage" v-if="post.content.secondaryimage">
         <img
-          v-lazy="$options.filters.imageApi(post.content.secondaryimage, 'tiny')"
+          :src="$options.filters.imageApi(post.content.secondaryimage, 'tiny')"
           alt="post.name" />
       </div>
       <h1 class="medium noSpaceBelow u-color--light">{{ post.name }}</h1>
       <h2 class="small noSpaceBelow u-color--light" v-if="post.content.jobtitle">{{ post.content.jobtitle }}</h2>
     </header>
     <div class="Brick-backgroundImage" v-if="post.content.primaryimage">
-      <img class="Brick-backgroundImage"
-        v-lazy="$options.filters.imageApi(post.content.primaryimage, 'large')" />
+      <img :src="$options.filters.imageApi(post.content.primaryimage, 'nano')"
+           v-lazy="$options.filters.imageApi(post.content.primaryimage, 'large')" />
     </div>
   </article>
 </template>
@@ -40,6 +40,7 @@
   }
 
   .Brick-backgroundImage {
+    overflow: hidden;
     &:after {
       content: ' ';
       position: absolute;
@@ -48,6 +49,7 @@
       z-index: 1;
       top: 0;
       left: 0;
+      overflow: hidden;
       /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,000000+100&0+0,0.35+100 */
       background: -moz-linear-gradient(top,  rgba(125,185,232,0) 0%, rgba(0,0,0,0.35) 100%); /* FF3.6-15 */
       background: -webkit-linear-gradient(top,  rgba(125,185,232,0) 0%,rgba(0,0,0,0.35) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -58,6 +60,12 @@
       display: block;
       width: 100%;
       height: auto;
+      filter: blur(15px);
+      transform: scale(1.1);
+      transition: 0.25s 1s filter ease-out;
+      &[lazy=loaded] {
+        filter: blur(0px);
+      }
     }
   }
 

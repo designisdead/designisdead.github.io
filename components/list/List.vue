@@ -2,7 +2,7 @@
   <div v-editable="blok">
       <!-- If list type is masonry -->
       <masonry v-if="blok.listtype == 'masonry'"
-               :cols="{default: 4, 1400: 3, 700: 2, 400: 1}"
+               :cols="{default: 3, 1400: 3, 700: 2, 400: 1}"
                :gutter="0">
         <div v-for="(post, index) in blok.listcontent" :key="index">
           <brick :post="post" />
@@ -31,8 +31,6 @@
 
   export default {
     data () {
-      console.log(this.blok);
-
       return {
         page: 1,
         perPage: this.blok.perpage,

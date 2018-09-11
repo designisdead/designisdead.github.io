@@ -1,6 +1,7 @@
 <template>
-  <div class="VideoBackground"
-       v-lazy:background-image="$options.filters.imageApi(poster, 'large')">
+  <div class="VideoBackground">
+    <div class="VideoBackground-overlay"
+         :style="'background-image: url(' + $options.filters.imageApi(poster, 'large') + ')'"></div>
     <video class="VideoBackground-video" :poster="poster" playsinline autoplay loop muted>
       <!--
     - Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
@@ -40,7 +41,14 @@
     },
     methods: {
       startVideo: function (video) {
-        video.classList.add('VideoBackground-video--playing');
+        // remove video overlay when video is already playing > smooth start
+        const raf = () => {
+          requestAnimationFrame(raf)
+          if(video.currentTime > 0.5) {
+            video.classList.add('VideoBackground-video--playing');
+          }
+        }
+        requestAnimationFrame(raf);
       },
       stopVideo: function (video) {
         video.pause();
@@ -49,7 +57,9 @@
     }
   }
 </script>
+
 <style lang="scss">
+  .VideoBackground-overlay,
   .VideoBackground {
     position: absolute;
     z-index: 0;
@@ -78,5 +88,6 @@
 
   .VideoBackground-video--playing {
     opacity: 1;
+    z-index: 1;
   }
 </style>

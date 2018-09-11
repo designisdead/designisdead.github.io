@@ -27,6 +27,7 @@ const store = () => {
             return this.$storyapi.get(`cdn/stories/${params.slug}?cv=` + Date.now(), {
               version: storyblokSettings.version
             }).catch((res) => {
+              console.log(res);
               context.error({ statusCode: res.response.status, message: res.response.data.error })
             });
           }

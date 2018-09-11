@@ -17,13 +17,17 @@
       return { story: { content: {} } }
     },
     mounted () {
-      this.$storyblok.init()
-      this.$storyblok.on('change', () => {
-        location.reload(true)
-      })
-      this.$storyblok.on('published', () => {
-        location.reload(true)
-      })
+      this.$storyblok.init();
+      this.$storyblok.on(['input', 'published', 'change'], (event) => {
+        if (event.action == 'input') {
+          if (event.story.id === this.story.id) {
+            this.story.content = event.story.content;
+          }
+        }
+        else {
+          window.location.reload(true);
+        }
+      });
     },
     head () {
       let story = this.story

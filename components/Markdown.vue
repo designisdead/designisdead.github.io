@@ -40,8 +40,11 @@
         this.html = marked(text);
       },
     },
-    created() {
-      this.createHTML();
+    mounted() {
+      // @todo: only run setInterval when we are in edit mode
+      setInterval(() => {
+        this.createHTML();
+      }, 250);
     },
     beforeMount() {
       this.createHTML();

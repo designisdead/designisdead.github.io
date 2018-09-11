@@ -4,7 +4,6 @@
 
 <script>
   import marked    from 'marked';
-  import { VNode } from 'vue';
 
   marked.setOptions({
     renderer:    new marked.Renderer(),

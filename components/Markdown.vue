@@ -45,6 +45,9 @@
         this.createHTML();
       }, 250);
     },
+    created() {
+      this.createHTML();
+    },
     beforeMount() {
       this.createHTML();
     },

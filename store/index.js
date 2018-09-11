@@ -1,4 +1,6 @@
 import Vuex from 'vuex';
+import moment from 'moment';
+
 
 import storyblokSettings from '~/plugins/storyblokSettings';
 
@@ -10,30 +12,23 @@ const store = () => {
       post: {}
     },
     actions: {
+      /*
       async nuxtServerInit ({commit}, context) {
-        let params = context.params;
-
         if(process.server) {
-          if (params.folder && params.subslug) {
-            return this.$storyapi.get(`cdn/stories/${params.folder}/${params.subslug}?cv=` + Date.now(), {
-              version: storyblokSettings.version
-            }).then((res) => {
-              commit('setPost', res.data.story)
-            }).catch((res) => {
-              context.error({ statusCode: res.response.status, message: res.response.data.error })
-            });
-          }
-          else if(params.slug) {
-            return this.$storyapi.get(`cdn/stories/${params.slug}?cv=` + Date.now(), {
-              version: storyblokSettings.version
-            }).catch((res) => {
-              console.log(res);
-              context.error({ statusCode: res.response.status, message: res.response.data.error })
-            });
-          }
+          // Load page slug from the API
+          const slug = context.route.path == '/' || context.route.path == '' ? '/home' : context.route.path;
+          console.log(`${slug} is a valid slug. Rendering page from nuxtServerInit`)
+          return await context.app.$storyapi.get(`cdn/stories${slug}`, {
+            cv: moment().format('YYYYMMDDHHmm'),
+            version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
+          }).then((res) => {
+            return res.data
+          }).catch((res) => {
+            context.error({ statusCode: res.response.status, message: res.response.data.error })
+          });
         }
       },
-
+      */
       async loadSettings ({ commit }) {
         return this.$storyapi.get(`cdn/stories/_settings`, {
           cv: storyblokSettings.cv,
@@ -51,7 +46,6 @@ const store = () => {
             per_page: '100',
             version: storyblokSettings.version
           }).then((res) => {
-            // console.log(res.data.stories);
             commit('setEmployees', res.data.stories)
           })
         }

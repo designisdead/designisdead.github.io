@@ -44,11 +44,8 @@ node('master') {
     }
 
     stage('Building image') {
-        steps {
-            script {
-              docker.build registry + ":$buildNumber"
-            }
-        }
+        def websiteImage = docker.build(registry + ":$buildNumber")
+        websiteImage.push()
     }
 }
 

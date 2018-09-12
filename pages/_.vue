@@ -22,17 +22,19 @@ export default {
     }
   },
   mounted () {
-    this.$storyblok.init();
-    this.$storyblok.on(['input', 'published', 'change'], (event) => {
-      if (event.action == 'input') {
-        if (event.story.id === this.story.id) {
-          this.story.content = event.story.content;
+    if(typeof this.$storyblok !== 'undefined') {
+      this.$storyblok.init();
+      this.$storyblok.on(['input', 'published', 'change'], (event) => {
+        if (event.action == 'input') {
+          if (event.story.id === this.story.id) {
+            this.story.content = event.story.content;
+          }
         }
-      }
-      else {
-        window.location.reload(true);
-      }
-    });
+        else {
+          window.location.reload(true);
+        }
+      });
+    }
   },
   head () {
     let story = this.story

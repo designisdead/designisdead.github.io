@@ -1,4 +1,6 @@
 const axios = require("axios");
+const webpack = require('webpack');
+const config = require('./plugins/config');
 
 module.exports = {
   modules: [
@@ -47,6 +49,12 @@ module.exports = {
   ** Build configuration
   */
   build: {
+    plugins: [
+      new webpack.ContextReplacementPlugin(
+        /highlight\.js\/lib\/languages$/,
+        new RegExp(`^./(${config.allowedLanguagesForHighlightJS.join('|')})$`),
+      ),
+    ]
     /*
     ** Run ESLint on save
     extend(config, {isDev, isClient}) {

@@ -1,7 +1,7 @@
 <template>
   <span class="Author" rel="author">
     <span class="Author-avatar">
-      <img v-lazy="$options.filters.imageApi(Author.content.secondaryimage, 'tiny')" />
+      <img :src="$options.filters.imageApi(Author.content.secondaryimage, 'tiny')" />
     </span>
     <span class="Author-name">{{ Author.name }}</span>
   </span>

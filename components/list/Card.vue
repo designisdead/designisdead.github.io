@@ -7,6 +7,7 @@
       <article>
         <div class="Card-image"
           v-if="post.content.primaryimage"
+          :style="'background-image: url(' + $options.filters.imageApi(post.content.primaryimage, 'nano') + ')'"
           v-lazy:background-image="$options.filters.imageApi(post.content.primaryimage, 'small')">
         </div>
         <div class="Card-content">
@@ -66,6 +67,7 @@
     padding: 0;
     margin: 0 $spacer/2 $spacer;
     list-style-type: none;
+    overflow: hidden;
     > a:hover {
       text-decoration: none;
     }
@@ -87,13 +89,22 @@
 
   .Card-content {
     padding: $spacer/2;
+    background-color: white;
+    z-index: 1;
+    position: relative;
   }
 
   .Card-image {
+    position: relative;
+    z-index: 0;
     width: 100%;
     height: 180px;
     background-size: cover;
     background-position: center center;
+    filter: blur(15px);
+    &[lazy=loaded] {
+      filter: blur(0px);
+    }
   }
 
 </style>

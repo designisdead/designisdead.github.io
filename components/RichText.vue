@@ -9,13 +9,21 @@
 </template>
 
 <script>
-  import highlightjs from 'highlightjs';
+  import hljs from 'highlight.js/lib/highlight';
+  import config from '~/plugins/config';
+
+  config.allowedLanguagesForHighlightJS.forEach((langName) => {
+    // Using require() here because import() support hasn't landed in Webpack yet
+    const langModule = require(`highlight.js/lib/languages/${langName}`);
+    hljs.registerLanguage(langName, langModule);
+  });
+
   export default {
     props: ['blok'],
     mounted() {
       let targets = this.$el.querySelectorAll('code')
       targets.forEach((target) => {
-          highlightjs.highlightBlock(target)
+        hljs.highlightBlock(target)
       });
     },
   }

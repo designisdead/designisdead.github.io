@@ -43,7 +43,7 @@ node('master') {
     }
 
     stage('Building image') {
-        def websiteImage = docker.build(registry + ":$buildNumber", "./")
+        def websiteImage = docker.build(registry + ":$buildNumber", "--build-arg x=y .")
         websiteImage.push()
         websiteImage.push('latest')
     }

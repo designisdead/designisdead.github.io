@@ -14,7 +14,6 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "highlightjs": "^9.10.0",
     "marked": "^0.4.0",
     "moment": "^2.22.2",
     "nuxt": "^1.0.0",

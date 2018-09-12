@@ -50,10 +50,13 @@ module.exports = {
   */
   build: {
     plugins: [
+      // Ignore all locale files of moment.js
       new webpack.ContextReplacementPlugin(
         /highlight\.js\/lib\/languages$/,
         new RegExp(`^./(${config.allowedLanguagesForHighlightJS.join('|')})$`),
       ),
+      // Ignore all locale files of moment.js
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     ]
     /*
     ** Run ESLint on save

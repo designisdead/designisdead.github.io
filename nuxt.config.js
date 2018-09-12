@@ -35,10 +35,6 @@ module.exports = {
       {rel: 'icon', type: 'image/png', href: '/favicon-16x16.png'},
       {rel: 'manifest', href: '/manifest.json'},
       {rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#5bbad5'},
-      {
-        rel: 'stylesheet',
-        href: 'https://fonts.googleapis.com/css?family=Zilla+Slab:400,700'
-      }
     ]
   },
   /*

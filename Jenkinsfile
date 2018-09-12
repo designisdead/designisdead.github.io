@@ -9,10 +9,9 @@ def version;
 def majorVersion;
 def buildNumber;
 
-environment {
-  registry = "designisdead/website"
-  registryCredential = 'did-docker-hub'
-}
+
+def registry = "designisdead/website"
+def registryCredential = 'did-docker-hub'
 
 
 node('master') {

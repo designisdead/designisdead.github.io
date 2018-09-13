@@ -59,7 +59,13 @@ stage("Deploy $acceptanceEnv") {
     }
     node('master') {
         echo 'Deploying...'
-
+        kubernetesDeploy(kubeconfigId: 'did-k8s-cluster',               // REQUIRED
+            configs: 'k8s/deployment.yml', // REQUIRED
+            enableConfigSubstitution: false,
+            dockerCredentials: [
+              [credentialsId: 'did-docker-hub']
+            ]
+        )
     }
 }
 

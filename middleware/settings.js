@@ -3,7 +3,8 @@
   F.e: primary navigation
  */
 export default function ({ store }) {
-  if(process.server && !store.state.settings.primary_navigation) {
-    return store.dispatch('loadSettings');
+  // only load settings (primary navigation etc) on a SSR
+  if(process.server) {
+    store.dispatch('loadSettings');
   }
 }

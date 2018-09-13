@@ -1,7 +1,8 @@
 <template>
   <div class="Image" v-editable="blok">
     <img
-      :src="blok.image"
+      :src="$options.filters.imageApi(blok.image, 'nano')"
+      v-lazy="blok.image"
       :width="blok.width"
       :alt="blok.alt"
       :class="{

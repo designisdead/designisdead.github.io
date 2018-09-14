@@ -1,8 +1,8 @@
 <template>
   <svg class="Icon">
-    <use v-bind:xlink:href="'#svg-' +type"
-         v-bind:href="'#svg-' +type">
-    </use>
+    <use
+      :xlink:href="'#svg-' +type"
+      :href="'#svg-' +type"/>
   </svg>
 </template>
 
@@ -11,8 +11,9 @@
     props: {
       type: {
         type: String,
-        require: true
-      }
+        default: 'knuckles',
+        required: true
+      },
     }
   }
 </script>

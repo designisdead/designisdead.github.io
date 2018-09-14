@@ -1,22 +1,24 @@
 <template>
-  <div class="Image" v-editable="blok">
+  <div 
+    v-editable="blok" 
+    class="Image">
     <img
-      :src="$options.filters.imageApi(blok.image, 'nano')"
       v-lazy="blok.image"
+      :src="$options.filters.imageApi(blok.image, 'nano')"
       :width="blok.width"
       :alt="blok.alt"
       :class="{
-       'u-centered' : blok.alignment == 'center',
-       'u-floatRight' : blok.alignment == 'right',
-       'ImageUpload--stretched' : !blok.width
+        'u-centered' : blok.alignment == 'center',
+        'u-floatRight' : blok.alignment == 'right',
+        'ImageUpload--stretched' : !blok.width
       }"
-    />
+    >
   </div>
 </template>
 
 <script>
   export default {
-    props: ['blok']
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
   }
 </script>
 

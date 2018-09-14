@@ -57,9 +57,10 @@ module.exports = {
       ),
       // Ignore all locale files of moment.js
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    ]
+    ],
     /*
-    ** Run ESLint on save
+     * Run ESLint on save
+     */
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -70,7 +71,6 @@ module.exports = {
         })
       }
     }
-    */
   },
   generate: {
     routes: function () {

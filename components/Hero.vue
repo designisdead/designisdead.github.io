@@ -1,7 +1,8 @@
 <template>
-  <section class="Hero"
+  <section 
     v-editable="blok"
-    :class="[blok.size]">
+    :class="[blok.size]"
+    class="Hero">
     <div class="Hero-content u-color--light u-textAlignCenter">
       <!-- Hero content starts here -->
       <div class="Wrapper medium">
@@ -9,16 +10,17 @@
       </div>
       <!-- Hero content ends here -->
     </div>
-    <div class="Hero-backgroundImage"
-         v-lazy:background-image="$options.filters.imageApi(blok.image, 'large')"
-         v-if="blok.image"
-    ></div>
+    <div 
+      v-lazy:background-image="$options.filters.imageApi(blok.image, 'large')"
+      v-if="blok.image"
+      class="Hero-backgroundImage"
+    />
   </section>
 </template>
 
 <script>
   export default {
-    props: ['blok'],
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
     computed: {
       background() {
         return this.blok.image;

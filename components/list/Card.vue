@@ -5,19 +5,27 @@
       :to="'/' + post.full_slug"
       @mouseover.native="preloadHeader($options.filters.imageApi(post.content.primaryimage, 'large'))">
       <article>
-        <div class="Card-image"
+        <div 
+          v-lazy:background-image="$options.filters.imageApi(post.content.primaryimage, 'small')"
           v-if="post.content.primaryimage"
           :style="'background-image: url(' + $options.filters.imageApi(post.content.primaryimage, 'nano') + ')'"
-          v-lazy:background-image="$options.filters.imageApi(post.content.primaryimage, 'small')">
-        </div>
+          class="Card-image"/>
         <div class="Card-content">
           <header class="Card-header">
-            <p class="Card-author" v-if="post.content.author">
-              <author :id="post.content.author"></author>
+            <p 
+              v-if="post.content.author" 
+              class="Card-author">
+              <author :id="post.content.author"/>
             </p>
-            <h2 class="Card-meta micro uppercase" v-if="post.content.published">
-              <span class="Post-tags" v-if="tags.length > 0">
-                <strong v-for="tag in tags">
+            <h2 
+              v-if="post.content.published" 
+              class="Card-meta micro uppercase">
+              <span 
+                v-if="tags.length > 0" 
+                class="Post-tags">
+                <strong 
+                  v-for="(tag, index) in tags" 
+                  :key="'tag' + index">
                   {{ tag }}
                 </strong> |
               </span>
@@ -35,11 +43,11 @@
   import moment from 'moment';
 
   export default {
-    props: ['post'],
-    methods: {
-      preloadHeader(url) {
-        var img=new Image();
-        img.src=url;
+    props: {
+      post: {
+        type: Object, default: function () {
+          return {}
+        }
       }
     },
     computed: {
@@ -55,7 +63,13 @@
       tags() {
         return this.post.content.tags && this.post.content.tags.tags ? this.post.content.tags.tags : {};
       }
-    }
+    },
+    methods: {
+      preloadHeader(url) {
+        var img = new Image();
+        img.src = url;
+      }
+    },
   }
 </script>
 
@@ -63,7 +77,7 @@
 
   .Card {
     background: white;
-    box-shadow: 0px 0px 20px rgba(0,0,0,0.05);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     padding: 0;
     margin: 0 $spacer/2 $spacer;
     list-style-type: none;

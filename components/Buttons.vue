@@ -1,13 +1,19 @@
 <template>
-  <div class="Buttons" v-editable="blok"
-    :style="{justifyContent: blok.alignment}">
-    <component :key="blok._uid" v-for="blok in blok.buttons" :blok="blok" :is="'vue-' + blok.component"></component>
+  <div
+    v-editable="blok"
+    :style="{justifyContent: blok.alignment}"
+    class="Buttons">
+    <component
+      v-for="blok in blok.buttons"
+      :key="blok._uid"
+      :blok="blok"
+      :is="'vue-' + blok.component"/>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['blok']
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
   }
 </script>
 

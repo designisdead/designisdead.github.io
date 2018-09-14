@@ -1,13 +1,21 @@
 <template>
   <div v-editable="Blok">
-    <div class="Wrapper" :class="[Blok.backgroundcolor, Blok.textcolor, Height]">
-      <div class="Wrapper-content" :class="[Size]">
-        <component :key="Blok._uid" v-for="Blok in Blok.elements" :blok="Blok" :is="Blok.component"></component>
-        <slot></slot>
+    <div
+      :class="[Blok.backgroundcolor, Blok.textcolor, Height]"
+      class="Wrapper">
+      <div
+        :class="[Size]"
+        class="Wrapper-content">
+        <component
+          v-for="Blok in Blok.elements"
+          :key="Blok._uid"
+          :blok="Blok"
+          :is="Blok.component"/>
+        <slot/>
       </div>
-      <div class="Wrapper-background"
-        v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
+      <div
         v-lazy:background-image="$options.filters.imageApi(Blok.backgroundimage, 'large')"
+        v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
         :class="{
           'u-backgroundTopRight': Blok.backgroundposition == 'top right',
           'u-backgroundCenterCenter': Blok.backgroundposition == 'center center',
@@ -15,10 +23,13 @@
           'u-backgroundSizeCover': Blok.backgroundsize == 'cover',
           'u-backgroundSizeContain': Blok.backgroundsize == 'contain',
           'u-backgroundAttachmentFixed' : Blok.backgroundfixed == 'fixed'
-        }">
-      </div>
-      <particles v-if="Blok.backgroundeffect == 'particles'"></particles>
-      <video-background :src="Blok.backgroundvideosrc" :poster="Blok.backgroundimage" v-if="Blok.backgroundvideosrc && Blok.backgroundimage"></video-background>
+        }"
+        class="Wrapper-background"/>
+      <particles v-if="Blok.backgroundeffect == 'particles'"/>
+      <video-background
+        v-if="Blok.backgroundvideosrc && Blok.backgroundimage"
+        :src="Blok.backgroundvideosrc"
+        :poster="Blok.backgroundimage"/>
     </div>
   </div>
 </template>
@@ -26,9 +37,20 @@
 <script>
   export default {
     props: {
-      blok: Object,
-      size: String,
-      height: String
+      blok: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      },
+      size: {
+        type: String,
+        default: null
+      },
+      height: {
+        type: String,
+        default: null
+      }
     },
     computed: {
       Blok() {

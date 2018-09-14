@@ -1,19 +1,25 @@
 <template>
-  <div class="Columns" v-editable="blok"
+  <div
+    v-editable="blok"
     :class="[
       'Columns--tiny' + blok.tiny,
       'Columns--small' + blok.small,
       'Columns--medium' + blok.medium,
       'Columns--large' + blok.large,
       'Columns--huge' + blok.huge,
-    ]">
-    <component :key="blok._uid" v-for="blok in blok.columns" :blok="blok" :is="blok.component"></component>
+    ]"
+    class="Columns">
+    <component
+      v-for="blok in blok.columns"
+      :key="blok._uid"
+      :blok="blok"
+      :is="blok.component"/>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['blok']
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
   }
 </script>
 

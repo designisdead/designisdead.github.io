@@ -3,15 +3,21 @@
     <wrapper size="large">
       <div class="Footer">
         <div class="Footer-left">
-          <a href="https://twitter.com/designisdead" class="u-color--twitter">
+          <a 
+            href="https://twitter.com/designisdead" 
+            class="u-color--twitter">
             <icon type="twitter" />
           </a>
           &nbsp;
-          <a href="https://www.facebook.com/DesignisDead/" class="u-color--facebook">
+          <a 
+            href="https://www.facebook.com/DesignisDead/" 
+            class="u-color--facebook">
             <icon type="facebook" />
           </a>
           &nbsp;
-          <a href="https://www.linkedin.com/company/design-is-dead" class="u-color--linkedin">
+          <a 
+            href="https://www.linkedin.com/company/design-is-dead" 
+            class="u-color--linkedin">
             <icon type="linkedin" />
           </a>
         </div>

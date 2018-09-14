@@ -1,7 +1,9 @@
 <template>
-  <span class="Author" rel="author">
+  <span
+    class="Author"
+    rel="author">
     <span class="Author-avatar">
-      <img :src="$options.filters.imageApi(Author.content.secondaryimage, 'tiny')" />
+      <img :src="$options.filters.imageApi(Author.content.secondaryimage, 'tiny')" >
     </span>
     <span class="Author-name">{{ Author.name }}</span>
   </span>
@@ -10,7 +12,10 @@
 <script>
   export default {
     props: {
-      id: Number,
+      id: {
+        type: Number,
+        default: null
+      },
     },
     computed: {
       Author() {

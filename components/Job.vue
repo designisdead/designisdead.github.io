@@ -6,16 +6,22 @@ This component is used to render the Post content type on Storyblok
   <main>
     <article>
       <header class="Wrapper u-textAlignCenter u-backgroundColor--light">
-        <spacer size="medium"></spacer>
+        <spacer size="medium"/>
         <wrapper size="large">
           <h1>{{ pagetitle }}</h1>
           <h2 class="small">{{ blok.metadescription }}</h2>
         </wrapper>
-        <spacer size="medium"></spacer>
+        <spacer size="medium"/>
       </header>
 
-      <div v-editable="blok" class="page">
-        <component :key="blok._uid" v-for="blok in blok.body" :blok="blok" :is="blok.component"></component>
+      <div
+        v-editable="blok"
+        class="page">
+        <component
+          v-for="blok in blok.body"
+          :key="blok._uid"
+          :blok="blok"
+          :is="blok.component"/>
       </div>
 
       <footer>
@@ -31,8 +37,11 @@ This component is used to render the Post content type on Storyblok
   import moment from 'moment';
   export default {
     props: {
-      blok: Object,
-      pagetitle: String
+      blok: {        type: Object,        default: function () {          return {}        }      },
+      pagetitle: {
+        type: String,
+        default: 'Design is Dead Jobs'
+      }
     }
   }
 </script>

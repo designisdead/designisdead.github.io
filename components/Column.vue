@@ -1,20 +1,34 @@
 <template>
-  <div class="Column" v-editable="blok">
+  <div
+    v-editable="blok"
+    class="Column">
     <div class="Column-header">
-      <component :key="blok._uid" v-for="blok in blok.columnheader" :blok="blok" :is="blok.component"></component>
+      <component
+        v-for="blok in blok.columnheader"
+        :key="blok._uid"
+        :blok="blok"
+        :is="blok.component"/>
     </div>
     <div class="Column-content">
-      <component :key="blok._uid" v-for="blok in blok.blocks" :blok="blok" :is="blok.component"></component>
+      <component
+        v-for="blok in blok.blocks"
+        :key="blok._uid"
+        :blok="blok"
+        :is="blok.component"/>
     </div>
     <div class="Column-footer">
-      <component :key="blok._uid" v-for="blok in blok.columnfooter" :blok="blok" :is="blok.component"></component>
+      <component
+        v-for="blok in blok.columnfooter"
+        :key="blok._uid"
+        :blok="blok"
+        :is="blok.component"/>
     </div>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['blok']
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
   }
 </script>
 

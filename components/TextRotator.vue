@@ -1,5 +1,7 @@
 <template>
-  <div v-editable="blok" class="u-textAlignCenter">
+  <div
+    v-editable="blok"
+    class="u-textAlignCenter">
     <div class="TextRotator">
       <div class="TextRotator-slide">Enable Agility</div>
       <div class="TextRotator-slide">Boost Engagement</div>
@@ -11,7 +13,14 @@
 
 <script>
   export default {
-    props: ['blok']
+    props: {
+      blok: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    }
   }
 </script>
 

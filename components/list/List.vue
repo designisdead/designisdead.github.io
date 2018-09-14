@@ -1,28 +1,37 @@
 <template>
   <div v-editable="blok">
-      <!-- If list type is masonry -->
-      <masonry v-if="blok.listtype == 'masonry'"
-               :cols="{default: 3, 1400: 3, 700: 2, 400: 1}"
-               :gutter="0">
-        <div v-for="(post, index) in blok.listcontent" :key="index">
-          <brick :post="post" />
-        </div>
-      </masonry>
-
-      <!-- else -->
-      <ul class="List"
-          v-else
-          :class="['List--' + blok.listtype]">
-        <component
-          v-for="post in blok.listcontent"
-          :key="post.full_slug"
-          :post="post"
-          :is="blok.listtype" />
-      </ul>
-
-      <div class="u-textAlignCenter" v-if="showMoreButton">
-        <button class="Button" @click="nextPage" :disabled="loading">Load more</button>
+    <!-- If list type is masonry -->
+    <masonry
+      v-if="blok.listtype == 'masonry'"
+      :cols="{default: 3, 1400: 3, 700: 2, 400: 1}"
+      :gutter="0">
+      <div
+        v-for="(post, index) in blok.listcontent"
+        :key="index">
+        <brick :post="post" />
       </div>
+    </masonry>
+
+    <!-- else -->
+    <ul
+      v-else
+      :class="['List--' + blok.listtype]"
+      class="List">
+      <component
+        v-for="post in blok.listcontent"
+        :key="post.full_slug"
+        :post="post"
+        :is="blok.listtype" />
+    </ul>
+
+    <div
+      v-if="showMoreButton"
+      class="u-textAlignCenter">
+      <button
+        :disabled="loading"
+        class="Button"
+        @click="nextPage">Load more</button>
+    </div>
   </div>
 </template>
 
@@ -30,6 +39,7 @@
   import storyblokSettings from '~/plugins/storyblokSettings';
 
   export default {
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
     data () {
       return {
         page: 1,
@@ -39,7 +49,16 @@
         nextContent: []
       }
     },
-    props: ['blok'],
+    computed: {
+      showMoreButton() {
+        return this.nextContent.length > 0;
+      }
+    },
+    mounted() {
+      this.$nextTick(() => {
+        this.nextPage();
+      })
+    },
     methods: {
       nextPage: function () {
         this.loading = true;
@@ -60,32 +79,10 @@
           is_startpage: false, // exclude start pages (fe: blog list)
         }).then(data => {
           this.nextContent = data.data.stories;
-          /*
-            Merge serverside listcontent with new stories
-            Because components do not have an asyncData method,
-            you cannot directly fetch async data server side within a component.
-            https://nuxtjs.org/faq/async-data-components/
-          */
-          /*
-          this.blok.listcontent = [
-            ...this.blok.listcontent,
-            ...data.data.stories
-          ];
-          */
           this.loading = false;
         })
       }
     },
-    mounted() {
-      this.$nextTick(() => {
-        this.nextPage();
-      })
-    },
-    computed: {
-      showMoreButton() {
-        return this.nextContent.length > 0;
-      }
-    }
   }
 </script>
 

@@ -1,20 +1,35 @@
 <template>
   <div class="VideoBackground">
-    <div class="VideoBackground-overlay"
-         :style="'background-image: url(' + $options.filters.imageApi(poster, 'large') + ')'"></div>
-    <video class="VideoBackground-video" :poster="poster" playsinline autoplay loop muted>
+    <div
+      :style="'background-image: url(' + $options.filters.imageApi(poster, 'large') + ')'"
+      class="VideoBackground-overlay"/>
+    <video
+      :poster="poster"
+      class="VideoBackground-video"
+      playsinline
+      autoplay
+      loop
+      muted>
       <!--
     - Video needs to be muted, since Chrome 66+ will not autoplay video with sound.
     WCAG general accessibility recommendation is that media such as background video play through only once.  -->
-      <source :src="src" type="video/mp4">
+      <source
+        :src="src"
+        type="video/mp4">
     </video>
   </div>
 </template>
 <script>
   export default {
     props: {
-      src: String,
-      poster: String
+      src: {
+        type: String,
+        default: ''
+      },
+      poster: {
+        type: String,
+        default: ''
+      }
     },
     mounted() {
       let video = this.$el.querySelectorAll('video')[0];

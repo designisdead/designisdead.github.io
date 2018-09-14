@@ -1,15 +1,23 @@
 <template>
-  <div class="Spacer"
+  <div 
     v-editable="Blok"
-    v-bind:class="[Size]">
-  </div>
+    :class="[Size]"
+    class="Spacer"/>
 </template>
 
 <script>
   export default {
     props: {
-      blok: Object,
-      size: String
+      blok: {
+        type: Object,
+        default: function() {
+          return {}
+        }
+      },
+      size: {
+        type: String,
+        default: null
+      }
     },
     computed: {
       Blok() {

@@ -5,6 +5,6 @@
 export default function ({ store }) {
   // only load settings (primary navigation etc) on a SSR
   if(process.server) {
-    store.dispatch('loadSettings');
+    return store.dispatch('loadSettings');
   }
 }

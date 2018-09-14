@@ -1,8 +1,10 @@
 <template>
-  <div class="Teaser" v-editable="blok">
-    <div class="Teaser-image"
-         v-lazy:background-image="$options.filters.imageApi(blok.image, 'large')">
-    </div>
+  <div
+    v-editable="blok"
+    class="Teaser">
+    <div
+      v-lazy:background-image="$options.filters.imageApi(blok.image, 'large')"
+      class="Teaser-image"/>
     <div class="Teaser-content">
       <markdown>{{ blok.text }}</markdown>
     </div>
@@ -11,7 +13,13 @@
 
 <script>
   export default {
-    props: ['blok']
+    props: {
+      blok: {
+        type: Object, default: function () {
+          return {}
+        }
+      }
+    },
   }
 </script>
 

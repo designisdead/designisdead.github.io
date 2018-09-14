@@ -1,17 +1,20 @@
 <template>
   <div>
-    <nuxt-link v-editable="blok"
-               v-if="!externalLink"
-               class="Button"
-               :class="[blok.style]"
-               :key="blok.id"
-               :to="blok.link.cached_url">
+    <nuxt-link 
+      v-editable="blok"
+      v-if="!externalLink"
+      :class="[blok.style]"
+      :key="blok.id"
+      :to="blok.link.cached_url"
+      class="Button">
       {{ blok.text }}
     </nuxt-link>
-    <a class="Button" :href="blok.link.cached_url"
-      rel="noopener"
+    <a 
+      v-if="externalLink" 
+      :href="blok.link.cached_url"
       :class="[blok.style]"
-      v-if="externalLink">
+      class="Button"
+      rel="noopener">
       {{ blok.text }}
     </a>
   </div>
@@ -19,7 +22,7 @@
 
 <script>
   export default {
-    props: ['blok'],
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
     computed: {
       externalLink() {
         /*

@@ -1,10 +1,16 @@
 <template>
-  <div class="Spinner" :class="{'Spinner--loading': loading}">
-    <slot></slot>
+  <div
+    :class="{'Spinner--loading': loading}"
+    class="Spinner">
+    <slot/>
     <no-ssr>
       <div class="Spinner-wrapper">
-        <div class="Spinner-overlay" v-if="loading"></div>
-        <div class="Spinner-icon" v-if="loading"></div>
+        <div
+          v-if="loading"
+          class="Spinner-overlay"/>
+        <div
+          v-if="loading"
+          class="Spinner-icon"/>
       </div>
     </no-ssr>
   </div>
@@ -15,7 +21,8 @@
     props: {
       loading: {
         type: Boolean,
-        require: true
+        require: true,
+        default: true
       }
     }
   }

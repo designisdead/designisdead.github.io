@@ -1,16 +1,22 @@
 <template>
   <article class="Brick">
     <header class="Brick-content">
-      <div class="Brick-profileImage" v-if="post.content.secondaryimage">
+      <div
+        v-if="post.content.secondaryimage"
+        class="Brick-profileImage">
         <img
           :src="$options.filters.imageApi(post.content.secondaryimage, 'tiny')"
-          alt="post.name" />
+          alt="post.name" >
       </div>
       <h1 class="medium noSpaceBelow u-color--light">{{ post.name }}</h1>
-      <h2 class="small noSpaceBelow u-color--light" v-if="post.content.jobtitle">{{ post.content.jobtitle }}</h2>
+      <h2
+        v-if="post.content.jobtitle"
+        class="small noSpaceBelow u-color--light">{{ post.content.jobtitle }}</h2>
     </header>
-    <div class="Brick-backgroundImage" v-if="post.content.primaryimage">
-      <img :src="$options.filters.imageApi(post.content.primaryimage, 'nano')" />
+    <div
+      v-if="post.content.primaryimage"
+      class="Brick-backgroundImage">
+      <img :src="$options.filters.imageApi(post.content.primaryimage, 'nano')" >
     </div>
   </article>
 </template>
@@ -19,7 +25,15 @@
   import scrollMonitor from 'scrollmonitor';
 
   export default {
-    props: ['post'],
+    props: {
+      post: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      },
+    },
+
     mounted() {
       if(process.client) {
         let img = this.$el.querySelectorAll('.Brick-backgroundImage img')[0];

@@ -29,9 +29,11 @@
 
 <style lang="scss">
 .Spacer {
+  $i: 0;
   @each $key, $value in $sizes {
+    $i: $i + 1;
     &.#{$key} {
-      padding: ceil($value/66);
+      padding: $i * 5px;
     }
   }
 }

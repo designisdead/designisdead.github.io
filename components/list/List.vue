@@ -1,17 +1,19 @@
 <template>
   <div v-editable="blok">
     <!-- If list type is masonry -->
-    <masonry
+    <div
       v-if="blok.listtype == 'masonry'"
-      :cols="{default: 3, 1400: 3, 700: 2, 400: 1}"
-      :gutter="0">
-      <div
-        v-for="(post, index) in blok.listcontent"
-        :key="index">
-        <brick :post="post" />
-      </div>
-    </masonry>
-
+      class="Masonry">
+      <masonry
+        :cols="{default: 3, 1400: 3, 700: 2, 400: 1}"
+        :gutter="0">
+        <div
+          v-for="(post, index) in blok.listcontent"
+          :key="index">
+          <brick :post="post"/>
+        </div>
+      </masonry>
+    </div>
     <!-- else -->
     <ul
       v-else
@@ -21,7 +23,7 @@
         v-for="post in blok.listcontent"
         :key="post.full_slug"
         :post="post"
-        :is="blok.listtype" />
+        :is="blok.listtype"/>
     </ul>
 
     <div
@@ -30,7 +32,8 @@
       <button
         :disabled="loading"
         class="Button"
-        @click="nextPage">Load more</button>
+        @click="nextPage">Load more
+      </button>
     </div>
   </div>
 </template>
@@ -42,7 +45,7 @@
     props: {
       blok: {
         type: Object,
-        default: function() {
+        default: function () {
           return {}
         }
       }
@@ -71,7 +74,7 @@
         this.loading = true;
         this.page += 1;
 
-        if(this.blok.listcontent) {
+        if (this.blok.listcontent) {
           this.blok.listcontent = [
             ...this.blok.listcontent,
             ...this.nextContent
@@ -99,6 +102,11 @@
 </script>
 
 <style lang="scss">
+  .Masonry {
+    position: relative;
+    overflow: hidden;
+  }
+
   .List {
     position: relative;
   }

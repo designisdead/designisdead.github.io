@@ -67,6 +67,10 @@
     will-change: min-height;
     transition: 0.4s min-height ease-out;
 
+    &.quarterscreen {
+      min-height: 25vh;
+    }
+
     &.halfscreen {
       min-height: 50vh;
     }

@@ -4,7 +4,7 @@
       :class="[Blok.backgroundcolor, Blok.textcolor, Blok.wrapperheight]"
       class="Wrapper">
       <div
-        :class="[Blok.size]"
+        :class="[Blok.size, size]"
         class="Wrapper-content">
         <component
           v-for="Blok in Blok.elements"
@@ -43,6 +43,10 @@
           return {}
         }
       },
+      size: {
+        type: String,
+        default: null
+      }
     },
     computed: {
       Blok() {

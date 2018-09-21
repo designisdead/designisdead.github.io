@@ -1,6 +1,6 @@
 <template>
-  <div 
-    v-editable="blok" 
+  <div
+    v-editable="blok"
     :class="{
       'u-textAlignCenter' : blok.textalignment == 'center',
       'u-textAlignRight' : blok.textalignment == 'right'
@@ -47,23 +47,11 @@
       position: relative;
       display: inline-block;
       font-weight: bold;
+      will-change: color;
+      transition: 0.25s ease-out color;
+      text-decoration: none;
       &:hover {
-        text-decoration: none;
-        &:after {
-          width: 80%;
-          will-change: width;
-        }
-      }
-      &:after {
-        content: ' ';
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        height: 2px;
-        background: currentColor;
-        width: 100%;
-        transition: width 0.15s ease-out;
-        transform: translateX(-50%);
+        color: (blue);
       }
     }
   }

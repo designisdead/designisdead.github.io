@@ -38,7 +38,7 @@ This component is used to render the Post content type on Storyblok
             class="Post-headerBackground"/>
         </header>
         <div class="Post-content">
-          <spacer size="small"/>
+          <spacer size="medium"/>
 
           <div
             v-editable="blok"
@@ -133,6 +133,10 @@ This component is used to render the Post content type on Storyblok
     padding: 10px 0;
   }
 
+  .Post-headerContent {
+    width: 100%;
+  }
+
   .Post-headerBackground {
     position: absolute;
     top: 0vh;
@@ -150,7 +154,10 @@ This component is used to render the Post content type on Storyblok
     @media screen and (min-width: 400px) and (min-height: 360px) {
       font-size: 6vw;
     }
-    @media screen and (min-width: 600px) and (min-height: 600px) {
+    @media screen and (min-height: 600px) {
+      font-size: 2.5rem;
+    }
+    @media screen and (min-width: 600px) {
       font-size: 2.5rem;
     }
   }

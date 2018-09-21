@@ -1,7 +1,7 @@
 <template>
   <div
     v-editable="Blok"
-    :class="[Blok.size]"
+    :class="[Blok.size, size]"
     class="Spacer"/>
 </template>
 
@@ -13,6 +13,10 @@
         default: function() {
           return {}
         }
+      },
+      size: {
+        type: String,
+        default: null
       }
     },
     computed: {
@@ -27,7 +31,7 @@
 .Spacer {
   @each $key, $value in $sizes {
     &.#{$key} {
-      padding: ceil($value/20);
+      padding: ceil($value/66);
     }
   }
 }

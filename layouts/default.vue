@@ -1,14 +1,14 @@
 <template>
   <div>
-    <input 
-      id="page-sidebarstate" 
-      type="checkbox" 
+    <input
+      id="page-sidebarstate"
+      type="checkbox"
       class="Page-sidebarState">
     <div class="Page">
       <div class="Page-sidebar u-backgroundColor--light u-colorDark">
 
-        <label 
-          class="Page-close" 
+        <label
+          class="Page-close"
           for="page-sidebarstate">
           Close
         </label>
@@ -339,7 +339,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    max-width: size('large');
+    max-width: size('huge');
     margin: 0 auto;
     height: 100%;
     padding: $spacer/2;

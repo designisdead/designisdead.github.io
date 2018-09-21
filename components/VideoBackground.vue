@@ -3,6 +3,8 @@
     <div
       :style="'background-image: url(' + $options.filters.imageApi(poster, 'large') + ')'"
       class="VideoBackground-overlay"/>
+    <div
+      class="VideoBackground-darken"/>
     <video
       :poster="poster"
       class="VideoBackground-video"
@@ -74,6 +76,7 @@
 </script>
 
 <style lang="scss">
+  .VideoBackground-darken,
   .VideoBackground-overlay,
   .VideoBackground {
     position: absolute;
@@ -84,6 +87,11 @@
     bottom: 0;
     overflow: hidden;
     background-size: cover;
+  }
+  .VideoBackground-darken {
+    background: black;
+    z-index: 2;
+    opacity: 0.5;
   }
 
   .VideoBackground-video {

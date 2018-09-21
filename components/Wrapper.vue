@@ -1,10 +1,10 @@
 <template>
   <div v-editable="Blok">
     <div
-      :class="[Blok.backgroundcolor, Blok.textcolor, Height]"
+      :class="[Blok.backgroundcolor, Blok.textcolor, Blok.wrapperheight]"
       class="Wrapper">
       <div
-        :class="[Size]"
+        :class="[Blok.size]"
         class="Wrapper-content">
         <component
           v-for="Blok in Blok.elements"
@@ -43,30 +43,11 @@
           return {}
         }
       },
-      size: {
-        type: String,
-        default: null
-      },
-      height: {
-        type: String,
-        default: null
-      }
     },
     computed: {
       Blok() {
         return this.blok || {};
       },
-      Size() {
-        return this.size || this.blok.size;
-      },
-      Height() {
-        if(this.height) {
-          return this.height;
-        }
-        if(this.blok && this.blok.wrapperheight) {
-          return this.blok.wrapperheight;
-        }
-      }
     }
   }
 </script>

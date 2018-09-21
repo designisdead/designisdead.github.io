@@ -19,7 +19,14 @@
 
 <script>
   export default {
-    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
+    props: {
+      blok: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    },
   }
 </script>
 

@@ -9,10 +9,10 @@ This component is used to render the Page content type on Storyblok
       v-editable="blok"
       class="page">
       <component
-        v-for="blok in blok.body"
-        :key="blok._uid"
-        :blok="blok"
-        :is="blok.component"/>
+        v-for="b in blok.body"
+        :key="b._uid"
+        :blok="b"
+        :is="b.component" />
     </div>
     <doormat/>
   </div>

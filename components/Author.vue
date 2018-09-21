@@ -14,7 +14,7 @@
     props: {
       id: {
         type: Number,
-        default: null
+        default: 1
       },
     },
     computed: {

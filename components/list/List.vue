@@ -39,8 +39,15 @@
   import storyblokSettings from '~/plugins/storyblokSettings';
 
   export default {
-    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
-    data () {
+    props: {
+      blok: {
+        type: Object,
+        default: function() {
+          return {}
+        }
+      }
+    },
+    data() {
       return {
         page: 1,
         perPage: this.blok.perpage,
@@ -64,10 +71,15 @@
         this.loading = true;
         this.page += 1;
 
-        this.blok.listcontent = [
-          ...this.blok.listcontent,
-          ...this.nextContent
-        ];
+        if(this.blok.listcontent) {
+          this.blok.listcontent = [
+            ...this.blok.listcontent,
+            ...this.nextContent
+          ];
+        }
+        else {
+          alert('listcontent was not rendered on page load!');
+        }
 
         return this.$storyapi.get('cdn/stories', {
           version: storyblokSettings.version,

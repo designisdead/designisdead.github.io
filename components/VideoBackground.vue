@@ -91,7 +91,7 @@
   .VideoBackground-darken {
     background: black;
     z-index: 2;
-    opacity: 0.5;
+    opacity: 0.25;
   }
 
   .VideoBackground-video {

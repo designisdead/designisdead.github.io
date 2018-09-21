@@ -11,6 +11,7 @@ import UnorderedList from '~/components/list/UnorderedList.vue'
 import Hero from '~/components/Hero.vue'
 import Teaser from '~/components/Teaser.vue'
 import RichText from '~/components/RichText.vue'
+import Grid from '~/components/Grid.vue'
 import Columns from '~/components/Columns.vue'
 import Column from '~/components/Column.vue'
 import Feature from '~/components/Feature.vue'
@@ -26,6 +27,7 @@ import VideoBackground from '@/components/VideoBackground.vue';
 import Particles from '@/components/Particles.vue';
 import Doormat from '@/components/Doormat.vue';
 import TextRotator from '@/components/TextRotator.vue';
+import HtmlText from '@/components/HtmlText.vue';
 
 
 Vue.component('author', Author)
@@ -41,6 +43,7 @@ Vue.component('page', Page)
 Vue.component('teaser', Teaser)
 Vue.component('richtext', RichText)
 Vue.component('hero', Hero)
+Vue.component('grid', Grid)
 Vue.component('columns', Columns)
 Vue.component('column', Column)
 Vue.component('feature', Feature)
@@ -55,3 +58,4 @@ Vue.component('videoBackground', VideoBackground)
 Vue.component('particles', Particles)
 Vue.component('doormat', Doormat)
 Vue.component('textrotator', TextRotator)
+Vue.component('htmltext', HtmlText)

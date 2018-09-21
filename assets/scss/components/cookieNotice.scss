@@ -1,0 +1,59 @@
+#body {
+  #optanon-popup-body-left-shading {
+    background: black !important;
+  }
+  #optanon-popup-top {
+    background: white !important;
+  }
+  #optanon-show-settings-popup {
+    display: none !important;
+    background: red !important;
+  }
+  .optanon-alert-box-wrapper {
+    .optanon-button-allow {
+      .optanon-alert-box-button-middle {
+        background: white !important;
+        border-color: white !important;
+        a {
+          text-transform: uppercase;
+          color: black !important;
+          &:before {
+            display: none !important;
+          }
+        }
+      }
+    }
+
+    &.hide-cookie-setting-button .optanon-alert-box-body {
+      margin-right: 20px;
+      @media screen and (min-width: 753px){
+        margin-right: 295px;
+      }
+    }
+  }
+  #optanon #optanon-popup-wrapper .optanon-white-button-middle {
+      background: black !important;
+  }
+}
+
+
+.optanon-cookie-policy-group-name {
+  font-size: 34px; line-height: 46px;
+}
+
+.optanon-cookie-policy-subgroup-table {
+  margin: 20px 0;
+}
+
+.optanon-show-settings-popup-wrapper {
+  display: inline-block;
+  &:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+  }
+}
+

@@ -39,10 +39,6 @@
 
 <style lang="scss">
   .Text {
-    p {
-      opacity: 0.8;
-    }
-
     a {
       position: relative;
       display: inline-block;

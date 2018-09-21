@@ -16,9 +16,6 @@
         return this.$store.state.post[this.$route.fullPath];
       },
     },
-    created() {
-      this.$store.dispatch('getPost', this.$route.fullPath);
-    },
     mounted() {
       if (typeof this.$storyblok !== 'undefined') {
         this.$storyblok.init();

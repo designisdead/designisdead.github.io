@@ -57,7 +57,6 @@
 </script>
 
 <style lang="scss">
-
   .Wrapper {
     position: relative;
     display: flex;

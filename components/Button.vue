@@ -1,6 +1,6 @@
 <template>
   <div>
-    <nuxt-link 
+    <nuxt-link
       v-editable="blok"
       v-if="!externalLink"
       :class="[blok.style]"
@@ -9,8 +9,8 @@
       class="Button">
       {{ blok.text }}
     </nuxt-link>
-    <a 
-      v-if="externalLink" 
+    <a
+      v-if="externalLink"
       :href="blok.link.cached_url"
       :class="[blok.style]"
       class="Button"
@@ -21,20 +21,22 @@
 </template>
 
 <script>
+  import isMailtoLink from '../plugins/isMailtoLink';
+  import isExternalLink from '../plugins/isExternalLink';
+
   export default {
-    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
+    props: {
+      blok: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    },
     computed: {
       externalLink() {
-        /*
-          ^ - Only match at the beginning of the string
-          http - Match the literal string "http"
-          s? - Optionally match an "s"
-          : - Match a colon
-          \/\/ - Escape the "/" characters since they mark the beginning/end of the regular expression
-          The "i" after the regular expression makes it case-insensitive so it will match "HTTP://", etc.
-         */
-         return /^https?:\/\//i.test(this.blok.link.cached_url);
+         return isExternalLink(this.blok.link.cached_url) || isMailtoLink(this.blok.link.cached_url);
       }
-    }
+    },
   }
 </script>

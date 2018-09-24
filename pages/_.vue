@@ -10,8 +10,7 @@
 </template>
 
 <script>
-  import moment from 'moment';
-  import storyblokSettings from '~/plugins/storyblokSettings';
+  import storyblokSettings from '../plugins/storyblokSettings';
 
   /*
    * Get data for list components
@@ -63,8 +62,8 @@
       const slug = this.$route.fullPath == '/' || this.$route.fullPath == '' ? '/home' : this.$route.fullPath;
       console.log(`Update content for ${slug}`);
       this.$storyapi.get(`cdn/stories${slug}`, {
-        cv: moment().format('YYYYMMDDHHmm'),
-        version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
+        version: storyblokSettings.version,
+        cv: storyblokSettings.cv,
       }).then((page) => {
         console.log('page', page);
         if (page.data.story.content.body) {
@@ -114,8 +113,8 @@
       // Load page slug from the API
       const slug = context.route.path == '/' || context.route.path == '' ? '/home' : context.route.path;
       let page = await context.app.$storyapi.get(`cdn/stories${slug}`, {
-        cv: moment().format('YYYYMMDDHHmm'),
-        version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
+        version: storyblokSettings.version,
+        cv: storyblokSettings.cv,
       }).then((res) => {
         return res.data
       }).catch((res) => {

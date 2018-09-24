@@ -1,7 +1,7 @@
 <template>
   <div v-editable="Blok">
     <div
-      :class="[Blok.backgroundcolor, Blok.textcolor, Blok.wrapperheight]"
+      :class="[Blok.backgroundcolor, Blok.textcolor, Height]"
       class="Wrapper">
       <div
         :class="[Blok.size, size]"
@@ -46,12 +46,27 @@
       size: {
         type: String,
         default: null
+      },
+      height: {
+        type: String,
+        default: null
       }
     },
     computed: {
       Blok() {
         return this.blok || {};
       },
+      Size() {
+        return this.size || this.blok.size;
+      },
+      Height() {
+        if(this.height) {
+          return this.height;
+        }
+        if(this.blok && this.blok.wrapperheight) {
+          return this.blok.wrapperheight;
+        }
+      }
     }
   }
 </script>

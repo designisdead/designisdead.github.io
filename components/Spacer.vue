@@ -1,7 +1,7 @@
 <template>
-  <div
+  <div 
     v-editable="Blok"
-    :class="[Blok.size, size]"
+    :class="[Size]"
     class="Spacer"/>
 </template>
 
@@ -22,6 +22,9 @@
     computed: {
       Blok() {
         return this.blok || {};
+      },
+      Size() {
+        return this.size || this.blok.size;
       }
     }
   }

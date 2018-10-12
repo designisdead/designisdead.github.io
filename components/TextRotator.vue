@@ -3,10 +3,10 @@
     v-editable="blok"
     class="u-textAlignCenter">
     <div class="TextRotator">
-      <div class="TextRotator-slide">Enable Agility</div>
-      <div class="TextRotator-slide">Boost Engagement</div>
-      <div class="TextRotator-slide">Generate InsigHts</div>
       <div class="TextRotator-slide">Secure Growth</div>
+      <div class="TextRotator-slide">Enable Business</div>
+      <div class="TextRotator-slide">Shorten Time 2 Market</div>
+      <div class="TextRotator-slide">Translate Complexity</div>
     </div>
   </div>
 </template>

@@ -62,8 +62,6 @@ This component is used to render the Post content type on Storyblok
         </div>
       </article>
     </main>
-
-
   </div>
 </template>
 

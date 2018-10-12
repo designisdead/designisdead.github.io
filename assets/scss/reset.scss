@@ -55,6 +55,7 @@ hr {
   }
 }
 
+li,
 p {
   line-height: $line-height;
   padding-bottom: $spacer/2;
@@ -70,6 +71,7 @@ pre {
   overflow-y: hidden;
 }
 
+ol,
 ul {
   padding-top: $spacer/2;
   padding-bottom: $spacer;

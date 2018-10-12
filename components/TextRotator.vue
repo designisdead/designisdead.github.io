@@ -5,7 +5,7 @@
     <div class="TextRotator">
       <div class="TextRotator-slide">Secure Growth</div>
       <div class="TextRotator-slide">Enable Business</div>
-      <div class="TextRotator-slide">Shorten Time 2 Market</div>
+      <div class="TextRotator-slide">Shorten Time2Market</div>
       <div class="TextRotator-slide">Translate Complexity</div>
     </div>
   </div>

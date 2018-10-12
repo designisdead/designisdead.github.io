@@ -17,7 +17,6 @@ module.exports = {
     { src: '~/plugins/imageApi'},
     { src: '~/plugins/lazyLoad'},
     { src: '~/plugins/storyblokSettings'},
-    { src: '~/plugins/localStorage.js', ssr: false }
   ],
   router: {
     middleware: ['settings', 'employees'],

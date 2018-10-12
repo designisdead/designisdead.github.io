@@ -1,7 +1,4 @@
 import Vuex from 'vuex';
-import moment from 'moment';
-
-
 import storyblokSettings from '~/plugins/storyblokSettings';
 
 const store = () => {

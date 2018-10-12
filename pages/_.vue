@@ -60,17 +60,14 @@
     created() {
       // Load page slug from the API
       const slug = this.$route.fullPath == '/' || this.$route.fullPath == '' ? '/home' : this.$route.fullPath;
-      console.log(`Update content for ${slug}`);
       this.$storyapi.get(`cdn/stories${slug}`, {
         version: storyblokSettings.version,
         cv: storyblokSettings.cv,
       }).then((page) => {
-        console.log('page', page);
         if (page.data.story.content.body) {
           var richBody = enrichJsonObject(page.data.story.content.body, this.$storyapi);
           richBody.then((res) => {
             page.data.story.content.body = res;
-            console.log('richpage', page);
             this.story = page.data.story;
           });
         }

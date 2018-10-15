@@ -26,19 +26,19 @@
 
     &.hide-cookie-setting-button .optanon-alert-box-body {
       margin-right: 20px;
-      @media screen and (min-width: 753px){
+      @media screen and (min-width: 753px) {
         margin-right: 295px;
       }
     }
   }
   #optanon #optanon-popup-wrapper .optanon-white-button-middle {
-      background: black !important;
+    background: black !important;
   }
 }
 
-
 .optanon-cookie-policy-group-name {
-  font-size: 34px; line-height: 46px;
+  font-size: 34px;
+  line-height: 46px;
 }
 
 .optanon-cookie-policy-subgroup-table {
@@ -57,3 +57,9 @@
   }
 }
 
+.optanon-alert-box-wrapper .optanon-alert-box-button-middle a {
+  font-size: 10px;
+  @media screen and (min-width: 500px) {
+    font-size: 13px;
+  }
+}

@@ -5,14 +5,14 @@ This component is used to render the Post content type on Storyblok
 <template>
   <main>
     <article>
-      <header class="Wrapper u-textAlignCenter u-backgroundColor--light">
-        <spacer size="medium"/>
+      <header class="Wrapper halfscreen u-textAlignCenter u-backgroundColor--black u-color--light">
         <wrapper size="large">
           <h1>{{ pagetitle }}</h1>
           <h2 class="small">{{ blok.metadescription }}</h2>
         </wrapper>
-        <spacer size="medium"/>
       </header>
+
+      <spacer size="huge" />
 
       <div
         v-editable="blok"
@@ -25,8 +25,9 @@ This component is used to render the Post content type on Storyblok
       </div>
 
       <footer>
+        <spacer size="medium" />
         <wrapper size="medium">
-          <nuxt-link :to="'/blog'">View all posts</nuxt-link>
+          <nuxt-link :to="'/jobs'">View all jobs</nuxt-link>
         </wrapper>
       </footer>
 
@@ -38,20 +39,25 @@ This component is used to render the Post content type on Storyblok
 </template>
 
 <script>
-  import moment from 'moment';
-  export default {
-    props: {
-      blok: {        type: Object,        default: function () {          return {}        }      },
-      pagetitle: {
-        type: String,
-        default: 'Design is Dead Jobs'
+import moment from "moment";
+export default {
+  props: {
+    blok: {
+      type: Object,
+      default: function() {
+        return {};
       }
+    },
+    pagetitle: {
+      type: String,
+      default: "Design is Dead Jobs"
     }
   }
+};
 </script>
 
 <style lang="scss">
-  .Post-primaryImage {
-    padding-bottom: $spacer;
-  }
+.Post-primaryImage {
+  padding-bottom: $spacer;
+}
 </style>

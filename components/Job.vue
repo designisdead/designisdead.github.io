@@ -29,6 +29,10 @@ This component is used to render the Post content type on Storyblok
           <nuxt-link :to="'/blog'">View all posts</nuxt-link>
         </wrapper>
       </footer>
+
+      <spacer size="small"/>
+      
+      <doormat/>
     </article>
   </main>
 </template>

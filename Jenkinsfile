@@ -29,6 +29,8 @@ node('master') {
     echo "MajorVersion is ${majorVersion}"
     echo "buildNumber is ${buildNumber}"
 
+    env.buildNumber = "${buildNumber}"
+
     stage('Build') {
         try {
             sh 'npm install'

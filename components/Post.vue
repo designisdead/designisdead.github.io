@@ -10,29 +10,44 @@ This component is used to render the Post content type on Storyblok
           <div class="Post-headerContent">
             <wrapper size="medium">
               <div class="Title tiny uppercase">
-              <span class="Post-tags" v-if="tags.length > 0">
-                <strong v-for="tag in tags">
-                  {{ tag }}
-                </strong> |
-              </span>
+                <span
+                  v-if="tags.length > 0"
+                  class="Post-tags">
+                  <strong
+                    v-for="(tag, index) in tags"
+                    :key="index">
+                    {{ tag }}
+                  </strong> |
+                </span>
                 <time :datetime="dataTime">{{ formattedDate }}</time><br>
               </div>
 
               <h1 class="Post-title">{{ pagetitle }}</h1>
 
-              <div class="Title tiny uppercase" v-if="blok.published">
-                <author v-if="blok.author" :id="blok.author"></author>
+              <div
+                v-if="blok.published"
+                class="Title tiny uppercase">
+                <author
+                  v-if="blok.author"
+                  :id="blok.author"/>
               </div>
             </wrapper>
           </div>
-          <div class="Post-headerBackground"
-               :style="{ backgroundImage: 'url(' + $options.filters.imageApi(blok.primaryimage, 'large') + ')' }"></div>
+          <div
+            :style="{ backgroundImage: 'url(' + $options.filters.imageApi(blok.primaryimage, 'large') + ')' }"
+            class="Post-headerBackground"/>
         </header>
         <div class="Post-content">
-          <spacer size="small"></spacer>
+          <spacer size="medium"/>
 
-          <div v-editable="blok" class="page">
-            <component :key="blok._uid" v-for="blok in blok.body" :blok="blok" :is="blok.component"></component>
+          <div
+            v-editable="blok"
+            class="page">
+            <component
+              v-for="blok in blok.body"
+              :key="blok._uid"
+              :blok="blok"
+              :is="blok.component"/>
           </div>
 
           <footer>
@@ -41,14 +56,12 @@ This component is used to render the Post content type on Storyblok
             </wrapper>
           </footer>
 
-          <spacer size="small"></spacer>
+          <spacer size="small"/>
 
           <doormat />
         </div>
       </article>
     </main>
-
-
   </div>
 </template>
 
@@ -56,8 +69,16 @@ This component is used to render the Post content type on Storyblok
   import moment from 'moment';
   export default {
     props: {
-      blok: Object,
-      pagetitle: String
+      blok: {
+        type: Object,
+        default: function(){
+          return {};
+        }
+      },
+      pagetitle: {
+        type: String,
+        default: 'Design is Dead Blogpost'
+      }
     },
     computed: {
       dataTime() {
@@ -77,8 +98,6 @@ This component is used to render the Post content type on Storyblok
 </script>
 
 <style lang="scss">
-
-
   $background: #333;
   $scroll-factor : .5;
   .Post {
@@ -87,7 +106,7 @@ This component is used to render the Post content type on Storyblok
     perspective-origin: center top;
     transform-style: preserve-3d;
     overflow-x: hidden;
-    // -webkit-overflow-scrolling: touch; 
+    // -webkit-overflow-scrolling: touch;
   }
 
   .Post-header {
@@ -112,6 +131,10 @@ This component is used to render the Post content type on Storyblok
     padding: 10px 0;
   }
 
+  .Post-headerContent {
+    width: 100%;
+  }
+
   .Post-headerBackground {
     position: absolute;
     top: 0vh;
@@ -129,7 +152,10 @@ This component is used to render the Post content type on Storyblok
     @media screen and (min-width: 400px) and (min-height: 360px) {
       font-size: 6vw;
     }
-    @media screen and (min-width: 600px) and (min-height: 600px) {
+    @media screen and (min-height: 600px) {
+      font-size: 2.5rem;
+    }
+    @media screen and (min-width: 600px) {
       font-size: 2.5rem;
     }
   }

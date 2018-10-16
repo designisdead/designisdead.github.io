@@ -5,111 +5,156 @@
       :key="story.content._uid"
       :pagetitle="story.name"
       :blok="story.content"
-      :is="story.content.component" />
+      :is="story.content.component"/>
   </section>
 </template>
 
 <script>
-import moment from 'moment';
-import storyblokSettings from '~/plugins/storyblokSettings';
+import storyblokSettings from "../plugins/storyblokSettings";
+
+/*
+   * Get data for list components
+   */
+async function getListContent(listObject, storyApi) {
+  return await storyApi
+    .get("cdn/stories", {
+      version: storyblokSettings.version,
+      cv: storyblokSettings.cv,
+      starts_with: listObject.contenttype,
+      sort_by: listObject.sortby ? listObject.sortby : "created_at:desc",
+      per_page: listObject.perpage ? listObject.perpage : "50",
+      page: "1",
+      is_startpage: false // exclude start pages (fe: blog list)
+    })
+    .then(data => {
+      return data.data.stories;
+    });
+}
+
+/*
+   * Recursively loop through page components (hero, teaser,...)
+   * Enrich list component data ~ blogposts, employees,... (for server side rendering)
+   */
+async function enrichJsonObject(obj, storyApi) {
+  let richObj = [];
+  for (var i in obj) {
+    // loop trough elements tree
+    if (obj[i].hasOwnProperty("elements")) {
+      obj.elements = await enrichJsonObject(obj[i].elements, storyApi);
+    } else if (obj[i].component == "list") {
+      obj[i].listcontent = await getListContent(obj[i], storyApi);
+    }
+    richObj.push(obj[i]);
+  }
+
+  return richObj;
+}
 
 export default {
-  data () {
+  data() {
     return {
       story: {
         content: {}
       }
-    }
+    };
   },
-  mounted () {
-    if(typeof this.$storyblok !== 'undefined') {
+  created() {
+    // Load page slug from the API
+    const slug =
+      this.$route.fullPath == "/" || this.$route.fullPath == ""
+        ? "/home"
+        : this.$route.fullPath;
+    this.$storyapi
+      .get(`cdn/stories${slug}`, {
+        version: storyblokSettings.version,
+        cv: storyblokSettings.cv
+      })
+      .then(page => {
+        if (page.data.story.content.body) {
+          var richBody = enrichJsonObject(
+            page.data.story.content.body,
+            this.$storyapi
+          );
+          richBody.then(res => {
+            page.data.story.content.body = res;
+            this.story = page.data.story;
+          });
+        }
+      });
+  },
+  mounted() {
+    if (typeof this.$storyblok !== "undefined") {
       this.$storyblok.init();
-      this.$storyblok.on(['input', 'published', 'change'], (event) => {
-        if (event.action == 'input') {
+      this.$storyblok.on(["input", "published", "change"], event => {
+        if (event.action == "input") {
           if (event.story.id === this.story.id) {
             this.story.content = event.story.content;
           }
-        }
-        else {
+        } else {
           window.location.reload(true);
         }
       });
     }
+
+    // force reload if onetrust js is not executed
+    // @todo find a better way to show content on cookie policy page
+    if (process.client && document.getElementById("optanon-cookie-policy")) {
+      setTimeout(function() {
+        if (
+          document.getElementById("optanon-cookie-policy").innerHTML.length == 0
+        ) {
+          window.location.reload(true);
+        }
+      }, 1000);
+    }
   },
-  head () {
-    let story = this.story
+  head() {
+    let story = this.story;
     return {
       title: story.name,
       meta: [
         {
           hid: `description`,
-          name: 'description',
+          name: "description",
           content: story.content.metadescription
-        }, {
-          hid: 'canonical',
-          name: 'canonical',
-          content: 'https://www.designisdead.com' + this.$route.path
         },
+        {
+          hid: "canonical",
+          name: "canonical",
+          content: "https://www.designisdead.com" + this.$route.path
+        }
       ]
-    }
+    };
   },
-  async asyncData (context) {
-
-    /*
-     * Get data for list components
-     */
-    async function getListContent(listObject) {
-      return await context.app.$storyapi.get('cdn/stories' , {
-        version: storyblokSettings.version,
-        cv: storyblokSettings.cv,
-        starts_with: listObject.contenttype,
-        sort_by: listObject.sortby ? listObject.sortby : 'created_at:desc',
-        per_page: listObject.perpage ? listObject.perpage : '50',
-        page: '1',
-        is_startpage: false, // exclude start pages (fe: blog list)
-      }).then(data => {
-        // console.log(`${moment().format('YYYYMMDDHHmm')}: Get list content for ${listObject.contenttype}`);
-        return data.data.stories;
-      });
-    }
-
-    /*
-     * Recursively loop through page components (hero, teaser,...)
-     * Enrich list component data ~ blogposts, employees,... (for server side rendering)
-     */
-    async function enrichJsonObject(obj) {
-      let richObj = [];
-      for(var i in obj) {
-        // loop trough elements tree
-        if(obj[i].hasOwnProperty('elements')) {
-          obj.elements = await enrichJsonObject(obj[i].elements);
-        }
-        else if(obj[i].component == 'list'){
-          obj[i].listcontent = await getListContent(obj[i]);
-        }
-        richObj.push(obj[i]);
-      }
-
-      return richObj;
-    }
-
+  async asyncData(context) {
     // Load page slug from the API
-    const slug = context.route.path == '/' || context.route.path == '' ? '/home' : context.route.path;
-    let page = await context.app.$storyapi.get(`cdn/stories${slug}`, {
-      cv: moment().format('YYYYMMDDHHmm'),
-      version: process.env.NODE_ENV == 'production' ? 'published' : 'draft',
-    }).then((res) => {
-      return res.data
-    }).catch((res) => {
-      context.error({ statusCode: res.response.status, message: res.response.data.error })
-    });
+    const slug =
+      context.route.path == "/" || context.route.path == ""
+        ? "/home"
+        : context.route.path;
+    let page = await context.app.$storyapi
+      .get(`cdn/stories${slug}`, {
+        version: storyblokSettings.version,
+        cv: storyblokSettings.cv
+      })
+      .then(res => {
+        return res.data;
+      })
+      .catch(res => {
+        context.error({
+          statusCode: res.response.status,
+          message: res.response.data.error
+        });
+      });
 
-    if(page && page.story.content.body) {
-      page.story.content.body = await enrichJsonObject(page.story.content.body);
+    if (page && page.story.content.body) {
+      page.story.content.body = await enrichJsonObject(
+        page.story.content.body,
+        context.app.$storyapi
+      );
     }
 
     return page;
-
   }
-}
+};
 </script>

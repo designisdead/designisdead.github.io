@@ -1,8 +1,8 @@
 import Vue from 'vue';
 
 Vue.filter('imageApi', (src, size) => {
-  if (src) {
-    size = !size ? 'large' : size;
+  if (!src.endsWith('.svg')) {
+    size = !size || size == null ? 'large' : size;
 
     const sizes = {
       'nano': '25x0',
@@ -18,5 +18,8 @@ Vue.filter('imageApi', (src, size) => {
     const path = src.replace('//a.storyblok.com', '');
 
     return imageService + sizes[size] + path;
+  }
+  else {
+    return src;
   }
 });

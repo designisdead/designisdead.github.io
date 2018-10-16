@@ -2,83 +2,92 @@
   <div
     v-editable="blok"
     :class="[
-      'Columns--tiny' + blok.tiny,
-      'Columns--small' + blok.small,
-      'Columns--medium' + blok.medium,
-      'Columns--large' + blok.large,
-      'Columns--huge' + blok.huge,
+      'Grid--tiny' + blok.tiny,
+      'Grid--small' + blok.small,
+      'Grid--medium' + blok.medium,
+      'Grid--large' + blok.large,
+      'Grid--huge' + blok.huge,
     ]"
-    class="Columns">
-    <component
+    class="Grid">
+    <div
       v-for="blok in blok.columns"
-      :key="blok._uid"
-      :blok="blok"
-      :is="blok.component"/>
+      :key="blok._uid">
+      <component
+        :blok="blok"
+        :is="blok.component"/>
+    </div>
   </div>
 </template>
 
 <script>
   export default {
-    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
+    props: {
+      blok: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    },
   }
 </script>
 
 <style lang="scss">
-  .Columns {
+  .Grid {
     display: grid;
     margin: 0 -#{$spacer/2};
   }
 
   @for $i from 1 through 16 {
-    .Columns--tiny#{$i} {
+    .Grid--tiny#{$i} {
       grid-template-columns: repeat($i, 1fr);
     }
   }
 
   @media screen and (min-width: size('small')) {
     @for $i from 1 through 16 {
-      .Columns--small#{$i} {
+      .Grid--small#{$i} {
         grid-template-columns: repeat($i, 1fr);
       }
     }
 
-    .Columns--small {
+    .Grid--small {
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 
   @media screen and (min-width: size('medium')) {
     @for $i from 1 through 16 {
-      .Columns--medium#{$i} {
+      .Grid--medium#{$i} {
         grid-template-columns: repeat($i, 1fr);
       }
     }
 
-    .Columns--medium {
+    .Grid--medium {
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 
   @media screen and (min-width: size('large')) {
     @for $i from 1 through 16 {
-      .Columns--large#{$i} {
+      .Grid--large#{$i} {
         grid-template-columns: repeat($i, 1fr);
       }
     }
 
-    .Columns--large {
+    .Grid--large {
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 
   @media screen and (min-width: size('huge')) {
     @for $i from 1 through 16 {
-      .Columns--huge#{$i} {
+      .Grid--huge#{$i} {
         grid-template-columns: repeat($i, 1fr);
       }
     }
 
-    .Columns--huge {
+    .Grid--huge {
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }

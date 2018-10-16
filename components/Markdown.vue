@@ -24,6 +24,18 @@
         html: '',
       };
     },
+    mounted() {
+      // @todo: only run setInterval when we are in edit mode
+      setInterval(() => {
+        this.createHTML();
+      }, 250);
+    },
+    created() {
+      this.createHTML();
+    },
+    beforeMount() {
+      this.createHTML();
+    },
     methods: {
       createHTML() {
         let text = '';
@@ -38,18 +50,6 @@
 
         this.html = marked(text);
       },
-    },
-    mounted() {
-      // @todo: only run setInterval when we are in edit mode
-      setInterval(() => {
-        this.createHTML();
-      }, 250);
-    },
-    created() {
-      this.createHTML();
-    },
-    beforeMount() {
-      this.createHTML();
     },
   };
 </script>

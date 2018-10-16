@@ -1,5 +1,5 @@
 export default function ({ store }) {
-  if(!store.state.employees) {
+  if(process.server && !store.state.employees) {
     return store.dispatch('getEmployees')
   }
 }

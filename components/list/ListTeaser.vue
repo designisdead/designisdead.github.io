@@ -1,18 +1,31 @@
 <template>
   <li class="ListTeaser">
-      <h2>
-        <nuxt-link class="ListTeaser-link" :key="post.full_slug" :to="post.full_slug">{{ post.name }}</nuxt-link>
-      </h2>
-      <p v-if="post.content.metadescription">
-        {{ post.content.metadescription }}
-      </p>
-      <nuxt-link class="ListTeaser-readMore" :key="post.full_slug" :to="post.full_slug">Read more</nuxt-link>
+    <h2>
+      <nuxt-link
+        :key="post.full_slug"
+        :to="post.full_slug"
+        class="ListTeaser-link">{{ post.name }}</nuxt-link>
+    </h2>
+    <p v-if="post.content.metadescription">
+      {{ post.content.metadescription }}
+    </p>
+    <nuxt-link
+      :key="post.full_slug"
+      :to="post.full_slug"
+      class="ListTeaser-readMore">Read more</nuxt-link>
   </li>
 </template>
 
 <script>
   export default {
-    props: ['post'],
+    props: {
+      post: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    },
   }
 </script>
 

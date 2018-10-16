@@ -1,11 +1,12 @@
 <template>
-  <div id="particles-js" class="Particles">
-  </div>
+  <div 
+    id="particles-js" 
+    class="Particles"/>
 </template>
 
 <script>
   export default {
-    name: 'vue-particles',
+    name: 'VueParticles',
     mounted () {
       // import particle.js only on client-side
       require('particles.js');

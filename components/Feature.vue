@@ -1,11 +1,13 @@
 <template>
-  <div v-editable="blok" class="util__flex-eq">
+  <div
+    v-editable="blok"
+    class="util__flex-eq">
     <h1>{{ blok.name }}</h1>
   </div>
 </template>
 
 <script>
   export default {
-    props: ['blok']
+    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
   }
 </script>

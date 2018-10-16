@@ -17,7 +17,6 @@ module.exports = {
     { src: '~/plugins/imageApi'},
     { src: '~/plugins/lazyLoad'},
     { src: '~/plugins/storyblokSettings'},
-    { src: '~/plugins/localStorage.js', ssr: false }
   ],
   router: {
     middleware: ['settings', 'employees'],
@@ -57,9 +56,10 @@ module.exports = {
       ),
       // Ignore all locale files of moment.js
       new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    ]
+    ],
     /*
-    ** Run ESLint on save
+     * Run ESLint on save
+     */
     extend(config, {isDev, isClient}) {
       if (isDev && isClient) {
         config.module.rules.push({
@@ -70,9 +70,9 @@ module.exports = {
         })
       }
     }
-    */
   },
   generate: {
+    fallback: true,
     routes: function () {
       let posts = axios
         .get('https://api.storyblok.com/v1/cdn/links?version=published&token=O2r6aDSsF6m26lYt5NNMzQtt&cv=' + Math.floor(Date.now()))

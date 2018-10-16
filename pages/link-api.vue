@@ -1,7 +1,9 @@
 <template>
   <section id="page-home">
     <ul>
-      <li v-for="post in pages" :key="post.slug">
+      <li 
+        v-for="post in pages" 
+        :key="post.slug">
         <nuxt-link :to="post.slug">{{ post.name }}</nuxt-link>
       </li>
     </ul>

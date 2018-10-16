@@ -1,25 +1,50 @@
 <template>
-  <div class="Image" v-editable="blok">
+  <div
+    v-editable="blok"
+    :style="'height: ' + imageHeight + ';'"
+    class="Image">
     <img
-      :src="blok.image"
+      v-lazy="blok.image"
+      :src="$options.filters.imageApi(blok.image, 'nano')"
       :width="blok.width"
       :alt="blok.alt"
       :class="{
-       'u-centered' : blok.alignment == 'center',
-       'u-floatRight' : blok.alignment == 'right',
-       'ImageUpload--stretched' : !blok.width
+        'u-centered' : blok.alignment == 'center',
+        'u-floatRight' : blok.alignment == 'right',
+        'ImageUpload--stretched' : !blok.width
       }"
-    />
+    >
   </div>
 </template>
 
 <script>
   export default {
-    props: ['blok']
+    props: {
+      blok: {
+        type: Object, default: function () {
+          return {}
+        }
+      }
+    },
+    computed: {
+      imageHeight() {
+        let imageHeight = 'auto';
+        if(typeof this.blok.height !== 'undefined') {
+          imageHeight = this.blok.height + 'px';
+        }
+
+        return imageHeight;
+      }
+    }
   }
 </script>
 
 <style lang="scss">
+  .Image {
+    display: flex;
+    align-items: center;
+  }
+
   .Image::after {
     content: "";
     clear: both;

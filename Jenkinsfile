@@ -9,12 +9,12 @@ def version;
 def majorVersion;
 def buildNumber;
 
-
 def registry = "designisdead/website"
 def registryCredential = 'did-docker-hub'
 
 
 node('master') {
+    def websiteImage
     checkout scm
     def config = jsonParse(readFile("package.json"))
     version = config["version"]
@@ -43,8 +43,11 @@ node('master') {
     }
 
     stage('Building image') {
-        def websiteImage = docker.build(registry)
-        docker.withRegistry('https://registry.hub.docker.com', 'did-docker-hub') {
+        websiteImage = docker.build(registry)
+    }
+
+    stage('Publish image') {
+        docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
           websiteImage.push("${buildNumber}")
           websiteImage.push("latest")
         }
@@ -61,9 +64,9 @@ stage("Deploy $acceptanceEnv") {
         echo 'Deploying...'
         kubernetesDeploy(kubeconfigId: 'did-k8s-cluster',               // REQUIRED
             configs: 'k8s/deployment.yml', // REQUIRED
-            enableConfigSubstitution: false,
+            enableConfigSubstitution: true,
             dockerCredentials: [
-              [credentialsId: 'did-docker-hub']
+              [credentialsId: registryCredential]
             ]
         )
     }

@@ -1,39 +1,122 @@
 <template>
   <div class="Page-footer">
     <wrapper size="large">
-      <div class="Footer">
-        <div class="Footer-left">
-          <a
-            href="https://twitter.com/designisdead"
-            class="u-color--twitter">
-            <icon type="twitter" />
-          </a>
-          &nbsp;
-          <a
-            href="https://www.facebook.com/DesignisDead/"
-            class="u-color--facebook">
-            <icon type="facebook" />
-          </a>
-          &nbsp;
-          <a
-            href="https://www.linkedin.com/company/design-is-dead"
-            class="u-color--linkedin">
-            <icon type="linkedin" />
-          </a>
+      <div class="Doormat">
+        <div class="Doormat-contactDetails">
+          <p>
+            <strong>Design is Dead</strong><br>
+            Rue Middelbourg 64 B<br>
+            1170 Brussels, Belgium
+          </p>
+          <p>
+            <a href="mailto:info@designisdead.com">info@designisdead.com</a><br>
+            VAT: BE457.419.732
+          </p>
         </div>
-        <div class="Footer-right">
-          <span class="Footer-copyright">
-            <nuxt-link to="/cookie-policy">Cookie policy</nuxt-link> -
-            <nuxt-link to="/privacy-policy">Privacy policy</nuxt-link> &nbsp;
-            &copy; {{ year }}
-          </span>
+        <div class="Doormat-copyright">
+          <p>
+            <nuxt-link to="/cookie-policy">cookie policy</nuxt-link>
+            -
+            <nuxt-link to="/privacy-policy">privacy policy</nuxt-link>
+            <br>
+            &copy; {{ year }} Design is Dead
+          </p>
           &nbsp;
-          <span class="Footer-knuckles"><icon type="knuckles" /></span>
         </div>
+        <div class="Doormat-icons">
+          <p>
+            <a
+              href="https://twitter.com/designisdead"
+              class="u-color--twitter">
+              <icon
+                type="twitter"
+                size="small"/>
+            </a>
+            &nbsp;
+            <a
+              href="https://www.facebook.com/DesignisDead/"
+              class="u-color--facebook">
+              <icon
+                type="facebook"
+                size="small"/>
+            </a>
+            &nbsp;
+            <a
+              href="https://www.linkedin.com/company/design-is-dead"
+              class="u-color--linkedin">
+              <icon
+                type="linkedin"
+                size="small"/>
+            </a>
+          </p>
+        </div><!-- .Doormat-icons -->
       </div>
     </wrapper>
   </div>
 </template>
+
+<style lang="scss">
+  .Doormat {
+    padding-top: 40px;
+    text-align: center;
+    font-size: 0.7rem;
+    @media screen and (min-width: size("large")) {
+      display: flex;
+      padding-top: 33px;
+      > div {
+        flex: 1;
+      }
+    }
+  }
+
+  .Doormat-contactDetails {
+    padding-bottom: 20px;
+
+    strong {
+      text-transform: uppercase;
+    }
+
+    @media screen and (min-width: size("large")) {
+      text-align: left;
+      display: flex;
+      > p {
+        flex: 1;
+        &:last-child {
+          padding-top: 17px;
+        }
+      }
+    }
+  }
+
+  .Doormat-copyright {
+    padding-bottom: 20px;
+    a {
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+    @media screen and (min-width: size("large")) {
+      padding-top: 17px;
+    }
+  }
+
+  .Doormat-icons {
+    padding-bottom: 20px;
+    a {
+      margin-left: 10px;
+      margin-right: 10px;
+    }
+
+    @media screen and (min-width: size("large")) {
+      text-align: right;
+      padding-top: 22px;
+      a {
+        margin-right: 0;
+      }
+    }
+  }
+</style>
 
 <script>
   export default {

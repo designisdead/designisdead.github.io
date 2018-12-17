@@ -376,7 +376,7 @@ $pageSidebarMinimumWidth: 310px;
       transform: translateX(10px);
     }
   }
-  @media screen and (min-width: size("medium")) {
+  @media screen and (min-width: size("large")) {
     display: none;
   }
 }
@@ -439,7 +439,7 @@ $pageSidebarMinimumWidth: 310px;
   display: none;
   text-align: right;
   line-height: $pageHeaderHeight;
-  @media screen and (min-width: size("medium")) {
+  @media screen and (min-width: size("large")) {
     display: block;
   }
 }
@@ -520,26 +520,5 @@ $pageSidebarMinimumWidth: 310px;
       transform: rotate(-45deg) translateX(0);
     }
   }
-}
-
-.Footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px 0;
-}
-
-.Footer-right {
-  display: flex;
-  align-items: center;
-}
-
-.Footer-copyright {
-  font-size: 10px;
-}
-
-.Footer-knuckles {
-  margin-top: -2px;
-  margin-left: 5px;
 }
 </style>

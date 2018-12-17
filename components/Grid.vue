@@ -34,61 +34,60 @@
 
 <style lang="scss">
   .Grid {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 -#{$spacer/2};
+    justify-content: center;
+    > div {
+      padding: 0 $spacer/2 $spacer/2 $spacer/2;
+    }
   }
 
   @for $i from 1 through 16 {
     .Grid--tiny#{$i} {
-      grid-template-columns: repeat($i, 1fr);
+      > div {
+        min-width: (100 / $i) + %;
+      }
     }
   }
 
   @media screen and (min-width: size('small')) {
     @for $i from 1 through 16 {
       .Grid--small#{$i} {
-        grid-template-columns: repeat($i, 1fr);
+        > div {
+          min-width: (100 / $i) + %;
+        }
       }
-    }
-
-    .Grid--small {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 
   @media screen and (min-width: size('medium')) {
     @for $i from 1 through 16 {
       .Grid--medium#{$i} {
-        grid-template-columns: repeat($i, 1fr);
+        > div {
+          min-width: (100 / $i) + %;
+        }
       }
-    }
-
-    .Grid--medium {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 
   @media screen and (min-width: size('large')) {
     @for $i from 1 through 16 {
       .Grid--large#{$i} {
-        grid-template-columns: repeat($i, 1fr);
+        > div {
+          min-width: (100 / $i) + %;
+        }
       }
-    }
-
-    .Grid--large {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 
   @media screen and (min-width: size('huge')) {
     @for $i from 1 through 16 {
       .Grid--huge#{$i} {
-        grid-template-columns: repeat($i, 1fr);
+        > div {
+          min-width: (100 / $i) + %;
+        }
       }
-    }
-
-    .Grid--huge {
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     }
   }
 

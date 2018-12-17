@@ -1,5 +1,7 @@
 <template>
-  <svg class="Icon">
+  <svg
+    class="Icon"
+    :class="size">
     <use
       :xlink:href="'#svg-' +type"
       :href="'#svg-' +type"/>
@@ -13,6 +15,11 @@
         type: String,
         default: 'knuckles',
         required: true
+      },
+      size: {
+        type: String,
+        default: 'medium',
+        required: false
       },
     }
   }

@@ -8,6 +8,7 @@
       :src="$options.filters.imageApi(blok.image, 'nano')"
       :width="blok.width"
       :alt="blok.alt"
+      :title="blok.alt"
       :class="{
         'u-centered' : blok.alignment == 'center',
         'u-floatRight' : blok.alignment == 'right',

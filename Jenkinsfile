@@ -59,19 +59,40 @@ node('master') {
 def acceptanceEnv = "STG"
 stage("Deploy $acceptanceEnv") {
     milestone()
+    env.k8s_namespace = "did-stg"
+    env.k8s_nodePort = "30001"
     timeout(time: 5, unit: 'DAYS') {
         input "About to deploy on $acceptanceEnv. Are you sure?"
     }
     node('master') {
         echo 'Deploying...'
         kubernetesDeploy(kubeconfigId: 'did-k8s-cluster',               // REQUIRED
-            configs: 'k8s/deployment.yml', // REQUIRED
+            configs: 'k8s/*.yml', // REQUIRED
             enableConfigSubstitution: true,
             dockerCredentials: [
               [credentialsId: registryCredential]
             ]
         )
     }
+}
+
+stage("Deploy PRD") {
+    milestone()
+    env.k8s_namespace = "did-prd"
+    env.k8s_nodePort = "30002"
+    timeout(time: 5, unit: 'DAYS') {
+        input "About to deploy on PRD. Are you sure?"
+    }
+    node('master') {
+        echo 'Deploying...'
+        kubernetesDeploy(kubeconfigId: 'did-k8s-cluster',               // REQUIRED
+            configs: 'k8s/*.yml', // REQUIRED
+            enableConfigSubstitution: true,
+            dockerCredentials: [
+              [credentialsId: registryCredential]
+            ]
+        )
+   }
 }
 
 

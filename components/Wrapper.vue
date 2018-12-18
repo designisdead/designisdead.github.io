@@ -105,7 +105,7 @@
   .Wrapper-content {
     position: relative;
     margin: 0 auto;
-    padding: 0 $spacer/2;
+    padding: $spacer $spacer/2;
     z-index: 1;
     width: 100%;
     will-change: max-width;

@@ -1,18 +1,14 @@
 <template>
   <div v-editable="blok">
     <!-- If list type is masonry -->
-    <div
-      v-if="blok.listtype == 'masonry'"
-      class="Masonry">
-      <masonry
-        :cols="{default: 3, 1400: 3, 700: 2, 400: 1}"
-        :gutter="0">
+    <div v-if="blok.listtype == 'masonry'">
+      <equalcolumns :cols="{default: 4, 1400: 3, 700: 2, 400: 1}">
         <div
           v-for="(post, index) in blok.listcontent"
           :key="index">
           <brick :post="post"/>
         </div>
-      </masonry>
+      </equalcolumns>
     </div>
     <!-- else -->
     <ul
@@ -100,11 +96,6 @@ export default {
 </script>
 
 <style lang="scss">
-.Masonry {
-  position: relative;
-  overflow: hidden;
-}
-
 .List {
   position: relative;
 }

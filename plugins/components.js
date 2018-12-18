@@ -29,6 +29,7 @@ import Particles from "@/components/Particles.vue";
 import Doormat from "@/components/Doormat.vue";
 import TextRotator from "@/components/TextRotator.vue";
 import HtmlText from "@/components/HtmlText.vue";
+import EqualColumns from "@/components/EqualColumns.vue";
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -60,3 +61,4 @@ Vue.component("particles", Particles);
 Vue.component("doormat", Doormat);
 Vue.component("textrotator", TextRotator);
 Vue.component("htmltext", HtmlText);
+Vue.component("equalcolumns", EqualColumns);

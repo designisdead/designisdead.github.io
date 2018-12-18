@@ -197,13 +197,13 @@
     <script 
       type="text/plain" 
       class="optanon-category-2">
-      console.log('optanon-category-2 accepted');
+      // console.log('optanon-category-2 accepted');
     </script>
 
     <script 
       type="text/plain" 
       class="optanon-category-4">
-      console.log('optanon-category-4 accepted');
+      // console.log('optanon-category-4 accepted');
     </script>
 
     <!-- google analytics -->

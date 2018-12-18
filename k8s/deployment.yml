@@ -4,6 +4,11 @@ metadata:
   name: did-website-node
 spec:
   replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
   template:
     metadata:
       labels:
@@ -15,5 +20,12 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          failureThreshold: 12
       imagePullSecrets:
         - name: dockerhubcred

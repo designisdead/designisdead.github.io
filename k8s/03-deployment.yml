@@ -2,6 +2,7 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: did-website-node
+  namespace: ${k8s_namespace}
 spec:
   replicas: 1
   strategy:

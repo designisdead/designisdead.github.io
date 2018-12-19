@@ -7,7 +7,7 @@ module.exports = {
     ['storyblok-nuxt', {
       accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
       cacheProvider: 'memory',
-      excludeHeaderScript: process.env.NODE_ENV == 'production'
+      // excludeHeaderScript: process.env.NODE_ENV == 'production'
     }],
     ['nuxt-sass-resources-loader', '@/assets/scss/_config.scss'],
   ],

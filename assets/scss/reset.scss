@@ -137,11 +137,20 @@ small {
 }
 
 h1 {
-  font-size: 3rem;
+  font-size: 8vw;
+  @media screen and (min-width: size(small)) {
+    font-size: 7vw;
+  }
+  @media screen and (min-width: size(medium)) {
+    font-size: 3rem;
+  }
 }
 
 h2 {
-  font-size: 2rem;
+  font-size: 6vw;
+  @media screen and (min-width: size(small)) {
+    font-size: 2rem;
+  }
 }
 
 h3 {

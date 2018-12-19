@@ -80,6 +80,7 @@
     flex-direction: column;
     will-change: min-height;
     transition: 0.4s min-height ease-out;
+    padding: $spacer 0;
 
     &.quarterscreen {
       min-height: 25vh;
@@ -105,7 +106,7 @@
   .Wrapper-content {
     position: relative;
     margin: 0 auto;
-    padding: $spacer $spacer/2;
+    padding: 0 $spacer/2;
     z-index: 1;
     width: 100%;
     will-change: max-width;

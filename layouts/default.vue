@@ -22,6 +22,37 @@
             @click.native="toggle">
             {{ navitem.title }}
           </nuxt-link>
+
+          <p class="Page-sidebarContentSocial">
+            <a
+              href="https://twitter.com/designisdead"
+              class="u-color--twitter">
+              <icon
+                type="twitter"
+                size="small"/>
+            </a>
+            &nbsp;
+            <a
+              href="https://www.facebook.com/DesignisDead/"
+              class="u-color--facebook">
+              <icon
+                type="facebook"
+                size="small"/>
+            </a>
+            &nbsp;
+            <a
+              href="https://www.linkedin.com/company/design-is-dead"
+              class="u-color--linkedin">
+              <icon
+                type="linkedin"
+                size="small"/>
+            </a>
+          </p>
+
+          <p class="Page-sidebarContentFooter"><strong>Design is Dead</strong><br>
+            Rue Middelbourg 64 B<br>
+            1170 Brussels, Belgium
+          </p>
         </div>
       </div>
 
@@ -194,16 +225,18 @@
 
     </svg>
 
-    <script 
-      type="text/plain" 
+    <script
+      type="text/plain"
       class="optanon-category-2">
       // console.log('optanon-category-2 accepted');
+
     </script>
 
-    <script 
-      type="text/plain" 
+    <script
+      type="text/plain"
       class="optanon-category-4">
       // console.log('optanon-category-4 accepted');
+
     </script>
 
     <!-- google analytics -->
@@ -224,12 +257,13 @@
 
       ga('create', 'UA-98613071-1', 'auto');
       ga('send', 'pageview');
+
     </script>
     <!-- google analytics end -->
 
     <!-- facebook analytics -->
-    <script 
-      type="text/plain" 
+    <script
+      type="text/plain"
       class="optanon-category-4">
       window.fbAsyncInit = function () {
       FB.init({
@@ -252,6 +286,7 @@
       js.src = 'https://connect.facebook.net/en_US/sdk.js';
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
+
     </script>
     <!-- facebook analytics end -->
 
@@ -271,254 +306,270 @@
 </template>
 
 <script>
-export default {
-  methods: {
-    toggle() {
-      document.getElementById("page-sidebarstate").checked = false;
+  export default {
+    methods: {
+      toggle() {
+        document.getElementById("page-sidebarstate").checked = false;
+      }
     }
-  }
-};
+  };
 </script>
 
 <style lang="scss">
-@import "../assets/scss/styles";
+  @import "../assets/scss/styles";
 
-$pageHeaderHeight: 70px;
-$pageSidebarMinimumWidth: 310px;
+  $pageHeaderHeight: 70px;
+  $pageSidebarMinimumWidth: 310px;
 
-.Page-sidebarState {
-  display: none;
-}
-
-.Page-sidebar {
-  position: fixed;
-  top: 0;
-  right: 0;
-  height: 100vh;
-  color: white;
-  z-index: 10;
-  padding: 20px;
-  width: $pageSidebarMinimumWidth;
-  transform: translate3d($pageSidebarMinimumWidth, 0, 0);
-  transition: 0.45s cubic-bezier(0.86, 0, 0.07, 1) transform;
-  will-change: transform;
-  &:before {
-    content: " ";
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.4);
-    opacity: 0;
-    transition: 0.45s cubic-bezier(0.86, 0, 0.07, 1) opacity;
-    will-change: opacity;
-    z-index: -1;
-
-    .Page-sidebarState:checked + .Page & {
-      opacity: 1;
-    }
-  }
-
-  .Page-sidebarState:checked + .Page & {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.Page-sidebarContent {
-  display: flex;
-  height: 100%;
-  justify-content: center;
-  align-items: flex-start;
-  flex-direction: column;
-  padding-top: 50px;
-}
-
-.Page-hamburger {
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  user-select: none;
-  outline: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-
-  span {
-    display: block;
-    text-indent: -9999px;
-    width: 30px;
-    height: 4px;
-    background: black;
-    margin: 4px 0;
-  }
-
-  &:before,
-  &:after {
-    display: block;
-    content: " ";
-    width: 30px;
-    height: 4px;
-    background: color("dark");
-    transition: 0.3s cubic-bezier(0.6, 0, 0.2, 1) transform;
-    will-change: transform;
-  }
-
-  &:before {
-    .Page-sidebarState:checked + .Page & {
-      transform: translateX(-10px);
-    }
-  }
-
-  &:after {
-    .Page-sidebarState:checked + .Page & {
-      transform: translateX(10px);
-    }
-  }
-  @media screen and (min-width: size("large")) {
+  .Page-sidebarState {
     display: none;
   }
-}
 
-.Page-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 0;
-  height: 100vh;
-  cursor: pointer;
-  background: black;
-  opacity: 0;
-  transition: 0.25s ease opacity, 0s 0.25s width;
-  z-index: 9;
-  .Page-sidebarState:checked + .Page & {
-    opacity: 0.03;
-    width: 100vw;
-    transition: 0.25s ease opacity, 0s 0s width;
-  }
-}
-
-.Page-header {
-  position: relative;
-  position: sticky;
-  width: 100%;
-  height: $pageHeaderHeight;
-  background: color("light");
-  z-index: 1;
-  top: 0;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-}
-
-.Page-logo {
-  width: 240px;
-  height: 41px;
-  margin-left: -20px;
-  @media screen and (min-width: size("large")) {
-    width: 300px;
-    height: 55px;
-  }
-}
-
-.Page-content {
-  position: relative;
-  z-index: 0;
-}
-
-.Page-headerContent {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: size("huge");
-  margin: 0 auto;
-  height: 100%;
-  padding: $spacer/2;
-}
-
-.Navigation {
-  display: none;
-  text-align: right;
-  line-height: $pageHeaderHeight;
-  @media screen and (min-width: size("large")) {
-    display: block;
-  }
-}
-
-.Navigation-link {
-  display: inline-block;
-  padding: 7px 10px;
-  margin: 0 5px;
-  text-decoration: none !important;
-  transition: 0.25s ease opacity;
-  opacity: 1;
-  line-height: 1;
-  text-transform: uppercase;
-  font-size: 0.85rem;
-  border: 1px solid transparent;
-
-  &.nuxt-link-active {
-    opacity: 1;
-    font-weight: bold;
-  }
-
-  &:hover {
-    opacity: 0.5;
-  }
-}
-
-.Navigation-link--border {
-  border-color: black;
-}
-
-.MobileNavigation-link {
-  display: block;
-  padding: $spacer/2 0;
-  text-transform: uppercase;
-  font-size: 1.4rem;
-  transition: 0.25s ease opacity;
-  will-change: opacity;
-  &:hover {
-    text-decoration: none;
-    opacity: 0.5;
-  }
-}
-
-.Page-close {
-  position: absolute;
-  top: $spacer/4;
-  right: $spacer/4;
-  width: 40px;
-  height: 40px;
-  text-indent: -9999px;
-  &:before,
-  &:after {
-    position: absolute;
-    content: " ";
-    display: block;
-    background: color("dark");
+  .Page-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    color: white;
+    z-index: 10;
+    padding: 0 20px;
+    width: $pageSidebarMinimumWidth;
+    transform: translate3d($pageSidebarMinimumWidth, 0, 0);
+    transition: 0.45s cubic-bezier(0.86, 0, 0.07, 1) transform;
     will-change: transform;
-    top: 50%;
-    left: 50%;
-    width: 24px;
-    height: 3px;
-    margin-top: -1.5px;
-    margin-left: -12px;
-  }
+    &:before {
+      content: " ";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: 0.45s cubic-bezier(0.86, 0, 0.07, 1) opacity;
+      will-change: opacity;
+      z-index: -1;
 
-  &:before {
-    transition: 0.3s 0.2s cubic-bezier(0.6, 0, 0.2, 1) transform;
-    transform: rotate(45deg) translateX(-50px);
+      .Page-sidebarState:checked + .Page & {
+        opacity: 1;
+      }
+    }
+
     .Page-sidebarState:checked + .Page & {
-      transform: rotate(45deg) translateX(0);
+      transform: translate3d(0, 0, 0);
     }
   }
 
-  &:after {
-    transition: 0.3s 0.25s cubic-bezier(0.6, 0, 0.2, 1) transform;
-    transform: rotate(-45deg) translateX(50px);
-    .Page-sidebarState:checked + .Page & {
-      transform: rotate(-45deg) translateX(0);
+  .Page-sidebarContent {
+    display: flex;
+    height: 100%;
+    justify-content: flex-end;
+    align-items: flex-start;
+    flex-direction: column;
+    padding-top: 50px;
+  }
+
+  .Page-hamburger {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    span {
+      display: block;
+      text-indent: -9999px;
+      width: 30px;
+      height: 4px;
+      background: black;
+      margin: 4px 0;
+    }
+
+    &:before,
+    &:after {
+      display: block;
+      content: " ";
+      width: 30px;
+      height: 4px;
+      background: color("dark");
+      transition: 0.3s cubic-bezier(0.6, 0, 0.2, 1) transform;
+      will-change: transform;
+    }
+
+    &:before {
+      .Page-sidebarState:checked + .Page & {
+        transform: translateX(-10px);
+      }
+    }
+
+    &:after {
+      .Page-sidebarState:checked + .Page & {
+        transform: translateX(10px);
+      }
+    }
+    @media screen and (min-width: size("large")) {
+      display: none;
     }
   }
-}
+
+  .Page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100vh;
+    cursor: pointer;
+    background: black;
+    opacity: 0;
+    transition: 0.25s ease opacity, 0s 0.25s width;
+    z-index: 9;
+    .Page-sidebarState:checked + .Page & {
+      opacity: 0.03;
+      width: 100vw;
+      transition: 0.25s ease opacity, 0s 0s width;
+    }
+  }
+
+  .Page-header {
+    position: relative;
+    position: sticky;
+    width: 100%;
+    height: $pageHeaderHeight;
+    background: color("light");
+    z-index: 1;
+    top: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .Page-logo {
+    width: 240px;
+    height: 41px;
+    margin-left: -20px;
+    @media screen and (min-width: size("large")) {
+      width: 300px;
+      height: 55px;
+    }
+  }
+
+  .Page-content {
+    position: relative;
+    z-index: 0;
+  }
+
+  .Page-headerContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: size("huge");
+    margin: 0 auto;
+    height: 100%;
+    padding: $spacer/2;
+  }
+
+  .Navigation {
+    display: none;
+    text-align: right;
+    line-height: $pageHeaderHeight;
+    @media screen and (min-width: size("large")) {
+      display: block;
+    }
+  }
+
+  .Navigation-link {
+    display: inline-block;
+    padding: 7px 10px;
+    margin: 0 5px;
+    text-decoration: none !important;
+    transition: 0.25s ease opacity;
+    opacity: 1;
+    line-height: 1;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border: 1px solid transparent;
+
+    &.nuxt-link-active {
+      opacity: 1;
+      font-weight: bold;
+    }
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+
+  .Navigation-link--border {
+    border-color: black;
+  }
+
+  .MobileNavigation-link {
+    display: block;
+    padding: $spacer/3 0;
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: 0.25s ease opacity;
+    will-change: opacity;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.5;
+    }
+  }
+
+  .Page-close {
+    position: absolute;
+    top: $spacer/4;
+    right: $spacer/4;
+    width: 40px;
+    height: 40px;
+    text-indent: -9999px;
+    &:before,
+    &:after {
+      position: absolute;
+      content: " ";
+      display: block;
+      background: color("dark");
+      will-change: transform;
+      top: 50%;
+      left: 50%;
+      width: 24px;
+      height: 3px;
+      margin-top: -1.5px;
+      margin-left: -12px;
+    }
+
+    &:before {
+      transition: 0.3s 0.2s cubic-bezier(0.6, 0, 0.2, 1) transform;
+      transform: rotate(45deg) translateX(-50px);
+      .Page-sidebarState:checked + .Page & {
+        transform: rotate(45deg) translateX(0);
+      }
+    }
+
+    &:after {
+      transition: 0.3s 0.25s cubic-bezier(0.6, 0, 0.2, 1) transform;
+      transform: rotate(-45deg) translateX(50px);
+      .Page-sidebarState:checked + .Page & {
+        transform: rotate(-45deg) translateX(0);
+      }
+    }
+  }
+
+  .Page-sidebarContentSocial {
+    margin-top: $spacer / 3;
+  }
+
+  .Page-sidebarContentFooter {
+    color: #ccc;
+    font-size: 12px;
+    border-top: 1px solid #ddd;
+    padding-top: 19px;
+    padding-left: 82px;
+    background: black;
+    margin: 10px -20px 0 -20px;
+    width: calc(100% + 40px);
+    padding-bottom: 20px !important;
+  }
 </style>

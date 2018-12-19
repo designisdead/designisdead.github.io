@@ -19,7 +19,8 @@ This component is used to render the Post content type on Storyblok
                     {{ tag }}
                   </strong> |
                 </span>
-                <time :datetime="dataTime">{{ formattedDate }}</time><br>
+                <time :datetime="dataTime">{{ formattedDate }}</time>
+                <br>
               </div>
 
               <h1 class="Post-title">{{ pagetitle }}</h1>
@@ -52,13 +53,21 @@ This component is used to render the Post content type on Storyblok
 
           <footer>
             <wrapper size="medium">
-              <nuxt-link :to="'/blog'">View all posts</nuxt-link>
+              <div
+                class="Buttons"
+                style="justify-content: center;">
+                <nuxt-link
+                  :to="'/blog'"
+                  class="Button">
+                  View all posts
+                </nuxt-link>
+              </div>
             </wrapper>
           </footer>
 
           <spacer size="small"/>
 
-          <doormat />
+          <doormat/>
         </div>
       </article>
     </main>
@@ -67,11 +76,12 @@ This component is used to render the Post content type on Storyblok
 
 <script>
   import moment from 'moment';
+
   export default {
     props: {
       blok: {
         type: Object,
-        default: function(){
+        default: function () {
           return {};
         }
       },
@@ -99,7 +109,7 @@ This component is used to render the Post content type on Storyblok
 
 <style lang="scss">
   $background: #333;
-  $scroll-factor : .5;
+  $scroll-factor: .5;
   .Post {
     height: calc(100vh - 70px);
     perspective: 1px;
@@ -114,12 +124,10 @@ This component is used to render the Post content type on Storyblok
     position: relative;
     vertical-align: top;
     transform-origin: center top;
-    transform:
-      translateZ(-#{$scroll-factor * 2}px)
-      scale(1 + $scroll-factor * 2);
+    transform: translateZ(-#{$scroll-factor * 2}px) scale(1 + $scroll-factor * 2);
 
     height: calc(100vh - 70px);
-    @media screen and (min-width: 600px) and (min-height: 600px)     {
+    @media screen and (min-width: 600px) and (min-height: 600px) {
       height: 50vh;
     }
   }
@@ -144,19 +152,5 @@ This component is used to render the Post content type on Storyblok
     background-size: cover;
     opacity: 0.4;
     background-position: center center;
-    // filter: blur(1px);
-  }
-
-  .Post-title {
-    font-size: 8vw;
-    @media screen and (min-width: 400px) and (min-height: 360px) {
-      font-size: 6vw;
-    }
-    @media screen and (min-height: 600px) {
-      font-size: 2.5rem;
-    }
-    @media screen and (min-width: 600px) {
-      font-size: 2.5rem;
-    }
   }
 </style>

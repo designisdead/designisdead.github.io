@@ -1,3 +1,13 @@
+.Buttons {
+  display: flex;
+  margin: 0 -#{$spacer/4};
+
+  .Button {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .Button {
   position: relative;
   display: inline-block;

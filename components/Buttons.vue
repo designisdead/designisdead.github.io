@@ -13,18 +13,13 @@
 
 <script>
   export default {
-    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
+    props: {
+      blok: {
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    },
   }
 </script>
-
-<style lang="scss">
-  .Buttons {
-    display: flex;
-    margin: 0 -#{$spacer/4};
-
-    .Button {
-      display: flex;
-      align-items: center;
-    }
-  }
-</style>

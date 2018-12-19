@@ -49,10 +49,20 @@
             </a>
           </p>
 
-          <p class="Page-sidebarContentFooter"><strong>Design is Dead</strong><br>
-            Rue Middelbourg 64 B<br>
-            1170 Brussels, Belgium
-          </p>
+          <a
+            href="https://goo.gl/maps/cV1npJ3qzMp"
+            target="_blank"
+            rel="noopener"
+            class="Page-sidebarContentFooter">
+            <icon
+              type="navigate"
+              size="large"/>
+            <span>
+              <strong>Design is Dead</strong><br>
+              Rue Middelbourg 64 B<br>
+              1170 Brussels, Belgium
+            </span>
+          </a>
         </div>
       </div>
 
@@ -221,6 +231,14 @@
 		c-3.987,1.474-7.534,1.219-8.949,3.211c-2.852,4.016,1.935,12.317,3.901,13.768c4.383,3.233,19.908,2.606,23.635,0.23
 		c2.04-1.302,7.011-10.172,4.129-14.227c-1.581-2.225-5.858-1.438-9.637-2.983c-3.061-1.254-4.054-3.44-7.342-2.753
 		C46.626,28.695,45.774,30.004,43.143,30.978z"/>
+      </symbol>
+
+      <symbol
+        id="svg-navigate"
+        viewBox="0 0 100 100">
+        <path
+          fill="currentColor"
+          d="M50,1C22.9,1,1,22.9,1,50s21.9,49,49,49s49-21.9,49-49S77.1,1,50,1z M50,80.2V50H19.9l52.7-22.6L50,80.2z"/>
       </symbol>
 
     </svg>
@@ -561,15 +579,23 @@
     margin-top: $spacer / 3;
   }
 
-  .Page-sidebarContentFooter {
+  a.Page-sidebarContentFooter {
     color: #ccc;
     font-size: 12px;
     border-top: 1px solid #ddd;
     padding-top: 19px;
-    padding-left: 82px;
+    padding-left: $spacer/2;
     background: black;
     margin: 10px -20px 0 -20px;
     width: calc(100% + 40px);
     padding-bottom: 20px !important;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    > span {
+      padding-left: $spacer/2;
+      display: inline-block;
+    }
   }
 </style>

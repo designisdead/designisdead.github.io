@@ -3,23 +3,24 @@ const webpack = require('webpack');
 const config = require('./plugins/config');
 
 module.exports = {
+  mode: 'universal',
   modules: [
     ['storyblok-nuxt', {
       accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
       cacheProvider: 'memory',
+      excludeHeaderScript: false
       // excludeHeaderScript: process.env.NODE_ENV == 'production'
     }],
     ['nuxt-sass-resources-loader', '@/assets/scss/_config.scss'],
   ],
   plugins: [
     { src: '~/plugins/components'},
-    { src: '~/plugins/masonry'},
     { src: '~/plugins/imageApi'},
     { src: '~/plugins/lazyLoad'},
     { src: '~/plugins/storyblokSettings'},
   ],
   router: {
-    middleware: ['settings', 'employees'],
+    middleware: ['middleware'],
   },
   /*
   ** Headers of the page

@@ -63,8 +63,11 @@
         if(this.height) {
           return this.height;
         }
-        if(this.blok && this.blok.wrapperheight) {
+        else if(this.blok && this.blok.wrapperheight) {
           return this.blok.wrapperheight;
+        }
+        else {
+          return '100vh';
         }
       }
     }

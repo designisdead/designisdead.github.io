@@ -59,9 +59,11 @@ li,
 p {
   line-height: $line-height;
   padding-bottom: $spacer/2;
+  /*
   &:last-child {
     padding-bottom: 0;
   }
+  */
 }
 
 pre {

@@ -29,7 +29,7 @@ This component is used to render the Page content type on Storyblok
       },
       pagetitle: {
         type: String,
-        default: 'Design is Dead - Default page title'
+        default: 'Design is Dead'
       }
     },
   }

@@ -63,4 +63,4 @@ Vue.component("doormat", Doormat);
 Vue.component("textrotator", TextRotator);
 Vue.component("htmltext", HtmlText);
 Vue.component("equalcolumns", EqualColumns);
-Vue.component("youtube_embed", YoutubeEmbed);
+Vue.component("youtubeEmbed", YoutubeEmbed);

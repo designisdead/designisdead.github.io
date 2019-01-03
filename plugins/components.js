@@ -30,6 +30,7 @@ import Doormat from "@/components/Doormat.vue";
 import TextRotator from "@/components/TextRotator.vue";
 import HtmlText from "@/components/HtmlText.vue";
 import EqualColumns from "@/components/EqualColumns.vue";
+import YoutubeEmbed from "@/components/YoutubeEmbed.vue";
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -62,3 +63,4 @@ Vue.component("doormat", Doormat);
 Vue.component("textrotator", TextRotator);
 Vue.component("htmltext", HtmlText);
 Vue.component("equalcolumns", EqualColumns);
+Vue.component("youtube_embed", YoutubeEmbed);

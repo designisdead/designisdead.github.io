@@ -83,6 +83,24 @@
         }
       })
     },
+    head() {
+      const story = this.story;
+      return {
+        title: story.name,
+        meta: [
+          {
+            hid: `description`,
+            name: "description",
+            content: story.content.metadescription
+          },
+          {
+            hid: "canonical",
+            name: "canonical",
+            content: "https://www.designisdead.com" + this.$route.path
+          }
+        ]
+      };
+    },
     async asyncData(context) {
       // Check if we are in the editing mode
       let editMode = false

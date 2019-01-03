@@ -17,6 +17,7 @@ This component is used to render the Post content type on Storyblok
                     v-for="(tag, index) in tags"
                     :key="index">
                     {{ tag }}
+                    <span v-if="index < tags.length - 1">,</span>
                   </strong> |
                 </span>
                 <time :datetime="dataTime">{{ formattedDate }}</time>

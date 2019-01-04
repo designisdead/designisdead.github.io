@@ -6,7 +6,9 @@ This component is used to render the Post content type on Storyblok
   <div>
     <main>
       <article class="Post">
-        <header class="Post-header Wrapper u-backgroundColor--black u-color--light">
+        <header
+          class="Post-header Wrapper u-backgroundColor--black u-color--light"
+          data-parallax="0.5">
           <div class="Post-headerContent">
             <wrapper size="medium">
               <div class="Title tiny uppercase">
@@ -109,24 +111,10 @@ This component is used to render the Post content type on Storyblok
 </script>
 
 <style lang="scss">
-  $background: #333;
-  $scroll-factor: .5;
-  .Post {
-    height: calc(100vh - 70px);
-    perspective: 1px;
-    perspective-origin: center top;
-    transform-style: preserve-3d;
-    overflow-x: hidden;
-    // -webkit-overflow-scrolling: touch;
-  }
-
   .Post-header {
     margin-left: -6px; // Why?
     position: relative;
     vertical-align: top;
-    transform-origin: center top;
-    transform: translateZ(-#{$scroll-factor * 2}px) scale(1 + $scroll-factor * 2);
-
     height: calc(100vh - 70px);
     @media screen and (min-width: 600px) and (min-height: 600px) {
       height: 50vh;

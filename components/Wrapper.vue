@@ -1,5 +1,5 @@
 <template>
-  <div v-editable="Blok">
+  <div v-editable="Blok" :data-parallax="Parallax">
     <div
       :class="[Blok.backgroundcolor, Blok.textcolor, Height]"
       class="Wrapper">
@@ -58,6 +58,14 @@
       },
       Size() {
         return this.size || this.blok.size;
+      },
+      Parallax() {
+        if(this.blok.parallax && Number(this.blok.parallax) !== 0) {
+          return Number(this.blok.parallax);
+        }
+        else {
+          return false;
+        }
       },
       Height() {
         if(this.height) {

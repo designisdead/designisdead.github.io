@@ -5,7 +5,7 @@
       :key="story.content._uid"
       :pagetitle="story.name"
       :blok="story.content"
-      :is="story.content.component" />
+      :is="story.content.component"/>
   </div>
 </template>
 
@@ -45,7 +45,10 @@
         is_startpage: false // exclude start pages (fe: blog list)
       })
       .then(data => {
-        return data.data.stories;
+        let stories = data.data.stories;
+        return stories.filter(function (story) {
+          return !story.content.hidden;
+        });
       });
   }
 

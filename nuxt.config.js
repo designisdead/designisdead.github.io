@@ -18,6 +18,7 @@ module.exports = {
     { src: '~/plugins/imageApi'},
     { src: '~/plugins/lazyLoad'},
     { src: '~/plugins/storyblokSettings'},
+    { src: '~/plugins/parallax', ssr: false},
   ],
   router: {
     middleware: ['middleware'],

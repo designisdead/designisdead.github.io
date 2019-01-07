@@ -83,9 +83,13 @@
   }
 
   .Teaser-content {
-    padding: $spacer/2;
+    padding: $spacer $spacer/2;
     max-width: 550px;
     margin: 0 auto;
+
+    p:last-child {
+      padding-bottom: 0;
+    }
   }
 
 </style>

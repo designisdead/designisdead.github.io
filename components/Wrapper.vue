@@ -20,6 +20,7 @@
           'u-backgroundTopRight': Blok.backgroundposition == 'top right',
           'u-backgroundCenterCenter': Blok.backgroundposition == 'center center',
           'u-backgroundTopLeft': Blok.backgroundposition == 'top left',
+          'u-backgroundBottomRight': Blok.backgroundposition == 'bottom right',
           'u-backgroundSizeCover': Blok.backgroundsize == 'cover',
           'u-backgroundSizeContain': Blok.backgroundsize == 'contain',
           'u-backgroundAttachmentFixed' : Blok.backgroundfixed == 'fixed'

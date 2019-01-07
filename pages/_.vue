@@ -104,7 +104,28 @@
             hid: "canonical",
             name: "canonical",
             content: "https://www.designisdead.com" + this.$route.path
-          }
+          },
+          {
+            hid: "og:url",
+            name: "og:url",
+            content: "https://www.designisdead.com" + this.$route.path
+          },
+          {
+            hid: "og:image",
+            name: "og:image",
+            content: story.content.primaryimage || '/default.jpg'
+          },
+          {
+            hid: "og:title",
+            name: "og:title",
+            content: story.name
+          },
+          {
+            hid: "og:description",
+            name: "og:description",
+            content: story.content.metadescription
+          },
+
         ]
       };
     },
@@ -122,14 +143,6 @@
 
         editMode = true
       }
-
-      // load employees
-      /*
-      if (!context.store.state.employees) {
-        context.store.dispatch('getEmployees');
-      }
-      */
-
 
       let version = editMode ? 'draft' : 'published'
       let path = context.route.path == '/' ? 'home' : context.route.path
@@ -150,7 +163,6 @@
           context.app.$storyapi
         );
       }
-
 
       return page;
     }

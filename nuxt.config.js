@@ -32,7 +32,9 @@ module.exports = {
       {charset: 'utf-8'},
       {name: 'viewport', content: 'width=device-width, initial-scale=1'},
       {name: 'theme-color', content: '#fffffe'}, // Chrome tab color on android
-      {hid: 'description', name: 'description', content: 'Design is Dead'}
+      {hid: 'description', name: 'description', content: 'Design is Dead'},
+      {hid: 'fb:app_id', name: 'fb:app_id', content: '879905388836438'},
+      {hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image'},
     ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},

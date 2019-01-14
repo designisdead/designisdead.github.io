@@ -22,7 +22,7 @@
     },
     computed: {
       youtubeSrc() {
-        return 'http://www.youtube.com/embed/' + this.blok.youtube_id + '?rel=0&hd=1';
+        return '//www.youtube.com/embed/' + this.blok.youtube_id + '?rel=0&hd=1';
       }
     }
   }

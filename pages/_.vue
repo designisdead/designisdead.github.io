@@ -103,12 +103,12 @@
           {
             hid: "canonical",
             name: "canonical",
-            content: "https://www.designisdead.com" + this.$route.path
+            content: "http://designisdead.com" + this.$route.path
           },
           {
             hid: "og:url",
             name: "og:url",
-            content: "https://www.designisdead.com" + this.$route.path
+            content: "http://designisdead.com" + this.$route.path
           },
           {
             hid: "og:image",

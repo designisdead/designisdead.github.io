@@ -23,6 +23,9 @@ module.exports = {
   router: {
     middleware: ['middleware'],
   },
+  serverMiddleware: [
+    '~/servermiddleware/seo.js'
+  ],
   /*
   ** Headers of the page
   */

@@ -156,15 +156,24 @@
         path: path
       });
 
-      // Enrich list components in body
-      if (typeof page.story.content.body !== 'undefined') {
-        page.story.content.body = await enrichJsonObject(
-          page.story.content.body,
-          context.app.$storyapi
-        );
+      // Show 404 error
+      if(!page) {
+        context.error({
+          statusCode: 404,
+          message: 'Page not found',
+        });
       }
+      else {
+        // Enrich list components in body
+        if (typeof page.story.content.body !== 'undefined') {
+          page.story.content.body = await enrichJsonObject(
+            page.story.content.body,
+            context.app.$storyapi
+          );
+        }
 
-      return page;
+        return page;
+      }
     }
   }
 </script>

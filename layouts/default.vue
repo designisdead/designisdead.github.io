@@ -347,7 +347,7 @@
     position: fixed;
     top: 0;
     right: 0;
-    height: 100vh;
+    bottom: 0;
     color: white;
     z-index: 10;
     padding: 0 20px;

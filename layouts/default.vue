@@ -3,7 +3,9 @@
     <input
       id="page-sidebarstate"
       type="checkbox"
-      class="Page-sidebarState">
+      class="Page-sidebarState"
+      v-model="sidebarOpen"
+      @change="updateBodyClass()">
     <div class="Page">
       <div class="Page-sidebar u-backgroundColor--light u-colorDark">
 
@@ -19,7 +21,7 @@
             :key="index"
             :to="'/' + navitem.link.cached_url"
             class="MobileNavigation-link"
-            @click.native="toggle">
+            @click.native="closeSidebar">
             {{ navitem.title }}
           </nuxt-link>
 
@@ -248,12 +250,14 @@
       class="optanon-category-2">
       // console.log('optanon-category-2 accepted');
 
+
     </script>
 
     <script
       type="text/plain"
       class="optanon-category-4">
       // console.log('optanon-category-4 accepted');
+
 
     </script>
 
@@ -275,6 +279,7 @@
 
       ga('create', 'UA-98613071-1', 'auto');
       ga('send', 'pageview');
+
 
     </script>
     <!-- google analytics end -->
@@ -305,6 +310,7 @@
       fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
 
+
     </script>
     <!-- facebook analytics end -->
 
@@ -324,10 +330,19 @@
 </template>
 
 <script>
+
+  const body = process.client ? document.querySelectorAll('body')[0] : null;
   export default {
+    data: () => ({
+      sidebarOpen: false,
+    }),
     methods: {
-      toggle() {
-        document.getElementById("page-sidebarstate").checked = false;
+      closeSidebar() {
+        this.sidebarOpen = false;
+        this.updateBodyClass();
+      },
+      updateBodyClass() {
+        this.sidebarOpen ? body.classList.add('body--sidebarOpened') : body.classList.remove('body--sidebarOpened');
       }
     }
   };
@@ -338,6 +353,10 @@
 
   $pageHeaderHeight: 70px;
   $pageSidebarMinimumWidth: 310px;
+
+  .body--sidebarOpened {
+    overflow: hidden;
+  }
 
   .Page-sidebarState {
     display: none;

@@ -5,7 +5,16 @@
     <div class="u-textAlignCenter">
       <h1>Offline</h1>
       <p>
-        You seem to be offline
+        <strong>
+          You appear to be offline.<br>
+          Come grap a coffee at our HQ
+        </strong>
+      </p>
+      <p>
+        <span>
+          Rue Middelbourg 64 B<br>
+          1170 Brussels, Belgium
+        </span>
       </p>
     </div>
 

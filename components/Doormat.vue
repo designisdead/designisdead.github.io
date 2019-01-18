@@ -27,6 +27,9 @@
           <p>
             <a
               href="https://twitter.com/designisdead"
+              target="_blank"
+              rel="noopener"
+              title="Visit our twitter page"
               class="u-color--twitter">
               <icon
                 type="twitter"
@@ -35,6 +38,9 @@
             &nbsp;
             <a
               href="https://www.facebook.com/DesignisDead/"
+              target="_blank"
+              rel="noopener"
+              title="Visit our facebook page"
               class="u-color--facebook">
               <icon
                 type="facebook"
@@ -43,6 +49,9 @@
             &nbsp;
             <a
               href="https://www.linkedin.com/company/design-is-dead"
+              target="_blank"
+              rel="noopener"
+              title="Visit our linkedin page"
               class="u-color--linkedin">
               <icon
                 type="linkedin"

@@ -8,7 +8,9 @@
       <div
         v-if="blok.icon"
         class="Teaser-icon">
-        <img :src="blok.icon">
+        <img
+          :src="blok.icon"
+          :alt="blok.alt" />
       </div>
     </div>
     <div class="Teaser-content">

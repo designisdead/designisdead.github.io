@@ -38,7 +38,7 @@ This component is used to render the Post content type on Storyblok
             </wrapper>
           </div>
           <div
-            :style="{ backgroundImage: 'url(' + $options.filters.imageApi(blok.primaryimage, 'large') + ')' }"
+            v-lazy:background-image="headerImage"
             class="Post-headerBackground"/>
         </header>
         <div class="Post-content">
@@ -79,6 +79,7 @@ This component is used to render the Post content type on Storyblok
 
 <script>
   import moment from 'moment';
+  import supportsWebP from 'supports-webp';
 
   export default {
     props: {
@@ -105,6 +106,12 @@ This component is used to render the Post content type on Storyblok
       },
       tags() {
         return this.blok.tags && this.blok.tags.tags ? this.blok.tags.tags : {};
+      },
+      headerImage() {
+        const filters = supportsWebP ? '/filters:format(webp)' : '';
+        const image = this.$options.filters.imageApi({src: this.blok.primaryimage, size: 'large', filters: filters});
+        console.log(image);
+        return image;
       }
     }
   }

@@ -3,7 +3,7 @@
     v-editable="blok"
     class="Teaser">
     <div
-      v-lazy:background-image="$options.filters.imageApi(blok.image, 'large')"
+      v-lazy:background-image="backgroundImage"
       class="Teaser-image">
       <div
         v-if="blok.icon"
@@ -18,6 +18,8 @@
 </template>
 
 <script>
+  import supportsWebP from 'supports-webp';
+
   export default {
     props: {
       blok: {
@@ -26,9 +28,14 @@
         }
       }
     },
+    computed: {
+      backgroundImage() {
+        const filters = supportsWebP ? '/filters:format(webp)' : '';
+        return this.$options.filters.imageApi({src: this.blok.image, size: 'large', filters: filters});
+      }
+    }
   }
 </script>
-
 
 <style lang="scss">
   $teaserIconSize: 120px;

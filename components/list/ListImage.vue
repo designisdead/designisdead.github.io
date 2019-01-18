@@ -3,16 +3,16 @@
     <nuxt-link
       :key="post.full_slug"
       :to="'/' + post.full_slug"
-      @mouseover.native="preloadHeader($options.filters.imageApi(post.content.primaryimage, 'large'))">
+      @mouseover.native="preloadHeader($options.filters.imageApi({src: post.content.primaryimage, size: 'large'}))">
       <article>
-        <div 
-          v-lazy:background-image="$options.filters.imageApi(post.content.primaryimage, 'small')"
+        <div
+          v-lazy:background-image="$options.filters.imageApi({src: post.content.primaryimage, size: 'small'})"
           v-if="post.content.primaryimage"
-          :style="'background-image: url(' + $options.filters.imageApi(post.content.primaryimage, 'nano') + ')'"
+          :style="'background-image: url(' + $options.filters.imageApi({src: post.content.primaryimage, size: 'nano'}) + ')'"
           class="ListImage-image"
           :data-title="post.name">
           <h1 class="medium Title ListImage-title">{{ post.name }}</h1>
-        </div>   
+        </div>
       </article>
     </nuxt-link>
   </li>

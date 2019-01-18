@@ -2,9 +2,11 @@
   <span
     class="Author"
     rel="author">
-    <span class="Author-avatar">
-      <img :src="$options.filters.imageApi(Author.content.secondaryimage, 'tiny')" >
-    </span>
+    <picture class="Author-avatar">
+      <source :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny', filters: '/filters:format(webp)'})" type="image/webp">
+      <source :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})" type="image/jpeg">
+      <img :src="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})" >
+    </picture>
     <span class="Author-name">{{ Author.name }}</span>
   </span>
 </template>

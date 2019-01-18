@@ -20,6 +20,7 @@
     "nuxt": "2.3.4",
     "nuxt-sass-resources-loader": "^2.0.0",
     "storyblok-nuxt": "1.0.1",
+    "supports-webp": "^1.0.5",
     "vue-lazyload": "^1.2.6",
     "vuex-persistedstate": "^2.5.4"
   },

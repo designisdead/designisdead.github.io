@@ -1,7 +1,7 @@
 <template>
   <div class="VideoBackground">
     <div
-      :style="'background-image: url(' + $options.filters.imageApi(poster, 'large') + ')'"
+      :style="'background-image: url(' + $options.filters.imageApi({src: poster, size: 'large'}) + ')'"
       class="VideoBackground-overlay"/>
     <div
       class="VideoBackground-darken"/>

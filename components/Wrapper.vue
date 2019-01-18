@@ -14,7 +14,7 @@
         <slot/>
       </div>
       <div
-        v-lazy:background-image="$options.filters.imageApi(Blok.backgroundimage, 'large')"
+        v-lazy:background-image="$options.filters.imageApi({src: Blok.backgroundimage, size: 'large'})"
         v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
         :class="{
           'u-backgroundTopRight': Blok.backgroundposition == 'top right',

@@ -3,28 +3,27 @@
     <nuxt-link
       :key="post.full_slug"
       :to="'/' + post.full_slug"
-      @mouseover.native="preloadHeader($options.filters.imageApi(post.content.primaryimage, 'large'))">
+      @mouseover.native="preloadHeader()">
       <article>
-        <div 
-          v-lazy:background-image="$options.filters.imageApi(post.content.primaryimage, 'small')"
+        <div
+          v-lazy:background-image="lazyImage"
           v-if="post.content.primaryimage"
-          :style="'background-image: url(' + $options.filters.imageApi(post.content.primaryimage, 'nano') + ')'"
           class="Card-image"/>
         <div class="Card-content">
           <header class="Card-header">
-            <p 
-              v-if="post.content.author" 
+            <p
+              v-if="post.content.author"
               class="Card-author">
               <author :id="post.content.author"/>
             </p>
-            <h2 
-              v-if="post.content.published" 
+            <h2
+              v-if="post.content.published"
               class="Card-meta micro uppercase">
-              <span 
-                v-if="tags.length > 0" 
+              <span
+                v-if="tags.length > 0"
                 class="Post-tags">
-                <strong 
-                  v-for="(tag, index) in tags" 
+                <strong
+                  v-for="(tag, index) in tags"
                   :key="'tag' + index">
                   {{ tag }}
                 </strong> |
@@ -41,6 +40,9 @@
 
 <script>
   import moment from 'moment';
+  import supportsWebP from 'supports-webp';
+
+  const filters = supportsWebP ? '/filters:format(webp)' : '';
 
   export default {
     props: {
@@ -62,11 +64,15 @@
       },
       tags() {
         return this.post.content.tags && this.post.content.tags.tags ? this.post.content.tags.tags : {};
-      }
+      },
+      lazyImage() {
+        return this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'small', filters: filters});
+      },
     },
     methods: {
-      preloadHeader(url) {
-        var img = new Image();
+      preloadHeader() {
+        let img = new Image();
+        const url = this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'large', filters: filters});
         img.src = url;
       }
     },

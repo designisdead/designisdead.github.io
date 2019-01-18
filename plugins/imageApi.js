@@ -1,9 +1,7 @@
 import Vue from 'vue';
 
-Vue.filter('imageApi', (src, size) => {
+Vue.filter('imageApi', ({src, size = '', filters = ''}) => {
   if (!src.endsWith('.svg')) {
-    size = !size || size == null ? 'large' : size;
-
     const sizes = {
       'nano': '25x0',
       'micro': '50x0',
@@ -14,10 +12,11 @@ Vue.filter('imageApi', (src, size) => {
       'huge': '1920x0',
     };
 
-    const imageService = '//img2.storyblok.com/';
+    const imageSize = size in sizes ? '/' + sizes[size] : '';
+    const imageService = '//img2.storyblok.com';
     const path = src.replace('//a.storyblok.com', '');
 
-    return imageService + sizes[size] + path;
+    return imageService + imageSize + filters + path;
   }
   else {
     return src;

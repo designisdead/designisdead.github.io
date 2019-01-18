@@ -1,28 +1,33 @@
 <template>
   <article class="Brick">
     <header class="Brick-content">
-      <div
+      <picture
         v-if="post.content.secondaryimage"
         class="Brick-profileImage">
+        <source :srcset="secondaryImage('/filters:format(webp)')" type="image/webp">
+        <source :srcset="secondaryImage('')" type="image/jpeg">
         <img
-          :src="$options.filters.imageApi(post.content.secondaryimage, 'tiny')"
+          :src="secondaryImage('')"
           alt="post.name" >
-      </div>
+      </picture>
       <h1 class="medium noSpaceBelow u-color--light">{{ post.name }}</h1>
       <h2
         v-if="post.content.jobtitle"
         class="small noSpaceBelow u-color--light">{{ post.content.jobtitle }}</h2>
     </header>
-    <div
+    <picture
       v-if="post.content.primaryimage"
-      class="Brick-backgroundImage">
-      <img :src="$options.filters.imageApi(post.content.primaryimage, 'nano')" >
-    </div>
+      class="Brick-lowresBackgroundImage">
+      <source :srcset="primaryImage('/filters:format(webp)')" type="image/webp">
+      <source :srcset="primaryImage('')" type="image/jpeg">
+      <img :src="primaryImage('')" >
+    </picture>
   </article>
 </template>
 
 <script>
   import scrollMonitor from 'scrollmonitor';
+  import supportsWebP from 'supports-webp';
 
   export default {
     props: {
@@ -33,31 +38,41 @@
         }
       },
     },
-
     mounted() {
       if(process.client) {
-        let img = this.$el.querySelectorAll('.Brick-backgroundImage img')[0];
-        var elementWatcher = scrollMonitor.create( img , 1000);
+        const brick = this.$el;
+        const elementWatcher = scrollMonitor.create( brick , 1000);
+        const filters = supportsWebP ? '/filters:format(webp)' : '';
+
+        let highresImage = document.createElement("img");
+        highresImage.classList.add('Brick-highresBackgroundImage');
 
         elementWatcher.enterViewport(() => {
-          img.src = this.$options.filters.imageApi(this.post.content.primaryimage, 'medium');
-          img.addEventListener('load', function() {
-            img.classList.add('loaded');
-          });
+          highresImage.src = this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'medium', filters: filters});
+          brick.insertBefore(highresImage, brick.childNodes[0]);
         });
       }
 
+    },
+    methods: {
+      primaryImage(webp) {
+        return this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'nano', filters: webp});
+      },
+      secondaryImage(webp) {
+        return this.$options.filters.imageApi({src: this.post.content.secondaryimage, size: 'tiny', filters: webp});
+      },
     }
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 
   .Brick {
     position: relative;
     padding: 0;
     margin: 0;
     list-style-type: none;
+    min-height: 100px;
   }
 
   .Brick-content {
@@ -68,7 +83,8 @@
     z-index: 2;
   }
 
-  .Brick-backgroundImage {
+  .Brick-lowresBackgroundImage {
+    display: block;
     overflow: hidden;
     &:after {
       content: ' ';
@@ -89,16 +105,23 @@
       display: block;
       width: 100%;
       height: auto;
-      filter: blur(15px);
       transform: scale(1.1);
       transition: 0.25s 0.25s filter ease-out;
-      &.loaded {
-        filter: blur(0px);
-      }
     }
   }
 
+  .Brick-highresBackgroundImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+
   .Brick-profileImage {
+    display: block;
     width: 70px;
     height: 70px;
     border: 4px solid white;

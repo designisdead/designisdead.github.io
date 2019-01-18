@@ -1,5 +1,5 @@
 <template>
-  <section 
+  <section
     v-editable="blok"
     :class="[blok.size]"
     class="Hero">
@@ -10,8 +10,8 @@
       </div>
       <!-- Hero content ends here -->
     </div>
-    <div 
-      v-lazy:background-image="$options.filters.imageApi(blok.image, 'large')"
+    <div
+      v-lazy:background-image="$options.filters.imageApi({src: blok.image, size: 'large'})"
       v-if="blok.image"
       class="Hero-backgroundImage"
     />

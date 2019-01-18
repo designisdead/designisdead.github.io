@@ -1,12 +1,12 @@
 <template>
-  <div class="VideoBackground">
-    <div
-      :style="'background-image: url(' + $options.filters.imageApi({src: poster, size: 'large'}) + ')'"
-      class="VideoBackground-overlay"/>
+  <div
+    class="VideoBackground"
+    v-lazy:background-image="headerImage">
+
     <div
       class="VideoBackground-darken"/>
+
     <video
-      :poster="poster"
       class="VideoBackground-video"
       playsinline
       autoplay
@@ -22,6 +22,8 @@
   </div>
 </template>
 <script>
+  import supportsWebP from 'supports-webp';
+
   export default {
     props: {
       src: {
@@ -34,34 +36,24 @@
       }
     },
     mounted() {
+      // autoplay video
       let video = this.$el.querySelectorAll('video')[0];
-
       if (window.matchMedia('(prefers-reduced-motion)').matches) {
         video.removeAttribute("autoplay");
         this.stopVideo();
       }
-
-      /*
-      // only works when there is no loop attribute
-      video.addEventListener('loadedmetadata', () => {
-        console.log(video.duration);
-        // @todo: get 2 seconds transition speed from .VideoBackground-video
-        let timeoutDuration = Math.floor((video.duration - 2) * 1000);
-        setTimeout(
-          () => this.stopVideo(video), timeoutDuration
-        );
-      });
-      */
-      this.$nextTick(() => {
-        this.startVideo(video);
-      });
+      else {
+        this.$nextTick(() => {
+          this.startVideo(video);
+        });
+      }
     },
     methods: {
       startVideo: function (video) {
         // remove video overlay when video is already playing > smooth start
         const raf = () => {
           requestAnimationFrame(raf)
-          if(video.currentTime > 0.5) {
+          if (video.currentTime > 0.2) {
             video.classList.add('VideoBackground-video--playing');
           }
         }
@@ -71,13 +63,18 @@
         video.pause();
         video.classList.remove('VideoBackground-video--playing');
       }
+    },
+    computed: {
+      headerImage() {
+        const filters = supportsWebP ? '/filters:format(webp)' : '';
+        return this.$options.filters.imageApi({src: this.poster, size: 'huge', filters: filters});
+      }
     }
   }
 </script>
 
 <style lang="scss">
   .VideoBackground-darken,
-  .VideoBackground-overlay,
   .VideoBackground {
     position: absolute;
     z-index: 0;
@@ -87,7 +84,9 @@
     bottom: 0;
     overflow: hidden;
     background-size: cover;
+    background-position: center center;
   }
+
   .VideoBackground-darken {
     background: black;
     z-index: 2;

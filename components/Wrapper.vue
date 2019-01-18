@@ -14,7 +14,7 @@
         <slot/>
       </div>
       <div
-        v-lazy:background-image="$options.filters.imageApi({src: Blok.backgroundimage, size: 'large'})"
+        v-lazy:background-image="BackgroundImage"
         v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
         :class="{
           'u-backgroundTopRight': Blok.backgroundposition == 'top right',
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+  import supportsWebP from 'supports-webp';
+
   export default {
     props: {
       blok: {
@@ -78,6 +80,10 @@
         else {
           return '100vh';
         }
+      },
+      BackgroundImage() {
+        const filters = supportsWebP ? '/filters:format(webp)' : '';
+        return this.$options.filters.imageApi({src: this.Blok.backgroundimage, size: 'large', filters: filters});
       }
     }
   }

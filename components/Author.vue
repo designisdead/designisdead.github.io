@@ -5,7 +5,9 @@
     <picture class="Author-avatar">
       <source :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny', filters: '/filters:format(webp)'})" type="image/webp">
       <source :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})" type="image/jpeg">
-      <img :src="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})" >
+      <img
+        :src="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})"
+        :title="'Written by ' + Author.name" />
     </picture>
     <span class="Author-name">{{ Author.name }}</span>
   </span>

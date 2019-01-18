@@ -83,7 +83,9 @@
           for="page-sidebarstate"/>
         <div class="Page-header">
           <div class="Page-headerContent">
-            <nuxt-link :to="'/'">
+            <nuxt-link
+              :to="'/'"
+              title="Back to homepage">
               <svg class="Page-logo">
                 <use
                   xlink:href="#svg-logo"

@@ -58,6 +58,10 @@ module.exports = {
   manifest: {
     theme_color: '#000001'
   },
+  workbox: {
+    // Workbox options
+    offlinePage: '/offline'
+  },
   /*
   ** Build configuration
   */

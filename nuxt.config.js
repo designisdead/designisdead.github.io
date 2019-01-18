@@ -5,6 +5,7 @@ const config = require('./plugins/config');
 module.exports = {
   mode: 'universal',
   modules: [
+    ['@nuxtjs/pwa'],
     ['storyblok-nuxt', {
       accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
       cacheProvider: 'memory',
@@ -54,6 +55,9 @@ module.exports = {
   ** Customize the progress bar color
   */
   loading: {color: '#000001'},
+  manifest: {
+    theme_color: '#000001'
+  },
   /*
   ** Build configuration
   */

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Design is Dead website",
   "author": "Design is Dead",
+  "license": "ISC",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",

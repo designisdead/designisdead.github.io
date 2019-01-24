@@ -46,7 +46,7 @@
   @for $i from 1 through 16 {
     .Grid--tiny#{$i} {
       > div {
-        min-width: (100 / $i) + %;
+        min-width: 100% / $i;
       }
     }
   }
@@ -55,7 +55,7 @@
     @for $i from 1 through 16 {
       .Grid--small#{$i} {
         > div {
-          min-width: (100 / $i) + %;
+          min-width: 100% / $i;
         }
       }
     }
@@ -65,7 +65,7 @@
     @for $i from 1 through 16 {
       .Grid--medium#{$i} {
         > div {
-          min-width: (100 / $i) + %;
+          min-width: 100% / $i;
         }
       }
     }
@@ -75,7 +75,7 @@
     @for $i from 1 through 16 {
       .Grid--large#{$i} {
         > div {
-          min-width: (100 / $i) + %;
+          min-width: 100% / $i;
         }
       }
     }
@@ -85,7 +85,7 @@
     @for $i from 1 through 16 {
       .Grid--huge#{$i} {
         > div {
-          min-width: (100 / $i) + %;
+          min-width: 100% / $i;
         }
       }
     }

@@ -16,7 +16,6 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^2.6.0",
     "marked": "^0.6.0",
     "moment": "2.24.0",
     "nuxt": "2.3.4",

@@ -5,7 +5,6 @@ const config = require('./plugins/config');
 module.exports = {
   mode: 'universal',
   modules: [
-    ['@nuxtjs/pwa'],
     ['storyblok-nuxt', {
       accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
       cacheProvider: 'memory',

@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@nuxtjs/pwa": "^2.6.0",
-    "marked": "^0.5.2",
+    "marked": "^0.6.0",
     "moment": "2.24.0",
     "nuxt": "2.3.4",
     "nuxt-sass-resources-loader": "^2.0.0",

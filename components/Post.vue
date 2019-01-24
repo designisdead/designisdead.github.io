@@ -109,9 +109,7 @@ This component is used to render the Post content type on Storyblok
       },
       headerImage() {
         const filters = supportsWebP ? '/filters:format(webp)' : '';
-        const image = this.$options.filters.imageApi({src: this.blok.primaryimage, size: 'large', filters: filters});
-        console.log(image);
-        return image;
+        return this.$options.filters.imageApi({src: this.blok.primaryimage, size: 'large', filters: filters});
       }
     }
   }

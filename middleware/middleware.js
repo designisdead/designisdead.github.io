@@ -1,19 +1,5 @@
-/*
-  Load site settings.
-  F.e: primary navigation
- */
-export default function ({store}) {
-  if (!store.state.cacheVersion) {
-    store.dispatch('loadCacheVersion')
-  }
-  /*
-  // @todo: what's the difference between middleware and nuxtServerInit?
-  if (!store.state.employees) {
-    store.dispatch('getEmployees');
-  }
-
-  if (!store.state.settings.primary_navigation) {
-    store.dispatch('loadSettings');
-  }
-  */
+// Runs after nuxtServerInit
+// Also triggered client-side when the user navigates between pages
+// https://github.com/nuxt/nuxt.js/issues/273
+export default function ({}) {
 }

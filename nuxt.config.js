@@ -17,7 +17,6 @@ module.exports = {
     { src: '~/plugins/components'},
     { src: '~/plugins/imageApi'},
     { src: '~/plugins/lazyLoad'},
-    { src: '~/plugins/storyblokSettings'},
     { src: '~/plugins/parallax', ssr: false},
   ],
   router: {

@@ -35,8 +35,6 @@
 </template>
 
 <script>
-import storyblokSettings from "~/plugins/storyblokSettings";
-
 export default {
   props: {
     blok: {
@@ -78,8 +76,8 @@ export default {
 
       return this.$storyapi
         .get("cdn/stories", {
-          version: storyblokSettings.version,
-          cv: storyblokSettings.cv,
+          version: this.$store.state.version,
+          cv: this.$store.state.cacheVersion,
           starts_with: this.blok.contenttype,
           sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
           page: this.page,

@@ -116,6 +116,11 @@
         </div>
       </div>
     </div>
+
+    <div class="DraftMode" v-if="draftMode">
+      draft content
+    </div>
+
     <svg style="display: none;">
       <!-- Close -->
       <symbol
@@ -354,6 +359,11 @@
       },
       updateBodyClass() {
         this.sidebarOpen ? body.classList.add('body--sidebarOpened') : body.classList.remove('body--sidebarOpened');
+      }
+    },
+    computed: {
+      draftMode() {
+        return this.$store.state.editMode;
       }
     }
   };
@@ -627,5 +637,17 @@
       padding-left: $spacer/2;
       display: inline-block;
     }
+  }
+
+  .DraftMode {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: white;
+    z-index: 99999999999;
+    background: #09B3AF;
+    color: white;
+    font-size: 12px;
+    padding: 3px 5px;
   }
 </style>

@@ -47,8 +47,6 @@ This component is used to render the Post content type on Storyblok
 </template>
 
 <script>
-  import moment from "moment";
-
   export default {
     props: {
       blok: {

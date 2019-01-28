@@ -59,9 +59,6 @@
       formattedDate() {
         return moment(this.post.content.published).format('dddd MMMM D, YYYY');
       },
-      fromNow() {
-        return moment(this.post.content.published).fromNow();
-      },
       tags() {
         return this.post.content.tags && this.post.content.tags.tags ? this.post.content.tags.tags : {};
       },

@@ -115,22 +115,22 @@
           },
           {
             hid: "og:url",
-            name: "og:url",
+            property: "og:url",
             content: "https://designisdead.com" + this.$route.path
           },
           {
             hid: "og:image",
-            name: "og:image",
+            property: "og:image",
             content: story.content.primaryimage || '/default.jpg'
           },
           {
             hid: "og:title",
-            name: "og:title",
+            property: "og:title",
             content: story.name
           },
           {
             hid: "og:description",
-            name: "og:description",
+            property: "og:description",
             content: story.content.metadescription
           },
 

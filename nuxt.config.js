@@ -17,10 +17,10 @@ module.exports = {
     scss: ['@/assets/scss/_config.scss'],
   },
   plugins: [
-    { src: '~/plugins/components'},
-    { src: '~/plugins/imageApi'},
-    { src: '~/plugins/lazyLoad'},
-    { src: '~/plugins/parallax', ssr: false},
+    '~/plugins/components',
+    '~/plugins/imageApi',
+    '~/plugins/lazyLoad',
+    '~/plugins/parallax.client',
   ],
   router: {
     linkPrefetchedClass: 'nuxt-link-prefetched'

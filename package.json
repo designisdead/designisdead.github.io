@@ -18,14 +18,14 @@
   "dependencies": {
     "marked": "^0.6.0",
     "moment": "2.24.0",
-    "nuxt": "2.3.4",
-    "nuxt-sass-resources-loader": "^2.0.0",
+    "nuxt": "2.4.0",
     "storyblok-nuxt": "1.0.1",
     "supports-webp": "^1.0.7",
     "vue-lazyload": "^1.2.6",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {
+    "@nuxtjs/style-resources": "^0.1.1",
     "babel-eslint": "^10.0.1",
     "cross-env": "^5.2.0",
     "css-loader": "^2.0.1",
@@ -33,11 +33,11 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-vue": "^5.0.0",
-    "highlight.js": "^9.13.1",
+    "highlight.js": "^9.14.1",
     "node-sass": "^4.11.0",
     "particles.js": "^2.0.0",
     "push-dir": "^0.4.1",
-    "sass-loader": "^7.0.1",
+    "sass-loader": "^7.1.0",
     "scrollmonitor": "^1.2.4"
   }
 }

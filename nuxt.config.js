@@ -11,8 +11,11 @@ module.exports = {
       excludeHeaderScript: false
       // excludeHeaderScript: process.env.NODE_ENV == 'production'
     }],
-    ['nuxt-sass-resources-loader', '@/assets/scss/_config.scss'],
+    ['@nuxtjs/style-resources'],
   ],
+  styleResources: {
+    scss: ['@/assets/scss/_config.scss'],
+  },
   plugins: [
     { src: '~/plugins/components'},
     { src: '~/plugins/imageApi'},
@@ -20,7 +23,7 @@ module.exports = {
     { src: '~/plugins/parallax', ssr: false},
   ],
   router: {
-    middleware: ['middleware'],
+    linkPrefetchedClass: 'nuxt-link-prefetched'
   },
   serverMiddleware: [
     '~/servermiddleware/seo.js'

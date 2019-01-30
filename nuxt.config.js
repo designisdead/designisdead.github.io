@@ -91,10 +91,10 @@ module.exports = {
   },
   generate: {
     fallback: true,
-    routes: function () {
+    routes: () => {
       let posts = axios
         .get('https://api.storyblok.com/v1/cdn/links?version=published&token=O2r6aDSsF6m26lYt5NNMzQtt&cv=' + Math.floor(Date.now()))
-        .then((res) => {
+        .then(res => {
           var pages = [];
 
           for (var key in res.data.links) {

@@ -142,9 +142,9 @@
 
       // Load the JSON from the API
       let page = await loadData({
-        version: context.store.state.version,
+        version: context.store.state.settings.version,
         api: context.app.$storyapi,
-        cacheVersion: context.store.state.cacheVersion,
+        cacheVersion: context.store.state.settings.cacheVersion,
         errorCallback: context.error,
         path: path
       });
@@ -155,8 +155,8 @@
           page.story.content.body = await enrichJsonObject({
             elements: page.story.content.body,
             api: context.app.$storyapi,
-            version: context.store.state.version,
-            cacheVersion: context.store.state.cacheVersion,
+            version: context.store.state.settings.version,
+            cacheVersion: context.store.state.settings.cacheVersion,
             errorCallback: context.error,
           });
         }

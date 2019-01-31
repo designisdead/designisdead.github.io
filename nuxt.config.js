@@ -23,7 +23,7 @@ module.exports = {
     '~/plugins/parallax.client',
   ],
   router: {
-    linkPrefetchedClass: 'nuxt-link-prefetched'
+    // linkPrefetchedClass: 'nuxt-link-prefetched'
   },
   serverMiddleware: [
     '~/servermiddleware/seo.js'

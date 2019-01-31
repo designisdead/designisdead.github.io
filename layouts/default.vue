@@ -17,7 +17,7 @@
 
         <div class="Page-sidebarContent">
           <nuxt-link
-            v-for="(navitem, index) in $store.state.settings.primary_navigation"
+            v-for="(navitem, index) in $store.state.settings.primaryNavigation"
             :key="index"
             :to="'/' + navitem.link.cached_url"
             class="MobileNavigation-link"
@@ -99,7 +99,7 @@
             </label>
             <div class="Navigation">
               <nuxt-link
-                v-for="(navitem, index) in $store.state.settings.primary_navigation"
+                v-for="(navitem, index) in $store.state.settings.primaryNavigation"
                 :key="index"
                 :to="'/' + navitem.link.cached_url"
                 :class="{ 'Navigation-link--border': navitem.border }"
@@ -363,7 +363,7 @@
     },
     computed: {
       draftMode() {
-        return this.$store.state.editMode;
+        return this.$store.state.settings.editMode;
       }
     }
   };

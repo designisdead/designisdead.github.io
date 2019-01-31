@@ -76,8 +76,8 @@ export default {
 
       return this.$storyapi
         .get("cdn/stories", {
-          version: this.$store.state.version,
-          cv: this.$store.state.cacheVersion,
+          version: this.$store.state.settings.version,
+          cv: this.$store.state.settings.cacheVersion,
           starts_with: this.blok.contenttype,
           sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
           page: this.page,

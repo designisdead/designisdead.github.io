@@ -23,7 +23,7 @@
     },
     computed: {
       Author() {
-        return this.$store.state.employees.find((employee) => {
+        return this.$store.state.employees.all.find((employee) => {
           return employee.id == this.id;
         });
       }

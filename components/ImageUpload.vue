@@ -1,20 +1,28 @@
 <template>
-  <div
+  <figure
     v-editable="blok"
     :style="'height: ' + imageHeight + ';'"
-    class="Image">
+    class="ImageUpload">
+    <div class="ImageUpload-imageWrapper">
       <img
         v-lazy="lazyImage"
         :width="blok.width"
         :alt="blok.alt"
         :title="blok.alt"
+        class="ImageUpload-image"
         :class="{
         'u-centered' : blok.alignment == 'center',
         'u-floatRight' : blok.alignment == 'right',
-        'ImageUpload--stretched' : !blok.width
+        'ImageUpload-image--stretched' : !blok.width
       }"
       />
-  </div>
+    </div>
+    <figcaption
+      v-if="blok.title"
+      class="ImageUpload-caption">
+      {{ blok.title }}
+    </figcaption>
+  </figure>
 </template>
 
 <script>
@@ -50,20 +58,31 @@
 </script>
 
 <style lang="scss">
-  .Image {
+  .ImageUpload {
+    margin-bottom: $spacer;
+  }
+
+  .ImageUpload-imageWrapper {
     display: flex;
     align-items: center;
   }
 
-  .Image::after {
+  .ImageUpload-imageWrapper::after {
     content: "";
     clear: both;
     display: table;
   }
 
-  .ImageUpload--stretched {
+  .ImageUpload-image--stretched {
     max-width: 100%;
     display: block;
-    margin-bottom: $spacer;
+  }
+
+  .ImageUpload-caption {
+    display: block;
+    text-align: center;
+    font-size: 0.85rem;
+    font-style: italic;
+    padding-top: $spacer/4;
   }
 </style>

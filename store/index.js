@@ -1,18 +1,18 @@
-import settings from './modules/settings';
-import employees from './modules/employees';
+import settings from './settings';
+import employees from './employees';
 
 export default {
   actions: {
     // Prepare the store with data from the server-side
     async nuxtServerInit({dispatch, commit}, {query}) {
       // check if we are in editMode
-      await dispatch('loadEditMode', query);
+      await dispatch('settings/loadEditMode', query);
 
       // load cv, employees and settings
-      await dispatch('loadCacheVersion');
-      await dispatch('loadSettings');
+      await dispatch('settings/loadCacheVersion');
+      await dispatch('settings/loadSettings');
 
-      await dispatch('getEmployees');
+      await dispatch('employees/getEmployees');
     },
   },
   modules: {

@@ -35,7 +35,7 @@ const actions = {
   },
   async loadCacheVersion({commit}) {
     await this.$storyapi.get(`cdn/spaces/me`).then((res) => {
-      commit('setCacheVersion', res.data.space.version);
+      commit('setCacheVersion', process.client ? res.data.space.version : Date.now());
     })
   },
   async loadSettings({commit}) {
@@ -53,4 +53,3 @@ export default {
   mutations,
   actions
 };
-

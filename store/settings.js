@@ -19,10 +19,12 @@ const mutations = {
 }
 
 const actions = {
-  loadEditMode({commit}, query) {
+  loadEditMode({
+    commit
+  }, query) {
     let isEditMode = false;
 
-    if(query['_storyblok_tk[space_id]']) {
+    if (query['_storyblok_tk[space_id]']) {
       // const validationString = context.query['_storyblok_tk[space_id]'] + ':AJwMQue3YmvF9GhvSrecTQtt:' + context.query['_storyblok_tk[timestamp]'];
       // const validationToken = crypto.createHash('sha1').update(validationString).digest('hex');
 
@@ -33,15 +35,19 @@ const actions = {
 
     commit('setEditMode', isEditMode);
   },
-  async loadCacheVersion({commit}) {
+  async loadCacheVersion({
+    commit
+  }) {
     await this.$storyapi.get(`cdn/spaces/me`).then((res) => {
       commit('setCacheVersion', process.client ? res.data.space.version : Date.now());
     })
   },
-  async loadSettings({commit}) {
+  async loadSettings({
+    commit
+  }) {
     await this.$storyapi.get(`cdn/stories/_settings`, {
       cv: this.state.cacheVersion,
-      version: this.state.version
+      version: "draft"
     }).then((res) => {
       commit('setSettings', res.data.story.content)
     })

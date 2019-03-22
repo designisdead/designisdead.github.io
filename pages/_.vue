@@ -14,7 +14,7 @@
 const loadData = function({ api, cacheVersion, errorCallback, version, path }) {
   return api
     .get(`cdn/stories/${path}`, {
-      version: "draft",
+      version: version,
       cv: cacheVersion
     })
     .then(res => {

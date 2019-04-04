@@ -4,12 +4,12 @@ metadata:
   name: did-website-node
   namespace: ${k8s_namespace}
 spec:
-  replicas: 1
+  replicas: 2
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 2
-      maxUnavailable: 0
+      maxUnavailable: 1
   template:
     metadata:
       labels:

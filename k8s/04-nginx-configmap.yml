@@ -29,8 +29,8 @@ data:
             # set client body size to 32M #
             client_max_body_size 32M;
 
-            access_log /var/log/nginx/did_access.log
-            error_log /var/log/nginx/did_error.log
+            access_log /var/log/nginx/did_access.log;
+            error_log /var/log/nginx/did_error.log;
 
             location / {
                 resolver 127.0.0.1:53 ipv6=off;

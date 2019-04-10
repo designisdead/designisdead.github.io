@@ -23,6 +23,8 @@ spec:
           - name: nginx-config-volume
             mountPath: /etc/nginx/nginx.conf
             subPath: nginx.conf
+          - name: nginx-logs
+            mountPath: /var/log/nginx
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -57,6 +59,8 @@ spec:
           - name: AWS_REGION
             value: "eu-central-1"
         volumeMounts:
+          - name: nginx-logs
+            mountPath: /var/log/nginx
           - name: fluent-config-volume
             mountPath: /etc/td-agent
       restartPolicy: Always
@@ -65,7 +69,9 @@ spec:
       volumes:
         - name: nginx-config-volume
           configMap:
-           name: nginx-config
+            name: nginx-config
+        - name: nginx-logs
+          emptyDir: {}
         - name: fluent-config-volume
           configMap:
             name: nginx-fluentd-config

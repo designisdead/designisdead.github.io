@@ -53,7 +53,7 @@ spec:
           - name: FLUENTD_ARGS
             value: -c /etc/td-agent/td-agent.conf
           - name: LOG_GROUP_NAME
-            value: "did-stg"
+            value: ${k8s_namespace}
           - name: LOG_STREAM_NAME
             value: "did-nginx"
           - name: AWS_REGION

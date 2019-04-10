@@ -20,7 +20,7 @@ spec:
         name: webserver
         imagePullPolicy: Always
         volumeMounts:
-          - name: config-volume
+          - name: nginx-config-volume
             mountPath: /etc/nginx/nginx.conf
             subPath: nginx.conf
         ports:
@@ -45,8 +45,27 @@ spec:
         - --append-search-domains
         - --hostsfile=/etc/hosts
         - --verbose
+      - image: designisdead/fluent
+          name: fluent
+          env:
+            - name: FLUENTD_ARGS
+              value: -c /etc/td-agent/td-agent.conf
+            - name: LOG_GROUP_NAME
+              value: "did-stg"
+            - name: LOG_STREAM_NAME
+              value: "did-nginx"
+            - name: AWS_REGION
+              value: "eu-central-1"
+          volumeMounts:
+            - name: fluent-config-volume
+              mountPath: /etc/td-agent
       restartPolicy: Always
+      imagePullSecrets:
+        - name: dockerhubcred
       volumes:
-        - name: config-volume
+        - name: nginx-config-volume
           configMap:
            name: nginx-config
+        - name: fluent-config-volume
+          configMap:
+            name: nginx-fluentd-config

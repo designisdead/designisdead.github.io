@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: did-website-nginx
+  namespace: ${k8s_namespace}
+  labels:
+    app: did-website-nginx
+spec:
+  selector:
+    app: did-website-nginx
+  ports:
+  - port: 8080
+    protocol: TCP
+    nodePort: ${k8s_nginxPort}
+  type: NodePort
+

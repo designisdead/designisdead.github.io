@@ -1,0 +1,52 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: did-website-nginx
+  namespace: ${k8s_namespace}
+spec:
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: did-website-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: webserver
+        imagePullPolicy: Always
+        volumeMounts:
+          - name: config-volume
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: localhost
+            path: /
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 6
+      - name: dnsmasq
+        image: "janeczku/go-dnsmasq:release-1.0.5"
+        args:
+        - --listen
+        - "127.0.0.1:53"
+        - --default-resolver
+        - --append-search-domains
+        - --hostsfile=/etc/hosts
+        - --verbose
+      restartPolicy: Always
+      volumes:
+        - name: config-volume
+        configMap:
+         name: nginx-config

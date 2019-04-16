@@ -26,6 +26,9 @@ data:
         server {
             listen 8080;
 
+            # don't expose nginx version
+            server_tokens off;
+
             # set client body size to 32M #
             client_max_body_size 32M;
 

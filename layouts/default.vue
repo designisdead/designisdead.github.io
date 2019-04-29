@@ -338,12 +338,12 @@
           (e.pgo.q = e.pgo.q || []).push(arguments)
         };
         e.pgo.l = (new Date).getTime();
-        r = t.createElement("script");
+        r = t.createElement('script');
         r.src = o;
         r.async = true;
-        i = t.getElementsByTagName("script")[0];
+        i = t.getElementsByTagName('script')[0];
         i.parentNode.insertBefore(r, i)
-      })(window, document, "https://prism.app-us1.com/prism.js", "pgo");
+      })(window, document, 'https://prism.app-us1.com/prism.js', 'pgo');
 
       pgo('setAccount', '223882243');
       pgo('setTrackByDefault', true);

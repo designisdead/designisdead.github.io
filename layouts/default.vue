@@ -330,6 +330,28 @@
     </script>
     <!-- facebook analytics end -->
 
+    <!-- active campaign -->
+    <script type="text/javascript">
+      (function (e, t, o, n, p, r, i) {
+        e.prismGlobalObjectAlias = n;
+        e.pgo = e.pgo || function () {
+          (e.pgo.q = e.pgo.q || []).push(arguments)
+        };
+        e.pgo.l = (new Date).getTime();
+        r = t.createElement("script");
+        r.src = o;
+        r.async = true;
+        i = t.getElementsByTagName("script")[0];
+        i.parentNode.insertBefore(r, i)
+      })(window, document, "https://prism.app-us1.com/prism.js", "pgo");
+
+      pgo('setAccount', '223882243');
+      pgo('setTrackByDefault', true);
+
+      pgo('process');
+    </script>
+    <!-- active campaign end -->
+
     <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) start -->
     <script
       src="https://cdn.cookielaw.org/consent/eff3d4aa-ad19-42ef-8d19-d25261e64080.js"

@@ -344,23 +344,11 @@
 
     <!-- active campaign -->
     <script type="text/javascript">
-      (function (e, t, o, n, p, r, i) {
-        e.prismGlobalObjectAlias = n;
-        e.pgo = e.pgo || function () {
-          (e.pgo.q = e.pgo.q || []).push(arguments)
-        };
-        e.pgo.l = (new Date).getTime();
-        r = t.createElement('script');
-        r.src = o;
-        r.async = true;
-        i = t.getElementsByTagName('script')[0];
-        i.parentNode.insertBefore(r, i)
-      })(window, document, 'https://prism.app-us1.com/prism.js', 'pgo');
+        (function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement('script');r.src=o;r.async=true;i=t.getElementsByTagName('script')[0];i.parentNode.insertBefore(r,i)})(window,document,'https://prism.app-us1.com/prism.js','vgo');
+        vgo('setAccount', '223882243');
+        vgo('setTrackByDefault', true);
 
-      pgo('setAccount', '223882243');
-      pgo('setTrackByDefault', true);
-
-      pgo('process');
+        vgo('process');
     </script>
     <!-- active campaign end -->
 

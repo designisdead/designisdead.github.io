@@ -12,6 +12,9 @@ module.exports = {
       // excludeHeaderScript: process.env.NODE_ENV == 'production'
     }],
     ['@nuxtjs/style-resources'],
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-98613071-1'
+    }]
   ],
   styleResources: {
     scss: ['@/assets/scss/_config.scss'],

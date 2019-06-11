@@ -109,6 +109,7 @@ export default {
     };
   },
   mounted() {
+    this.$ga.require('GTM-5GFQJ4N'); //add google optimize
     this.$storybridge.on(["input", "published", "change"], event => {
       if (event.action == "input") {
         if (event.story.id === this.story.id) {

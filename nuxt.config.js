@@ -14,6 +14,9 @@ module.exports = {
     ['@nuxtjs/style-resources'],
     ['@nuxtjs/google-analytics', {
       id: 'UA-98613071-1'
+    }],
+    ['@nuxtjs/google-tag-manager', {
+      id: 'GTM-TQWRSTX'
     }]
   ],
   styleResources: {

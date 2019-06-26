@@ -38,7 +38,7 @@ data:
       log_stream_name "#{ENV['LOG_STREAM_NAME']}"
       auto_create_stream true
     </match>
-    <match *.**>
+    <match **>
       @type kafka_buffered
 
       # list of seed brokers

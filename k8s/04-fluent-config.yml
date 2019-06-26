@@ -38,3 +38,25 @@ data:
       log_stream_name "#{ENV['LOG_STREAM_NAME']}"
       auto_create_stream true
     </match>
+    <match *.**>
+      @type kafka_buffered
+
+      # list of seed brokers
+      zookeeper data-platform-cp-zookeeper.data-platform.svc.cluster.local:2181
+
+      # buffer settings
+      buffer_type file
+      buffer_path /buffer/td
+      flush_interval 3s
+
+      # topic settings
+      default_topic did-website-logs
+
+      # data type settings
+      output_data_type json
+      compression_codec gzip
+
+      # producer settings
+      max_send_retries 1
+      required_acks -1
+    </match>

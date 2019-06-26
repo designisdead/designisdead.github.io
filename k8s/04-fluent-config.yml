@@ -42,7 +42,7 @@ data:
       @type kafka_buffered
 
       # list of seed brokers
-      zookeeper data-platform-cp-zookeeper.data-platform.svc.cluster.local:2181
+      brokers data-platform-cp-kafka-0.data-platform-cp-kafka-headless.data-platform.svc.cluster.local:9092,data-platform-cp-kafka-1.data-platform-cp-kafka-headless.data-platform.svc.cluster.local:9092,data-platform-cp-kafka-2.data-platform-cp-kafka-headless.data-platform.svc.cluster.local:9092
 
       # buffer settings
       buffer_type file

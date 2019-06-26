@@ -52,6 +52,8 @@ data:
       # topic settings
       default_topic did-website-logs
 
+      get_kafka_client_log true
+
       # data type settings
       output_data_type json
       compression_codec gzip

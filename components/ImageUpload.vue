@@ -16,9 +16,9 @@
         :title="blok.alt"
         class="ImageUpload-image"
         :class="{
-        'u-centered' : blok.alignment == 'center',
-        'ImageUpload-image--stretched' : !blok.width
-      }"
+          'u-centered' : blok.alignment == 'center',
+          'ImageUpload-image--stretched' : !blok.width
+        }"
       />
     </div>
     <figcaption

@@ -7,7 +7,7 @@
       <p>
         <strong>
           You appear to be offline.<br>
-          Come grap a coffee at our HQ
+          Come grab a coffee at our HQ
         </strong>
       </p>
       <p>

@@ -3,7 +3,12 @@
     v-editable="blok"
     :style="'height: ' + imageHeight + ';'"
     class="ImageUpload">
-    <div class="ImageUpload-imageWrapper">
+    <div
+      class="ImageUpload-imageWrapper"
+      :class="{
+        'u-flexEnd': blok.alignment === 'right'
+      }"
+    >
       <img
         v-lazy="lazyImage"
         :width="blok.width"
@@ -12,7 +17,6 @@
         class="ImageUpload-image"
         :class="{
         'u-centered' : blok.alignment == 'center',
-        'u-floatRight' : blok.alignment == 'right',
         'ImageUpload-image--stretched' : !blok.width
       }"
       />

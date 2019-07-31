@@ -1,6 +1,6 @@
 <template>
-  <div 
-    id="particles-js" 
+  <div
+    id="particles-js"
     class="Particles"/>
 </template>
 

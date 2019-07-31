@@ -3,8 +3,8 @@
     class="Icon"
     :class="size">
     <use
-      :xlink:href="'#svg-' +type"
-      :href="'#svg-' +type"/>
+      :xlink:href="'#svg-' + type"
+      :href="'#svg-' + type"/>
   </svg>
 </template>
 

@@ -5,7 +5,8 @@
       'u-textAlignCenter' : blok.textalignment == 'center',
       'u-textAlignRight' : blok.textalignment == 'right'
     }"
-    class="Text">
+    :style="'width:' + blok.width + '%;'"
+    class="Text inline-display">
     <markdown>{{ blok.richtext }}</markdown>
   </div>
 </template>
@@ -33,11 +34,23 @@
       targets.forEach((target) => {
         hljs.highlightBlock(target)
       });
-    },
+    }
   }
 </script>
 
 <style lang="scss">
+  .inline-display {
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  @media screen and (max-width: map-get($sizes, "medium")) {
+    .inline-display {
+      display: block;
+      width: 100%!important;
+    }
+  }
+
   .Text {
     a {
       position: relative;

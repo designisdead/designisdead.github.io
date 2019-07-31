@@ -181,6 +181,8 @@ export default {
           cacheVersion: context.store.state.settings.cacheVersion,
           errorCallback: context.error
         });
+        // dev purpose
+        // console.log(page.story.content.body[0].elements)
       }
 
       return page;

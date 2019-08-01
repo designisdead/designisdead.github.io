@@ -5,7 +5,7 @@
       'u-textAlignCenter' : blok.textalignment == 'center',
       'u-textAlignRight' : blok.textalignment == 'right'
     }"
-    :style="'width:' + blok.width + '%;'"
+    :style="'width:' + blok.width + '%; vertical-align:' + blok.vertical_alignment + ';'"
     class="Text inline-display">
     <markdown>{{ blok.richtext }}</markdown>
   </div>
@@ -41,7 +41,6 @@
 <style lang="scss">
   .inline-display {
     display: inline-block;
-    vertical-align: top;
   }
 
   @media screen and (max-width: map-get($sizes, "medium")) {

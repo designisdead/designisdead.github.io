@@ -5,7 +5,6 @@
       'u-textAlignCenter' : blok.textalignment == 'center',
       'u-textAlignRight' : blok.textalignment == 'right'
     }"
-    :style="'width:' + blok.width + '%; vertical-align:' + blok.vertical_alignment + ';'"
     class="Text inline-display">
     <markdown>{{ blok.richtext }}</markdown>
   </div>

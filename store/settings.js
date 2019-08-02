@@ -1,8 +1,8 @@
 const state = () => ({
   primaryNavigation: [],
   cacheVersion: '',
-  editMode: false,
-  version: 'published',
+  editMode: true,
+  version: 'draft',
 })
 
 const mutations = {
@@ -22,7 +22,7 @@ const actions = {
   loadEditMode({
     commit
   }, query) {
-    let isEditMode = false;
+    let isEditMode = true;
 
     if (query['_storyblok_tk[space_id]']) {
       // const validationString = context.query['_storyblok_tk[space_id]'] + ':AJwMQue3YmvF9GhvSrecTQtt:' + context.query['_storyblok_tk[timestamp]'];
@@ -47,8 +47,10 @@ const actions = {
   }) {
     await this.$storyapi.get(`cdn/stories/_settings`, {
       cv: this.state.cacheVersion,
-      version: this.state.version
+      // version: this.state.version
+      version: 'draft'
     }).then((res) => {
+      console.log(res.data.story.content)
       commit('setSettings', res.data.story.content)
     })
   }

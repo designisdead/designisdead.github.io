@@ -1,8 +1,7 @@
 <template>
   <figure
     v-editable="blok"
-    class="ImageUpload inline-display"
-    :style="'width:' + blok.blok_width + '%; vertical-align:' + blok.vertical_alignment + ';'">
+    class="ImageUpload">
     <div
       class="ImageUpload-imageWrapper"
       :class="{
@@ -56,17 +55,6 @@
 </script>
 
 <style lang="scss">
-  .inline-display {
-    display: inline-block;
-  }
-
-  @media screen and (max-width: map-get($sizes, "medium")) {
-    .inline-display {
-      display: block;
-      width: 100%!important;
-    }
-  }
-
   .ImageUpload {
     margin-bottom: $spacer;
     max-width: 100%;

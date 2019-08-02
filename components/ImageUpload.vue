@@ -58,7 +58,6 @@
   .ImageUpload {
     margin-bottom: $spacer;
     max-width: 100%;
-    overflow: hidden;
   }
 
   .ImageUpload-imageWrapper {

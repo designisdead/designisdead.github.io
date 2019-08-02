@@ -33,7 +33,7 @@
       targets.forEach((target) => {
         hljs.highlightBlock(target)
       });
-    },
+    }
   }
 </script>
 

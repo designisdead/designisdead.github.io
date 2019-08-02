@@ -57,6 +57,17 @@
                 type="linkedin"
                 size="small"/>
             </a>
+            &nbsp;
+            <a
+              href="https://www.instagram.com/design.is.dead/"
+              target="_blank"
+              rel="noopener"
+              title="Visit our instagram page"
+              class="u-color--instagram">
+              <icon
+                type="instagram"
+                size="small"/>
+            </a>
           </p>
         </div><!-- .Doormat-icons -->
       </div>

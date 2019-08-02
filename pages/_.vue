@@ -24,7 +24,7 @@ const loadData = function({ api, cacheVersion, errorCallback, version, path }) {
       if (!res.response) {
         errorCallback({
           statusCode: 404,
-          message: "Failed to receive content form api"
+          message: "Failed to receive content from api"
         });
       } else {
         errorCallback({
@@ -163,7 +163,8 @@ export default {
 
     // Load the JSON from the API
     let page = await loadData({
-      version: context.store.state.settings.version,
+      // version: context.store.state.settings.version,
+      version: context.isDev ? 'draft' : 'published',
       api: context.app.$storyapi,
       cacheVersion: context.store.state.settings.cacheVersion,
       errorCallback: context.error,
@@ -180,6 +181,8 @@ export default {
           cacheVersion: context.store.state.settings.cacheVersion,
           errorCallback: context.error
         });
+        // dev purpose
+        // console.log(page.story.content.body[0].elements)
       }
 
       return page;

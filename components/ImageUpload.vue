@@ -1,20 +1,25 @@
 <template>
   <figure
     v-editable="blok"
-    :style="'height: ' + imageHeight + ';'"
     class="ImageUpload">
-    <div class="ImageUpload-imageWrapper">
+    <div
+      class="ImageUpload-imageWrapper"
+      :class="{
+        'u-flexEnd': blok.alignment === 'right',
+        'u-flexStart': blok.alignment === 'left',
+        'u-flexCenter': blok.alignment === 'center',
+      }"
+    >
       <img
         v-lazy="lazyImage"
         :width="blok.width"
+        :height="blok.height === '' ? 'auto' : blok.height"
         :alt="blok.alt"
         :title="blok.alt"
         class="ImageUpload-image"
         :class="{
-        'u-centered' : blok.alignment == 'center',
-        'u-floatRight' : blok.alignment == 'right',
-        'ImageUpload-image--stretched' : !blok.width
-      }"
+          'ImageUpload-image--stretched' : !blok.width
+        }"
       />
     </div>
     <figcaption
@@ -45,14 +50,6 @@
         const filters = supportsWebP ? '/filters:format(webp)' : '';
         return this.$options.filters.imageApi({src: this.blok.image, size: '', filters: filters});
       },
-      imageHeight() {
-        let imageHeight = 'auto';
-        if (typeof this.blok.height !== 'undefined') {
-          imageHeight = this.blok.height + 'px';
-        }
-
-        return imageHeight;
-      }
     }
   }
 </script>
@@ -60,6 +57,7 @@
 <style lang="scss">
   .ImageUpload {
     margin-bottom: $spacer;
+    max-width: 100%;
   }
 
   .ImageUpload-imageWrapper {

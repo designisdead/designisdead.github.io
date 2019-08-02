@@ -51,6 +51,18 @@
   float: right;
 }
 
+.u-flexEnd {
+  justify-content: flex-end;
+}
+
+.u-flexStart {
+  justify-content: flex-start;
+}
+
+.u-flexCenter {
+  justify-content: center;
+}
+
 .u-noListStyleType {
   li {
     padding-left: 0;

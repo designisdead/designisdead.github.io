@@ -5,7 +5,8 @@
       'u-textAlignCenter' : blok.textalignment == 'center',
       'u-textAlignRight' : blok.textalignment == 'right'
     }"
-    class="Text">
+    class="Text"
+    style="clear: both;">
     <markdown>{{ blok.richtext }}</markdown>
   </div>
 </template>

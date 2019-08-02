@@ -1,7 +1,8 @@
 <template>
   <figure
     v-editable="blok"
-    class="ImageUpload">
+    class="ImageUpload"
+    style="clear: both;">
     <div
       class="ImageUpload-imageWrapper"
       :class="{
@@ -58,6 +59,7 @@
   .ImageUpload {
     margin-bottom: $spacer;
     max-width: 100%;
+    clear: both;
   }
 
   .ImageUpload-imageWrapper {

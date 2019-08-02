@@ -33,6 +33,7 @@ import EqualColumns from "@/components/EqualColumns.vue";
 import YoutubeEmbed from "@/components/YoutubeEmbed.vue";
 import Mailchimp from '@/components/Mailchimp.vue';
 import Timeline from '@/components/Timeline.vue';
+import TextAndImage from '@/components/TextAndImage.vue';
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -68,3 +69,4 @@ Vue.component("equalcolumns", EqualColumns);
 Vue.component("youtubeEmbed", YoutubeEmbed);
 Vue.component("mailchimp", Mailchimp);
 Vue.component("timeline", Timeline);
+Vue.component("textandimage", TextAndImage);

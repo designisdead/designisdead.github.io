@@ -24,11 +24,11 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
   .timeline--ulist {
     list-style: none;
     position: relative;
-    margin-left: 200px;
+    margin-left: 240px;
   }
 
   /* Dashed line on the left */
@@ -39,7 +39,13 @@ export default {
     left: 0;
     width: 0;
     height: 100%;
-    border: 1px dashed #999;
+    border: 1px dashed #BBB;
+  }
+
+  @media screen and (max-width: size('medium')) {
+    .timeline--ulist {
+      margin-left: 0;
+    }
   }
 
 </style>

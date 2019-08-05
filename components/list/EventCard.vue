@@ -19,7 +19,7 @@
         <!-- location of the event -->
         <p class="timeline--ulistitem--location timeline--ulistitem--text">
           <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
-          {{ post.content.author }} // to replace with real location
+          {{ post.content.location }}
         </p>
 
       </div>

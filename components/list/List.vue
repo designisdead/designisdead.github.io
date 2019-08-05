@@ -10,6 +10,10 @@
         </div>
       </equalcolumns>
     </div>
+    <!-- else if list type is event -->
+    <div v-else-if="blok.listtype === 'eventcard'">
+      <timeline :blok="blok"></timeline>
+    </div>
     <!-- else -->
     <ul
       v-else

@@ -35,6 +35,7 @@ import Mailchimp from '@/components/Mailchimp.vue';
 import Timeline from '@/components/Timeline.vue';
 import EventCard from '@/components/list/EventCard.vue';
 import Event from '@/components/Event.vue';
+import GoogleMap from '@/components/GoogleMap.vue';
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -72,3 +73,4 @@ Vue.component("mailchimp", Mailchimp);
 Vue.component("timeline", Timeline);
 Vue.component("eventcard", EventCard);
 Vue.component("event", Event);
+Vue.component("googlemap", GoogleMap);

@@ -2,7 +2,7 @@
   <div class="timeline--container">
     <ul class="timeline--ulist">
       <eventcard
-        v-for="post in blok.listcontent"
+        v-for="post in filteredPosts"
         :key="post.full_slug"
         :is="blok.listtype"
         :post="post"
@@ -21,6 +21,11 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      filteredPosts: this.blok.listcontent
+    }
+  }
 }
 </script>
 

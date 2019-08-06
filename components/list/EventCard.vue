@@ -17,12 +17,12 @@
         <div
           v-if="tags.length > 0"
           class="timeline--ulistitem--tags timeline--ulistitem--text">
-          <b
+          <strong
             v-for="(tag, index) in tags"
             :key="index">
-            {{ tag }}
+            {{ tag.toUpperCase() }}
             <span v-if="index < tags.length - 1">,</span>
-          </b>
+          </strong>
         </div>
 
         <!-- title of the event -->
@@ -64,7 +64,7 @@ export default {
   },
   computed: {
     formattedDatePart1() {
-      return moment(this.post.content.date).format('dddd, MMMM D')
+      return moment(this.post.content.date).format('dddd MMMM D')
     },
     formattedDatePart2() {
       return moment(this.post.content.date).format('YYYY')

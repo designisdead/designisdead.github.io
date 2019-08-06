@@ -15,7 +15,7 @@ This component is used to render the Event content type on Storyblok
                 <span
                   v-if="tags.length > 0"
                   class="Event-tags">
-                  <strong
+                    <strong
                     v-for="(tag, index) in tags"
                     :key="index">
                     {{ tag }}
@@ -39,6 +39,7 @@ This component is used to render the Event content type on Storyblok
             v-lazy:background-image="headerImage"
             class="Event-headerBackground"/>
         </header>
+
         <div class="Event-content">
           <spacer size="medium"/>
 
@@ -103,7 +104,7 @@ This component is used to render the Event content type on Storyblok
         return moment(this.blok.date).fromNow();
       },
       tags() {
-        return this.blok.tags && this.blok.tags.tags ? this.blok.tags.tags : {};
+        return this.blok.tags ? this.blok.tags : [];
       },
       headerImage() {
         const filters = supportsWebP ? '/filters:format(webp)' : '';

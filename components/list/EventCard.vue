@@ -13,6 +13,18 @@
         <!-- left time line on item -->
         <span class="timeline--ulistitem--leftline"></span>
 
+        <!-- tags of the event -->
+        <div
+          v-if="tags.length > 0"
+          class="timeline--ulistitem--tags timeline--ulistitem--text">
+          <b
+            v-for="(tag, index) in tags"
+            :key="index">
+            {{ tag }}
+            <span v-if="index < tags.length - 1">,</span>
+          </b>
+        </div>
+
         <!-- title of the event -->
         <h2 class="timeline--ulistitem--title timeline--ulistitem--text">{{ post.name }}</h2>
 
@@ -59,6 +71,9 @@ export default {
     },
     lazyImage() {
       return this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'medium', filters: filters})
+    },
+    tags() {
+      return this.post.content.tags ? this.post.content.tags : [];
     },
   },
   methods: {
@@ -114,7 +129,7 @@ export default {
     background: radial-gradient(ellipse at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.4) 20%, rgba(0,0,0,0.7) 85%);
   }
 
-  /* solid line on the left */
+  // solid line on the left
   .timeline--ulistitem--leftline {
     content: '';
     position: absolute;
@@ -125,7 +140,7 @@ export default {
     border: 1px solid #BBB;
   }
 
-  /* dot on the line */
+  // dot on the line
   .timeline--ulistitem--leftline:before {
     content: '';
     position: absolute;
@@ -147,11 +162,21 @@ export default {
     text-align: center;
   }
 
+  .timeline--ulistitem--tags {
+    font-size: $font-size / 1.3;
+    padding-bottom: 20px;
+  }
+
   .timeline--ulistitem--title {
     padding-bottom: 20px;
   }
 
+  .timeline--ulistitem--location {
+    font-size: $font-size /b;
+  }
+
   .timeline--ulistitem--date {
+    font-size: $font-size;
     width: 212px;
     position: absolute;
     left: -320px;

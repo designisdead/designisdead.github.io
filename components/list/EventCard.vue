@@ -52,10 +52,10 @@ export default {
   },
   computed: {
     formattedDatePart1() {
-      return moment(this.post.content.published).format('dddd, MMMM D')
+      return moment(this.post.content.date).format('dddd, MMMM D')
     },
     formattedDatePart2() {
-      return moment(this.post.content.published).format('YYYY')
+      return moment(this.post.content.date).format('YYYY')
     },
     lazyImage() {
       return this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'medium', filters: filters})

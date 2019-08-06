@@ -34,6 +34,7 @@ import YoutubeEmbed from "@/components/YoutubeEmbed.vue";
 import Mailchimp from '@/components/Mailchimp.vue';
 import Timeline from '@/components/Timeline.vue';
 import EventCard from '@/components/list/EventCard.vue';
+import Event from '@/components/Event.vue';
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -70,3 +71,4 @@ Vue.component("youtubeEmbed", YoutubeEmbed);
 Vue.component("mailchimp", Mailchimp);
 Vue.component("timeline", Timeline);
 Vue.component("eventcard", EventCard);
+Vue.component("event", Event);

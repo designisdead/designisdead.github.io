@@ -75,6 +75,7 @@ export default {
   .search-bar__search-form {
     position: relative;
     display: flex;
+    width: 340px;
   }
 
   .search-bar__search-input-label {
@@ -90,8 +91,7 @@ export default {
 
   .search-bar__search-input {
     position: relative;
-    width: 340px;
-    min-width: 300px;
+    width: 100%;
     padding: 10px 0 10px 5px;
     background-color: transparent;
     border: none;

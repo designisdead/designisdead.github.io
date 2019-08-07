@@ -105,7 +105,7 @@ This component is used to render the Post content type on Storyblok
         return moment(this.blok.published).fromNow();
       },
       tags() {
-        return this.blok.tags && this.blok.tags.tags ? this.blok.tags.tags : {};
+        return this.blok.tags ? this.blok.tags : [];
       },
       headerImage() {
         const filters = supportsWebP ? '/filters:format(webp)' : '';

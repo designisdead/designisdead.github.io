@@ -1,5 +1,7 @@
 <template>
   <div class="timeline--container">
+    <searchbar @sendSearchInput="getSearchInput"></searchbar>
+
     <ul class="timeline--ulist">
       <eventcard
         v-for="post in filteredPosts"
@@ -24,6 +26,13 @@ export default {
   data() {
     return {
       filteredPosts: this.blok.listcontent
+    }
+  },
+  methods: {
+    getSearchInput(input) {
+      if (process.client) {
+        console.log(input)
+      }
     }
   }
 }

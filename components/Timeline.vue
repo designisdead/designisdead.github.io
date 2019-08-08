@@ -14,6 +14,7 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
   props: {
     blok: {
@@ -39,7 +40,7 @@ export default {
       this.filteredPosts = this.blok.listcontent.filter(event => {
         return this.formatString(event.name).includes(this.searchInput)
         || this.formatString(event.content.location).includes(this.searchInput)
-        || this.formatString(event.content.date).includes(this.searchInput)
+        || this.formatString(this.formatDate(event.content.date)).includes(this.searchInput)
         || this.checkTags([...event.content.tags])
       })
     },
@@ -52,6 +53,9 @@ export default {
         tag.includes(this.searchInput) ? containSearchInput = true : null
       })
       return containSearchInput
+    },
+    formatDate(date) {
+      return moment(date).format('dddd MMMM D, YYYY')
     }
   }
 }

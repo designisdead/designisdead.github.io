@@ -1,8 +1,13 @@
 <template>
   <div class="timeline--container">
-    <searchbar @sendSearchInput="getSearchInput" :searchType="'event'"></searchbar>
+    <searchbar
+      @sendSearchInput="getSearchInput"
+      @sendSelectedTags="getSelectedTags"
+      :searchType="'event'"></searchbar>
 
-    <ul class="timeline--ulist">
+    <ul
+      class="timeline--ulist"
+      v-if="filteredPosts.length > 0">
       <eventcard
         v-for="post in filteredPosts"
         :key="post.full_slug"
@@ -10,6 +15,13 @@
         :post="post"
       ></eventcard>
     </ul>
+    <div
+      v-else
+      class="timeline--no-match-found">
+      <h2>
+        Sorry, no event was found...
+      </h2>
+    </div>
   </div>
 </template>
 
@@ -20,15 +32,15 @@ export default {
     blok: {
       type: Object,
       default: function() {
-        return {
-          searchInput: ''
-        }
+        return {}
       }
     }
   },
   data() {
     return {
-      filteredPosts: this.blok.listcontent
+      filteredPosts: this.blok.listcontent,
+      searchInput: '',
+      selectedTags: []
     }
   },
   methods: {
@@ -36,18 +48,33 @@ export default {
       this.searchInput = input
       this.filterEvents()
     },
+    getSelectedTags(tags) {
+      this.selectedTags = tags
+      this.filterEvents()
+    },
     filterEvents() {
-      this.filteredPosts = this.blok.listcontent.filter(event => {
-        return this.formatString(event.name).includes(this.searchInput)
+      this.selectedTags.length === 0 ? (
+        this.filteredPosts = this.blok.listcontent
+      ) : (
+        this.filteredPosts = this.blok.listcontent.filter(event => this.inputFilter(event) && this.tagsFilter(event))
+      )
+    },
+    inputFilter(event) {
+      return this.formatString(event.name).includes(this.searchInput)
         || this.formatString(event.content.location).includes(this.searchInput)
         || this.formatString(this.formatDate(event.content.date)).includes(this.searchInput)
         || this.checkTags([...event.content.tags])
-      })
+    },
+    tagsFilter(event) {
+      let matchSelectedTags = false
+      this.selectedTags.forEach(tag => event.content.tags.includes(tag.value) ? matchSelectedTags = true : null)
+      return matchSelectedTags
     },
     formatString(string) {
       return typeof(string) !== undefined ? string.replace(' ', '').toLowerCase() : null
     },
     checkTags(tagsArray) {
+      // used for the input filter, if input match tags
       let containSearchInput = false
       tagsArray.forEach(tag => {
         tag.includes(this.searchInput) ? containSearchInput = true : null
@@ -77,6 +104,14 @@ export default {
     width: 0;
     height: 100%;
     border: 1px dashed #BBB;
+  }
+
+  .timeline--no-match-found {
+    text-align: center;
+    height: 42vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   @media screen and (max-width: size('medium')) {

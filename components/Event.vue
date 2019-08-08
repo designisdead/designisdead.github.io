@@ -118,7 +118,7 @@ This component is used to render the Event content type on Storyblok
 
 <style lang="scss">
   .Event-header {
-    margin-left: -6px; // Why?
+    margin-left: -6px;
     position: relative;
     vertical-align: top;
     height: calc(100vh - 70px);

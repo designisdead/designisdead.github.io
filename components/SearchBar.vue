@@ -96,7 +96,7 @@ export default {
   .search-bar__search-form {
     position: relative;
     display: flex;
-    width: 380px;
+    width: 400px;
     height: 38px;
     margin-bottom: 5px;
   }

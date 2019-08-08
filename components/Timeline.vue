@@ -45,19 +45,23 @@ export default {
   },
   methods: {
     getSearchInput(input) {
+      console.log(input)
       this.searchInput = input
       this.filterEvents()
     },
     getSelectedTags(tags) {
+      console.log(tags)
       this.selectedTags = tags
       this.filterEvents()
     },
     filterEvents() {
-      this.selectedTags.length === 0 ? (
-        this.filteredPosts = this.blok.listcontent
-      ) : (
-        this.filteredPosts = this.blok.listcontent.filter(event => this.inputFilter(event) && this.tagsFilter(event))
-      )
+      this.filteredPosts = this.blok.listcontent.filter(event => {
+        if (this.selectedTags.length > 0) {
+          return this.inputFilter(event) && this.tagsFilter(event)
+        } else {
+          return this.inputFilter(event)
+        }
+      })
     },
     inputFilter(event) {
       return this.formatString(event.name).includes(this.searchInput)

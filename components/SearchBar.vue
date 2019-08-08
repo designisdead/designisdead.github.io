@@ -20,12 +20,12 @@
     </div>
 
     <form
-      @submit="sendSearch"
+      @submit="search"
       class="search-bar__search-form"
       autocomplete="off">
       <input
         type="text"
-        @keyup="sendSearch"
+        @keyup="search"
         v-model="searchInput"
         required
         name="searchInput"
@@ -47,38 +47,77 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
-    searchType: {
-      type: String
+    searchType: String,
+    posts: {
+      type: Array,
+      default: () => {}
     }
   },
   data() {
     return {
       publicToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
+      filteredPosts: this.posts,
       searchInput: '',
       tags: [],
       selectedTags: []
     }
   },
   methods: {
-    // Emit to the parent the search input on each keyup or submit
-    sendSearch(e) {
+    emitMatchingPosts() {
+      this.$emit('returnMatchingPosts', this.filteredPosts)
+    },
+    search(e) {
       e.preventDefault()
-      this.$emit('sendSearchInput', this.searchInput.replace(' ', '').toLowerCase())
+      this.filterPosts()
+      this.emitMatchingPosts()
     },
     tagToSelected(tag) {
       tag.active ? this.selectedTags.push(tag) : this.selectedTags = this.selectedTags.filter(currentTag => currentTag !== tag)
-      this.$emit('sendSelectedTags', this.selectedTags)
+      this.filterPosts()
+      this.emitMatchingPosts()
+    },
+    filterPosts() {
+      this.filteredPosts = this.posts.filter(post => {
+        if (this.selectedTags.length > 0) {
+          return this.inputFilter(post) && this.tagsFilter(post)
+        } else {
+          return this.inputFilter(post)
+        }
+      })
+    },
+    inputFilter(post) {
+      return this.formatString(post.name).includes(this.searchInput)
+        || this.formatString(post.content.location).includes(this.searchInput)
+        || this.formatString(this.formatDate(post.content.date)).includes(this.searchInput)
+        || this.checkTags([...post.content.tags])
+    },
+    tagsFilter(post) {
+      let matchSelectedTags = false
+      this.selectedTags.forEach(tag => post.content.tags.includes(tag.value) ? matchSelectedTags = true : null)
+      return matchSelectedTags
+    },
+    formatString(string) {
+      return typeof(string) !== undefined ? string.replace(' ', '').toLowerCase() : null
+    },
+    checkTags(tagsArray) {
+      // used for the input filter, if input match tags
+      let containSearchInput = false
+      tagsArray.forEach(tag => {
+        tag.includes(this.searchInput) ? containSearchInput = true : null
+      })
+      return containSearchInput
+    },
+    formatDate(date) {
+      return moment(date).format('dddd MMMM D, YYYY')
     }
   },
   mounted() {
     this.$storyapi.get(`cdn/datasource_entries?datasource=tags&token=${this.publicToken}`)
-    .then(res => {
-      console.log(res.data.datasource_entries)
-      this.tags = res.data.datasource_entries.map(tag => { return { name: tag.name, value: tag.value, active: false }})
-      console.log(this.tags)
-    })
+    .then(res => this.tags = res.data.datasource_entries.map(tag => { return { name: tag.name, value: tag.value, active: false }}))
     .catch(err => console.log(err))
   }
 }

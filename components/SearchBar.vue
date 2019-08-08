@@ -14,7 +14,7 @@
 
       <label
         for="searchInput"
-        class="search-bar__search-input-label">What event are you looking for ?</label>
+        class="search-bar__search-input-label">What {{ searchType }} are you looking for ?</label>
 
       <button
         type="submit"
@@ -38,6 +38,11 @@
 
 <script>
 export default {
+  props: {
+    searchType: {
+      type: String
+    }
+  },
   data() {
     return {
       publicToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
@@ -46,21 +51,16 @@ export default {
     }
   },
   methods: {
+    // Emit to the parent the search input on each keyup or submit
     sendSearch(e) {
       e.preventDefault()
-      this.$emit('sendSearchInput', this.searchInput)
-      console.log(this.searchInput)
+      this.$emit('sendSearchInput', this.searchInput.replace(' ', '').toLowerCase())
     }
   },
   mounted() {
     this.$storyapi.get(`cdn/datasource_entries?datasource=tags&token=${this.publicToken}`)
-    .then(res => {
-      this.tags = res.data.datasource_entries.map(tag => tag.value)
-      console.log(this.tags)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+    .then(res => this.tags = res.data.datasource_entries.map(tag => tag.value))
+    .catch(err => console.log(err))
   }
 }
 </script>
@@ -97,6 +97,7 @@ export default {
     border: none;
     outline: none;
     border-bottom: 2px solid #BBB;
+    border-bottom-left-radius: 5px;
     &:focus,
     &:valid {
       border-bottom: 2px solid color('secondary');
@@ -116,7 +117,7 @@ export default {
     cursor: pointer;
     height: auto;
     border-bottom: 2px solid #BBB;
-    border-radius: 3px;
+    border-radius: 3px 3px 5px 0;
     vertical-align: bottom;
     padding: 8px 5px;
     display: flex;

@@ -1,6 +1,6 @@
 <template>
   <div class="timeline--container">
-    <searchbar @sendSearchInput="getSearchInput"></searchbar>
+    <searchbar @sendSearchInput="getSearchInput" :searchType="'event'"></searchbar>
 
     <ul class="timeline--ulist">
       <eventcard
@@ -19,7 +19,9 @@ export default {
     blok: {
       type: Object,
       default: function() {
-        return {};
+        return {
+          searchInput: ''
+        }
       }
     }
   },
@@ -30,9 +32,26 @@ export default {
   },
   methods: {
     getSearchInput(input) {
-      if (process.client) {
-        console.log(input)
-      }
+      this.searchInput = input
+      this.filterEvents()
+    },
+    filterEvents() {
+      this.filteredPosts = this.blok.listcontent.filter(event => {
+        return this.formatString(event.name).includes(this.searchInput)
+        || this.formatString(event.content.location).includes(this.searchInput)
+        || this.formatString(event.content.date).includes(this.searchInput)
+        || this.checkTags([...event.content.tags])
+      })
+    },
+    formatString(string) {
+      return typeof(string) !== undefined ? string.replace(' ', '').toLowerCase() : null
+    },
+    checkTags(tagsArray) {
+      let containSearchInput = false
+      tagsArray.forEach(tag => {
+        tag.includes(this.searchInput) ? containSearchInput = true : null
+      })
+      return containSearchInput
     }
   }
 }

@@ -42,8 +42,6 @@ export default {
   },
   methods: {
     getMatchingPosts(posts) {
-      // console.log(this.filteredPosts)
-      // console.log(posts)
       this.filteredPosts = posts
     }
   }

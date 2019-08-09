@@ -53,8 +53,6 @@ This component is used to render the Event content type on Storyblok
               :is="blok.component"/>
           </div>
 
-          <googlemap></googlemap>
-
           <footer>
             <wrapper size="medium">
               <div

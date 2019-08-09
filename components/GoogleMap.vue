@@ -1,28 +1,67 @@
 <template>
-  <div>
+  <div v-editable="blok">
     <GmapMap
-      :center="{lat:50.7956527, lng:4.4177161}"
+      :center="center"
       :zoom="16"
-      map-type-id="terrain"
-      style="width: 500px; height: 300px"
+      map-type-id="roadmap"
+      style="width: 100%; height: 340px"
+      full-screen="true"
     >
       <GmapMarker
-        :key="index"
-        v-for="(m, index) in markers"
-        :position="{ let: 50.7956527, lng: 4.4177161 }"
+        :position="center"
         :clickable="true"
-        :draggable="true"
-        @click="center=m.position"
-      />
+        @click="infoWinOpen = !infoWinOpen" />
+
+      <GmapInfoWindow
+        :position="center"
+        :options="infoOptions"
+        :opened="infoWinOpen"
+        @closeclick="infoWinOpen = false">
+        <h4 class="google-map__address-title">Address</h4>
+        <ul class="google-map__address-ulist">
+          <li class="google-map__address-ulist-item">{{ blok.street }}</li>
+          <li class="google-map__address-ulist-item">{{ blok.city }}</li>
+          <li class="google-map__address-ulist-item">{{ blok.country }}</li>
+        </ul>
+      </GmapInfoWindow>
     </GmapMap>
   </div>
 </template>
 
 <script>
 export default {
+  props: {
+    blok: {
+      type: Object, default: function () {
+        return {}
+      }
+    }
+  },
+  data() {
+    return {
+      center: { lat: Number(this.blok.lat), lng: Number(this.blok.lng) },
+      infoOptions: { pixelOffset: { width: 0, height: -35 } },
+      infoWinOpen: false,
+    }
+  },
+  mounted() {
+    console.log(Number(this.blok.lat),  Number(this.blok.lng))
+  }
 }
 </script>
 
 <style>
+.google-map__address-title {
+  padding-bottom: 6px;
+}
 
+.google-map__address-ulist {
+  list-style: none;
+  padding: 0;
+}
+
+.google-map__address-ulist-item {
+  padding: 0px;
+  margin-left: 0;
+}
 </style>

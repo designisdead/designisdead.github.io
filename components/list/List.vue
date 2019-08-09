@@ -12,19 +12,30 @@
     </div>
     <!-- else if list type is event -->
     <div v-else-if="blok.listtype === 'eventcard'">
-      <timeline :blok="blok"></timeline>
+      <searchbar
+      @returnMatchingPosts="getMatchingPosts"
+      :searchType="'event'"
+      :posts="blok.listcontent"></searchbar>
+
+      <timeline :filteredPosts="filteredPosts"></timeline>
     </div>
     <!-- else -->
-    <ul
-      v-else
-      :class="['List--' + blok.listtype]"
-      class="List">
-      <component
-        v-for="post in blok.listcontent"
-        :key="post.full_slug"
-        :post="post"
-        :is="blok.listtype"/>
-    </ul>
+    <div v-else>
+      <searchbar
+      @returnMatchingPosts="getMatchingPosts"
+      :searchType="'blog'"
+      :posts="blok.listcontent"></searchbar>
+
+      <ul
+        :class="['List--' + blok.listtype]"
+        class="List">
+        <component
+          v-for="post in filteredPosts"
+          :key="post.full_slug"
+          :post="post"
+          :is="blok.listtype"/>
+      </ul>
+    </div>
 
     <div
       v-if="showMoreButton"
@@ -54,7 +65,8 @@ export default {
       perPage: this.blok.perpage,
       stories: this.blok.listcontent,
       loading: false,
-      nextContent: []
+      nextContent: [],
+      filteredPosts: this.blok.listcontent
     };
   },
   computed: {
@@ -92,6 +104,9 @@ export default {
           this.nextContent = data.data.stories;
           this.loading = false;
         });
+    },
+    getMatchingPosts(posts) {
+      this.filteredPosts = posts
     }
   }
 };

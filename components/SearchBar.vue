@@ -119,6 +119,8 @@ export default {
     this.$storyapi.get(`cdn/datasource_entries?datasource=tags&token=${this.publicToken}`)
     .then(res => this.tags = res.data.datasource_entries.map(tag => { return { name: tag.name, value: tag.value, active: false }}))
     .catch(err => console.log(err))
+
+    console.log(this.posts)
   }
 }
 </script>

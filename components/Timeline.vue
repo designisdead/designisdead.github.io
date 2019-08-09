@@ -1,17 +1,11 @@
 <template>
   <div class="timeline--container">
-    <searchbar
-      @returnMatchingPosts="getMatchingPosts"
-      :searchType="'event'"
-      :posts="blok.listcontent"></searchbar>
-
     <ul
       class="timeline--ulist"
       v-if="filteredPosts.length > 0">
       <eventcard
         v-for="post in filteredPosts"
         :key="post.full_slug"
-        :is="blok.listtype"
         :post="post"
       ></eventcard>
     </ul>
@@ -28,23 +22,8 @@
 <script>
 export default {
   props: {
-    blok: {
-      type: Object,
-      default: function() {
-        return {}
-      }
-    }
+    filteredPosts: Array
   },
-  data() {
-    return {
-      filteredPosts: this.blok.listcontent
-    }
-  },
-  methods: {
-    getMatchingPosts(posts) {
-      this.filteredPosts = posts
-    }
-  }
 }
 </script>
 

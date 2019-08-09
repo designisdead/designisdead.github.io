@@ -39,13 +39,13 @@ export default {
   },
   data() {
     return {
-      center: { lat: Number(this.blok.lat), lng: Number(this.blok.lng) },
+      center: { lat: Number(this.blok.lat.replace(',', '.').trim()), lng: Number(this.blok.lng.replace(',', '.').trim()) },
       infoOptions: { pixelOffset: { width: 0, height: -35 } },
       infoWinOpen: false,
     }
   },
   mounted() {
-    console.log(Number(this.blok.lat),  Number(this.blok.lng))
+    console.log(Number(this.blok.lat.replace(',', '.')),  Number(this.blok.lng.replace(',', '.')))
   }
 }
 </script>

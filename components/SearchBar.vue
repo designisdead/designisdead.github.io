@@ -63,7 +63,8 @@ export default {
       filteredPosts: this.posts,
       searchInput: '',
       tags: [],
-      selectedTags: []
+      selectedTags: [],
+      timer: null
     }
   },
   methods: {
@@ -72,8 +73,11 @@ export default {
     },
     search(e) {
       e.preventDefault()
-      this.filterPosts()
-      this.emitMatchingPosts()
+      clearTimeout(this.timer)
+      this.timer = setTimeout(()=> {
+        this.filterPosts()
+        this.emitMatchingPosts()
+      }, 500)
     },
     tagToSelected(tag) {
       tag.active ? this.selectedTags.push(tag) : this.selectedTags = this.selectedTags.filter(currentTag => currentTag !== tag)
@@ -123,13 +127,6 @@ export default {
     this.$storyapi.get(`cdn/datasource_entries?datasource=tags&token=${this.publicToken}`)
     .then(res => this.tags = res.data.datasource_entries.map(tag => { return { name: tag.name, value: tag.value, active: false }}))
     .catch(err => console.log(err))
-
-    console.log(this.posts)
-    setTimeout(()=> {
-      console.log(this.tags)
-    }, 100)
-
-    // console.log('mounted author:', this.author(34))
   }
 }
 </script>

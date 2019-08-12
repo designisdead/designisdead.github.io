@@ -29,8 +29,13 @@
       <ul
         :class="['List--' + blok.listtype]"
         class="List">
-        <component
+        <!-- <component
           v-for="post in filteredPosts"
+          :key="post.full_slug"
+          :post="post"
+          :is="blok.listtype"/> -->
+        <component
+          v-for="post in nextContent"
           :key="post.full_slug"
           :post="post"
           :is="blok.listtype"/>
@@ -75,20 +80,40 @@ export default {
     }
   },
   mounted() {
+    console.log(this.blok.contenttype)
     this.$nextTick(() => {
       this.nextPage();
+      // this.$storyapi
+      //   .get("cdn/stories", {
+      //     version: this.$store.state.settings.version,
+      //     cv: this.$store.state.settings.cacheVersion,
+      //     starts_with: this.blok.contenttype,
+      //     sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
+      //     // filter_query: {
+      //     //   metadescription: {
+      //     //     in: "Press release Alexander de Haan"
+      //     //   }
+      //     // },
+      //     // with_tag: 'Blockchain',
+      //     search_term: 'angular',
+      //     // excluding_fields: 'body',
+      //     // page: this.page,
+      //     // per_page: this.blok.perpage,
+      //     is_startpage: false // exclude start pages (fe: blog list)
+      //   })
+      //   .then(data => {
+      //     this.nextContent = data.data.stories;
+      //     this.loading = false;
+      //     console.log(this.nextContent)
+      //   });
     });
   },
   methods: {
-    nextPage: function() {
+    nextPage() {
       this.loading = true;
       this.page += 1;
 
-      if (this.blok.listcontent) {
-        this.blok.listcontent = [...this.blok.listcontent, ...this.nextContent];
-      } else {
-        alert("listcontent was not rendered on page load!");
-      }
+      this.blok.listcontent ? this.blok.listcontent = [...this.blok.listcontent, ...this.nextContent] : alert("listcontent was not rendered on page load!")
 
       return this.$storyapi
         .get("cdn/stories", {

@@ -91,8 +91,9 @@ export default {
     },
     inputFilter(post) {
       return this.formatString(post.name).includes(this.searchInput)
-        || this.formatString(post.content.location).includes(this.searchInput)
-        || this.formatString(this.formatDate(post.content.date)).includes(this.searchInput)
+        // by location if event, by author if blog
+        || this.formatString(this.searchType === 'event' ? post.content.location : (post.content.author !== '' ? this.author(post.content.author) : '')).includes(this.searchInput)
+        || this.formatString(this.formatDate(this.searchType === 'event' ? post.content.date : post.content.published)).includes(this.searchInput)
         || this.checkTags([...post.content.tags])
     },
     tagsFilter(post) {
@@ -113,6 +114,9 @@ export default {
     },
     formatDate(date) {
       return moment(date).format('dddd MMMM D, YYYY')
+    },
+    author(id) {
+      return this.$store.state.employees.all.find(employee => employee.id == id).name
     }
   },
   mounted() {
@@ -121,6 +125,11 @@ export default {
     .catch(err => console.log(err))
 
     console.log(this.posts)
+    setTimeout(()=> {
+      console.log(this.tags)
+    }, 100)
+
+    // console.log('mounted author:', this.author(34))
   }
 }
 </script>

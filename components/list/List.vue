@@ -35,7 +35,7 @@
           :post="post"
           :is="blok.listtype"/> -->
         <component
-          v-for="post in nextContent"
+          v-for="post in blok.listcontent"
           :key="post.full_slug"
           :post="post"
           :is="blok.listtype"/>
@@ -80,32 +80,37 @@ export default {
     }
   },
   mounted() {
-    console.log(this.blok.contenttype)
+    // console.log(this.blok.listcontent)
     this.$nextTick(() => {
-      this.nextPage();
-      // this.$storyapi
-      //   .get("cdn/stories", {
-      //     version: this.$store.state.settings.version,
-      //     cv: this.$store.state.settings.cacheVersion,
-      //     starts_with: this.blok.contenttype,
-      //     sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
-      //     // filter_query: {
-      //     //   metadescription: {
-      //     //     in: "Press release Alexander de Haan"
-      //     //   }
-      //     // },
-      //     // with_tag: 'Blockchain',
-      //     search_term: 'angular',
-      //     // excluding_fields: 'body',
-      //     // page: this.page,
-      //     // per_page: this.blok.perpage,
-      //     is_startpage: false // exclude start pages (fe: blog list)
-      //   })
-      //   .then(data => {
-      //     this.nextContent = data.data.stories;
-      //     this.loading = false;
-      //     console.log(this.nextContent)
-      //   });
+      // this.nextPage();
+      this.$storyapi
+        .get("cdn/stories", {
+          version: this.$store.state.settings.version,
+          cv: this.$store.state.settings.cacheVersion,
+          starts_with: this.blok.contenttype,
+          sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
+          // filter_query: {
+          //   tags: {
+          //     in: "Javascript"
+          //   }
+          // },
+          // filter_query: {
+          //   metadescription: {
+          //     in: "Bla bla bla"
+          //   }
+          // },
+          with_tag: 'Blockchain',
+          search_term: 'another',
+          // excluding_fields: 'body',
+          page: this.page,
+          // per_page: this.blok.perpage,
+          is_startpage: false // exclude start pages (fe: blog list)
+        })
+        .then(data => {
+          this.blok.listcontent = data.data.stories;
+          this.loading = false;
+          console.log(this.blok.listcontent)
+        });
     });
   },
   methods: {
@@ -128,6 +133,7 @@ export default {
         .then(data => {
           this.nextContent = data.data.stories;
           this.loading = false;
+          console.log(this.nextContent)
         });
     },
     getMatchingPosts(posts) {

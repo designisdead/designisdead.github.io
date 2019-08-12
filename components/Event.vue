@@ -110,6 +110,9 @@ This component is used to render the Event content type on Storyblok
         const filters = supportsWebP ? '/filters:format(webp)' : '';
         return this.$options.filters.imageApi({src: this.blok.primaryimage, size: 'large', filters: filters});
       }
+    },
+    mounted() {
+      console.log(this.blok)
     }
   }
 </script>

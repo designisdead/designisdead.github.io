@@ -73,7 +73,7 @@ export default {
       return this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'medium', filters: filters})
     },
     tags() {
-      return this.post.content.tags ? this.post.content.tags : [];
+      return this.post.tag_list ? this.post.tag_list : [];
     },
   },
   methods: {

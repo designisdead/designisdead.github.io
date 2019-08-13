@@ -60,72 +60,35 @@ export default {
   data() {
     return {
       publicToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
-      filteredPosts: this.posts,
-      searchInput: '',
       tags: [],
+      searchInput: '',
       selectedTags: [],
       timer: null
     }
   },
   methods: {
-    emitMatchingPosts() {
-      this.$emit('returnMatchingPosts', this.filteredPosts)
-    },
     search(e) {
       e.preventDefault()
       clearTimeout(this.timer)
       this.timer = setTimeout(()=> {
-        this.filterPosts()
-        this.emitMatchingPosts()
+        this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
       }, 500)
     },
     tagToSelected(tag) {
       tag.active ? this.selectedTags.push(tag) : this.selectedTags = this.selectedTags.filter(currentTag => currentTag !== tag)
-      this.filterPosts()
-      this.emitMatchingPosts()
+      this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
-    filterPosts() {
-      this.filteredPosts = this.posts.filter(post => {
-        if (this.selectedTags.length > 0) {
-          return this.inputFilter(post) && this.tagsFilter(post)
-        } else {
-          return this.inputFilter(post)
-        }
-      })
-    },
-    inputFilter(post) {
-      return this.formatString(post.name).includes(this.searchInput)
-        // by location if event, by author if blog
-        || this.formatString(this.searchType === 'event' ? post.content.location : (post.content.author !== '' ? this.author(post.content.author) : '')).includes(this.searchInput)
-        || this.formatString(this.formatDate(this.searchType === 'event' ? post.content.date : post.content.published)).includes(this.searchInput)
-        || this.checkTags([...post.content.tags])
-    },
-    tagsFilter(post) {
-      let matchSelectedTags = false
-      this.selectedTags.forEach(tag => post.content.tags.includes(tag.value) ? matchSelectedTags = true : null)
-      return matchSelectedTags
-    },
-    formatString(string) {
-      return typeof(string) !== undefined ? string.replace(' ', '').toLowerCase() : null
-    },
-    checkTags(tagsArray) {
-      // used for the input filter, if input match tags
-      let containSearchInput = false
-      tagsArray.forEach(tag => {
-        tag.includes(this.searchInput) ? containSearchInput = true : null
-      })
-      return containSearchInput
-    },
-    formatDate(date) {
-      return moment(date).format('dddd MMMM D, YYYY')
-    },
-    author(id) {
-      return this.$store.state.employees.all.find(employee => employee.id == id).name
+    tagArrToString(tags) {
+      return tags.map(tag => tag.name).toString()
     }
+
   },
   mounted() {
-    this.$storyapi.get(`cdn/datasource_entries?datasource=tags&token=${this.publicToken}`)
-    .then(res => this.tags = res.data.datasource_entries.map(tag => { return { name: tag.name, value: tag.value, active: false }}))
+    this.$storyapi.get(`cdn/tags`, {
+      version: this.$store.state.settings.version,
+      cv: this.$store.state.settings.cacheVersion,
+    })
+    .then(res => this.tags = res.data.tags.map(tag => { return { name: tag.name, active: false}}))
     .catch(err => console.log(err))
   }
 }

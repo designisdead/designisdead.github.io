@@ -2,9 +2,9 @@
   <div class="timeline--container">
     <ul
       class="timeline--ulist"
-      v-if="filteredPosts.length > 0">
+      v-if="listContent.length > 0">
       <eventcard
-        v-for="post in filteredPosts"
+        v-for="post in listContent"
         :key="post.full_slug"
         :post="post"
       ></eventcard>
@@ -22,7 +22,7 @@
 <script>
 export default {
   props: {
-    filteredPosts: Array
+    listContent: Array
   },
 }
 </script>

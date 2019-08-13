@@ -13,27 +13,20 @@
     <!-- else if list type is event -->
     <div v-else-if="blok.listtype === 'eventcard'">
       <searchbar
-      @returnMatchingPosts="getMatchingPosts"
-      :searchType="'event'"
-      :posts="blok.listcontent"></searchbar>
+      @emitSearchFields="getSearchField"
+      :searchType="'event'"></searchbar>
 
-      <timeline :filteredPosts="filteredPosts"></timeline>
+      <timeline :listContent="blok.listcontent"></timeline>
     </div>
     <!-- else -->
     <div v-else>
       <searchbar
-      @returnMatchingPosts="getMatchingPosts"
-      :searchType="'blog'"
-      :posts="blok.listcontent"></searchbar>
+      @emitSearchFields="getSearchField"
+      :searchType="'blog'"></searchbar>
 
       <ul
         :class="['List--' + blok.listtype]"
         class="List">
-        <!-- <component
-          v-for="post in filteredPosts"
-          :key="post.full_slug"
-          :post="post"
-          :is="blok.listtype"/> -->
         <component
           v-for="post in blok.listcontent"
           :key="post.full_slug"
@@ -60,7 +53,7 @@ export default {
     blok: {
       type: Object,
       default: function() {
-        return {};
+        return {}
       }
     }
   },
@@ -71,75 +64,79 @@ export default {
       stories: this.blok.listcontent,
       loading: false,
       nextContent: [],
-      filteredPosts: this.blok.listcontent
+      searchInput: '',
+      searchTags: ''
     };
   },
   computed: {
     showMoreButton() {
-      return this.nextContent.length > 0;
+      return this.nextContent.length > 0
     }
   },
   mounted() {
     this.$nextTick(() => {
-      this.nextPage();
-      this.$storyapi
-        .get("cdn/stories", {
-          version: this.$store.state.settings.version,
-          cv: this.$store.state.settings.cacheVersion,
-          starts_with: this.blok.contenttype,
-          sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
-          // filter_query: {
-          //   tags: {
-          //     in: "Javascript"
-          //   }
-          // },
-          // filter_query: {
-          //   metadescription: {
-          //     in: "Bla bla bla"
-          //   }
-          // },
-          with_tag: 'Blockchain',
-          search_term: 'another',
-          // excluding_fields: 'body',
-          page: this.page,
-          // per_page: this.blok.perpage,
-          is_startpage: false // exclude start pages (fe: blog list)
-        })
-        .then(data => {
-          // this.blok.listcontent = data.data.stories;
-          this.loading = false;
-          // console.log(data.data.stories)
-        });
-    });
+      this.nextPage()
+    })
   },
   methods: {
     nextPage() {
-      this.loading = true;
-      this.page += 1;
+      this.loading = true
+      this.page += 1
 
-      this.blok.listcontent ? this.blok.listcontent = [...this.blok.listcontent, ...this.nextContent] : alert("listcontent was not rendered on page load!")
+      this.blok.listcontent ? this.blok.listcontent = [...this.blok.listcontent, ...this.nextContent] : console.log('no list content found')
 
       return this.$storyapi
-        .get("cdn/stories", {
-          version: this.$store.state.settings.version,
-          cv: this.$store.state.settings.cacheVersion,
-          starts_with: this.blok.contenttype,
-          sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
-          page: this.page,
-          per_page: this.blok.perpage,
-          is_startpage: false // exclude start pages (fe: blog list)
-        })
-        .then(data => {
-          this.nextContent = data.data.stories;
-          this.loading = false;
-          // console.log(this.nextContent)
-        });
+      .get("cdn/stories", {
+        version: this.$store.state.settings.version,
+        cv: this.$store.state.settings.cacheVersion,
+        starts_with: this.blok.contenttype,
+        sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
+        with_tag: this.searchTags,
+        search_term: this.searchInput,
+        page: this.page,
+        per_page: this.blok.perpage,
+        is_startpage: false // exclude start pages (fe: blog list)
+      })
+      .then(data => {
+        this.nextContent = data.data.stories
+        this.loading = false
+
+        console.log('content:', this.blok.listcontent)
+        console.log('next content: ', this.nextContent)
+      })
     },
-    getMatchingPosts(posts) {
-      this.filteredPosts = posts
+    getNewSearchData() {
+      this.loading = true
+      this.page = 0
+
+      return this.$storyapi
+      .get('cdn/stories', {
+        version: this.$store.state.settings.version,
+        cv: this.$store.state.settings.cacheVersion,
+        starts_with: this.blok.contenttype,
+        sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
+        with_tag: this.searchTags,
+        search_term: this.searchInput,
+        page: this.page,
+        per_page: this.perpage,
+        is_startpage: false // exclude start pages (fe: blog list)
+      })
+      .then(data => {
+        this.loading = false
+        this.blok.listcontent = data.data.stories
+        this.page = 1
+        this.nextPage()
+      })
+    },
+    getSearchField(input, tags) {
+      console.log('search fields received: ', input, tags)
+      this.searchInput = input
+      this.searchTags = tags
+      this.nextContent = []
+      this.getNewSearchData()
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

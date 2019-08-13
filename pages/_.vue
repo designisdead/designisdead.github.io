@@ -90,12 +90,15 @@ const getListContent = async function({
   version,
   cacheVersion
 }) {
+  console.log(elements.contenttype)
   return await api
     .get("cdn/stories", {
       version: version,
       cv: cacheVersion,
       starts_with: elements.contenttype,
-      sort_by: elements.sortby ? elements.sortby : "created_at:desc",
+      // if type is event, get first future events, js sort em after
+      // sort_by: elements.sortby ? elements.sortby : "created_at:desc",
+      sort_by: elements.contenttype === 'events/' ? "content.date:desc" : 'created_at:desc ',
       per_page: elements.perpage ? elements.perpage : "50",
       page: "1",
       is_startpage: false // exclude start pages (fe: blog list)

@@ -77,6 +77,7 @@ export default {
     this.$nextTick(() => {
       this.nextPage()
     })
+    console.log(this.blok)
   },
   methods: {
     nextPage() {
@@ -100,14 +101,11 @@ export default {
       .then(data => {
         this.nextContent = data.data.stories
         this.loading = false
-
-        console.log('content:', this.blok.listcontent)
-        console.log('next content: ', this.nextContent)
       })
     },
     getNewSearchData() {
       this.loading = true
-      this.page = 0
+      this.page = 1
 
       return this.$storyapi
       .get('cdn/stories', {
@@ -118,7 +116,7 @@ export default {
         with_tag: this.searchTags,
         search_term: this.searchInput,
         page: this.page,
-        per_page: this.perpage,
+        per_page: this.blok.perpage,
         is_startpage: false // exclude start pages (fe: blog list)
       })
       .then(data => {

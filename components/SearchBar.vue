@@ -8,13 +8,15 @@
         :class="{ 'search-bar__selected-tag': tag.active }"
         @click="tag.active = !tag.active; tagToSelected(tag)"
       >
-        {{ tag.name }}
-        <span v-if="tag.active">
-          <img
-            src="/close.svg"
-            alt="Cancel icon"
-            width="10px"
-            style="vertical-align: baseline;">
+        <span v-if="tag.taggings_count > 0">
+          {{ tag.name }}
+          <span v-if="tag.active">
+            <img
+              src="/close.svg"
+              alt="Cancel icon"
+              width="10px"
+              style="vertical-align: baseline;">
+          </span>
         </span>
       </span>
     </div>
@@ -81,14 +83,13 @@ export default {
     tagArrToString(tags) {
       return tags.map(tag => tag.name).toString()
     }
-
   },
   mounted() {
     this.$storyapi.get(`cdn/tags`, {
       version: this.$store.state.settings.version,
       cv: this.$store.state.settings.cacheVersion,
     })
-    .then(res => this.tags = res.data.tags.map(tag => { return { name: tag.name, active: false}}))
+    .then(res => this.tags = res.data.tags.map(tag => { return { name: tag.name, active: false, taggings_count: tag.taggings_count }}))
     .catch(err => console.log(err))
   }
 }

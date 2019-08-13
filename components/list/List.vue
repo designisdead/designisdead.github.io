@@ -80,9 +80,8 @@ export default {
     }
   },
   mounted() {
-    // console.log(this.blok.listcontent)
     this.$nextTick(() => {
-      // this.nextPage();
+      this.nextPage();
       this.$storyapi
         .get("cdn/stories", {
           version: this.$store.state.settings.version,
@@ -107,9 +106,9 @@ export default {
           is_startpage: false // exclude start pages (fe: blog list)
         })
         .then(data => {
-          this.blok.listcontent = data.data.stories;
+          // this.blok.listcontent = data.data.stories;
           this.loading = false;
-          console.log(this.blok.listcontent)
+          // console.log(data.data.stories)
         });
     });
   },
@@ -133,7 +132,7 @@ export default {
         .then(data => {
           this.nextContent = data.data.stories;
           this.loading = false;
-          console.log(this.nextContent)
+          // console.log(this.nextContent)
         });
     },
     getMatchingPosts(posts) {

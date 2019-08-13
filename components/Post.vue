@@ -29,11 +29,11 @@ This component is used to render the Post content type on Storyblok
               <h1 class="Post-title">{{ pagetitle }}</h1>
 
               <div
-                v-if="blok.published"
+                v-if="blok.content.published"
                 class="Title tiny uppercase">
                 <author
-                  v-if="blok.author"
-                  :id="blok.author"/>
+                  v-if="blok.content.author"
+                  :id="blok.content.author"/>
               </div>
             </wrapper>
           </div>
@@ -48,7 +48,7 @@ This component is used to render the Post content type on Storyblok
             v-editable="blok"
             class="page">
             <component
-              v-for="blok in blok.body"
+              v-for="blok in blok.content.body"
               :key="blok._uid"
               :blok="blok"
               :is="blok.component"/>
@@ -96,20 +96,20 @@ This component is used to render the Post content type on Storyblok
     },
     computed: {
       dataTime() {
-        return moment(this.blok.published).format('YYYY-MM-DD HH:mm');
+        return moment(this.blok.content.published).format('YYYY-MM-DD HH:mm');
       },
       formattedDate() {
-        return moment(this.blok.published).format('dddd MMMM D, YYYY');
+        return moment(this.blok.content.published).format('dddd MMMM D, YYYY');
       },
       fromNow() {
-        return moment(this.blok.published).fromNow();
+        return moment(this.blok.content.published).fromNow();
       },
       tags() {
-        return this.blok.tags ? this.blok.tags : [];
+        return this.blok.tag_list ? this.blok.tag_list : [];
       },
       headerImage() {
         const filters = supportsWebP ? '/filters:format(webp)' : '';
-        return this.$options.filters.imageApi({src: this.blok.primaryimage, size: 'large', filters: filters});
+        return this.$options.filters.imageApi({src: this.blok.content.primaryimage, size: 'large', filters: filters});
       }
     }
   }

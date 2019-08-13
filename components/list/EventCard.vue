@@ -83,6 +83,9 @@ export default {
       img.src = url
     }
   },
+  mounted() {
+    // console.log(this.$props)
+  }
 }
 </script>
 

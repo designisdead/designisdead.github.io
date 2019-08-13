@@ -31,7 +31,7 @@ This component is used to render the Event content type on Storyblok
               <div
                 class="Title tiny uppercase">
                 <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
-                {{ blok.location }}
+                {{ blok.content.location }}
               </div>
             </wrapper>
           </div>
@@ -47,7 +47,7 @@ This component is used to render the Event content type on Storyblok
             v-editable="blok"
             class="page">
             <component
-              v-for="blok in blok.body"
+              v-for="blok in blok.content.body"
               :key="blok._uid"
               :blok="blok"
               :is="blok.component"/>
@@ -95,24 +95,21 @@ This component is used to render the Event content type on Storyblok
     },
     computed: {
       dataTime() {
-        return moment(this.blok.date).format('YYYY-MM-DD HH:mm');
+        return moment(this.blok.content.date).format('YYYY-MM-DD HH:mm');
       },
       formattedDate() {
-        return moment(this.blok.date).format('dddd MMMM D, YYYY');
+        return moment(this.blok.content.date).format('dddd MMMM D, YYYY');
       },
       fromNow() {
-        return moment(this.blok.date).fromNow();
+        return moment(this.blok.content.date).fromNow();
       },
       tags() {
-        return this.blok.tags ? this.blok.tags : [];
+        return this.blok.tag_list ? this.blok.tag_list : [];
       },
       headerImage() {
         const filters = supportsWebP ? '/filters:format(webp)' : '';
-        return this.$options.filters.imageApi({src: this.blok.primaryimage, size: 'large', filters: filters});
+        return this.$options.filters.imageApi({src: this.blok.content.primaryimage, size: 'large', filters: filters});
       }
-    },
-    mounted() {
-      console.log(this.blok)
     }
   }
 </script>

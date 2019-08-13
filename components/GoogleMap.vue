@@ -43,9 +43,6 @@ export default {
       infoOptions: { pixelOffset: { width: 0, height: -35 } },
       infoWinOpen: false,
     }
-  },
-  mounted() {
-    console.log(Number(this.blok.lat.replace(',', '.')),  Number(this.blok.lng.replace(',', '.')))
   }
 }
 </script>

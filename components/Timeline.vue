@@ -4,7 +4,7 @@
       class="timeline--ulist"
       v-if="listContent.length > 0">
       <eventcard
-        v-for="post in listContent"
+        v-for="post in sortedList"
         :key="post.full_slug"
         :post="post"
       ></eventcard>
@@ -23,6 +23,22 @@
 export default {
   props: {
     listContent: Array
+  },
+  computed: {
+    sortedList() {
+      let sorted = JSON.parse(JSON.stringify(this.listContent))
+
+      return sorted.sort((a, b) => {
+        console.log(new Date(b.content.date), new Date(a.content.date))
+        return new Date(b.content.date) > new Date() ? new Date(b.content.date) - new Date(a.content.date) : null
+      })
+
+      // return sorted.sort((a, b) => {
+      //   return new Date(a.content.date).getTime() > Date.now() ? (
+      //     b - a
+      //   ) : null
+      // })
+    }
   },
 }
 </script>

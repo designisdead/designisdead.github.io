@@ -82,9 +82,6 @@ export default {
       const url = this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'large', filters: filters})
       img.src = url
     }
-  },
-  mounted() {
-    // console.log(this.$props)
   }
 }
 </script>
@@ -199,6 +196,7 @@ export default {
     .timeline--ulistitem--date {
       left: 0;
       top: -25px;
+      width: 100%;
     }
 
     .timeline--ulistitem--date p {

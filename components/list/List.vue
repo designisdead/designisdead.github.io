@@ -77,7 +77,6 @@ export default {
     this.$nextTick(() => {
       this.nextPage()
     })
-    console.log(this.blok)
   },
   methods: {
     nextPage() {

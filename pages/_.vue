@@ -90,7 +90,6 @@ const getListContent = async function({
   version,
   cacheVersion
 }) {
-  console.log(elements.contenttype)
   return await api
     .get("cdn/stories", {
       version: version,

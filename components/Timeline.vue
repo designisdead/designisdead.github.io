@@ -3,8 +3,24 @@
     <ul
       class="timeline--ulist"
       v-if="listContent.length > 0">
+      <h3
+        v-if="futurEvents.length > 0"
+        class="timeline--ulist--subtitle">
+        Upcoming events
+      </h3>
       <eventcard
-        v-for="post in sortedList"
+        v-for="post in futurEvents"
+        :key="post.full_slug"
+        :post="post"
+      ></eventcard>
+
+      <h3
+        v-if="pastEvents.length > 0"
+        class="timeline--ulist--subtitle">
+        Past events
+      </h3>
+      <eventcard
+        v-for="post in pastEvents"
         :key="post.full_slug"
         :post="post"
       ></eventcard>
@@ -24,20 +40,18 @@ export default {
   props: {
     listContent: Array
   },
-  computed: {
-    sortedList() {
-      let sorted = JSON.parse(JSON.stringify(this.listContent))
-
-      return sorted.sort((a, b) => {
-        console.log(new Date(b.content.date), new Date(a.content.date))
-        return new Date(b.content.date) > new Date() ? new Date(b.content.date) - new Date(a.content.date) : null
-      })
-
-      // return sorted.sort((a, b) => {
-      //   return new Date(a.content.date).getTime() > Date.now() ? (
-      //     b - a
-      //   ) : null
-      // })
+  data() {
+    return {
+      futurEvents: [],
+      pastEvents: []
+    }
+  },
+  watch: {
+    listContent: function() {
+      this.futurEvents = []
+      this.pastEvents = []
+      this.listContent.forEach(event => new Date() > new Date(event.content.date) ? this.pastEvents.push(event) : this.futurEvents.push(event))
+      this.futurEvents = this.futurEvents.reverse()
     }
   },
 }
@@ -59,6 +73,11 @@ export default {
     width: 0;
     height: 100%;
     border: 1px dashed #BBB;
+  }
+
+  .timeline--ulist--subtitle {
+    text-align: right;
+    color: #999;
   }
 
   .timeline--no-match-found {

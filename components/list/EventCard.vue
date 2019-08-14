@@ -138,6 +138,7 @@ export default {
     width: 0px;
     height: 100%;
     border: 1px solid #BBB;
+    background-color: #BBB;
   }
 
   // dot on the line

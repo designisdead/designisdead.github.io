@@ -1,7 +1,7 @@
 <template>
   <div v-editable="blok">
     <!-- If list type is masonry -->
-    <div v-if="blok.contenttype == '_employees/'">
+    <div v-if="blok.listtype === 'masonry'">
       <equalcolumns :cols="{default: 4, 1400: 3, 700: 2, 400: 1}">
         <div
           v-for="(post, index) in blok.listcontent"
@@ -10,32 +10,21 @@
         </div>
       </equalcolumns>
     </div>
-    <!-- else if list type is event -->
-    <div v-else-if="blok.contenttype === 'events/'">
+    <!-- else if list type is eventcard -->
+    <div v-else-if="blok.listtype === 'eventcard'">
       <searchbar
       @emitSearchFields="getSearchField"
       :searchType="'event'"></searchbar>
 
       <timeline :listContent="blok.listcontent"></timeline>
     </div>
-    <!-- else if list type is card -->
-    <div v-else-if="blok.contenttype === 'blog/'">
+    <!-- else -->
+    <div v-else>
       <searchbar
+      v-if="blok.contenttype === 'blog/'"
       @emitSearchFields="getSearchField"
       :searchType="'blog'"></searchbar>
 
-      <ul
-        :class="['List--' + blok.listtype]"
-        class="List">
-        <component
-          v-for="post in blok.listcontent"
-          :key="post.full_slug"
-          :post="post"
-          :is="blok.listtype"/>
-      </ul>
-    </div>
-    <!-- else -->
-    <div v-else>
       <ul
         :class="['List--' + blok.listtype]"
         class="List">

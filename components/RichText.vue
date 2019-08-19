@@ -5,8 +5,7 @@
       'u-textAlignCenter' : blok.textalignment == 'center',
       'u-textAlignRight' : blok.textalignment == 'right'
     }"
-    class="Text"
-    style="clear: both;">
+    class="Text">
     <markdown>{{ blok.richtext }}</markdown>
   </div>
 </template>
@@ -40,6 +39,7 @@
 
 <style lang="scss">
   .Text {
+    clear: both;
     a {
       position: relative;
       display: inline-block;

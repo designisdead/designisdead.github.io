@@ -39,6 +39,7 @@
 
 <style lang="scss">
   .Text {
+    clear: both;
     a {
       position: relative;
       display: inline-block;

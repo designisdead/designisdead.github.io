@@ -171,8 +171,7 @@ export default {
 
     // Load the JSON from the API
     let page = await loadData({
-      // version: context.store.state.settings.version,
-      version: context.isDev ? 'draft' : 'published',
+      version: context.store.state.settings.version,
       api: context.app.$storyapi,
       cacheVersion: context.store.state.settings.cacheVersion,
       errorCallback: context.error,

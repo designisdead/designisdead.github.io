@@ -37,7 +37,7 @@ import EventCard from '@/components/list/EventCard.vue';
 import Event from '@/components/Event.vue';
 import GoogleMap from '@/components/GoogleMap.vue';
 import SearchBar from '@/components/SearchBar.vue';
-import Contact from '@/components/Contact.vue';
+import TextAndImage from "@/components/TextAndImage.vue";
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -77,4 +77,4 @@ Vue.component("eventcard", EventCard);
 Vue.component("event", Event);
 Vue.component("googlemap", GoogleMap);
 Vue.component("searchbar", SearchBar);
-Vue.component("contact", Contact);
+Vue.component("textandimage", TextAndImage);

@@ -1,8 +1,7 @@
 <template>
   <figure
     v-editable="blok"
-    class="ImageUpload"
-    style="clear: both;">
+    class="ImageUpload">
     <div
       class="ImageUpload-imageWrapper"
       :class="{

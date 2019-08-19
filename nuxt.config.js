@@ -27,6 +27,7 @@ module.exports = {
     '~/plugins/imageApi',
     '~/plugins/lazyLoad',
     '~/plugins/parallax.client',
+    '~/plugins/googleMapConfig',
   ],
   router: {
     // linkPrefetchedClass: 'nuxt-link-prefetched'
@@ -100,7 +101,8 @@ module.exports = {
           exclude: /(node_modules)/
         })
       }
-    }
+    },
+    transpile: [/^vue2-google-maps($|\/)/]
   },
   generate: {
     fallback: true,

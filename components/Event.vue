@@ -1,21 +1,21 @@
 <!--
-Post.vue
-This component is used to render the Post content type on Storyblok
+Event.vue
+This component is used to render the Event content type on Storyblok
 -->
 <template>
   <div>
     <main>
-      <article class="Post">
+      <article class="Event">
         <header
-          class="Post-header Wrapper u-backgroundColor--black u-color--light"
+          class="Event-header Wrapper u-backgroundColor--black u-color--light"
           data-parallax="0.5">
-          <div class="Post-headerContent">
+          <div class="Event-headerContent">
             <wrapper size="medium">
               <div class="Title tiny uppercase">
                 <span
                   v-if="tags.length > 0"
-                  class="Post-tags">
-                  <strong
+                  class="Event-tags">
+                    <strong
                     v-for="(tag, index) in tags"
                     :key="index">
                     {{ tag }}
@@ -26,22 +26,21 @@ This component is used to render the Post content type on Storyblok
                 <br>
               </div>
 
-              <h1 class="Post-title">{{ pagetitle }}</h1>
+              <h1 class="Event-title">{{ pagetitle }}</h1>
 
               <div
-                v-if="blok.content.published"
                 class="Title tiny uppercase">
-                <author
-                  v-if="blok.content.author"
-                  :id="blok.content.author"/>
+                <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
+                {{ blok.content.location }}
               </div>
             </wrapper>
           </div>
           <div
             v-lazy:background-image="headerImage"
-            class="Post-headerBackground"/>
+            class="Event-headerBackground"/>
         </header>
-        <div class="Post-content">
+
+        <div class="Event-content">
           <spacer size="medium"/>
 
           <div
@@ -60,9 +59,9 @@ This component is used to render the Post content type on Storyblok
                 class="Buttons"
                 style="justify-content: center;">
                 <nuxt-link
-                  :to="'/blog'"
+                  :to="'/events'"
                   class="Button">
-                  View all posts
+                  View all events
                 </nuxt-link>
               </div>
             </wrapper>
@@ -91,18 +90,18 @@ This component is used to render the Post content type on Storyblok
       },
       pagetitle: {
         type: String,
-        default: 'Design is Dead Blogpost'
+        default: 'Design is Dead Events'
       }
     },
     computed: {
       dataTime() {
-        return moment(this.blok.content.published).format('YYYY-MM-DD HH:mm');
+        return moment(this.blok.content.date).format('YYYY-MM-DD HH:mm');
       },
       formattedDate() {
-        return moment(this.blok.content.published).format('dddd MMMM D, YYYY');
+        return moment(this.blok.content.date).format('dddd MMMM D, YYYY');
       },
       fromNow() {
-        return moment(this.blok.content.published).fromNow();
+        return moment(this.blok.content.date).fromNow();
       },
       tags() {
         return this.blok.tag_list ? this.blok.tag_list : [];
@@ -116,8 +115,8 @@ This component is used to render the Post content type on Storyblok
 </script>
 
 <style lang="scss">
-  .Post-header {
-    margin-left: -6px; // Why?
+  .Event-header {
+    margin-left: -6px;
     position: relative;
     vertical-align: top;
     height: calc(100vh - 70px);
@@ -126,18 +125,18 @@ This component is used to render the Post content type on Storyblok
     }
   }
 
-  .Post-content {
+  .Event-content {
     min-height: 200vh;
     background: white;
     transform: translateZ(0);
     padding: 10px 0;
   }
 
-  .Post-headerContent {
+  .Event-headerContent {
     width: 100%;
   }
 
-  .Post-headerBackground {
+  .Event-headerBackground {
     position: absolute;
     top: 0vh;
     left: 0vw;

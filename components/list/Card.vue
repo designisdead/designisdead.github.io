@@ -60,7 +60,7 @@
         return moment(this.post.content.published).format('dddd MMMM D, YYYY');
       },
       tags() {
-        return this.post.content.tags && this.post.content.tags.tags ? this.post.content.tags.tags : {};
+        return this.post.tag_list ? this.post.tag_list : [];
       },
       lazyImage() {
         return this.$options.filters.imageApi({src: this.post.content.primaryimage, size: 'small', filters: filters});

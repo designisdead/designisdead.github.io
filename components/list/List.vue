@@ -1,7 +1,7 @@
 <template>
   <div v-editable="blok">
     <!-- If list type is masonry -->
-    <div v-if="blok.listtype == 'masonry'">
+    <div v-if="blok.contenttype == '_employees/'">
       <equalcolumns :cols="{default: 4, 1400: 3, 700: 2, 400: 1}">
         <div
           v-for="(post, index) in blok.listcontent"
@@ -10,17 +10,42 @@
         </div>
       </equalcolumns>
     </div>
+    <!-- else if list type is event -->
+    <div v-else-if="blok.contenttype === 'events/'">
+      <searchbar
+      @emitSearchFields="getSearchField"
+      :searchType="'event'"></searchbar>
+
+      <timeline :listContent="blok.listcontent"></timeline>
+    </div>
+    <!-- else if list type is card -->
+    <div v-else-if="blok.contenttype === 'blog/'">
+      <searchbar
+      @emitSearchFields="getSearchField"
+      :searchType="'blog'"></searchbar>
+
+      <ul
+        :class="['List--' + blok.listtype]"
+        class="List">
+        <component
+          v-for="post in blok.listcontent"
+          :key="post.full_slug"
+          :post="post"
+          :is="blok.listtype"/>
+      </ul>
+    </div>
     <!-- else -->
-    <ul
-      v-else
-      :class="['List--' + blok.listtype]"
-      class="List">
-      <component
-        v-for="post in blok.listcontent"
-        :key="post.full_slug"
-        :post="post"
-        :is="blok.listtype"/>
-    </ul>
+    <div v-else>
+      <ul
+        :class="['List--' + blok.listtype]"
+        class="List">
+        <component
+          v-for="post in blok.listcontent"
+          :key="post.full_slug"
+          :post="post"
+          :is="blok.listtype"/>
+      </ul>
+    </div>
 
     <div
       v-if="showMoreButton"
@@ -40,7 +65,7 @@ export default {
     blok: {
       type: Object,
       default: function() {
-        return {};
+        return {}
       }
     }
   },
@@ -50,47 +75,77 @@ export default {
       perPage: this.blok.perpage,
       stories: this.blok.listcontent,
       loading: false,
-      nextContent: []
+      nextContent: [],
+      searchInput: '',
+      searchTags: ''
     };
   },
   computed: {
     showMoreButton() {
-      return this.nextContent.length > 0;
+      return this.nextContent.length > 0
     }
   },
   mounted() {
     this.$nextTick(() => {
-      this.nextPage();
-    });
+      this.nextPage()
+    })
   },
   methods: {
-    nextPage: function() {
-      this.loading = true;
-      this.page += 1;
+    nextPage() {
+      this.loading = true
+      this.page += 1
 
-      if (this.blok.listcontent) {
-        this.blok.listcontent = [...this.blok.listcontent, ...this.nextContent];
-      } else {
-        alert("listcontent was not rendered on page load!");
-      }
+      this.blok.listcontent ? this.blok.listcontent = [...this.blok.listcontent, ...this.nextContent] : console.log('no list content found')
 
       return this.$storyapi
-        .get("cdn/stories", {
-          version: this.$store.state.settings.version,
-          cv: this.$store.state.settings.cacheVersion,
-          starts_with: this.blok.contenttype,
-          sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
-          page: this.page,
-          per_page: this.blok.perpage,
-          is_startpage: false // exclude start pages (fe: blog list)
-        })
-        .then(data => {
-          this.nextContent = data.data.stories;
-          this.loading = false;
-        });
+      .get("cdn/stories", {
+        version: this.$store.state.settings.version,
+        cv: this.$store.state.settings.cacheVersion,
+        starts_with: this.blok.contenttype,
+        sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
+        with_tag: this.searchTags,
+        search_term: this.searchInput,
+        page: this.page,
+        per_page: this.blok.perpage,
+        is_startpage: false // exclude start pages (fe: blog list)
+      })
+      .then(data => {
+        this.nextContent = data.data.stories
+        this.loading = false
+      })
+    },
+    getNewSearchData() {
+      this.loading = true
+      this.page = 1
+
+      return this.$storyapi
+      .get('cdn/stories', {
+        version: this.$store.state.settings.version,
+        cv: this.$store.state.settings.cacheVersion,
+        starts_with: this.blok.contenttype,
+        sort_by: this.blok.sortby ? this.blok.sortby : "created_at:desc",
+        with_tag: this.searchTags,
+        search_term: this.searchInput,
+        page: this.page,
+        per_page: this.blok.perpage,
+        is_startpage: false // exclude start pages (fe: blog list)
+      })
+      .then(data => {
+        this.loading = false
+        this.blok.listcontent = data.data.stories
+        this.page = 1
+        this.nextPage()
+      })
+    },
+    getSearchField(input, tags) {
+      console.log('search fields received: ', input, tags)
+      this.searchInput = input
+      this.searchTags = tags
+      this.nextContent = []
+      this.getNewSearchData()
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

@@ -1,7 +1,15 @@
 <template>
   <div>
     <component
-      v-if="story.content.component"
+      v-if="story.content.component === 'event' || story.content.component === 'post'"
+      :key="story.content._uid"
+      :pagetitle="story.name"
+      :blok="story"
+      :is="story.content.component"
+    />
+
+    <component
+      v-else
       :key="story.content._uid"
       :pagetitle="story.name"
       :blok="story.content"
@@ -181,8 +189,6 @@ export default {
           cacheVersion: context.store.state.settings.cacheVersion,
           errorCallback: context.error
         });
-        // dev purpose
-        // console.log(page.story.content.body[0].elements)
       }
 
       return page;

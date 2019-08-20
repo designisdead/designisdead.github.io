@@ -1,8 +1,8 @@
 const state = () => ({
   primaryNavigation: [],
   cacheVersion: '',
-  editMode: false,
-  version: 'published',
+  editMode: true,
+  version: 'draft',
 })
 
 const mutations = {
@@ -20,8 +20,8 @@ const mutations = {
 
 const actions = {
   loadEditMode({
-                 commit
-               }, query) {
+    commit
+  }, query) {
     let isEditMode = false;
 
     if (query['_storyblok_tk[space_id]']) {
@@ -36,15 +36,15 @@ const actions = {
     commit('setEditMode', isEditMode);
   },
   async loadCacheVersion({
-                           commit
-                         }) {
+    commit
+  }) {
     await this.$storyapi.get(`cdn/spaces/me`).then((res) => {
       commit('setCacheVersion', process.client ? res.data.space.version : Date.now());
     })
   },
   async loadSettings({
-                       commit
-                     }) {
+    commit
+  }) {
     await this.$storyapi.get(`cdn/stories/_settings`, {
       cv: this.state.cacheVersion,
       version: this.state.version

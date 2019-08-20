@@ -33,7 +33,8 @@ module.exports = {
     // linkPrefetchedClass: 'nuxt-link-prefetched'
   },
   serverMiddleware: [
-    '~/servermiddleware/seo.js'
+    '~/servermiddleware/seo.js',
+    '~/servermiddleware/contact.js'
   ],
   /*
   ** Headers of the page

@@ -1,22 +1,12 @@
 <template>
-  <div>
-    <h1 class="contact--title">My super contact page</h1>
-    <form
-      action="/"
-      method="post">
-      <input type="text" name="name" />
-      <input type="email" name="mail" />
-      <textarea name="msg"></textarea>
-      <button type="submit" name="submit">Send email</button>
-    </form>
+  <div
+    class="contact-modal--content">
+    <h3>My contact modal</h3>
+    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Unde quam, laborum sit nobis harum fugit doloremque ullam repellendus, voluptates architecto in debitis ex ipsa eligendi eaque aperiam modi? Aperiam, dolor?</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt doloribus odit sunt animi deleniti nihil reiciendis fugiat obcaecati voluptatum aliquam placeat et dicta, magnam porro nostrum accusamus. Dolorum, voluptates quasi.</p>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vero hic mollitia minima, voluptas sed temporibus atque rerum incidunt officia corporis magnam quis ducimus facere ab exercitationem veniam fuga quos. Quas.</p>
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos velit dolore sunt debitis, delectus est saepe deserunt, fugiat quae architecto quod dolores suscipit quaerat magni minus dolor, hic modi ratione!</p>
 
-    <!-- <div class="_form_4"></div><script src="https://mondtalexandre.activehosted.com/f/embed.php?id=4" type="text/javascript" charset="utf-8"></script> -->
-
-    <!-- <modal name="testModal">
-      Hey there !
-    </modal> -->
-
-    <!-- <script src="https://mondtalexandre.activehosted.com/f/embed.php?id=2" type="text/javascript" charset="utf-8"></script> -->
   </div>
 </template>
 
@@ -27,8 +17,11 @@ export default {
 </script>
 
 <style lang="scss">
-.contact--title {
-  color: #999999;
+.contact-modal--content {
+  background-color: #fefefe;
+  margin: 60px auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
 }
-
 </style>

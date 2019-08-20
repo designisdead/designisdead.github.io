@@ -25,6 +25,12 @@
             {{ navitem.title }}
           </nuxt-link>
 
+          <span
+            class="MobileNavigation-link Navigation-contact"
+            @click="closeSidebar; contactModalOpen = true">
+            Contact Us
+          </span>
+
           <p class="Page-sidebarContentSocial">
             <a
               href="https://twitter.com/designisdead"
@@ -117,6 +123,11 @@
                 class="Navigation-link">
                 {{ navitem.title }}
               </nuxt-link>
+              <span
+                class="Navigation-link Navigation-contact"
+                @click="closeSidebar; contactModalOpen = true">
+                Contact Us
+              </span>
             </div>
           </div>
         </div>
@@ -370,6 +381,14 @@
       }
     </script>
     <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) end -->
+
+    <!-- Contact form modal (ActiveCampaign) -->
+    <div
+      v-if="contactModalOpen"
+      class="contact-modal--container"
+      @click="contactModalOpen = false">
+      <contact></contact>
+    </div>
   </div>
 </template>
 
@@ -379,6 +398,7 @@
   export default {
     data: () => ({
       sidebarOpen: false,
+      contactModalOpen: false,
     }),
     methods: {
       closeSidebar() {
@@ -402,6 +422,17 @@
 
   $pageHeaderHeight: 70px;
   $pageSidebarMinimumWidth: 310px;
+
+  .contact-modal--container {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+  }
 
   .body--sidebarOpened {
     overflow: hidden;
@@ -602,6 +633,12 @@
       text-decoration: none;
       opacity: 0.5;
     }
+  }
+
+  .Navigation-contact {
+    color: black;
+    cursor: pointer;
+    user-select: none;
   }
 
   .Page-close {

@@ -22,7 +22,7 @@ const actions = {
   loadEditMode({
     commit
   }, query) {
-    let isEditMode = true;
+    let isEditMode = false;
 
     if (query['_storyblok_tk[space_id]']) {
       // const validationString = context.query['_storyblok_tk[space_id]'] + ':AJwMQue3YmvF9GhvSrecTQtt:' + context.query['_storyblok_tk[timestamp]'];

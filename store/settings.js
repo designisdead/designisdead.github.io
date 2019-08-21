@@ -47,7 +47,8 @@ const actions = {
   }) {
     await this.$storyapi.get(`cdn/stories/_settings`, {
       cv: this.state.cacheVersion,
-      version: this.state.version
+      // version: this.state.version
+      version: 'draft'
     }).then((res) => {
       commit('setSettings', res.data.story.content)
     })

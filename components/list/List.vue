@@ -35,6 +35,7 @@
           :post="post"
           :is="blok.listtype"/>
       </ul>
+
       <div
         v-else-if="blok.contenttype === 'blog/'"
         class="timeline--no-match-found">

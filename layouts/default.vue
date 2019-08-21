@@ -9,11 +9,11 @@
     <div class="Page">
       <div class="Page-sidebar u-backgroundColor--light u-colorDark">
 
-        <label
-          class="Page-close"
-          for="page-sidebarstate">
-          Close
-        </label>
+          <label
+            class="Page-close"
+            for="page-sidebarstate">
+            Close
+          </label>
 
         <div class="Page-sidebarContent">
           <nuxt-link
@@ -27,7 +27,7 @@
 
           <span
             class="MobileNavigation-link Navigation-contact"
-            @click="closeSidebar; contactModalOpen = true">
+            @click="contactModalOpen = true; sidebarOpen = false">
             Contact Us
           </span>
 
@@ -385,9 +385,8 @@
     <!-- Contact form modal (ActiveCampaign) -->
     <div
       v-if="contactModalOpen"
-      class="contact-modal--container"
-      @click="contactModalOpen = false">
-      <contact></contact>
+      class="contact-modal--container">
+      <contact @closeContactModal="closeContactModal"></contact>
     </div>
   </div>
 </template>
@@ -407,6 +406,9 @@
       },
       updateBodyClass() {
         this.sidebarOpen ? body.classList.toggle('body--sidebarOpened') : null;
+      },
+      closeContactModal() {
+        this.contactModalOpen = false
       }
     },
     computed: {
@@ -431,7 +433,7 @@
     width: 100%;
     height: 100%;
     background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4);
+    background-color: rgba(0,0,0,0.45);
   }
 
   .body--sidebarOpened {

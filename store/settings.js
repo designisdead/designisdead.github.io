@@ -1,8 +1,8 @@
 const state = () => ({
   primaryNavigation: [],
   cacheVersion: '',
-  editMode: true,
-  version: 'draft',
+  editMode: false,
+  version: 'published',
 })
 
 const mutations = {

@@ -26,6 +26,7 @@
       :searchType="'blog'"></searchbar>
 
       <ul
+        v-if="blok.listcontent.length > 0"
         :class="['List--' + blok.listtype]"
         class="List">
         <component
@@ -34,6 +35,13 @@
           :post="post"
           :is="blok.listtype"/>
       </ul>
+      <div
+        v-else-if="blok.contenttype === 'blog/'"
+        class="timeline--no-match-found">
+        <h2>
+          Sorry, no blogs were found that match the specified selection criteria...
+        </h2>
+      </div>
     </div>
 
     <div

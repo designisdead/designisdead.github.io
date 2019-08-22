@@ -35,7 +35,6 @@ module.exports = {
   },
   serverMiddleware: [
     '~/servermiddleware/seo.js',
-    '~/servermiddleware/contact.js'
   ],
   /*
   ** Headers of the page

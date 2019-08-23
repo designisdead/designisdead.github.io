@@ -6,8 +6,8 @@ module.exports = {
   mode: 'universal',
   modules: [
     ['storyblok-nuxt', {
-      accessToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
-      // accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
+      // accessToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
+      accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
       cacheProvider: 'memory',
       excludeHeaderScript: false
       // excludeHeaderScript: process.env.NODE_ENV == 'production'

@@ -147,20 +147,24 @@
               <textarea name="field[16]" placeholder="Type your inquiry" style="height: 113px;" required></textarea>
             </div>
           </div>
-          <div id="submitFormBtnSection" class="_button-wrapper _full_width">
-            <button id="contactModalMobileBackBtn" class="_submit" type="text">
+          <div id="submitFormBtnSection">
+            <button id="contactModalMobileBackBtn" class="_submit" type="text" @click="closeContactModal">
               Back
             </button>
-            <button id="_form_10_submit" class="_submit" type="submit">
-              Contact us
-            </button>
+            <div class="_button-wrapper">
+              <button id="_form_10_submit" class="_submit" type="submit">
+                Contact us
+              </button>
+            </div>
           </div>
           <div class="_clear-element">
           </div>
         </div>
         <div class="_form-thank-you" style="display:none;">
+          hi
         </div>
-      </form><script type="text/javascript">
+      </form>
+      <script type="text/javascript">
       window.cfields = {"16":"inquiry"};
       window._show_thank_you = function(id, message, trackcmp_url) {
         var form = document.getElementById('_form_' + id + '_'), thank_you = form.querySelector('._form-thank-you');
@@ -469,8 +473,21 @@
         };
         addEvent(form_to_submit, 'submit', form_submit);
       })();
+
     </script>
 
+    <!-- <div class="_form_10"></div><script src="https://designisdead.activehosted.com/f/embed.php?id=10" type="text/javascript" charset="utf-8"></script> -->
+
+    <!-- Back btn when form is validated -->
+    <div
+      id="backBtnThankYou"
+    >
+      <button id="contactModalMobileBackBtn" class="_submit" type="text" @click="closeContactModal">
+        Back
+      </button>
+    </div>
+
+    <!-- Infos box -->
     <div class="contact-modal--infos">
       <div class="contact-modal--infos--sub">
         <img
@@ -503,6 +520,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      formValidated: false
+    }
+  },
   methods: {
     closeContactModal() {
       this.$emit('closeContactModal')
@@ -541,6 +563,11 @@ export default {
 #contactModalMobileBackBtn {
   display: none;
   margin-right: 40px;
+  border-color: #ECC94B!important;
+}
+
+#backBtnThankYou {
+  display: none;
 }
 
 .contact-modal--infos {
@@ -603,7 +630,6 @@ export default {
 
   #contactModalMobileBackBtn {
     display: inline-block;
-    border-color: red!important;
   }
 
   .contact-modal--infos {

@@ -397,7 +397,7 @@
   export default {
     data: () => ({
       sidebarOpen: false,
-      contactModalOpen: false,
+      contactModalOpen: true,
     }),
     methods: {
       closeSidebar() {

@@ -10,7 +10,7 @@
       class="contact-modal--close"
       @click="closeContactModal">
 
-    <!-- <style>
+    <style>
       #_form_10_ { font-size:14px; line-height:1.6; font-family:arial, helvetica, sans-serif; margin:0; }
       #_form_10_ * { outline:0; }
       ._form_hide { display:none; visibility:hidden; }
@@ -93,7 +93,6 @@
       }
 
       #_form_10_._form_10 { width:100% !important; font-family:sans-serif; padding:0 !important; }
-      #_form_10_ ._x23678068 ._form-title { text-align:center; font-weight:normal; font-size:28px; margin-bottom:28px; }
       #_form_10_ ._submit { padding:16px 20px; background:transparent !important; }
       #_form_10_ ._submit:hover { background-color:#5b5b5b !important; }
       #_form_10_ ._x96983900 input { transition:0.2s; padding:14px 8px; font-size:14px; border:none; }
@@ -108,7 +107,7 @@
       #_form_10_ ._button-wrapper { display:flex; justify-content:flex-end; }
       @media screen and (max-width:800px) { #_form_10_ ._button-wrapper { justify-content:center !important; }
       #_form_10_ ._field16 textarea { height:115px !important; }
-      #_form_10_ ._x23678068 ._form-title { padding-right:60px; }
+      #_form_10_._form_10 { margin-top:100px !important; }
       }
       </style>
       <form method="POST" action="https://designisdead.activehosted.com/proc.php" id="_form_10_" class="_form _form_10 _inline-form  _dark" novalidate>
@@ -120,11 +119,6 @@
         <input type="hidden" name="act" value="sub" />
         <input type="hidden" name="v" value="2" />
         <div class="_form-content">
-          <div class="_form_element _x23678068 _full_width _clear" >
-            <div class="_form-title">
-              One Step Closer To Your Goal
-            </div>
-          </div>
           <div class="_form_element _x28642558 _full_width " >
             <label class="_form-label">
               Full Name*
@@ -469,9 +463,9 @@
         addEvent(form_to_submit, 'submit', form_submit);
       })();
 
-    </script> -->
+    </script>
 
-    <div class="_form_10"></div><script src="https://designisdead.activehosted.com/f/embed.php?id=10" type="text/javascript" charset="utf-8"></script>
+    <!-- <div class="_form_10"></div><script src="https://designisdead.activehosted.com/f/embed.php?id=10" type="text/javascript" charset="utf-8"></script> -->
 
     <!-- Infos box -->
     <div class="contact-modal--infos">

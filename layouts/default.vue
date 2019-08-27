@@ -27,7 +27,7 @@
 
           <span
             class="MobileNavigation-link Navigation-contact"
-            @click="contactModalOpen = true; sidebarOpen = false">
+            @click="contactModalOpen = true; sidebarOpen = false;">
             Contact Us
           </span>
 
@@ -125,7 +125,7 @@
               </nuxt-link>
               <span
                 class="Navigation-link Navigation-contact"
-                @click="closeSidebar; contactModalOpen = true">
+                @click="closeSidebar; contactModalOpen = true;">
                 Contact Us
               </span>
             </div>
@@ -383,11 +383,13 @@
     <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) end -->
 
     <!-- Contact form modal (ActiveCampaign) -->
-    <div
-      v-if="contactModalOpen"
-      class="contact-modal--container">
-      <contact @closeContactModal="closeContactModal"></contact>
-    </div>
+    <transition name="fade">
+      <div
+        v-if="contactModalOpen"
+        class="contact-modal--container">
+        <contact @closeContactModal="closeContactModal"></contact>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -397,18 +399,17 @@
   export default {
     data: () => ({
       sidebarOpen: false,
-      contactModalOpen: true,
+      contactModalOpen: false,
     }),
     methods: {
       closeSidebar() {
         this.sidebarOpen = false;
-        this.updateBodyClass();
       },
       updateBodyClass() {
-        this.sidebarOpen ? body.classList.toggle('body--sidebarOpened') : null;
+        this.sidebarOpen ? body.classList.remove('body--sidebarOpened') : body.classList.add('body--sidebarOpened');
       },
       closeContactModal() {
-        this.contactModalOpen = false
+        this.contactModalOpen = false;
       }
     },
     computed: {
@@ -425,6 +426,10 @@
   $pageHeaderHeight: 70px;
   $pageSidebarMinimumWidth: 310px;
 
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
   .contact-modal--container {
     position: fixed;
     z-index: 1;
@@ -434,6 +439,11 @@
     height: 100%;
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.9);
+    overflow-y: auto;
+    // opacity:0;
+    // -webkit-transition: opacity 400ms ease-in;
+    // -moz-transition: opacity 400ms ease-in;
+    // transition: opacity 400ms ease-in;
   }
 
   .body--sidebarOpened {

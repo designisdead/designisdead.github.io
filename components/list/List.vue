@@ -12,9 +12,10 @@
     </div>
     <!-- else if list type is event -->
     <div v-else-if="blok.contenttype === 'events/'">
-      <searchbar
+      <!-- Not enough events to justify the search bar here atm -->
+      <!-- <searchbar
       @emitSearchFields="getSearchField"
-      :searchType="'event'"></searchbar>
+      :searchType="'event'"></searchbar> -->
 
       <timeline :listContent="blok.listcontent"></timeline>
     </div>

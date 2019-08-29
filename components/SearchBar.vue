@@ -1,6 +1,6 @@
 <template>
   <div class="search-bar__main-container">
-    <div class="search-bar__tags-container">
+    <!-- <div class="search-bar__tags-container">
       <span
         v-for="tag in tags"
         :key="tag.value"
@@ -19,7 +19,7 @@
           </span>
         </span>
       </span>
-    </div>
+    </div> -->
 
     <form
       @submit="search"
@@ -32,6 +32,23 @@
         required
         name="searchInput"
         class="search-bar__search-input">
+
+      <span
+        class="search-bar__tag-filter-container">
+        <span
+          class="search-bar__tag-filter-open-btn"
+          @click="openTagFilter()">
+          All blogs &#9662;
+        </span>
+
+        <div
+          v-if="tagFilterOpened"
+          class="search-bar__tag-filter-box">
+          <p style="border-bottom: 1px solid #999; padding-bottom: 0;">Tags</p>
+          Tag filter
+          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus accusamus natus culpa officiis molestias nulla praesentium error quasi labore accusantium doloremque adipisci animi totam exercitationem nostrum odio quibusdam, aliquid voluptatibus.
+        </div>
+      </span>
 
       <label
         for="searchInput"
@@ -65,7 +82,8 @@ export default {
       tags: [],
       searchInput: '',
       selectedTags: [],
-      timer: null
+      timer: null,
+      tagFilterOpened: false
     }
   },
   methods: {
@@ -82,6 +100,10 @@ export default {
     },
     tagArrToString(tags) {
       return tags.map(tag => tag.name).toString()
+    },
+    openTagFilter() {
+      console.log(this.tagFilterOpened)
+      this.tagFilterOpened = !this.tagFilterOpened
     }
   },
   mounted() {
@@ -91,14 +113,35 @@ export default {
     })
     .then(res => this.tags = res.data.tags.map(tag => { return { name: tag.name, active: false, taggings_count: tag.taggings_count }}))
     .catch(err => console.log(err))
+
+    let prevScrollpos = window.pageYOffset
+      window.onscroll = () => {
+        var currentScrollPos = window.pageYOffset
+        if (prevScrollpos > currentScrollPos) {
+          document.querySelector('.search-bar__main-container').style.top = "70px"
+        } else {
+          document.querySelector('.search-bar__main-container').style.top = "-24px"
+          this.tagFilterOpened = false
+        }
+        prevScrollpos = currentScrollPos
+      }
   }
 }
 </script>
 
 <style lang="scss">
   .search-bar__main-container {
+    position: fixed;
+    z-index: 2;
+    background: #fff;
+    width: 100%;
+    top: 70px;
+    left: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 16px 0;
+    transition: top 0.4s;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
     flex-direction: row;
     margin-bottom: 40px;
@@ -107,7 +150,7 @@ export default {
   .search-bar__search-form {
     position: relative;
     display: flex;
-    width: 400px;
+    width: 600px;
     height: 38px;
     margin-bottom: 5px;
   }
@@ -137,13 +180,59 @@ export default {
       border-bottom: 2px solid color('secondary');
       ~ .search-bar__search-input-label {
         color: color('secondary');
-        top: -12px;
+        top: -4px;
         font-size: $font-size / 1.4;
       }
       ~ .search-bar__submit-button {
         border-bottom: 2px solid color('secondary');
       }
+      ~ .search-bar__tag-filter-container {
+        border-bottom: 2px solid color('secondary');
+      }
     }
+  }
+
+  .search-bar__tag-filter-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #BBB;
+  }
+
+  .search-bar__tag-filter-open-btn {
+    cursor: pointer;
+    user-select: none;
+    font-size: 12px;
+    padding-right: 16px;
+    white-space: nowrap;
+  }
+
+  .search-bar__tag-filter-box {
+    position: absolute;
+    top: 44px;
+    // Half the parent div's width
+    left: 38px;
+    transform: translate(-50%, 0);
+    background: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    // box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+    width: 300px;
+    height: auto;
+    padding: 14px;
+  }
+
+  .search-bar__tag-filter-box:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: -20px;
+    left: 45%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
   }
 
   .search-bar__submit-button {

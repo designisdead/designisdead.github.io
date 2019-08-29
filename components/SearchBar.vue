@@ -44,9 +44,10 @@
         <div
           v-if="tagFilterOpened"
           class="search-bar__tag-filter-box">
-          <p style="border-bottom: 1px solid #999; padding-bottom: 0;">Tags</p>
-          Tag filter
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus accusamus natus culpa officiis molestias nulla praesentium error quasi labore accusantium doloremque adipisci animi totam exercitationem nostrum odio quibusdam, aliquid voluptatibus.
+          <p style="border-bottom: 1px solid #999; padding-bottom: 0; color: #999">Tags</p>
+          <ul>
+            <li v-for="tag in tags" :key="tag.value">{{ tag.name }}</li>
+          </ul>
         </div>
       </span>
 
@@ -138,13 +139,12 @@ export default {
     top: 70px;
     left: 0;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    padding: 16px 0;
+    padding: 16px 20px;
     transition: top 0.4s;
     display: flex;
     justify-content: center;
     align-items: flex-end;
     flex-direction: row;
-    margin-bottom: 40px;
   }
 
   .search-bar__search-form {
@@ -217,8 +217,8 @@ export default {
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
     // box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
     border-radius: 3px;
-    width: 300px;
-    height: auto;
+    width: 200px;
+    // height: auto;
     padding: 14px;
   }
 

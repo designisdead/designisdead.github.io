@@ -106,6 +106,9 @@ export default {
     },
     openTagFilter() {
       this.tagFilterOpened = !this.tagFilterOpened
+      window.innerWidth < 800 ? (
+        this.tagFilterOpened ? document.querySelector('body').style.overflowY = 'hidden' : document.querySelector('body').style.overflowY = 'auto'
+      ) : null
     },
     resetSelectedTags() {
       this.selectedTags = []

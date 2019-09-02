@@ -1,26 +1,5 @@
 <template>
   <div class="search-bar__main-container">
-    <!-- <div class="search-bar__tags-container">
-      <span
-        v-for="tag in tags"
-        :key="tag.value"
-        class="search-bar__single-tag"
-        :class="{ 'search-bar__selected-tag': tag.active }"
-        @click="tag.active = !tag.active; tagToSelected(tag)"
-      >
-        <span v-if="tag.taggings_count > 0">
-          {{ tag.name }}
-          <span v-if="tag.active">
-            <img
-              src="/close.svg"
-              alt="Cancel icon"
-              width="10px"
-              style="vertical-align: baseline;">
-          </span>
-        </span>
-      </span>
-    </div> -->
-
     <form
       @submit="search"
       class="search-bar__search-form"
@@ -130,6 +109,7 @@ export default {
     },
     resetSelectedTags() {
       this.selectedTags = []
+      this.tagFilterOpened = false
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
     tagToSelected() {
@@ -257,7 +237,6 @@ export default {
   }
 
   .search-bar__tag-filter-box {
-    transition: .5s;
     position: absolute;
     top: 44px;
     right: -80px;
@@ -398,10 +377,9 @@ export default {
     }
   }
 
-  @media screen and (max-width: size('medium')) {
+  @media screen and (max-width: size('medium') - 1) {
     .search-bar__main-container {
-      flex-direction: column-reverse;
-      align-items: center;
+      height: 90px;
     }
 
     .search-bar__tags-container {
@@ -410,6 +388,67 @@ export default {
 
     .search-bar__search-form {
       margin-bottom: 14px;
+      top: -12px;
+    }
+
+    .search-bar__tag-filter-container {
+      position: absolute;
+      top: 50px;
+      border: none;
+    }
+
+    .search-bar__search-input {
+      &:focus,
+      &:valid {
+        ~ .search-bar__tag-filter-container {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .search-bar__tag-filter-box {
+      position: fixed;
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      border-radius: 0;
+      border-top: 2px solid #999;
+      padding: 0 14px;
+    }
+
+    .search-bar__tag-filter-box:before {
+      border: none;
+    }
+
+    .search-bar__tag-filter-box__header {
+      position: fixed;
+      z-index: 1;
+      background: #FFF;
+      width: 100%;
+      left: 0;
+      padding: 8px 16px 4px 16px;
+    }
+
+    .search-bar__tag-filter-box__reset-filter {
+      position: fixed;
+      z-index: 1;
+      background: #FFF;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      padding: 10px 16px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: all .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 1;
+      transform: translateY(300px);
     }
   }
 </style>

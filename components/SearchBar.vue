@@ -38,16 +38,33 @@
         <span
           class="search-bar__tag-filter-open-btn"
           @click="openTagFilter()">
-          All blogs &#9662;
+          {{ displaySelectedTags }} &#9662;
         </span>
 
         <div
           v-if="tagFilterOpened"
           class="search-bar__tag-filter-box">
-          <p style="border-bottom: 1px solid #999; padding-bottom: 0; color: #999">Tags</p>
-          <ul>
-            <li v-for="tag in tags" :key="tag.value">{{ tag.name }}</li>
+          <p style="border-bottom: 1px solid #BBB; padding-bottom: 0; color: #999">Tags</p>
+          <ul class="search-bar__tag-list">
+            <li
+              v-for="tag in tags"
+              :key="tag.value"
+              class="search-bar__tag-list-item">
+              <input
+                class="search-bar__tag-list-item__checkbox"
+                type="checkbox"
+                :value="tag.name"
+                v-model="selectedTags"
+                @change="test()">
+              <span>{{ tag.name }}</span>
+            </li>
           </ul>
+          <p
+            class="search-bar__reset-filter"
+            @click="resetSelectedTags()">
+            <img src="/trash-icon.svg" alt="Trash icon" width="18" style="margin-right: 6px;">
+            <span style="line-height: 14px;">All blogs</span>
+          </p>
         </div>
       </span>
 
@@ -100,11 +117,32 @@ export default {
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
     tagArrToString(tags) {
-      return tags.map(tag => tag.name).toString()
+      return tags.map(tag => tag).toString()
     },
     openTagFilter() {
       console.log(this.tagFilterOpened)
       this.tagFilterOpened = !this.tagFilterOpened
+    },
+    resetSelectedTags() {
+      this.selectedTags = []
+      this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
+    },
+    test() {
+      console.log(this.selectedTags)
+      this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
+    }
+  },
+  computed: {
+    displaySelectedTags() {
+      if (this.selectedTags.length === 0) {
+        return 'All blogs'
+      } else if (this.selectedTags.length === 1) {
+        return this.selectedTags[0]
+      } else if (this.selectedTags.length === 2) {
+        return this.selectedTags[0] + ', ' + this.selectedTags[1]
+      } else {
+        return this.selectedTags[0] + ', ' + this.selectedTags[1] + ', ...'
+      }
     }
   },
   mounted() {
@@ -210,15 +248,11 @@ export default {
   .search-bar__tag-filter-box {
     position: absolute;
     top: 44px;
-    // Half the parent div's width
-    left: 38px;
-    transform: translate(-50%, 0);
+    right: -80px;
     background: white;
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
-    // box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.05);
     border-radius: 3px;
-    width: 200px;
-    // height: auto;
+    min-width: 200px;
     padding: 14px;
   }
 
@@ -233,6 +267,61 @@ export default {
     border-bottom: 10px solid white;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
+  }
+
+  .search-bar__tag-list {
+    list-style: none;
+    padding-top: 16px;
+  }
+
+  .search-bar__tag-list-item {
+    margin: 0;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-bar__tag-list-item__checkbox {
+    cursor: pointer;
+    align-self: flex-start;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .search-bar__tag-list-item__checkbox:active, .search-bar__tag-list-item__checkbox:checked:active {
+	  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .search-bar__tag-list-item__checkbox:checked {
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+  }
+
+  .search-bar__tag-list-item__checkbox:checked:after {
+    content: '\2714';
+    font-size: 16px;
+    position: absolute;
+    top: 0px;
+    left: 2px;
+    color: #919191;
+  }
+
+  .search-bar__reset-filter {
+    cursor: pointer;
+    user-select: none;
+    border-top: 1px solid #BBB;
+    padding: 8px 0 0 0;
+    color: #999;
+    display: flex;
+    align-items: flex-end;
   }
 
   .search-bar__submit-button {

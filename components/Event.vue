@@ -84,9 +84,6 @@ This component is used to render the Event content type on Storyblok
   import supportsWebP from 'supports-webp';
 
   export default {
-    mounted() {
-      console.log(this.hasGoogleMap())
-    },
     props: {
       blok: {
         type: Object,

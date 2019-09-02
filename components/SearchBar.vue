@@ -31,7 +31,7 @@
                 alt="Close menu icon"
                 width="12px;"
                 class="search-bar__tag-filter-box__header__close"
-                @click="tagFilterOpened = false">
+                @click="openTagFilter()">
             </p>
             <ul class="search-bar__tag-list">
               <li
@@ -112,7 +112,7 @@ export default {
     },
     resetSelectedTags() {
       this.selectedTags = []
-      this.tagFilterOpened = false
+      this.openTagFilter()
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
     tagToSelected() {

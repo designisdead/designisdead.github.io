@@ -106,9 +106,9 @@ export default {
     },
     openTagFilter() {
       this.tagFilterOpened = !this.tagFilterOpened
-      window.innerWidth < 800 ? (
+      if (window.innerWidth < 800) {
         this.tagFilterOpened ? document.querySelector('body').style.overflowY = 'hidden' : document.querySelector('body').style.overflowY = 'auto'
-      ) : null
+      }
     },
     resetSelectedTags() {
       this.selectedTags = []
@@ -420,7 +420,7 @@ export default {
       top: auto;
       border-radius: 0;
       border-top: 2px solid #999;
-      padding: 0 14px;
+      padding: 0 20px;
     }
 
     .search-bar__tag-filter-box:before {
@@ -433,7 +433,7 @@ export default {
       background: #FFF;
       width: 100%;
       left: 0;
-      padding: 8px 16px 4px 16px;
+      padding: 8px 20px 4px 20px;
     }
 
     .search-bar__tag-filter-box__reset-filter {
@@ -443,7 +443,7 @@ export default {
       width: 100%;
       left: 0;
       bottom: 0;
-      padding: 10px 16px;
+      padding: 10px 20px;
     }
 
     .fade-enter-active, .fade-leave-active {

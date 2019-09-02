@@ -41,31 +41,41 @@
           {{ displaySelectedTags }} &#9662;
         </span>
 
-        <div
-          v-if="tagFilterOpened"
-          class="search-bar__tag-filter-box">
-          <p style="border-bottom: 1px solid #BBB; padding-bottom: 0; color: #999">Tags</p>
-          <ul class="search-bar__tag-list">
-            <li
-              v-for="tag in tags"
-              :key="tag.value"
-              class="search-bar__tag-list-item">
-              <input
-                class="search-bar__tag-list-item__checkbox"
-                type="checkbox"
-                :value="tag.name"
-                v-model="selectedTags"
-                @change="test()">
-              <span>{{ tag.name }}</span>
-            </li>
-          </ul>
-          <p
-            class="search-bar__reset-filter"
-            @click="resetSelectedTags()">
-            <img src="/trash-icon.svg" alt="Trash icon" width="18" style="margin-right: 6px;">
-            <span style="line-height: 14px;">All blogs</span>
-          </p>
-        </div>
+        <transition name="fade">
+          <div
+            v-if="tagFilterOpened"
+            class="search-bar__tag-filter-box">
+            <p class="search-bar__tag-filter-box__header">
+              <span>Tags</span>
+              <img
+                src="/close-grey-icon.svg"
+                alt="Close menu icon"
+                width="12px;"
+                class="search-bar__tag-filter-box__header__close"
+                @click="tagFilterOpened = false">
+            </p>
+            <ul class="search-bar__tag-list">
+              <li
+                v-for="tag in tags"
+                :key="tag.value"
+                class="search-bar__tag-list-item">
+                <input
+                  class="search-bar__tag-list-item__checkbox"
+                  type="checkbox"
+                  :value="tag.name"
+                  v-model="selectedTags"
+                  @change="tagToSelected()">
+                <span>{{ tag.name }}</span>
+              </li>
+            </ul>
+            <p
+              class="search-bar__tag-filter-box__reset-filter"
+              @click="resetSelectedTags()">
+              <img src="/trash-icon.svg" alt="Trash icon" width="18" style="margin-right: 6px;">
+              <span style="line-height: 14px;">All blogs</span>
+            </p>
+          </div>
+        </transition>
       </span>
 
       <label
@@ -112,23 +122,17 @@ export default {
         this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
       }, 500)
     },
-    tagToSelected(tag) {
-      tag.active ? this.selectedTags.push(tag) : this.selectedTags = this.selectedTags.filter(currentTag => currentTag !== tag)
-      this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
-    },
     tagArrToString(tags) {
       return tags.map(tag => tag).toString()
     },
     openTagFilter() {
-      console.log(this.tagFilterOpened)
       this.tagFilterOpened = !this.tagFilterOpened
     },
     resetSelectedTags() {
       this.selectedTags = []
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
-    test() {
-      console.log(this.selectedTags)
+    tagToSelected() {
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     }
   },
@@ -169,6 +173,13 @@ export default {
 </script>
 
 <style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
   .search-bar__main-container {
     position: fixed;
     z-index: 2;
@@ -246,6 +257,7 @@ export default {
   }
 
   .search-bar__tag-filter-box {
+    transition: .5s;
     position: absolute;
     top: 44px;
     right: -80px;
@@ -267,6 +279,18 @@ export default {
     border-bottom: 10px solid white;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
+  }
+
+  .search-bar__tag-filter-box__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #BBB;
+    padding-bottom: 4px;
+    color: #999;
+  }
+
+  .search-bar__tag-filter-box__header__close {
+    cursor: pointer;
   }
 
   .search-bar__tag-list {
@@ -314,7 +338,7 @@ export default {
     color: #919191;
   }
 
-  .search-bar__reset-filter {
+  .search-bar__tag-filter-box__reset-filter {
     cursor: pointer;
     user-select: none;
     border-top: 1px solid #BBB;

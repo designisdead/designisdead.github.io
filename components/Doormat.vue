@@ -10,7 +10,7 @@
           </p>
           <p>
             <a href="mailto:info@designisdead.com">info@designisdead.com</a><br>
-            VAT: BE457.419.732
+            VAT: BE 0457.419.732
           </p>
         </div>
         <div class="Doormat-copyright">

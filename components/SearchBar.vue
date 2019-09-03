@@ -116,7 +116,13 @@ export default {
     openTagFilter() {
       this.tagFilterOpened = !this.tagFilterOpened
       if (window.innerWidth < 800) {
-        this.tagFilterOpened ? document.querySelector('body').style.overflowY = 'hidden' : document.querySelector('body').style.overflowY = 'auto'
+        this.tagFilterOpened ? (
+          document.querySelector('body').style.overflowY = 'hidden',
+          document.querySelector('html').style.overflowY = 'hidden'
+        ) : (
+          document.querySelector('body').style.overflowY = 'auto',
+          document.querySelector('body').style.overflowY = 'auto'
+        )
       }
     },
     startTyping() {

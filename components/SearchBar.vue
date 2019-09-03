@@ -51,7 +51,7 @@
               class="search-bar__tag-filter-box__reset-filter"
               @click="resetSelectedTags()">
               <img src="/trash-icon.svg" alt="Trash icon" width="18" style="margin-right: 6px;">
-              <span style="line-height: 14px;">All blogs</span>
+              <span style="line-height: 14px;">Clear filters</span>
             </p>
           </div>
         </transition>

@@ -25,6 +25,9 @@
       v-if="blok.contenttype === 'blog/'"
       @emitSearchFields="getSearchField"
       :searchType="'blog'"></searchbar>
+      <div
+        v-if="blok.contenttype === 'blog/'"
+        class="list__mobile-top-spacer"></div>
 
       <ul
         v-if="blok.listcontent.length > 0"
@@ -176,6 +179,12 @@ export default {
   }
   @media screen and (min-width: size("large")) {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: size("medium")-1) {
+  .list__mobile-top-spacer {
+    height: 40px;
   }
 }
 </style>

@@ -49,10 +49,18 @@
               </li>
             </ul>
             <p
-              class="search-bar__tag-filter-box__reset-filter"
-              @click="resetSelectedTags()">
-              <img src="/trash-icon.svg" alt="Trash icon" width="18" style="margin-right: 6px;">
-              <span style="line-height: 14px;">Clear filters</span>
+              class="search-bar__tag-filter-box__reset-filter">
+              <img
+                src="/trash-icon.svg"
+                alt="Trash icon"
+                width="18"
+                style="margin-right: 6px; cursor: pointer;"
+                @click="resetSelectedTags()">
+              <span
+                style="line-height: 14px; cursor: pointer;"
+                @click="resetSelectedTags()">
+                Clear filters
+              </span>
             </p>
           </div>
         </transition>
@@ -285,6 +293,8 @@ export default {
   .search-bar__tag-list {
     list-style: none;
     padding-top: 16px;
+    max-height: 250px;
+    overflow-y: auto;
   }
 
   .search-bar__tag-list-item {
@@ -328,7 +338,6 @@ export default {
   }
 
   .search-bar__tag-filter-box__reset-filter {
-    cursor: pointer;
     user-select: none;
     border-top: 1px solid #BBB;
     padding: 8px 0 0 0;
@@ -419,15 +428,13 @@ export default {
     .search-bar__tag-filter-box {
       position: fixed;
       width: 100%;
-      max-height: 300px;
-      overflow-y: auto;
       left: 0;
       right: 0;
       bottom: 0;
       top: auto;
       border-radius: 0;
       border-top: 2px solid #999;
-      padding: 0 20px;
+      padding: 0;
     }
 
     .search-bar__tag-filter-box:before {
@@ -441,6 +448,11 @@ export default {
       width: 100%;
       left: 0;
       padding: 8px 20px 4px 20px;
+    }
+
+    .search-bar__tag-list {
+      margin: 37px 0;
+      padding: 16px 0 0 20px;
     }
 
     .search-bar__tag-filter-box__reset-filter {

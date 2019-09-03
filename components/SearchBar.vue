@@ -1,26 +1,5 @@
 <template>
   <div class="search-bar__main-container">
-    <div class="search-bar__tags-container">
-      <span
-        v-for="tag in tags"
-        :key="tag.value"
-        class="search-bar__single-tag"
-        :class="{ 'search-bar__selected-tag': tag.active }"
-        @click="tag.active = !tag.active; tagToSelected(tag)"
-      >
-        <span v-if="tag.taggings_count > 0">
-          {{ tag.name }}
-          <span v-if="tag.active">
-            <img
-              src="/close.svg"
-              alt="Cancel icon"
-              width="10px"
-              style="vertical-align: baseline;">
-          </span>
-        </span>
-      </span>
-    </div>
-
     <form
       @submit="search"
       class="search-bar__search-form"
@@ -32,6 +11,51 @@
         required
         name="searchInput"
         class="search-bar__search-input">
+
+      <span
+        class="search-bar__tag-filter-container">
+        <span
+          class="search-bar__tag-filter-open-btn"
+          @click="openTagFilter()">
+          {{ displaySelectedTags }} &#9662;
+        </span>
+
+        <transition name="fade">
+          <div
+            v-if="tagFilterOpened"
+            class="search-bar__tag-filter-box">
+            <p class="search-bar__tag-filter-box__header">
+              <span>Tags</span>
+              <img
+                src="/close-grey-icon.svg"
+                alt="Close menu icon"
+                width="12px;"
+                class="search-bar__tag-filter-box__header__close"
+                @click="openTagFilter()">
+            </p>
+            <ul class="search-bar__tag-list">
+              <li
+                v-for="tag in tags"
+                :key="tag.value"
+                class="search-bar__tag-list-item">
+                <input
+                  class="search-bar__tag-list-item__checkbox"
+                  type="checkbox"
+                  :value="tag.name"
+                  v-model="selectedTags"
+                  @change="tagToSelected()">
+                <span>{{ tag.name }}</span>
+              </li>
+            </ul>
+            <p
+              class="search-bar__tag-filter-box__reset-filter"
+              @click="resetSelectedTags()">
+              <img src="/trash-icon.svg" alt="Trash icon" width="18" style="margin-right: 6px;">
+              <span style="line-height: 14px;">Clear filters</span>
+            </p>
+          </div>
+        </transition>
+      </span>
 
       <label
         for="searchInput"
@@ -65,7 +89,8 @@ export default {
       tags: [],
       searchInput: '',
       selectedTags: [],
-      timer: null
+      timer: null,
+      tagFilterOpened: false
     }
   },
   methods: {
@@ -76,12 +101,35 @@ export default {
         this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
       }, 500)
     },
-    tagToSelected(tag) {
-      tag.active ? this.selectedTags.push(tag) : this.selectedTags = this.selectedTags.filter(currentTag => currentTag !== tag)
+    tagArrToString(tags) {
+      return tags.map(tag => tag).toString()
+    },
+    openTagFilter() {
+      this.tagFilterOpened = !this.tagFilterOpened
+      if (window.innerWidth < 800) {
+        this.tagFilterOpened ? document.querySelector('body').style.overflowY = 'hidden' : document.querySelector('body').style.overflowY = 'auto'
+      }
+    },
+    resetSelectedTags() {
+      this.selectedTags = []
+      this.openTagFilter()
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
-    tagArrToString(tags) {
-      return tags.map(tag => tag.name).toString()
+    tagToSelected() {
+      this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
+    }
+  },
+  computed: {
+    displaySelectedTags() {
+      if (this.selectedTags.length === 0) {
+        return 'All blogs'
+      } else if (this.selectedTags.length === 1) {
+        return this.selectedTags[0]
+      } else if (this.selectedTags.length === 2) {
+        return this.selectedTags[0] + ', ' + this.selectedTags[1]
+      } else {
+        return this.selectedTags[0] + ', ' + this.selectedTags[1] + ', ...'
+      }
     }
   },
   mounted() {
@@ -91,23 +139,50 @@ export default {
     })
     .then(res => this.tags = res.data.tags.map(tag => { return { name: tag.name, active: false, taggings_count: tag.taggings_count }}))
     .catch(err => console.log(err))
+
+    let prevScrollpos = window.pageYOffset
+      window.onscroll = () => {
+        var currentScrollPos = window.pageYOffset
+        if (prevScrollpos > currentScrollPos) {
+          document.querySelector('.search-bar__main-container').style.top = "70px"
+        } else {
+          document.querySelector('.search-bar__main-container').style.top = "-24px"
+          this.tagFilterOpened = false
+        }
+        prevScrollpos = currentScrollPos
+      }
   }
 }
 </script>
 
 <style lang="scss">
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
+  }
+
   .search-bar__main-container {
+    position: fixed;
+    z-index: 2;
+    background: #fff;
+    width: 100%;
+    top: 70px;
+    left: 0;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+    padding: 16px 20px;
+    transition: top 0.4s;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: flex-end;
     flex-direction: row;
-    margin-bottom: 40px;
   }
 
   .search-bar__search-form {
     position: relative;
     display: flex;
-    width: 400px;
+    width: 600px;
     height: 38px;
     margin-bottom: 5px;
   }
@@ -137,13 +212,122 @@ export default {
       border-bottom: 2px solid color('secondary');
       ~ .search-bar__search-input-label {
         color: color('secondary');
-        top: -12px;
+        top: -4px;
         font-size: $font-size / 1.4;
       }
       ~ .search-bar__submit-button {
         border-bottom: 2px solid color('secondary');
       }
+      ~ .search-bar__tag-filter-container {
+        border-bottom: 2px solid color('secondary');
+      }
     }
+  }
+
+  .search-bar__tag-filter-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #BBB;
+  }
+
+  .search-bar__tag-filter-open-btn {
+    cursor: pointer;
+    user-select: none;
+    font-size: 12px;
+    padding-right: 16px;
+    white-space: nowrap;
+  }
+
+  .search-bar__tag-filter-box {
+    position: absolute;
+    top: 44px;
+    right: -80px;
+    background: white;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    min-width: 200px;
+    padding: 14px;
+  }
+
+  .search-bar__tag-filter-box:before {
+    content: "";
+    width: 0px;
+    height: 0px;
+    position: absolute;
+    top: -20px;
+    left: 45%;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid white;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+  .search-bar__tag-filter-box__header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #BBB;
+    padding-bottom: 4px;
+    color: #999;
+  }
+
+  .search-bar__tag-filter-box__header__close {
+    cursor: pointer;
+  }
+
+  .search-bar__tag-list {
+    list-style: none;
+    padding-top: 16px;
+  }
+
+  .search-bar__tag-list-item {
+    margin: 0;
+    padding-bottom: 16px;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-bar__tag-list-item__checkbox {
+    cursor: pointer;
+    align-self: flex-start;
+    margin-right: 10px;
+    -webkit-appearance: none;
+    background-color: #fafafa;
+    border: 1px solid #cacece;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+    padding: 9px;
+    border-radius: 3px;
+    display: inline-block;
+    position: relative;
+  }
+
+  .search-bar__tag-list-item__checkbox:active, .search-bar__tag-list-item__checkbox:checked:active {
+	  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .search-bar__tag-list-item__checkbox:checked {
+    border: 1px solid #adb8c0;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+    color: #99a1a7;
+  }
+
+  .search-bar__tag-list-item__checkbox:checked:after {
+    content: '\2714';
+    font-size: 16px;
+    position: absolute;
+    top: 0px;
+    left: 2px;
+    color: #919191;
+  }
+
+  .search-bar__tag-filter-box__reset-filter {
+    cursor: pointer;
+    user-select: none;
+    border-top: 1px solid #BBB;
+    padding: 8px 0 0 0;
+    color: #999;
+    display: flex;
+    align-items: flex-end;
   }
 
   .search-bar__submit-button {
@@ -196,10 +380,9 @@ export default {
     }
   }
 
-  @media screen and (max-width: size('medium')) {
+  @media screen and (max-width: size('medium') - 1) {
     .search-bar__main-container {
-      flex-direction: column-reverse;
-      align-items: center;
+      height: 90px;
     }
 
     .search-bar__tags-container {
@@ -208,6 +391,67 @@ export default {
 
     .search-bar__search-form {
       margin-bottom: 14px;
+      top: -12px;
+    }
+
+    .search-bar__tag-filter-container {
+      position: absolute;
+      top: 50px;
+      border: none;
+    }
+
+    .search-bar__search-input {
+      &:focus,
+      &:valid {
+        ~ .search-bar__tag-filter-container {
+          border-bottom: none;
+        }
+      }
+    }
+
+    .search-bar__tag-filter-box {
+      position: fixed;
+      width: 100%;
+      max-height: 300px;
+      overflow-y: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: auto;
+      border-radius: 0;
+      border-top: 2px solid #999;
+      padding: 0 20px;
+    }
+
+    .search-bar__tag-filter-box:before {
+      border: none;
+    }
+
+    .search-bar__tag-filter-box__header {
+      position: fixed;
+      z-index: 1;
+      background: #FFF;
+      width: 100%;
+      left: 0;
+      padding: 8px 20px 4px 20px;
+    }
+
+    .search-bar__tag-filter-box__reset-filter {
+      position: fixed;
+      z-index: 1;
+      background: #FFF;
+      width: 100%;
+      left: 0;
+      bottom: 0;
+      padding: 10px 20px;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+      transition: all .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+      opacity: 1;
+      transform: translateY(300px);
     }
   }
 </style>

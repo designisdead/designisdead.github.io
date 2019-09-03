@@ -38,6 +38,7 @@ import Event from '@/components/Event.vue';
 import GoogleMap from '@/components/GoogleMap.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import TextAndImage from "@/components/TextAndImage.vue";
+import Contact from '@/components/Contact.vue';
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -78,3 +79,4 @@ Vue.component("event", Event);
 Vue.component("googlemap", GoogleMap);
 Vue.component("searchbar", SearchBar);
 Vue.component("textandimage", TextAndImage);
+Vue.component("contact", Contact);

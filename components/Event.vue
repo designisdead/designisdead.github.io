@@ -31,7 +31,10 @@ This component is used to render the Event content type on Storyblok
               <div
                 class="Title tiny uppercase">
                 <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
-                {{ blok.content.location }}
+                <a
+                  v-if="hasGoogleMap()"
+                  href="#gmapAnchor">{{ blok.content.location }}</a>
+                <span v-else>{{ blok.content.location }}</span>
               </div>
             </wrapper>
           </div>
@@ -109,6 +112,17 @@ This component is used to render the Event content type on Storyblok
       headerImage() {
         const filters = supportsWebP ? '/filters:format(webp)' : '';
         return this.$options.filters.imageApi({src: this.blok.content.primaryimage, size: 'large', filters: filters});
+      }
+    },
+    methods: {
+      hasGoogleMap() {
+        let hasGoogleMap = false
+        this.blok.content.body.forEach(el => {
+          el.elements.forEach(subEl => {
+            subEl.component === 'googlemap' ? hasGoogleMap = true : null
+          })
+        })
+        return hasGoogleMap
       }
     }
   }

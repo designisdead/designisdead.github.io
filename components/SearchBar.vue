@@ -121,7 +121,7 @@ export default {
           document.querySelector('html').style.overflowY = 'hidden'
         ) : (
           document.querySelector('body').style.overflowY = 'auto',
-          document.querySelector('body').style.overflowY = 'auto'
+          document.querySelector('html').style.overflowY = 'auto'
         )
       }
     },

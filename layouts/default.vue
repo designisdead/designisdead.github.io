@@ -560,8 +560,7 @@
   }
 
   .Page-header {
-    position: relative;
-    position: sticky;
+    position: fixed;
     width: 100%;
     height: $pageHeaderHeight;
     background: color("light");

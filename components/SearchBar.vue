@@ -7,7 +7,7 @@
       <input
         type="text"
         @keyup="search"
-        @click="openTagFilter()"
+        @click="startTyping()"
         v-model="searchInput"
         required
         name="searchInput"
@@ -118,6 +118,10 @@ export default {
       if (window.innerWidth < 800) {
         this.tagFilterOpened ? document.querySelector('body').style.overflowY = 'hidden' : document.querySelector('body').style.overflowY = 'auto'
       }
+    },
+    startTyping() {
+      this.tagFilterOpened = false;
+      document.querySelector('body').style.overflowY = 'auto'
     },
     resetSelectedTags() {
       this.selectedTags = []

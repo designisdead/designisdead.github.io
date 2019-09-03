@@ -1,5 +1,6 @@
 <template>
   <div v-editable="blok">
+    <div id="gmapAnchor"></div>
     <GmapMap
       :center="center"
       :zoom="16"
@@ -48,6 +49,11 @@ export default {
 </script>
 
 <style>
+#gmapAnchor {
+  position: relative;
+  top: -80px;
+}
+
 .google-map__address-title {
   padding-bottom: 6px;
 }

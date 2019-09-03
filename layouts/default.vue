@@ -440,10 +440,6 @@
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.9);
     overflow-y: auto;
-    // opacity:0;
-    // -webkit-transition: opacity 400ms ease-in;
-    // -moz-transition: opacity 400ms ease-in;
-    // transition: opacity 400ms ease-in;
   }
 
   .body--sidebarOpened {

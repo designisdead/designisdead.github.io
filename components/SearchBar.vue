@@ -207,6 +207,10 @@ export default {
     outline: none;
     border-bottom: 2px solid #BBB;
     border-bottom-left-radius: 5px;
+    color: black;
+    &:required {
+      box-shadow:none;
+    }
     &:focus,
     &:valid {
       border-bottom: 2px solid color('secondary');

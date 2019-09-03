@@ -38,6 +38,8 @@
       #_form_10_ ._form_element._clear:after { clear:left; }
       #_form_10_ ._form_element input[type="text"],#_form_10_ ._form_element input[type="date"],#_form_10_ ._form_element select,#_form_10_ ._form_element textarea:not(.g-recaptcha-response) { display:block; width:100%; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
       #_form_10_ ._field-wrapper { position:relative; }
+      #_form_10_ ._field-wrapper input { background-color:#FFF; }
+      #_form_10_ ._field-wrapper textarea { background-color:#FFF; }
       #_form_10_ ._inline-style { float:left; }
       #_form_10_ ._inline-style input[type="text"] { width:150px; }
       #_form_10_ ._inline-style:not(._clear) + ._inline-style:not(._clear) { margin-left:20px; }

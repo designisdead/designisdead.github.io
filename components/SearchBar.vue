@@ -229,6 +229,7 @@ export default {
     outline: none;
     border-bottom: 2px solid #BBB;
     border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 0px;
     color: black;
     &:required {
       box-shadow:none;

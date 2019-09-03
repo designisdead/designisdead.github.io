@@ -128,6 +128,7 @@ export default {
     startTyping() {
       this.tagFilterOpened = false;
       document.querySelector('body').style.overflowY = 'auto'
+      document.querySelector('html').style.overflowY = 'auto'
     },
     resetSelectedTags() {
       this.selectedTags = []
@@ -305,6 +306,7 @@ export default {
     padding-top: 16px;
     max-height: 250px;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .search-bar__tag-list-item {

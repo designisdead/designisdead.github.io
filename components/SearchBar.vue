@@ -7,6 +7,7 @@
       <input
         type="text"
         @keyup="search"
+        @click="openTagFilter()"
         v-model="searchInput"
         required
         name="searchInput"
@@ -20,7 +21,7 @@
           {{ displaySelectedTags }} &#9662;
         </span>
 
-        <transition name="fade">
+        <transition name="slide-fade">
           <div
             v-if="tagFilterOpened"
             class="search-bar__tag-filter-box">
@@ -156,10 +157,12 @@ export default {
 </script>
 
 <style lang="scss">
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
+  .slide-fade-enter-active, .slide-fade-leave-active {
+    transition: all .5s ease;
   }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  /* .slide-fade-leave-active below version 2.1.8 */
+  .slide-fade-enter, .slide-fade-leave-to {
+    // transform: translateX(350px);
     opacity: 0;
   }
 
@@ -450,12 +453,13 @@ export default {
       padding: 10px 20px;
     }
 
-    .fade-enter-active, .fade-leave-active {
-      transition: all .5s;
+    .slide-fade-enter-active, .slide-fade-leave-active {
+      transition: all .5s ease;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-      opacity: 1;
+    /* .slide-fade-leave-active below version 2.1.8 */
+    .slide-fade-enter, .slide-fade-leave-to {
       transform: translateY(300px);
+      opacity: 1;
     }
   }
 </style>

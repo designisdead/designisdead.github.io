@@ -9,11 +9,11 @@
     <div class="Page">
       <div class="Page-sidebar u-backgroundColor--light u-colorDark">
 
-        <label
-          class="Page-close"
-          for="page-sidebarstate">
-          Close
-        </label>
+          <label
+            class="Page-close"
+            for="page-sidebarstate">
+            Close
+          </label>
 
         <div class="Page-sidebarContent">
           <nuxt-link
@@ -24,6 +24,12 @@
             @click.native="closeSidebar">
             {{ navitem.title }}
           </nuxt-link>
+
+          <span
+            class="MobileNavigation-link Navigation-contact"
+            @click="contactModalOpen = true; sidebarOpen = false;">
+            Contact Us
+          </span>
 
           <p class="Page-sidebarContentSocial">
             <a
@@ -117,6 +123,11 @@
                 class="Navigation-link">
                 {{ navitem.title }}
               </nuxt-link>
+              <span
+                class="Navigation-link Navigation-contact"
+                @click="closeSidebar; contactModalOpen = true;">
+                Contact Us
+              </span>
             </div>
           </div>
         </div>
@@ -370,6 +381,15 @@
       }
     </script>
     <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) end -->
+
+    <!-- Contact form modal (ActiveCampaign) -->
+    <transition name="fade">
+      <div
+        v-if="contactModalOpen"
+        class="contact-modal--container">
+        <contact @closeContactModal="closeContactModal"></contact>
+      </div>
+    </transition>
   </div>
 </template>
 
@@ -379,14 +399,17 @@
   export default {
     data: () => ({
       sidebarOpen: false,
+      contactModalOpen: false,
     }),
     methods: {
       closeSidebar() {
         this.sidebarOpen = false;
-        this.updateBodyClass();
       },
       updateBodyClass() {
-        this.sidebarOpen ? body.classList.toggle('body--sidebarOpened') : null;
+        this.sidebarOpen ? body.classList.remove('body--sidebarOpened') : body.classList.add('body--sidebarOpened');
+      },
+      closeContactModal() {
+        this.contactModalOpen = false;
       }
     },
     computed: {
@@ -402,6 +425,22 @@
 
   $pageHeaderHeight: 70px;
   $pageSidebarMinimumWidth: 310px;
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+
+  .contact-modal--container {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.9);
+    overflow-y: auto;
+  }
 
   .body--sidebarOpened {
     overflow: hidden;
@@ -602,6 +641,12 @@
       text-decoration: none;
       opacity: 0.5;
     }
+  }
+
+  .Navigation-contact {
+    color: black;
+    cursor: pointer;
+    user-select: none;
   }
 
   .Page-close {

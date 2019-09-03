@@ -608,7 +608,7 @@ export default {
 
   .contact-modal--mobile-header-content {
     position: fixed;
-    background-color: #111;
+    background-color: #181818;
     width: 100vw;
     left: 0;
     top: 0;

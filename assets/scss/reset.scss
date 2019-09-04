@@ -29,6 +29,7 @@ li {
 
 html {
   scroll-behavior: smooth;
+  position: relative;
 }
 
 body {
@@ -37,6 +38,7 @@ body {
   color: color('dark');
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  position: relative;
 
   --colorPrimary: #000;
 }

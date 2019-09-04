@@ -411,11 +411,15 @@
       toggleContactModal() {
         this.contactModalOpen ? this.contactModalOpen = false : this.contactModalOpen = true
         this.contactModalOpen ? (
-          document.querySelector('body').style.overflowY = 'hidden',
-          document.querySelector('html').style.overflowY = 'hidden'
+          document.querySelector('body').style.overflow = 'hidden',
+          document.querySelector('body').style.height = '100%',
+          document.querySelector('html').style.overflow = 'hidden',
+          document.querySelector('html').style.height = '100%'
         ) : (
-          document.querySelector('body').style.overflowY = 'auto',
-          document.querySelector('html').style.overflowY = 'auto'
+          document.querySelector('body').style.overflow = 'auto',
+          document.querySelector('body').style.height = 'auto',
+          document.querySelector('html').style.overflow = 'auto',
+          document.querySelector('html').style.height = 'auto'
         )
       }
     },

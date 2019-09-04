@@ -166,9 +166,11 @@ export default {
     let prevScrollpos = window.pageYOffset
       window.onscroll = () => {
         var currentScrollPos = window.pageYOffset
-        console.log(window.pageYOffset)
         if (window.pageYOffset <= 0) {
           document.querySelector('.search-bar__main-container').style.top = "70px"
+        } else if (window.pageYOffset + window.innerHeight > document.body.scrollHeight + document.body.scrollTop) {
+          document.querySelector('.search-bar__main-container').style.top = "-24px"
+          this.tagFilterOpened = false
         } else {
           if (prevScrollpos > currentScrollPos) {
             document.querySelector('.search-bar__main-container').style.top = "70px"

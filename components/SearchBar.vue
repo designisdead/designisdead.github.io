@@ -346,20 +346,10 @@ export default {
   }
 
   .search-bar__tag-list-item__checkbox:checked:after {
-    // content: url(/checked-icon.svg);
-    content: "\2713";
-    // width: 16px;
-    // height: 16px;
-    font-size: 18px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+    content: url(/checkmark-icon.svg);
     position: absolute;
-    // z-index: 10;
-    top: -1px;
-    left: 1px;
-    // color: #919191;
-    // background: none;
+    top: -3px;
+    left: 0px;
   }
 
   .search-bar__tag-filter-box__reset-filter {

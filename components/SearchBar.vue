@@ -166,11 +166,16 @@ export default {
     let prevScrollpos = window.pageYOffset
       window.onscroll = () => {
         var currentScrollPos = window.pageYOffset
-        if (prevScrollpos > currentScrollPos) {
+        console.log(window.pageYOffset)
+        if (window.pageYOffset <= 0) {
           document.querySelector('.search-bar__main-container').style.top = "70px"
         } else {
-          document.querySelector('.search-bar__main-container').style.top = "-24px"
-          this.tagFilterOpened = false
+          if (prevScrollpos > currentScrollPos) {
+            document.querySelector('.search-bar__main-container').style.top = "70px"
+          } else {
+            document.querySelector('.search-bar__main-container').style.top = "-24px"
+            this.tagFilterOpened = false
+          }
         }
         prevScrollpos = currentScrollPos
       }

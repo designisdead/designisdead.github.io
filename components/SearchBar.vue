@@ -107,7 +107,7 @@ export default {
       e.preventDefault()
       window.scrollTo({top: 0, behavior: 'smooth'})
       clearTimeout(this.timer)
-      this.timer = setTimeout(()=> {
+      this.timer = setTimeout(() => {
         this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
       }, 500)
     },
@@ -117,19 +117,29 @@ export default {
     openTagFilter() {
       this.tagFilterOpened = !this.tagFilterOpened
       if (window.innerWidth < 800) {
+        const body = document.querySelector('body')
+        const html = document.querySelector('html')
         this.tagFilterOpened ? (
-          document.querySelector('body').style.overflowY = 'hidden',
-          document.querySelector('html').style.overflowY = 'hidden'
+          body.style.overflow = 'hidden',
+          body.style.height = '100%',
+          html.style.overflow = 'hidden',
+          html.style.height = '100%'
         ) : (
-          document.querySelector('body').style.overflowY = 'auto',
-          document.querySelector('html').style.overflowY = 'auto'
+          body.style.overflow = 'auto',
+          body.style.height = 'auto',
+          html.style.overflow = 'auto',
+          html.style.height = 'auto'
         )
       }
     },
     startTyping() {
+      const body = document.querySelector('body')
+      const html = document.querySelector('html')
       this.tagFilterOpened = false;
-      document.querySelector('body').style.overflowY = 'auto'
-      document.querySelector('html').style.overflowY = 'auto'
+      body.style.overflow = 'auto'
+      body.style.height = 'auto'
+      html.style.overflow = 'auto'
+      html.style.height = 'auto'
     },
     resetSelectedTags() {
       this.selectedTags = []
@@ -165,18 +175,15 @@ export default {
 
     let prevScrollpos = window.pageYOffset
       window.onscroll = () => {
-        var currentScrollPos = window.pageYOffset
+        let currentScrollPos = window.pageYOffset
+        let searchBarMainContainer = document.querySelector('.search-bar__main-container')
         if (window.pageYOffset <= 0) {
-          document.querySelector('.search-bar__main-container').style.top = "70px"
-        } else if (window.pageYOffset + window.innerHeight > document.body.scrollHeight + document.body.scrollTop) {
-          document.querySelector('.search-bar__main-container').style.top = "-24px"
-          this.tagFilterOpened = false
+          searchBarMainContainer.style.top = "70px"
         } else {
           if (prevScrollpos > currentScrollPos) {
-            document.querySelector('.search-bar__main-container').style.top = "70px"
+            searchBarMainContainer.style.top = "70px"
           } else {
-            document.querySelector('.search-bar__main-container').style.top = "-24px"
-            this.tagFilterOpened = false
+            searchBarMainContainer.style.top = "-24px"
           }
         }
         prevScrollpos = currentScrollPos
@@ -240,6 +247,7 @@ export default {
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 0px;
     color: black;
+    font-size: 100%;
     &:required {
       box-shadow:none;
     }
@@ -280,7 +288,7 @@ export default {
     top: 44px;
     right: -80px;
     background: white;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
     border-radius: 3px;
     min-width: 200px;
     padding: 14px;
@@ -314,7 +322,7 @@ export default {
   .search-bar__tag-list {
     list-style: none;
     padding-top: 16px;
-    max-height: 250px;
+    max-height: 220px;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
@@ -424,6 +432,8 @@ export default {
   @media screen and (max-width: size('medium') - 1) {
     .search-bar__main-container {
       height: 90px;
+      border-bottom: 1px solid #999;
+      box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
     }
 
     .search-bar__tags-container {
@@ -458,7 +468,7 @@ export default {
       bottom: 0;
       top: auto;
       border-radius: 0;
-      border-top: 2px solid #999;
+      border-top: 1px solid #999;
       padding: 0;
     }
 
@@ -471,6 +481,7 @@ export default {
       z-index: 1;
       background: #FFF;
       width: 100%;
+      height: 40px;
       left: 0;
       padding: 8px 20px 4px 20px;
     }
@@ -482,9 +493,12 @@ export default {
 
     .search-bar__tag-filter-box__reset-filter {
       position: fixed;
+      display: flex;
+      align-items: center;
       z-index: 1;
       background: #FFF;
       width: 100%;
+      height: 40px;
       left: 0;
       bottom: 0;
       padding: 10px 20px;

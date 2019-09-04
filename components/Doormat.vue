@@ -76,6 +76,11 @@
 </template>
 
 <style lang="scss">
+  .Page-footer {
+    z-index: 0;
+    position: relative;
+  }
+
   .Doormat {
     padding-top: 40px;
     text-align: center;

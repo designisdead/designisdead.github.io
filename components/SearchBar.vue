@@ -348,9 +348,9 @@ export default {
   .search-bar__tag-list-item__checkbox:checked:after {
     content: url(/checkmark-icon.svg);
     position: absolute;
-    transform: scale(0.7);
+    // transform: scale(0.7);
     top: -3px;
-    left: -3px;
+    left: 0px;
   }
 
   .search-bar__tag-filter-box__reset-filter {

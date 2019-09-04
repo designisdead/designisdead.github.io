@@ -27,7 +27,7 @@
 
           <span
             class="MobileNavigation-link Navigation-contact"
-            @click="contactModalOpen = true; sidebarOpen = false;">
+            @click="sidebarOpen = false; toggleContactModal()">
             Contact Us
           </span>
 
@@ -125,7 +125,7 @@
               </nuxt-link>
               <span
                 class="Navigation-link Navigation-contact"
-                @click="closeSidebar; contactModalOpen = true;">
+                @click="closeSidebar; toggleContactModal();">
                 Contact Us
               </span>
             </div>
@@ -387,7 +387,7 @@
       <div
         v-if="contactModalOpen"
         class="contact-modal--container">
-        <contact @closeContactModal="closeContactModal"></contact>
+        <contact @closeContactModal="toggleContactModal()"></contact>
       </div>
     </transition>
   </div>
@@ -408,8 +408,15 @@
       updateBodyClass() {
         this.sidebarOpen ? body.classList.remove('body--sidebarOpened') : body.classList.add('body--sidebarOpened');
       },
-      closeContactModal() {
-        this.contactModalOpen = false;
+      toggleContactModal() {
+        this.contactModalOpen ? this.contactModalOpen = false : this.contactModalOpen = true
+        this.contactModalOpen ? (
+          document.querySelector('body').style.overflowY = 'hidden',
+          document.querySelector('html').style.overflowY = 'hidden'
+        ) : (
+          document.querySelector('body').style.overflowY = 'auto',
+          document.querySelector('html').style.overflowY = 'auto'
+        )
       }
     },
     computed: {

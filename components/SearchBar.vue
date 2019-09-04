@@ -105,6 +105,7 @@ export default {
   methods: {
     search(e) {
       e.preventDefault()
+      window.scrollTo({top: 0, behavior: 'smooth'})
       clearTimeout(this.timer)
       this.timer = setTimeout(()=> {
         this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
@@ -133,9 +134,11 @@ export default {
     resetSelectedTags() {
       this.selectedTags = []
       this.openTagFilter()
+      window.scrollTo({top: 0, behavior: 'smooth'})
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     },
     tagToSelected() {
+      window.scrollTo({top: 0, behavior: 'smooth'})
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
     }
   },
@@ -348,7 +351,6 @@ export default {
   .search-bar__tag-list-item__checkbox:checked:after {
     content: url(/checkmark-icon.svg);
     position: absolute;
-    // transform: scale(0.7);
     top: -3px;
     left: 0px;
   }

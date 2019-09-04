@@ -28,9 +28,8 @@
             <p class="search-bar__tag-filter-box__header">
               <span>Tags</span>
               <img
-                src="/close-grey-icon.svg"
+                src="/checkmark-icon.svg"
                 alt="Close menu icon"
-                width="12px;"
                 class="search-bar__tag-filter-box__header__close"
                 @click="openTagFilter()">
             </p>

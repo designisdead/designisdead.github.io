@@ -154,6 +154,7 @@ export default {
     scrollEvent() {
       let currentScrollPos = window.pageYOffset
       let searchBarMainContainer = document.querySelector('.search-bar__main-container')
+      if (window.innerWidth > 800) this.tagFilterOpened = false
       if (window.pageYOffset <= 0) {
         searchBarMainContainer.style.top = "70px"
       } else {

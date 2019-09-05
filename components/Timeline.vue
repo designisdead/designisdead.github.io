@@ -36,37 +36,26 @@
 </template>
 
 <script>
+import moment from 'moment'
+
 export default {
   props: {
     listContent: Array
   },
-  // data() {
-  //   return {
-  //     futurEvents: [],
-  //     pastEvents: []
-  //   }
-  // },
-  computed: {
-    futurEvents() {
-      let futurEvents = []
-      this.listContent.forEach(event => new Date() <= new Date(event.content.date) ? futurEvents.push(event) : null)
-      return futurEvents.reverse()
-    },
-    pastEvents() {
-      let pastEvents = []
-      this.listContent.forEach(event => new Date() > new Date(event.content.date) ? pastEvents.push(event) : null)
-      return pastEvents
+  data() {
+    return {
+      futurEvents: [],
+      pastEvents: []
     }
   },
-  // watch: {
-  //   listContent: function(val) {
-  //     console.log(val)
-  //     this.futurEvents = []
-  //     this.pastEvents = []
-  //     val.forEach(event => new Date() > new Date(event.content.date) ? this.pastEvents.push(event) : this.futurEvents.push(event))
-  //     this.futurEvents = this.futurEvents.reverse()
-  //   }
-  // }
+  watch: {
+    listContent: function(val) {
+      this.futurEvents = []
+      this.pastEvents = []
+      val.forEach(event => moment().format() > moment(event.content.date).format() ? this.pastEvents.push(event) : this.futurEvents.push(event))
+      this.futurEvents = this.futurEvents.reverse()
+    }
+  }
 }
 </script>
 

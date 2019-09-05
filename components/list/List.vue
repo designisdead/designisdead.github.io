@@ -140,7 +140,6 @@ export default {
       })
     },
     getSearchField(input, tags) {
-      console.log('search fields received: ', input, tags)
       this.searchInput = input
       this.searchTags = tags
       this.nextContent = []

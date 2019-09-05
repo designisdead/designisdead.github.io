@@ -31,6 +31,14 @@
               <time :datetime="dataTime">{{ formattedDate }}</time>
             </h2>
             <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
+
+            <!-- location of the event -->
+            <p
+              v-if="post.content.location"
+              class="">
+              <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
+              {{ post.content.location }}
+            </p>
           </header>
         </div>
       </article>

@@ -92,7 +92,6 @@ export default {
     padding: 0;
     position: relative;
     display: flex;
-    background: white;
     box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
     > a:hover {
       text-decoration: none;

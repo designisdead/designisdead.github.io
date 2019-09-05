@@ -11,7 +11,7 @@
       @click="closeContactModal">
 
     <style>
-      #_form_10_ { font-size:14px; line-height:1.6; font-family:arial, helvetica, sans-serif; margin:0; }
+      #_form_10_ { font-size:16px; line-height:1.6; font-family:sans-serif, arial, helvetica; margin:0; letter-spacing: normal; }
       #_form_10_ * { outline:0; }
       ._form_hide { display:none; visibility:hidden; }
       ._form_show { display:block; visibility:visible; }
@@ -19,9 +19,9 @@
       #_form_10_._form-bottom { bottom:0; }
       #_form_10_._form-left { left:0; }
       #_form_10_._form-right { right:0; }
-      #_form_10_ input[type="text"],#_form_10_ input[type="date"],#_form_10_ textarea { padding:6px; height:auto; border:#979797 1px solid; border-radius:4px; color:#000 !important; font-size:13px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
-      #_form_10_ textarea { resize:none; }
-      #_form_10_ ._submit { -webkit-appearance:none; cursor:pointer; font-family:arial, sans-serif; font-size:14px; text-align:center; background:#dedede !important; border:1px solid #dedede !important; -moz-border-radius:4px !important; -webkit-border-radius:4px !important; border-radius:4px !important; color:#dedede !important; padding:16px !important; }
+      #_form_10_ input[type="text"],#_form_10_ input[type="date"],#_form_10_ textarea { padding:6px; height:auto; border:#979797 1px solid; border-radius:4px; color:#000 !important; font-size:16px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
+      #_form_10_ textarea { resize:none; text-rendering: auto; }
+      #_form_10_ ._submit { -webkit-appearance:none; cursor:pointer; font-family:sans-serif, arial; font-size:14px; text-align:center; background:#dedede !important; border:1px solid #dedede !important; -moz-border-radius:4px !important; -webkit-border-radius:4px !important; border-radius:4px !important; color:#dedede !important; padding:16px !important; }
       #_form_10_ ._close-icon { cursor:pointer; background-image:url('https://d226aj4ao1t61q.cloudfront.net/esfkyjh1u_forms-close-dark.png'); background-repeat:no-repeat; background-size:14.2px 14.2px; position:absolute; display:block; top:11px; right:9px; overflow:hidden; width:16.2px; height:16.2px; }
       #_form_10_ ._close-icon:before { position:relative; }
       #_form_10_ ._form-body { margin-bottom:30px; }
@@ -33,7 +33,7 @@
       #_form_10_._dark ._form-branding { color:#333; }
       #_form_10_._dark ._form-branding ._logo { background-image:url('https://d226aj4ao1t61q.cloudfront.net/jftq2c8s_aclogo_dk.png'); }
       #_form_10_ ._form_element { position:relative; margin-bottom:10px; font-size:0; max-width:100%; }
-      #_form_10_ ._form_element * { font-size:14px; }
+      #_form_10_ ._form_element * { font-size:16px; }
       #_form_10_ ._form_element._clear { clear:both; width:100%; float:none; }
       #_form_10_ ._form_element._clear:after { clear:left; }
       #_form_10_ ._form_element input[type="text"],#_form_10_ ._form_element input[type="date"],#_form_10_ ._form_element select,#_form_10_ ._form_element textarea:not(.g-recaptcha-response) { display:block; width:100%; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
@@ -54,7 +54,7 @@
       #_form_10_ ._error._below { padding-top:4px; top:100%; right:0; }
       #_form_10_ ._error._above ._error-arrow { bottom:0; right:15px; border-left:5px solid transparent; border-right:5px solid transparent; border-top:5px solid #f37c7b; }
       #_form_10_ ._error._below ._error-arrow { top:0; right:15px; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid #f37c7b; }
-      #_form_10_ ._error-inner { padding:8px 12px; background-color:#f37c7b; font-size:13px; font-family:arial, sans-serif; color:#fff; text-align:center; text-decoration:none; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; }
+      #_form_10_ ._error-inner { padding:8px 12px; background-color:#f37c7b; font-size:13px; font-family:sans-serif, arial; color:#fff; text-align:center; text-decoration:none; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; }
       #_form_10_ ._error-inner._form_error { margin-bottom:5px; text-align:left; }
       #_form_10_ ._button-wrapper ._error-inner._form_error { position:static; }
       #_form_10_ ._error-inner._no_arrow { margin-bottom:10px; }
@@ -103,7 +103,7 @@
       #_form_10_ ._x28642558 input:focus { border:2px solid #ccc; }
       #_form_10_ ._field16 textarea { height:140px !important; margin-bottom:20px; transition:0.2s; padding:14px 8px; font-size:14px; border:none; }
       #_form_10_ ._field16 textarea:focus { border:2px solid #ccc; }
-      #_form_10_ ._field16 textarea::placeholder { font-family:sans-serif; }
+      #_form_10_ ._field16 textarea::placeholder { font-family:sans-serif!important; }
       #_form_10_ ._field16 ._error { top:-50% !important; right:0 !important; transform:translateY(calc(50% +
         18px)) !important; bottom:auto !important; }
       #_form_10_ ._button-wrapper { display:flex; justify-content:flex-end; }
@@ -126,7 +126,7 @@
               Full Name*
             </label>
             <div class="_field-wrapper">
-              <input type="text" name="fullname" placeholder="Type your name" required/>
+              <input type="text" name="fullname" placeholder="Type your name" style="font-size: 100%;" required/>
             </div>
           </div>
           <div class="_form_element _x96983900 _full_width " >
@@ -134,7 +134,7 @@
               Email*
             </label>
             <div class="_field-wrapper">
-              <input type="text" name="email" placeholder="Type your email" required/>
+              <input type="text" name="email" placeholder="Type your email" style="font-size: 100%;" required/>
             </div>
           </div>
           <div class="_form_element _field16 _full_width " >
@@ -142,7 +142,7 @@
               Inquiry*
             </label>
             <div class="_field-wrapper">
-              <textarea name="field[16]" placeholder="Type your inquiry" style="height: 113px;" required></textarea>
+              <textarea name="field[16]" placeholder="Type your inquiry" style="height: 113px; font-size: 100%;" required></textarea>
             </div>
           </div>
           <div class="_button-wrapper _full_width">

@@ -32,10 +32,10 @@
             </h2>
             <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
 
-            <!-- location of the event -->
+            <!-- location -->
             <p
               v-if="post.content.location"
-              class="">
+              class="card__location-content">
               <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
               {{ post.content.location }}
             </p>
@@ -130,6 +130,10 @@
     &[lazy=loaded] {
       filter: blur(0px);
     }
+  }
+
+  .card__location-content {
+    padding: 0;
   }
 
 </style>

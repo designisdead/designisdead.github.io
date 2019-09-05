@@ -98,7 +98,8 @@ export default {
       searchInput: '',
       selectedTags: [],
       timer: null,
-      tagFilterOpened: false
+      tagFilterOpened: false,
+      prevScrollpos: 0
     }
   },
   methods: {
@@ -149,6 +150,20 @@ export default {
     tagToSelected() {
       window.scrollTo({top: 0, behavior: 'smooth'})
       this.$emit('emitSearchFields', this.searchInput, this.tagArrToString(this.selectedTags))
+    },
+    scrollEvent() {
+      let currentScrollPos = window.pageYOffset
+      let searchBarMainContainer = document.querySelector('.search-bar__main-container')
+      if (window.pageYOffset <= 0) {
+        searchBarMainContainer.style.top = "70px"
+      } else {
+        if (this.prevScrollpos > currentScrollPos) {
+          searchBarMainContainer.style.top = "70px"
+        } else {
+          searchBarMainContainer.style.top = "-24px"
+        }
+      }
+      this.prevScrollpos = currentScrollPos
     }
   },
   computed: {
@@ -172,21 +187,10 @@ export default {
     .then(res => this.tags = res.data.tags.map(tag => { return { name: tag.name, active: false, taggings_count: tag.taggings_count }}))
     .catch(err => console.log(err))
 
-    let prevScrollpos = window.pageYOffset
-      window.onscroll = () => {
-        let currentScrollPos = window.pageYOffset
-        let searchBarMainContainer = document.querySelector('.search-bar__main-container')
-        if (window.pageYOffset <= 0) {
-          searchBarMainContainer.style.top = "70px"
-        } else {
-          if (prevScrollpos > currentScrollPos) {
-            searchBarMainContainer.style.top = "70px"
-          } else {
-            searchBarMainContainer.style.top = "-24px"
-          }
-        }
-        prevScrollpos = currentScrollPos
-      }
+    window.addEventListener('scroll', this.scrollEvent)
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.scrollEvent)
   }
 }
 </script>

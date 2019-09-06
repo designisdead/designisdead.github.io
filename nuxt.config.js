@@ -21,10 +21,15 @@ module.exports = {
       id: 'GTM-TQWRSTX'
     }]
   ],
-  server: {
-    port: 3000, // par défaut: 3000
-    host: '172.16.102.58', // par défaut: localhost
+  env: {
+    devUrl: 'http://localhost:3000',
+    stgUrl: 'https://www-stg.designisdead.com',
+    liveUrl: 'https://designisdead.com'
   },
+  // server: {
+  //   port: 3000, // par défaut: 3000
+  //   host: '172.16.102.58', // par défaut: localhost
+  // },
   styleResources: {
     scss: ['@/assets/scss/_config.scss'],
   },

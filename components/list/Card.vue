@@ -36,7 +36,7 @@
             <p
               v-if="post.content.location"
               class="card__location-content">
-              <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
+              <img src="/location-icon.svg" alt="Location icon" width="16px" >
               {{ post.content.location }}
             </p>
           </header>
@@ -100,6 +100,7 @@
 
   .Card-title {
     letter-spacing: 1.25px;
+    padding-bottom: 10px;
   }
 
   .Card-meta {
@@ -117,6 +118,11 @@
     background-color: white;
     z-index: 1;
     position: relative;
+  }
+
+  .Card-header {
+    display: flex;
+    flex-direction: column;
   }
 
   .Card-image {

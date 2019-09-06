@@ -369,17 +369,53 @@
     </script>
     <!-- active campaign end -->
 
-    <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) start -->
+    <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) start
     <script
       src="https://cdn.cookielaw.org/consent/eff3d4aa-ad19-42ef-8d19-d25261e64080.js"
       type="text/javascript"
       charset="UTF-8"/>
     <script
       type="text/javascript">
-      function OptanonWrapper() {
+      function OptanonWrapper() {}
+    </script> -->
 
-      }
+    <!-- OneTrust Cookies Consent Notice start -->
+
+    <!-- <script src="https://cdn.cookielaw.org/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83.js" type="text/javascript" charset="UTF-8"></script>
+
+    <script type="text/javascript">
+
+    function OptanonWrapper() { }
+
+    </script> -->
+
+    <!-- OneTrust Cookies Consent Notice end -->
+
+    <!-- OneTrust Cookies Consent Notice start -->
+
+    <script src="https://optanon.blob.core.windows.net/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83-test.js" type="text/javascript" charset="UTF-8"></script>
+
+    <script type="text/javascript">
+
+    function OptanonWrapper() { }
+
     </script>
+
+    <!-- OneTrust Cookies Consent Notice end -->
+    <!-- <script>
+      var a;
+      //BEHAVIOUR(IsIABEnabled == true)
+      !function(t) {
+          var r= {
+      }
+      ;
+          function o(e) {
+          if(r[e])return r[e].exports;
+          var n=r[e]= {
+          i: e, l:!1, exports: {
+      }
+      }
+    </script> -->
     <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) end -->
 
     <!-- Contact form modal (ActiveCampaign) -->
@@ -733,5 +769,17 @@
     color: white;
     font-size: 12px;
     padding: 3px 5px;
+  }
+
+  #optanon *, #optanon *:before, #optanon *:after {
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+  }
+
+  #optanon, #optanon *, #optanon div, #optanon span, #optanon ul, #optanon li, #optanon a, #optanon p, .optanon-alert-box-wrapper * {
+    font-family: Arial, sans-serif;
+    background: none;
+    border: none;
   }
 </style>

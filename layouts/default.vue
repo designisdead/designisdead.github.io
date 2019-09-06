@@ -369,18 +369,12 @@
     </script>
     <!-- active campaign end -->
 
-    <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) start -->
-    <script
-      src="https://cdn.cookielaw.org/consent/eff3d4aa-ad19-42ef-8d19-d25261e64080.js"
-      type="text/javascript"
-      charset="UTF-8"/>
-    <script
-      type="text/javascript">
-      function OptanonWrapper() {
-
-      }
+    <!-- OneTrust Cookies Consent Notice start -->
+    <script src="https://cdn.cookielaw.org/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83.js" type="text/javascript" charset="UTF-8"></script>
+    <script type="text/javascript">
+    function OptanonWrapper() { }
     </script>
-    <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) end -->
+    <!-- OneTrust Cookies Consent Notice end -->
 
     <!-- Contact form modal (ActiveCampaign) -->
     <transition name="fade">

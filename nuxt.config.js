@@ -23,7 +23,7 @@ module.exports = {
   ],
   server: {
     port: 3000, // par défaut: 3000
-    host: 'localhost', // par défaut: localhost
+    host: '0.0.0.0', // par défaut: localhost
   },
   styleResources: {
     scss: ['@/assets/scss/_config.scss'],

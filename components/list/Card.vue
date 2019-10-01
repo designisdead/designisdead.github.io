@@ -32,14 +32,12 @@
             </h2>
             <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
 
-            <!-- Revert event location event => check last pull request on github for it -->
-            <!-- location of the event
             <p
               v-if="post.content.location"
-              class="">
-              <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
+              class="card__location-content">
+              <img src="/location-icon.svg" alt="Location icon" width="16px" >
               {{ post.content.location }}
-            </p> -->
+            </p>
           </header>
         </div>
       </article>
@@ -101,6 +99,7 @@
 
   .Card-title {
     letter-spacing: 1.25px;
+    padding-bottom: 10px;
   }
 
   .Card-meta {
@@ -120,6 +119,11 @@
     position: relative;
   }
 
+  .Card-header {
+    display: flex;
+    flex-direction: column;
+  }
+
   .Card-image {
     position: relative;
     z-index: 0;
@@ -131,6 +135,10 @@
     &[lazy=loaded] {
       filter: blur(0px);
     }
+  }
+
+  .card__location-content {
+    padding: 0;
   }
 
 </style>

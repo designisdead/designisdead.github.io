@@ -32,13 +32,14 @@
             </h2>
             <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
 
-            <!-- location of the event -->
+            <!-- Revert event location event => check last pull request on github for it -->
+            <!-- location of the event
             <p
               v-if="post.content.location"
               class="">
               <img src="/location-icon.svg" alt="Location icon" width="16px" style="vertical-align: text-top;">
               {{ post.content.location }}
-            </p>
+            </p> -->
           </header>
         </div>
       </article>

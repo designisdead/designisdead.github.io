@@ -68,7 +68,6 @@
       <label
         for="searchInput"
         class="search-bar__search-input-label">What {{ searchType }} are you looking for ?</label>
-
       <button
         type="submit"
         class="search-bar__submit-button"

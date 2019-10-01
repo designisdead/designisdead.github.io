@@ -319,13 +319,13 @@
 
     <!-- Start VWO Asynchronous Code -->
     <script type='text/javascript'>
-    var _vwo_code=(function(){
-    var account_id=413983,
-    settings_tolerance=2000,
-    library_tolerance=2500,
-    use_existing_jquery=false,
-    /* DO NOT EDIT BELOW THIS LINE */
-    f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
+      var _vwo_code=(function(){
+        var account_id=413983,
+          settings_tolerance=2000,
+          library_tolerance=2500,
+          use_existing_jquery=false,
+          /* DO NOT EDIT BELOW THIS LINE */
+          f=false,d=document;return{use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){settings_timer=setTimeout('_vwo_code.finish()',settings_tolerance);var a=d.createElement('style'),b='body{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('//dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&r='+Math.random());return settings_timer;}};}());_vwo_settings_timer=_vwo_code.init();
     </script>
     <!-- End VWO Asynchronous Code -->
 
@@ -361,62 +361,20 @@
 
     <!-- active campaign -->
     <script type="text/javascript">
-        (function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement('script');r.src=o;r.async=true;i=t.getElementsByTagName('script')[0];i.parentNode.insertBefore(r,i)})(window,document,'https://prism.app-us1.com/prism.js','vgo');
-        vgo('setAccount', '223882243');
-        vgo('setTrackByDefault', true);
+      (function(e,t,o,n,p,r,i){e.visitorGlobalObjectAlias=n;e[e.visitorGlobalObjectAlias]=e[e.visitorGlobalObjectAlias]||function(){(e[e.visitorGlobalObjectAlias].q=e[e.visitorGlobalObjectAlias].q||[]).push(arguments)};e[e.visitorGlobalObjectAlias].l=(new Date).getTime();r=t.createElement('script');r.src=o;r.async=true;i=t.getElementsByTagName('script')[0];i.parentNode.insertBefore(r,i)})(window,document,'https://prism.app-us1.com/prism.js','vgo');
+      vgo('setAccount', '223882243');
+      vgo('setTrackByDefault', true);
 
-        vgo('process');
+      vgo('process');
     </script>
     <!-- active campaign end -->
 
-    <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) start
-    <script
-      src="https://cdn.cookielaw.org/consent/eff3d4aa-ad19-42ef-8d19-d25261e64080.js"
-      type="text/javascript"
-      charset="UTF-8"/>
-    <script
-      type="text/javascript">
-      function OptanonWrapper() {}
-    </script> -->
-
     <!-- OneTrust Cookies Consent Notice start -->
-
-    <!-- <script src="https://cdn.cookielaw.org/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83.js" type="text/javascript" charset="UTF-8"></script>
-
+    <script src="https://cdn.cookielaw.org/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83.js" type="text/javascript" charset="UTF-8"></script>
     <script type="text/javascript">
-
-    function OptanonWrapper() { }
-
-    </script> -->
-
-    <!-- OneTrust Cookies Consent Notice end -->
-
-    <!-- OneTrust Cookies Consent Notice start -->
-
-    <script src="https://optanon.blob.core.windows.net/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83-test.js" type="text/javascript" charset="UTF-8"></script>
-
-    <script type="text/javascript">
-
-    function OptanonWrapper() { }
-
+      function OptanonWrapper() { }
     </script>
-
     <!-- OneTrust Cookies Consent Notice end -->
-    <!-- <script>
-      var a;
-      //BEHAVIOUR(IsIABEnabled == true)
-      !function(t) {
-          var r= {
-      }
-      ;
-          function o(e) {
-          if(r[e])return r[e].exports;
-          var n=r[e]= {
-          i: e, l:!1, exports: {
-      }
-      }
-    </script> -->
-    <!-- OneTrust Cookies Consent Notice (Production CDN, www.designisdead.com, en-GB) end -->
 
     <!-- Contact form modal (ActiveCampaign) -->
     <transition name="fade">

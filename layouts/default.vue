@@ -27,7 +27,7 @@
 
           <span
             class="MobileNavigation-link Navigation-contact"
-            @click="sidebarOpen = false; toggleContactModal()">
+            @click="closeSidebar(); toggleContactModal()">
             Contact Us
           </span>
 
@@ -400,9 +400,10 @@
     methods: {
       closeSidebar() {
         this.sidebarOpen = false;
+        this.updateBodyClass();
       },
       updateBodyClass() {
-        this.sidebarOpen ? body.classList.remove('body--sidebarOpened') : body.classList.add('body--sidebarOpened');
+        this.sidebarOpen ? body.classList.add('body--sidebarOpened') : body.classList.remove('body--sidebarOpened');
       },
       toggleContactModal() {
         this.contactModalOpen ? this.contactModalOpen = false : this.contactModalOpen = true
@@ -412,10 +413,8 @@
           document.querySelector('html').style.overflow = 'hidden',
           document.querySelector('html').style.height = '100%'
         ) : (
-          document.querySelector('body').style.overflow = 'auto',
-          document.querySelector('body').style.height = 'auto',
-          document.querySelector('html').style.overflow = 'auto',
-          document.querySelector('html').style.height = 'auto'
+          document.querySelector('html').removeAttribute('style'),
+          document.querySelector('body').removeAttribute('style')
         )
       }
     },

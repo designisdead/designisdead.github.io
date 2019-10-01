@@ -32,7 +32,6 @@
             </h2>
             <h1 class="medium uppercase Title Card-title">{{ post.name }}</h1>
 
-            <!-- location -->
             <p
               v-if="post.content.location"
               class="card__location-content">

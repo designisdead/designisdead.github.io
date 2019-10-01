@@ -372,7 +372,9 @@
     <!-- OneTrust Cookies Consent Notice start -->
     <script src="https://cdn.cookielaw.org/consent/bcac9bb5-c797-4328-8714-24d5cbb1ad83.js" type="text/javascript" charset="UTF-8"></script>
     <script type="text/javascript">
-      function OptanonWrapper() { }
+      function OptanonWrapper() {
+        
+      }
     </script>
     <!-- OneTrust Cookies Consent Notice end -->
 

@@ -1,5 +1,5 @@
-import settings from './settings'
-import employees from './employees'
+import settings from './settings';
+import employees from './employees';
 
 export default {
   actions: {

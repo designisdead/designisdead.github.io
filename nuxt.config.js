@@ -21,23 +21,31 @@ module.exports = {
       id: 'GTM-TQWRSTX'
     }]
   ],
-  server: {
-    port: 3000,
-    host: '0.0.0.0', // localhost
-  },
   styleResources: {
     scss: ['@/assets/scss/_config.scss'],
   },
   plugins: [
-    '~/plugins/components',
-    '~/plugins/imageApi',
-    '~/plugins/lazyLoad',
-    '~/plugins/parallax.client',
-    '~/plugins/googleMapConfig',
+    {
+      ssr: true,
+      src: '~/plugins/components.js'
+    },
+    {
+      ssr: true,
+      src: '~/plugins/imageApi.js'
+    },
+    {
+      ssr: false,
+      src: '~/plugins/lazyLoad.js'
+    },
+    {
+      ssr: false,
+      src: '~/plugins/parallax.client.js'
+    },
+    {
+      ssr: false,
+      src: '~/plugins/googleMapConfig.js'
+    }
   ],
-  router: {
-    // linkPrefetchedClass: 'nuxt-link-prefetched'
-  },
   serverMiddleware: [
     '~/servermiddleware/seo.js',
   ],

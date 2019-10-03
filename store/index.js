@@ -6,12 +6,10 @@ export default {
     // Prepare the store with data from the server-side
     async nuxtServerInit({dispatch, commit}, { query, req }) {
       // check if we are in editMode
-      await dispatch('settings/loadEditMode', { query, req });
+      dispatch('settings/loadEditMode', { query, req });
 
       // load cv, employees and settings
       await dispatch('settings/loadCacheVersion');
-      await dispatch('settings/loadSettings', { req });
-
       await dispatch('employees/getEmployees');
     },
   },

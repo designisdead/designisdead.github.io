@@ -19,7 +19,7 @@
           <nuxt-link
             v-for="(navitem, index) in $store.state.settings.primaryNavigation"
             :key="index"
-            :to="'/' + navitem.link.cached_url"
+            :to="'/' + navitem.link"
             class="MobileNavigation-link"
             @click.native="closeSidebar">
             {{ navitem.title }}
@@ -118,7 +118,7 @@
               <nuxt-link
                 v-for="(navitem, index) in $store.state.settings.primaryNavigation"
                 :key="index"
-                :to="'/' + navitem.link.cached_url"
+                :to="'/' + navitem.link"
                 :class="{ 'Navigation-link--border': navitem.border }"
                 class="Navigation-link">
                 {{ navitem.title }}

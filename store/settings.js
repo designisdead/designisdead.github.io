@@ -1,14 +1,17 @@
 const state = () => ({
-  primaryNavigation: [],
+  primaryNavigation: [
+    {title: 'Blog', link: 'blog'},
+    {title: 'Services', link: 'services'},
+    {title: 'Technologies', link: 'technologies'},
+    {title: 'Team', link: 'team'},
+    {title: 'Jobs', link: 'jobs'}
+  ],
   cacheVersion: '',
   editMode: false,
   version: 'published'
 });
 
 const mutations = {
-  setSettings(state, settings) {
-    state.primaryNavigation = settings.primary_navigation;
-  },
   setCacheVersion(state, version) {
     state.cacheVersion = version;
   },
@@ -19,19 +22,12 @@ const mutations = {
 };
 
 const actions = {
-  loadEditMode({ commit }, {query, req}) {
+  loadEditMode({commit}, {query, req}) {
     commit('setEditMode', req.headers.host !== 'designisdead.com');
   },
-  async loadCacheVersion({ commit }) {
+  async loadCacheVersion({commit}) {
     await this.$storyapi.get(`cdn/spaces/me`).then((res) => {
       commit('setCacheVersion', process.client ? res.data.space.version : Date.now());
-    })
-  },
-  async loadSettings({ commit }, { req }) {
-    await this.$storyapi.get(`cdn/stories/_settings`, {
-      version: req.headers.host === 'designisdead.com' ? 'published' : 'draft'
-    }).then((res) => {
-      commit('setSettings', res.data.story.content);
     })
   }
 };

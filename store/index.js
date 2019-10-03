@@ -9,12 +9,12 @@ export default {
       dispatch('settings/loadEditMode', { query, req });
 
       // load cv, employees and settings
-      await dispatch('settings/loadCacheVersion');
+      dispatch('settings/loadCacheVersion');
       await dispatch('employees/getEmployees');
     },
   },
   modules: {
     settings,
-    employees,
+    employees
   }
 }

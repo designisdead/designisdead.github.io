@@ -21,7 +21,7 @@
 <script>
 const loadData = function({ api, cacheVersion, errorCallback, version, path }) {
   return api
-    .get(`cdn/stories/${path}`, {
+    .get(`cdn/stories${path}`, {
       version: version,
       cv: cacheVersion
     })
@@ -167,7 +167,7 @@ export default {
     };
   },
   async asyncData(context) {
-    let path = context.route.path == "/" ? "home" : context.route.path;
+    let path = context.route.path == "/" ? "/home" : context.route.path;
 
     // Load the JSON from the API
     let page = await loadData({

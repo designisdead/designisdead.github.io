@@ -25,10 +25,8 @@ const actions = {
   loadEditMode({commit}, {query, req}) {
     commit('setEditMode', req.headers.host !== 'designisdead.com');
   },
-  async loadCacheVersion({commit}) {
-    await this.$storyapi.get(`cdn/spaces/me`).then((res) => {
-      commit('setCacheVersion', process.client ? res.data.space.version : Date.now());
-    })
+  loadCacheVersion({commit}) {
+    commit('setCacheVersion', Math.floor(new Date() / 60000) * 60000);
   }
 };
 

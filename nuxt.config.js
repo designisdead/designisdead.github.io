@@ -86,10 +86,6 @@ module.exports = {
     display: "standalone",
     short_name: "did"
   },
-  workbox: {
-    // Workbox options
-    offlinePage: '/offline'
-  },
   /*
   ** Build configuration
   */

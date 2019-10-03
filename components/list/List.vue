@@ -13,18 +13,18 @@
     <!-- else if list type is event -->
     <div v-else-if="blok.contenttype === 'events/'">
       <!-- Not enough events to justify the search bar here atm -->
-      <!-- <searchbar
+      <!-- <search-bar
       @emitSearchFields="getSearchField"
-      :searchType="'event'"></searchbar> -->
+      :searchType="'event'"></search-bar> -->
 
       <timeline :listContent="blok.listcontent"></timeline>
     </div>
     <!-- else -->
     <div v-else>
-      <searchbar
+      <search-bar
       v-if="blok.contenttype === 'blog/'"
       @emitSearchFields="getSearchField"
-      :searchType="'blog'"></searchbar>
+      :searchType="'blog'"></search-bar>
       <div
         v-if="blok.contenttype === 'blog/'"
         class="list__mobile-top-spacer"></div>
@@ -62,7 +62,12 @@
 </template>
 
 <script>
+import SearchBar from '@/components/SearchBar.vue';
+
 export default {
+  components: {
+    SearchBar
+  },
   props: {
     blok: {
       type: Object,

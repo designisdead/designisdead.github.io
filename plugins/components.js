@@ -75,6 +75,5 @@ Vue.component("timeline", Timeline);
 Vue.component("eventcard", EventCard);
 Vue.component("event", Event);
 Vue.component("googlemap", GoogleMap);
-Vue.component("searchbar", SearchBar);
 Vue.component("textandimage", TextAndImage);
 Vue.component("contact", Contact);

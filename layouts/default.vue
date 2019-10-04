@@ -589,7 +589,7 @@
   .Page-content {
     position: relative;
     z-index: 0;
-    margin-top: $pageHeaderHeight;
+    padding-top: $pageHeaderHeight;
   }
 
   .Page-headerContent {

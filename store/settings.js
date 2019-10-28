@@ -1,6 +1,8 @@
 const state = () => ({
   primaryNavigation: [
     {title: 'Blog', link: 'blog'},
+    // To add later
+    // {title: 'Events', link: 'events'},
     {title: 'Services', link: 'services'},
     {title: 'Technologies', link: 'technologies'},
     {title: 'Team', link: 'team'},

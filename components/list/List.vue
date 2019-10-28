@@ -27,7 +27,7 @@
       :searchType="'blog'"></search-bar>
       <div
         v-if="blok.contenttype === 'blog/'"
-        class="list__mobile-top-spacer"></div>
+        class="list__mobile-top-spacer blog-list__container"></div>
 
       <ul
         v-if="blok.listcontent.length > 0"
@@ -170,6 +170,10 @@ export default {
     bottom: 0;
     opacity: 0.9;
   }
+}
+
+.blog-list__container {
+  padding-top: 20px;
 }
 
 .List--list-image,

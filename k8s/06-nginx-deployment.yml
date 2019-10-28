@@ -1,10 +1,13 @@
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: did-website-nginx
   namespace: ${k8s_namespace}
 spec:
   replicas: 2
+  selector:
+    matchLabels:
+      app: did-website-nginx
   strategy:
     type: RollingUpdate
     rollingUpdate:

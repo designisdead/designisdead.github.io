@@ -1,21 +1,28 @@
 <template>
   <div
     class="cmp-carousel__container">
-    <img
-      class="cmp-carousel__side-image"
-      v-lazy="leftImage.filename"
-      :alt="leftImage.name"
-    />
-    <img
-      class="cmp-carousel__main-image"
-      v-lazy="lazyImage(blok.images[currentImageCursor].filename)"
-      :alt="blok.images[currentImageCursor].name"
-    />
-    <img
-      class="cmp-carousel__side-image"
-      v-lazy="rightImage.filename"
-      :alt="rightImage.name"
-    />
+    <div class="cmp-carousel__side-image">
+      <img
+        id="cmp-carousel__left-side-image"
+        @click="changeImage"
+        v-lazy="leftImage.filename"
+        :alt="leftImage.name"
+      />
+    </div>
+    <div class="cmp-carousel__main-image">
+      <img
+        v-lazy="lazyImage(blok.images[currentImageCursor].filename)"
+        :alt="blok.images[currentImageCursor].name"
+      />
+    </div>
+    <div class="cmp-carousel__side-image">
+      <img
+        id="cmp-carousel__right-side-image"
+        @click="changeImage"
+        v-lazy="rightImage.filename"
+        :alt="rightImage.name"
+      />
+    </div>
   </div>
 </template>
 
@@ -32,58 +39,70 @@ export default {
   },
   data() {
     return {
-      currentImageCursor: 1
+      currentImageCursor: 0
     }
-  },
-  mounted() {
-    console.log(this.leftImage)
-    console.log(this.rightImage)
   },
   methods: {
     lazyImage(filename) {
       /*
-        * If webp is supported by the client, serve a large webp image
-        * https://www.storyblok.com/docs/image-service
-        */
+      * If webp is supported by the client, serve a large webp image
+      * https://www.storyblok.com/docs/image-service
+      */
       const filters = supportsWebP ? '/filters:format(webp)' : '';
       return this.$options.filters.imageApi({src: filename, size: '', filters: filters});
     },
-    getSideImages() {
-      return {
-        left: this.blok.images[this.currentImageCursor - 1],
-        right: this.blok.images[this.currentImageCursor + 1]
+    changeImage(e) {
+      console.log(e.target.id)
+      if (e.target.id === 'cmp-carousel__right-side-image') {
+        this.currentImageCursor === this.blok.images[this.blok.images.length - 1] ? this.currentImageCursor = 0 : this.currentImageCursor += 1
+      } else {
+        this.currentImageCursor === 0 ? this.currentImageCursor = this.blok.images.length - 1 : this.currentImageCursor -= 1
       }
+      
+      console.log(this.currentImageCursor)
+      console.log(this.leftImage)
+      console.log(this.rightImage)
     }
   },
   computed: {
     rightImage() {
-      return this.blok.images[this.currentImageCursor + 1]
+      return this.currentImageCursor === this.blok.images.length - 1 ? this.blok.images[0] : this.blok.images[this.currentImageCursor + 1]
     },
     leftImage() {
-      return this.blok.images[this.currentImageCursor - 1]
+      return this.currentImageCursor === 0 ? this.blok.images[this.blok.images.length - 1] : this.blok.images[this.currentImageCursor - 1]
     }
   }
 }
 </script>
 
-<style>
+<style lang="scss">
 .cmp-carousel__container {
   position: relative;
   display: flex; 
   justify-content: center;
   align-items: center;
-  height: 350px;
+  width: 100%;
+  height: 500px;
 }
 
 .cmp-carousel__main-image {
-  width: 60%;
+  flex: 4;
+
+  img {
+    width: 100%;
+  }
 }
 
 .cmp-carousel__side-image {
-  object-fit: cover;
-  position: relative;
-  width: 160px;
   height: 70%;
+  flex: 1;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(50%)
+  }
 }
 
 </style>

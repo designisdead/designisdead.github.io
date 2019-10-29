@@ -42,7 +42,7 @@ export default {
     return {
       center: { lat: Number(this.blok.lat.replace(',', '.').trim()), lng: Number(this.blok.lng.replace(',', '.').trim()) },
       infoOptions: { pixelOffset: { width: 0, height: -35 } },
-      infoWinOpen: false,
+      infoWinOpen: true,
     }
   }
 }

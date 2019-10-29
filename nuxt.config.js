@@ -46,6 +46,7 @@ module.exports = {
       src: '~/plugins/parallax.client.js'
     },
     {
+      // ssr true required for gmap to work in staging
       ssr: true,
       src: '~/plugins/googleMapConfig.js'
     }

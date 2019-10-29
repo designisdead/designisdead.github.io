@@ -1,17 +1,21 @@
 <template>
-  <div>
-    <h1>This is my carousel component</h1>
-
-    <div
-    style="display: flex; flex-wrap: wrap">
-      <img
-        v-for="image in blok.images"
-        :key="image.name"
-        v-lazy="lazyImage(image.filename)"
-        :alt="image.name"
-        width="50%"
-      />
-    </div>
+  <div
+    class="cmp-carousel__container">
+    <img
+      class="cmp-carousel__side-image"
+      v-lazy="leftImage.filename"
+      :alt="leftImage.name"
+    />
+    <img
+      class="cmp-carousel__main-image"
+      v-lazy="lazyImage(blok.images[currentImageCursor].filename)"
+      :alt="blok.images[currentImageCursor].name"
+    />
+    <img
+      class="cmp-carousel__side-image"
+      v-lazy="rightImage.filename"
+      :alt="rightImage.name"
+    />
   </div>
 </template>
 
@@ -26,8 +30,14 @@ export default {
       }
     }
   },
+  data() {
+    return {
+      currentImageCursor: 1
+    }
+  },
   mounted() {
-    console.log(this.blok.images)
+    console.log(this.leftImage)
+    console.log(this.rightImage)
   },
   methods: {
     lazyImage(filename) {
@@ -38,10 +48,42 @@ export default {
       const filters = supportsWebP ? '/filters:format(webp)' : '';
       return this.$options.filters.imageApi({src: filename, size: '', filters: filters});
     },
+    getSideImages() {
+      return {
+        left: this.blok.images[this.currentImageCursor - 1],
+        right: this.blok.images[this.currentImageCursor + 1]
+      }
+    }
+  },
+  computed: {
+    rightImage() {
+      return this.blok.images[this.currentImageCursor + 1]
+    },
+    leftImage() {
+      return this.blok.images[this.currentImageCursor - 1]
+    }
   }
 }
 </script>
 
 <style>
+.cmp-carousel__container {
+  position: relative;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  height: 350px;
+}
+
+.cmp-carousel__main-image {
+  width: 60%;
+}
+
+.cmp-carousel__side-image {
+  object-fit: cover;
+  position: relative;
+  width: 160px;
+  height: 70%;
+}
 
 </style>

@@ -24,10 +24,6 @@ module.exports = {
   styleResources: {
     scss: ['@/assets/scss/_config.scss'],
   },
-  server: {
-    port: 3000,
-    host: '0.0.0.0', // localhost
-  },
   plugins: [
     {
       ssr: true,

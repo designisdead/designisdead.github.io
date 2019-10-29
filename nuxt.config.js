@@ -46,7 +46,7 @@ module.exports = {
       src: '~/plugins/parallax.client.js'
     },
     {
-      ssr: false,
+      ssr: true,
       src: '~/plugins/googleMapConfig.js'
     }
   ],

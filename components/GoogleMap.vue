@@ -18,7 +18,7 @@
         :options="infoOptions"
         :opened="infoWinOpen"
         @closeclick="infoWinOpen = false">
-        <h4 class="google-map__address-title">Address</h4>
+        <h4 class="google-map__address-title">{{ blok.addressTitle }}</h4>
         <ul class="google-map__address-ulist">
           <li class="google-map__address-ulist-item">{{ blok.street }}</li>
           <li class="google-map__address-ulist-item">{{ blok.city }}</li>

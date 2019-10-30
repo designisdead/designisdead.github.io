@@ -72,8 +72,6 @@
       },
     },
     mounted() {
-      console.log(this.blok.textverticalalignment)
-      console.log(this.blok.richtext)
       let targets = this.$el.querySelectorAll('code')
       targets.forEach((target) => {
         hljs.highlightBlock(target)

@@ -1,8 +1,12 @@
 <template>
   <div 
     v-editable="Blok"
-    :class="[Size]"
-    class="Spacer"/>
+    class="Spacer"
+    :class="{
+      [Size] : true,
+      'Spacer__separator-line-top' : blok.separatorline && blok.separatorlineposition === 'top',
+      'Spacer__separator-line-bottom' : blok.separatorline && blok.separatorlineposition === 'bottom',
+    }" />
 </template>
 
 <script>
@@ -39,5 +43,13 @@
       padding: $i * 5px;
     }
   }
+}
+
+.Spacer__separator-line-top {
+  border-top: solid 1px color('medium');
+}
+
+.Spacer__separator-line-bottom {
+  border-bottom: solid 1px color('medium');
 }
 </style>

@@ -5,23 +5,24 @@
       <img
         id="cmp-carousel__left-side-image"
         @click="changeImage"
-        v-lazy="leftImage.filename"
+        :src="leftImage.url"
         :alt="leftImage.name"
       />
     </div>
     <div class="cmp-carousel__main-image">
       <img
-        v-lazy="lazyImage(blok.images[currentImageCursor].filename)"
-        :alt="blok.images[currentImageCursor].name"
+        :src="mainImage.url"        
+        :alt="mainImage.name"
       />
     </div>
     <div class="cmp-carousel__side-image">
       <img
         id="cmp-carousel__right-side-image"
         @click="changeImage"
-        v-lazy="rightImage.filename"
+        :src="rightImage.url"
         :alt="rightImage.name"
       />
+
     </div>
   </div>
 </template>
@@ -39,37 +40,46 @@ export default {
   },
   data() {
     return {
-      currentImageCursor: 0
+      currentImageCursor: 2
     }
   },
   methods: {
-    lazyImage(filename) {
-      /*
-      * If webp is supported by the client, serve a large webp image
-      * https://www.storyblok.com/docs/image-service
-      */
-      const filters = supportsWebP ? '/filters:format(webp)' : '';
-      return this.$options.filters.imageApi({src: filename, size: '', filters: filters});
-    },
     changeImage(e) {
-      console.log(e.target.id)
       if (e.target.id === 'cmp-carousel__right-side-image') {
-        this.currentImageCursor === this.blok.images[this.blok.images.length - 1] ? this.currentImageCursor = 0 : this.currentImageCursor += 1
-      } else {
+        this.currentImageCursor === this.blok.images.length - 1 ? this.currentImageCursor = 0 : this.currentImageCursor += 1
+      } else {    // left side image
         this.currentImageCursor === 0 ? this.currentImageCursor = this.blok.images.length - 1 : this.currentImageCursor -= 1
       }
       
       console.log(this.currentImageCursor)
-      console.log(this.leftImage)
-      console.log(this.rightImage)
+      console.log(this.leftImage.name, ': ', this.leftImage.url)
+      console.log(this.rightImage.name, ': ', this.rightImage.url)
     }
   },
   computed: {
+    mainImage() {
+      const filters = supportsWebP ? '/filters:format(webp)' : '';
+      const image = this.blok.images[this.currentImageCursor];
+      return {
+        url: this.$options.filters.imageApi({src: image.filename, size: '', filters: filters}),
+        name: image.name
+      }
+    },
     rightImage() {
-      return this.currentImageCursor === this.blok.images.length - 1 ? this.blok.images[0] : this.blok.images[this.currentImageCursor + 1]
+      const filters = supportsWebP ? '/filters:format(webp)' : '';
+      const image = this.currentImageCursor === this.blok.images.length - 1 ? this.blok.images[0] : this.blok.images[this.currentImageCursor + 1];
+      return {
+        url: this.$options.filters.imageApi({src: image.filename, size: '', filters: filters}),
+        name: image.name
+      }
     },
     leftImage() {
-      return this.currentImageCursor === 0 ? this.blok.images[this.blok.images.length - 1] : this.blok.images[this.currentImageCursor - 1]
+      const filters = supportsWebP ? '/filters:format(webp)' : '';
+      const image = this.currentImageCursor === 0 ? this.blok.images[this.blok.images.length - 1] : this.blok.images[this.currentImageCursor - 1];
+      return {
+        url: this.$options.filters.imageApi({src: image.filename, size: '', filters: filters}),
+        name: image.name
+      }
     }
   }
 }
@@ -89,6 +99,8 @@ export default {
   flex: 4;
 
   img {
+    object-fit: cover;
+    max-height: 500px;
     width: 100%;
   }
 }

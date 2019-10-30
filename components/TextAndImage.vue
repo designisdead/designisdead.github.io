@@ -1,5 +1,7 @@
 <template>
-  <div class="TextAndImage" v-editable="blok">
+  <div
+    class="TextAndImage" 
+    v-editable="blok">
     <!-- Image -->
     <figure
       class="TextAndImage-figure"
@@ -29,11 +31,17 @@
     <!-- Rich Text -->
     <div
       :class="{
-        'u-textAlignCenter' : blok.textalignment == 'center',
-        'u-textAlignRight' : blok.textalignment == 'right'
+        'u-textAlignCenter' : blok.textalignment === 'center',
+        'u-textAlignRight' : blok.textalignment === 'right'
       }"
       class="TextAndImage-text">
-      <markdown>{{ blok.richtext }}</markdown>
+      <markdown
+        :class="{
+          'u-flexCenter' : blok.textverticalalignment === 'center',
+          'u-flexEnd' : blok.textverticalalignment === 'bottom'
+        }">
+          {{ blok.richtext }}
+        </markdown>
     </div>
   </div>
 </template>
@@ -59,15 +67,13 @@
     },
     computed: {
       lazyImage() {
-        /*
-          * If webp is supported by the client, serve a large webp image
-          * https://www.storyblok.com/docs/image-service
-          */
         const filters = supportsWebP ? '/filters:format(webp)' : '';
         return this.$options.filters.imageApi({src: this.blok.image, size: '', filters: filters});
       },
     },
     mounted() {
+      console.log(this.blok.textverticalalignment)
+      console.log(this.blok.richtext)
       let targets = this.$el.querySelectorAll('code')
       targets.forEach((target) => {
         hljs.highlightBlock(target)
@@ -77,9 +83,13 @@
 </script>
 
 <style lang="scss">
+  .TextAndImage {
+    display: flex;
+  }
+
   .TextAndImage-image {
     max-width: 100%;
-    margin-bottom: 20px;
+    display: block;
     @media screen and (max-width: size('medium')-1) {
       display: block;
       width: 100%;
@@ -87,15 +97,25 @@
     }
   }
 
+  .TextAndImage-text {
+    flex-grow: 1;
+    display: flex;
+
+    div {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
   @media screen and (min-width: size('medium')) {
     .TextAndImage-figure--left {
-      float: left;
       margin-right: 30px;
     }
 
     .TextAndImage-figure--right {
-      float: right;
       margin-left: 30px;
+      order: 1;
     }
   }
 

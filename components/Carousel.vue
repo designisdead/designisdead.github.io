@@ -22,7 +22,7 @@
         :src="rightImage.url"
         :alt="rightImage.name"
       />
-
+      <img src="/chevron.svg" alt="right chevron" style="position: absolute; top: 50%;margin-top: -25px; right: 10px;z-index: 999; width: 50px; height: auto;">
     </div>
   </div>
 </template>
@@ -106,6 +106,7 @@ export default {
 }
 
 .cmp-carousel__side-image {
+  position: relative;
   height: 70%;
   flex: 1;
 

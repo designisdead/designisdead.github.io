@@ -83,15 +83,19 @@
 <style lang="scss">
   .TextAndImage {
     display: flex;
+
+    @media screen and (max-width: size('medium')-1) {
+      display: block;
+    }
   }
 
   .TextAndImage-image {
     max-width: 100%;
     display: block;
+
     @media screen and (max-width: size('medium')-1) {
-      display: block;
       width: 100%;
-      height: auto;
+      margin-bottom: 20px;
     }
   }
 
@@ -103,6 +107,10 @@
       flex: 1;
       display: flex;
       flex-direction: column;
+    }
+
+    @media screen and (max-width: size('medium')-1) {
+      text-align: left;
     }
   }
 

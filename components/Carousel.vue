@@ -1,13 +1,19 @@
 <template>
   <div
     class="cmp-carousel__container">
-    <div class="cmp-carousel__side-image">
+    <div 
+      class="cmp-carousel__side-image"
+      @click="changeImage">
       <img
         id="cmp-carousel__left-side-image"
-        @click="changeImage"
         :src="leftImage.url"
         :alt="leftImage.name"
       />
+       <img 
+        src="/chevron.svg" 
+        alt="left chevron" 
+        class="cmp-carousel__chevron"
+        style="left: 10px; transform: rotate(180deg)">
     </div>
     <div class="cmp-carousel__main-image">
       <img
@@ -15,14 +21,19 @@
         :alt="mainImage.name"
       />
     </div>
-    <div class="cmp-carousel__side-image">
+    <div 
+      class="cmp-carousel__side-image"
+      @click="changeImage">
       <img
         id="cmp-carousel__right-side-image"
-        @click="changeImage"
         :src="rightImage.url"
         :alt="rightImage.name"
       />
-      <img src="/chevron.svg" alt="right chevron" style="position: absolute; top: 50%;margin-top: -25px; right: 10px;z-index: 999; width: 50px; height: auto;">
+      <img 
+        src="/chevron.svg" 
+        alt="right chevron" 
+        class="cmp-carousel__chevron"
+        style="right: 10px">
     </div>
   </div>
 </template>
@@ -40,8 +51,20 @@ export default {
   },
   data() {
     return {
-      currentImageCursor: 2
+      currentImageCursor: 2,
+      preloadImages: []
     }
+  },
+  mounted() {
+    for (let i = 0; i <= 2; i++) {
+      let image = new Image()
+      image.src = this.blok.images[i].filename
+      this.preloadImages.push(image)
+      console.log(this.blok.images[i])
+    }
+    setTimeout(() => {
+      console.table(this.preloadImages)
+    }, 1000)
   },
   methods: {
     changeImage(e) {
@@ -110,12 +133,21 @@ export default {
   height: 70%;
   flex: 1;
 
-  img {
+  img:first-child {
     object-fit: cover;
     width: 100%;
     height: 100%;
     filter: brightness(50%)
   }
+}
+
+.cmp-carousel__chevron {
+  position: absolute; 
+  top: 50%;
+  margin-top: -25px; 
+  z-index: 999; 
+  width: 50px; 
+  height: auto;
 }
 
 </style>

@@ -1,45 +1,43 @@
 <template>
   <div
-    class="cmp-carousel__container">
-    <div 
+    class="cmp-carousel">
+    <div class="cmp-carousel__container">
+      <div 
       class="cmp-carousel__side-image"
       @click="changeImage">
       <img
         id="cmp-carousel__left-side-image"
         :src="leftImage.url"
-        :alt="leftImage.name"
-      />
+        :alt="leftImage.name">
        <img 
         src="/chevron.svg" 
         alt="left chevron" 
         class="cmp-carousel__chevron"
         style="left: 10px; transform: rotate(180deg)">
+      </div>
+      <div class="cmp-carousel__main-image">
+        <expendableImage :mainImageProperties="this.blok.images[this.currentImageCursor]" />
+      </div>
+      <div 
+        class="cmp-carousel__side-image"
+        @click="changeImage">
+        <img
+          id="cmp-carousel__right-side-image"
+          :src="rightImage.url"
+          :alt="rightImage.name">
+        <img 
+          src="/chevron.svg" 
+          alt="right chevron" 
+          class="cmp-carousel__chevron"
+          style="right: 10px">
+      </div>
     </div>
-    <div class="cmp-carousel__main-image">
-      <img
-        :src="mainImage.url"        
-        :alt="mainImage.name"
-      />
-    </div>
-    <div 
-      class="cmp-carousel__side-image"
-      @click="changeImage">
-      <img
-        id="cmp-carousel__right-side-image"
-        :src="rightImage.url"
-        :alt="rightImage.name"
-      />
-      <img 
-        src="/chevron.svg" 
-        alt="right chevron" 
-        class="cmp-carousel__chevron"
-        style="right: 10px">
-    </div>
+    <p class="cmp-carousel__image-number">{{ currentImageCursor + 1 }} / {{ this.blok.images.length }}</p>
   </div>
 </template>
 
 <script>
-import supportsWebP from 'supports-webp';
+import supportsWebP from 'supports-webp'
 
 export default {
   props: {
@@ -51,20 +49,8 @@ export default {
   },
   data() {
     return {
-      currentImageCursor: 2,
-      preloadImages: []
+      currentImageCursor: 0
     }
-  },
-  mounted() {
-    for (let i = 0; i <= 2; i++) {
-      let image = new Image()
-      image.src = this.blok.images[i].filename
-      this.preloadImages.push(image)
-      console.log(this.blok.images[i])
-    }
-    setTimeout(() => {
-      console.table(this.preloadImages)
-    }, 1000)
   },
   methods: {
     changeImage(e) {
@@ -73,34 +59,22 @@ export default {
       } else {    // left side image
         this.currentImageCursor === 0 ? this.currentImageCursor = this.blok.images.length - 1 : this.currentImageCursor -= 1
       }
-      
-      console.log(this.currentImageCursor)
-      console.log(this.leftImage.name, ': ', this.leftImage.url)
-      console.log(this.rightImage.name, ': ', this.rightImage.url)
     }
   },
   computed: {
-    mainImage() {
-      const filters = supportsWebP ? '/filters:format(webp)' : '';
-      const image = this.blok.images[this.currentImageCursor];
-      return {
-        url: this.$options.filters.imageApi({src: image.filename, size: '', filters: filters}),
-        name: image.name
-      }
-    },
     rightImage() {
       const filters = supportsWebP ? '/filters:format(webp)' : '';
-      const image = this.currentImageCursor === this.blok.images.length - 1 ? this.blok.images[0] : this.blok.images[this.currentImageCursor + 1];
+      const image = this.currentImageCursor === this.blok.images.length - 1 ? this.blok.images[0] : this.blok.images[this.currentImageCursor + 1]
       return {
-        url: this.$options.filters.imageApi({src: image.filename, size: '', filters: filters}),
+        url: this.$options.filters.imageApi({src: image.filename, size: 'verticalSmall', filters: filters}),
         name: image.name
       }
     },
     leftImage() {
       const filters = supportsWebP ? '/filters:format(webp)' : '';
-      const image = this.currentImageCursor === 0 ? this.blok.images[this.blok.images.length - 1] : this.blok.images[this.currentImageCursor - 1];
+      const image = this.currentImageCursor === 0 ? this.blok.images[this.blok.images.length - 1] : this.blok.images[this.currentImageCursor - 1]
       return {
-        url: this.$options.filters.imageApi({src: image.filename, size: '', filters: filters}),
+        url: this.$options.filters.imageApi({src: image.filename, size: 'verticalSmall', filters: filters}),
         name: image.name
       }
     }
@@ -111,7 +85,7 @@ export default {
 <style lang="scss">
 .cmp-carousel__container {
   position: relative;
-  display: flex; 
+  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -120,6 +94,7 @@ export default {
 
 .cmp-carousel__main-image {
   flex: 4;
+  cursor: pointer;
 
   img {
     object-fit: cover;
@@ -132,6 +107,7 @@ export default {
   position: relative;
   height: 70%;
   flex: 1;
+  cursor: pointer;
 
   img:first-child {
     object-fit: cover;
@@ -139,15 +115,28 @@ export default {
     height: 100%;
     filter: brightness(50%)
   }
+
+  &:hover {
+    .cmp-carousel__chevron {
+      opacity: .7;
+    }
+  }
 }
 
 .cmp-carousel__chevron {
+  transition: opacity .15s;
+  opacity: 0;
   position: absolute; 
+  pointer-events: none;
   top: 50%;
   margin-top: -25px; 
-  z-index: 999; 
+  z-index: 10; 
   width: 50px; 
   height: auto;
 }
 
+.cmp-carousel__image-number {
+  text-align: center;
+  padding-bottom: 0; 
+}
 </style>

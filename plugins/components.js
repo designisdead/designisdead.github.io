@@ -39,6 +39,7 @@ import SearchBar from '@/components/SearchBar.vue';
 import TextAndImage from "@/components/TextAndImage.vue";
 import Contact from '@/components/Contact.vue';
 import Carousel from '@/components/Carousel.vue';
+import ExpendableImage from '@/components/ExpendableImage.vue';
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -79,3 +80,4 @@ Vue.component("googlemap", GoogleMap);
 Vue.component("textandimage", TextAndImage);
 Vue.component("contact", Contact);
 Vue.component("carousel", Carousel);
+Vue.component("expendableImage", ExpendableImage);

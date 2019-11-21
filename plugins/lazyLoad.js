@@ -5,5 +5,6 @@ import VueLazyload from 'vue-lazyload'
 
 Vue.use(VueLazyload, {
   preLoad: 2,
-  observer: true
+  observer: true,
+  loading: '/close-grey-icon.svg'
 })

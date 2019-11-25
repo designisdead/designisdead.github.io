@@ -16,7 +16,7 @@
         style="left: 10px; transform: rotate(180deg)">
       </div>
       <div class="cmp-carousel__main-image">
-        <expendableImage :mainImageProperties="this.blok.images[this.currentImageCursor]" />
+        <expendableImage :currentImageCursor="currentImageCursor" :imagesProperties="blok.images" @changeImage="test" />
       </div>
       <div 
         class="cmp-carousel__side-image"
@@ -47,14 +47,21 @@ export default {
       }
     }
   },
+  mounted() {
+    // console.log(this.blok.images)
+  },
   data() {
     return {
-      currentImageCursor: 0
+      currentImageCursor: 5
     }
   },
   methods: {
-    changeImage(e) {
-      if (e.target.id === 'cmp-carousel__right-side-image') {
+    test(val) {
+      let event = null
+      this.changeImage(event, val)
+    },
+    changeImage(e, direction = null) {
+      if (e ? e.target.id === 'cmp-carousel__right-side-image' : direction === 'right') {
         this.currentImageCursor === this.blok.images.length - 1 ? this.currentImageCursor = 0 : this.currentImageCursor += 1
       } else {    // left side image
         this.currentImageCursor === 0 ? this.currentImageCursor = this.blok.images.length - 1 : this.currentImageCursor -= 1
@@ -94,13 +101,6 @@ export default {
 
 .cmp-carousel__main-image {
   flex: 4;
-  cursor: pointer;
-
-  img {
-    object-fit: cover;
-    max-height: 500px;
-    width: 100%;
-  }
 }
 
 .cmp-carousel__side-image {

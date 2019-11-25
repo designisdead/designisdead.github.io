@@ -10,7 +10,8 @@ Vue.filter('imageApi', ({src, size = '', filters = ''}) => {
       'medium': '800x0',
       'large': '1200x0',
       'huge': '1920x0',
-      'verticalSmall': '0x400'
+      'verticalSmall': '0x400',
+      'thumbnails': '150x0'
     };
 
     const imageSize = size in sizes ? '/' + sizes[size] : '';

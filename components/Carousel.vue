@@ -16,7 +16,11 @@
         style="left: 10px; transform: rotate(180deg)">
       </div>
       <div class="cmp-carousel__main-image">
-        <expendableImage :currentImageCursor="currentImageCursor" :imagesProperties="blok.images" @changeImage="test" />
+        <expendableImage 
+          :currentImageCursor="currentImageCursor" 
+          :imagesProperties="blok.images" 
+          @changeImage="changeImageFromExpendable" 
+          @selectThumbnailImage="selectThumbnailImage" />
       </div>
       <div 
         class="cmp-carousel__side-image"
@@ -47,18 +51,15 @@ export default {
       }
     }
   },
-  mounted() {
-    // console.log(this.blok.images)
-  },
   data() {
     return {
-      currentImageCursor: 5
+      currentImageCursor: 3
     }
   },
   methods: {
-    test(val) {
+    changeImageFromExpendable(direction) {
       let event = null
-      this.changeImage(event, val)
+      this.changeImage(event, direction)
     },
     changeImage(e, direction = null) {
       if (e ? e.target.id === 'cmp-carousel__right-side-image' : direction === 'right') {
@@ -66,6 +67,9 @@ export default {
       } else {    // left side image
         this.currentImageCursor === 0 ? this.currentImageCursor = this.blok.images.length - 1 : this.currentImageCursor -= 1
       }
+    },
+    selectThumbnailImage(cursorPos) {
+      this.currentImageCursor = cursorPos
     }
   },
   computed: {

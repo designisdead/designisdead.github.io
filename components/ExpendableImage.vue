@@ -8,13 +8,19 @@
     <div 
       class="cmp-expendable-image__expended-container"
       v-if="isExpended">
+      <div class="cmp-expendable-image__close-wrapper">
+        <img
+        src="/close-icon-contact-form.svg"
+        alt="Close expended images"
+        class="cmp-expendable-image__close-icon"
+        @click="closeExpendedImage">
+      </div>
       <div class="cmp-expendable-image__expended-main-image-wrapper">
         <img 
           src="/chevron.svg" 
-          chevron="left"
+          chevronType="left"
           alt="left chevron" 
-          class="cmp-expendable-image__chevron"
-          style="left: 10px; transform: rotate(180deg)"
+          class="cmp-expendable-image__chevron cmp-expendable-image__chevron--left"
           @click="changeImage">
         <img
           class="cmp-expendable-image__expended-main-image"
@@ -22,25 +28,37 @@
           :alt="expendedImage.name">
         <img 
           src="/chevron.svg"
-          chevron="right"
+          chevronType="right"
           alt="right chevron" 
-          class="cmp-expendable-image__chevron"
-          style="right: 10px"
+          class="cmp-expendable-image__chevron cmp-expendable-image__chevron--right"
           @click="changeImage">
       </div>
       <div class="cmp-expendable-image__thumbnails-container">
-        <img
-          class="cmp-expendable-image__thumbnail"
+        <img 
+          src="/chevron.svg"
+          alt="left chevron" 
+          class="cmp-expendable-image__chevron cmp-expendable-image__chevron--left"
+          chevronType="left"
+          @click="shiftThumbnails">
+        <div 
+          class="cmp-expendable-image__thumbnail-wrapper"
           v-for="image in thumbnailListOrdered"
           :key="image.name"
-          :src="getSingleThumbnailSrc(image.filename)"
-          :alt="image.name">
+          @click="selectThumbnailImage">
+          <img
+            class="cmp-expendable-image__thumbnail"
+            :class="{ 'cmp-expendable-image__thumbnail-center': image.isMainImage }"
+            :src="getSingleThumbnailSrc(image.filename)"
+            :alt="image.name"
+            :position="image.position">
+        </div>
+        <img 
+          src="/chevron.svg"
+          alt="right chevron"
+          chevronType="right"
+          class="cmp-expendable-image__chevron cmp-expendable-image__chevron--right"
+          @click="shiftThumbnails">
       </div>
-      <img
-        src="/close-icon-contact-form.svg"
-        alt="Close expended images"
-        class="cmp-expendable-image__close"
-        @click="closeExpendedImage">
     </div>
   </div>
   
@@ -58,7 +76,7 @@ export default {
     return {
       isExpended: false,
       currentScrollPos: 0,
-      numberDisplayedThumbnails: this.getNumberDisplayedThumbnails(),
+      numberDisplayedThumbnails: 0,
       thumbnailList: new Proxy(this.imagesProperties, {
         get(target, prop) {
           if (!isNaN(prop)) {
@@ -69,15 +87,12 @@ export default {
               prop -= target.length
             }
           }
-          return target[prop]
+          return {...target[prop], position: prop}
         }
-      })
+      }),
+      currentThumbnailOffset: 0,
+      expendendImageIsLoading: false
     }
-  },
-  mounted() {
-    console.log(this.mainImageProperties)
-    console.log(this.imagesProperties)
-    console.log(window.innerWidth > 0 ? window.innerWidth : screen.width)
   },
   computed: {
     mainImage() {
@@ -85,7 +100,8 @@ export default {
       const image = this.imagesProperties[this.currentImageCursor]
       return {
         url: this.$options.filters.imageApi({src: image.filename, size: 'medium', filters: filters}),
-        name: image.name
+        name: image.name,
+        filename: image.filename
       }
     },
     expendedImage() {
@@ -97,21 +113,21 @@ export default {
       }
     },
     thumbnailListOrdered() {
-      const orderedList = []
+      let orderedList = []
       switch(this.numberDisplayedThumbnails) {
         case 3:
-          for (let i = this.currentImageCursor - 1; i <= this.currentImageCursor + 1; i++) {
-            orderedList.push(this.thumbnailList[i])
+          for (let i = this.currentImageCursor + this.currentThumbnailOffset - 1; i <= this.currentImageCursor + this.currentThumbnailOffset + 1; i++) {
+            orderedList.push({...this.thumbnailList[i], isMainImage: this.mainImage.filename === this.thumbnailList[i].filename ? true : false})
           }
           return orderedList
         case 5:
-          for (let i = this.currentImageCursor - 2; i <= this.currentImageCursor + 2; i++) {
-            orderedList.push(this.thumbnailList[i])
+          for (let i = this.currentImageCursor + this.currentThumbnailOffset - 2; i <= this.currentImageCursor + this.currentThumbnailOffset + 2; i++) {
+            orderedList.push({...this.thumbnailList[i], isMainImage: this.mainImage.filename === this.thumbnailList[i].filename ? true : false})
           }
           return orderedList
         case 7:
-          for (let i = this.currentImageCursor - 3; i <= this.currentImageCursor + 3; i++) {
-            orderedList.push(this.thumbnailList[i])
+          for (let i = this.currentImageCursor + this.currentThumbnailOffset - 3; i <= this.currentImageCursor + this.currentThumbnailOffset + 3; i++) {
+            orderedList.push({...this.thumbnailList[i], isMainImage: this.mainImage.filename === this.thumbnailList[i].filename ? true : false})
           }
           return orderedList
       }
@@ -140,16 +156,19 @@ export default {
     getNumberDisplayedThumbnails() {
       if (process.client) {
         let screenSize = window.innerWidth > 0 ? window.innerWidth : screen.width
-        if (screenSize >= 800) {
+        if (screenSize >= 800 && this.imagesProperties.length >= 7) {
           return 7
-        } else if (screenSize >= 620) {
+        } else if (screenSize >= 620 && this.imagesProperties.length >= 5) {
           return 5
-        } else {
+        } else if (this.imagesProperties.length >= 3) {
           return 3
+        } else {
+          return 0
         }
       }
     },
     expendImage(e) {
+      this.numberDisplayedThumbnails = this.getNumberDisplayedThumbnails()
       this.isExpended = true
 
       this.currentScrollPos = window.scrollY
@@ -171,12 +190,20 @@ export default {
       document.body.style.overflow = 'auto'
     },
     changeImage(e) {
-      if (e.target.getAttribute('chevron') === 'left') {
-        this.$emit('changeImage', 'left')
-      } else {    // left side image
-        this.$emit('changeImage', 'right')
+      this.currentThumbnailOffset = 0
+      e.target.getAttribute('chevronType') === 'left' ? this.$emit('changeImage', 'left') : this.$emit('changeImage', 'right')
+    },
+    selectThumbnailImage(e) {
+      this.$emit('selectThumbnailImage', +e.target.getAttribute('position'))
+      this.currentThumbnailOffset = 0
+    },
+    shiftThumbnails(e) {
+      e.target.getAttribute('chevronType') === 'left' ? this.currentThumbnailOffset -= 1 : this.currentThumbnailOffset += 1
+      if (this.currentThumbnailOffset >= this.imagesProperties.length) {
+        this.currentThumbnailOffset = 0
+      } else if (this.currentThumbnailOffset < 0) {
+        this.currentThumbnailOffset = this.imagesProperties.length - 1
       }
-      console.log(this.currentImageCursor)
     }
   }
 }
@@ -206,14 +233,34 @@ export default {
   position: fixed;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
   left: 0;
   top: 0;
   z-index: 999;
-  padding: 88px 20px 20px 20px;
+  padding: 20px;
   width: 100%;
   height: 100vh;
   background-color: #000;
+
+  .cmp-expendable-image__close-wrapper {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .cmp-expendable-image__close-icon {
+  cursor: pointer;
+  transition: transform .15s;
+  opacity: .7;
+  box-sizing: content-box;
+  width: 30px;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  padding: 6px;
+
+  &:hover {
+    transform: scale(1.08);
+  }
+}
 
   .cmp-expendable-image__expended-main-image-wrapper {
     position: relative;
@@ -228,14 +275,14 @@ export default {
   .cmp-expendable-image__expended-main-image {
     width: auto;
     max-width: 100%;
-    max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 200px);
     display: block;
     margin: auto;
   }
 
   .cmp-expendable-image__chevron {
     cursor: pointer;
-    transition: opacity .15s;
+    transition: opacity .15s, transform .15s;
     opacity: 0;
     position: absolute; 
     top: 50%;
@@ -243,37 +290,63 @@ export default {
     z-index: 999;
     width: 50px; 
     height: auto;
+
+    &--left {
+      left: 10px;
+      transform: rotate(180deg);
+
+      &:hover {
+        transform: rotate(180deg) scale(1.08);
+      }
+    }
+
+    &--right {
+      right: 10px;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+    }
   }
 }
 
 .cmp-expendable-image__thumbnails-container {
   display: flex;
   justify-content: center;
+  position: relative;
+
+  &:hover {
+    .cmp-expendable-image__chevron {
+      opacity: .5;
+    }
+  }
+
+  .cmp-expendable-image__thumbnail-wrapper {
+    cursor: pointer;
+    transition: width .15s;
+    width: 106px;
+    display: flex;
+    justify-content: center;
+
+    &:hover {
+      width: 112px;
+
+      .cmp-expendable-image__thumbnail {
+        transform: scale(1.07);
+      }
+    }
+  }
 
   .cmp-expendable-image__thumbnail {
-    margin: 0;
+    transition: transform .15s;
     width: 100px;
     height: 80px;
     object-fit: cover;
   }
-}
 
-.cmp-expendable-image__close {
-  cursor: pointer;
-  position: fixed;
-  transition: transform .15s;
-  opacity: .7;
-  box-sizing: content-box;
-  width: 30px;
-  z-index: 3;
-  top: 20px;
-  right: 20px;
-  border-radius: 50%;
-  border: 3px solid #DDD;
-  padding: 6px;
-
-  &:hover {
-    transform: scale(1.05);
+  .cmp-expendable-image__thumbnail-center {
+    border: solid 1px #cecece;
+    transform: scale(1.03)
   }
 }
 </style>

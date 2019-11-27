@@ -26,6 +26,7 @@
           class="cmp-expendable-image__expended-main-image"
           :src="expendedImage.url"        
           :alt="expendedImage.name">
+        <p class="cmp-expendable-image__image-number">{{ currentImageCursor + 1 }} / {{ this.imagesProperties.length }}</p>
         <img 
           src="/chevron.svg"
           chevronType="right"
@@ -33,7 +34,9 @@
           class="cmp-expendable-image__chevron cmp-expendable-image__chevron--right"
           @click="changeImage">
       </div>
-      <div class="cmp-expendable-image__thumbnails-container">
+      <div 
+        class="cmp-expendable-image__thumbnails-container"
+        v-if="imagesProperties.length >= 3">
         <img 
           src="/chevron.svg"
           alt="left chevron" 
@@ -245,6 +248,7 @@ export default {
   .cmp-expendable-image__close-wrapper {
     display: flex;
     justify-content: flex-end;
+    padding-bottom: 20px;
   }
 
   .cmp-expendable-image__close-icon {
@@ -275,9 +279,15 @@ export default {
   .cmp-expendable-image__expended-main-image {
     width: auto;
     max-width: 100%;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 222px);
     display: block;
     margin: auto;
+  }
+
+  .cmp-expendable-image__image-number {
+    text-align: center;
+    color: #c4c4c4;
+    padding-bottom: 10px;
   }
 
   .cmp-expendable-image__chevron {

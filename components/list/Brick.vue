@@ -14,13 +14,18 @@
       <h2
         v-if="post.content.jobtitle"
         class="small noSpaceBelow u-color--light">{{ post.content.jobtitle }}</h2>
+      <ul class="Brick-tagList u-color--light">
+        <li
+          v-for="(tag, index) in post.tag_list.slice(0, 3)"
+          v-bind:key="tag">{{ tag }}<span v-if="index != post.tag_list.length - 1">, </span></li>
+      </ul>
     </header>
     <picture
       v-if="post.content.primaryimage"
       class="Brick-lowresBackgroundImage">
       <source :srcset="primaryImage('/filters:format(webp)')" type="image/webp">
       <source :srcset="primaryImage('')" type="image/jpeg">
-      <img :src="primaryImage('')" >
+      <img :src="primaryImage('')" alt="">
     </picture>
   </article>
 </template>
@@ -137,6 +142,18 @@
       width: 100%;
       height: 100%;
       display: block;
+    }
+  }
+
+  .Brick-tagList {
+    padding-top: 0;
+    list-style-type: none;
+    & li {
+      margin-left: 0;
+      padding-bottom: 0;
+      display: inline-block;
+      font-size: 0.88rem;
+      white-space: pre;
     }
   }
 

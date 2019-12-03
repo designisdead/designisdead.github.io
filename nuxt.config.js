@@ -70,12 +70,6 @@ module.exports = {
       {hid: 'fb:app_id', name: 'fb:app_id', content: '879905388836438'},
       {hid: 'twitter:card', name: 'twitter:card', content: 'summary_large_image'},
     ],
-    script: [
-      {
-        async: true,
-        src: '//assets.adobedtm.com/launch-EN36f703d1b050451da605a1a6efe4946c-staging.min.js'
-      }
-    ],
     link: [
       {rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'},
       {rel: 'icon', type: 'image/png', href: '/favicon-32x32.png'},

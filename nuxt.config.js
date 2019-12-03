@@ -3,6 +3,10 @@ const webpack = require('webpack');
 const config = require('./plugins/config');
 
 module.exports = {
+  server: {
+    port: 8000, // default: 3000
+    host: '172.16.102.81' // default: localhost
+  },
   mode: 'universal',
   modules: [
     ['storyblok-nuxt', {

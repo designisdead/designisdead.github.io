@@ -4,7 +4,8 @@
     <div class="cmp-carousel__container">
       <div 
       class="cmp-carousel__side-image"
-      @click="changeImage">
+      @click="changeImage"
+      :style="leftImageStyle">
       <img
         id="cmp-carousel__left-side-image"
         :src="leftImage.url"
@@ -20,11 +21,14 @@
           :currentImageCursor="currentImageCursor" 
           :imagesProperties="blok.images" 
           @changeImage="changeImageFromExpendable" 
-          @selectThumbnailImage="selectThumbnailImage" />
+          @selectThumbnailImage="selectThumbnailImage"
+          @showSideImage="showSideImage"
+          @stopDrag="stopDrag" />
       </div>
       <div 
         class="cmp-carousel__side-image"
-        @click="changeImage">
+        @click="changeImage"
+        :style="rightImageStyle">
         <img
           id="cmp-carousel__right-side-image"
           :src="rightImage.url"
@@ -53,7 +57,8 @@ export default {
   },
   data() {
     return {
-      currentImageCursor: 3
+      currentImageCursor: 0,
+      mainImageOffset: 0,
     }
   },
   methods: {
@@ -70,6 +75,12 @@ export default {
     },
     selectThumbnailImage(cursorPos) {
       this.currentImageCursor = cursorPos
+    },
+    showSideImage(offset) {
+      this.mainImageOffset = offset
+    },
+    stopDrag() {
+      this.mainImageOffset = 0
     }
   },
   computed: {
@@ -81,6 +92,17 @@ export default {
         name: image.name
       }
     },
+    rightImageStyle() {
+      if (process.client) { 
+        let screenSize = window.innerWidth > 0 ? window.innerWidth : screen.width
+        return this.mainImageOffset >= 0 || screenSize >= 800 ? {
+          'display': 'block',
+        } : { 
+          'display': 'none' 
+        }
+      }
+      return null
+    },
     leftImage() {
       const filters = supportsWebP ? '/filters:format(webp)' : '';
       const image = this.currentImageCursor === 0 ? this.blok.images[this.blok.images.length - 1] : this.blok.images[this.currentImageCursor - 1]
@@ -88,6 +110,17 @@ export default {
         url: this.$options.filters.imageApi({src: image.filename, size: 'verticalSmall', filters: filters}),
         name: image.name
       }
+    },
+    leftImageStyle() {
+      if (process.client) { 
+        let screenSize = window.innerWidth > 0 ? window.innerWidth : screen.width
+        return this.mainImageOffset <= 0 || screenSize >= 800 ? {
+          'display': 'block',
+        } : { 
+          'display': 'none' 
+        }
+      }
+      return null
     }
   }
 }
@@ -104,25 +137,33 @@ export default {
 }
 
 .cmp-carousel__main-image {
-  flex: 4;
+  flex: 7;
+  padding: 0 20px;
+  height: 100%;
+  overflow-y: hidden;
 }
 
 .cmp-carousel__side-image {
   position: relative;
-  height: 70%;
+  height: 80%;
   flex: 1;
   cursor: pointer;
 
   img:first-child {
+    transition: filter .2s;
     object-fit: cover;
     width: 100%;
     height: 100%;
-    filter: brightness(50%)
+    filter: brightness(40%);
   }
 
   &:hover {
+    img:first-child {
+      filter: brightness(45%);
+    }
+
     .cmp-carousel__chevron {
-      opacity: .7;
+      opacity: .8;
     }
   }
 }
@@ -142,5 +183,46 @@ export default {
 .cmp-carousel__image-number {
   text-align: center;
   padding-bottom: 0; 
+}
+
+@media screen and (max-width: size('large')) {
+  .cmp-carousel__container {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: size('medium')) {
+  .cmp-carousel__container {
+    display: flex;
+    overflow: hidden;
+  }
+
+  .cmp-carousel__side-image {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    
+    img:first-child {
+      filter: none;
+    }
+  }
+
+  .cmp-carousel__chevron {
+    display: none;
+  }
+
+  .cmp-carousel__main-image {
+    padding: 0;
+  }
+}
+
+@media screen and (max-width: size('small')) {
+  .cmp-carousel__container {
+    max-height: 300px;
+  }
 }
 </style>

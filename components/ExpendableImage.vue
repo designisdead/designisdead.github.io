@@ -2,9 +2,16 @@
   <div class="cmp-expendable-image">
     <img
       class="cmp-expendable-image__main-image"
-      @click="expendImage"
       :src="mainImage.url"        
-      :alt="mainImage.name">
+      :alt="mainImage.name"
+      :style="currentImageStyle"
+      @mousemove="drag"
+      @touchmove="drag"
+      @mouseup="stopDrag"
+      @mouseout="mouseOutStopDrag"
+      @touchend="stopDrag"
+      @mousedown.prevent="startDrag"
+      @touchstart="startDrag">
     <div 
       class="cmp-expendable-image__expended-container"
       v-if="isExpended">
@@ -69,6 +76,7 @@
 
 <script>
 import supportsWebP from 'supports-webp'
+import func from '../vue-temp/vue-editor-bridge'
 
 export default {
   props: {
@@ -94,7 +102,10 @@ export default {
         }
       }),
       currentThumbnailOffset: 0,
-      expendendImageIsLoading: false
+      expendendImageIsLoading: false,
+      dragging: false,
+      cursorStartX: 0,
+      cursorCurrentX: 0
     }
   },
   computed: {
@@ -135,9 +146,68 @@ export default {
           return orderedList
       }
       return this.imagesProperties
+    },
+    swipingLeft() {
+      return this.cursorStartX - this.cursorCurrentX >= 0
+    },
+    currentImageStyle() {
+      return this.dragging && Math.abs(this.cursorStartX - this.cursorCurrentX) > 20 ? {
+        'right': `${this.cursorStartX - this.cursorCurrentX}px`,
+      } : { 
+        'right': '0' 
+      }
     }
   },
   methods: {
+    getCursorX(e) {
+      if (e.touches && e.touches.length) {
+        // touch
+        return e.touches[0].pageX
+      }
+
+      if (e.pageX && e.pageY) {
+        // mouse
+        return e.pageX
+      }
+
+      return 0
+    },
+    startDrag(e) {
+      this.dragging = true
+      this.cursorStartX = this.getCursorX(e)
+      this.cursorCurrentX = this.cursorStartX
+    },
+    drag(e) {
+      if(!this.dragging) {
+        return
+      }
+      this.cursorCurrentX = this.getCursorX(e)
+
+      this.$emit('showSideImage', this.cursorStartX - this.cursorCurrentX)
+    },
+    stopDrag(e) {
+      this.dragging = false
+
+      if (this.cursorStartX - this.cursorCurrentX === 0) {
+        this.expendImage()
+      } else if (Math.abs(this.cursorStartX - this.cursorCurrentX) > 50) {
+        // let id = setInterval(() => {
+        //   if (this.cursorCurrentX < 500) {
+        //     clearInterval(id)
+        //   } else {
+        //     this.cursorCurrentX -= 10
+        //   }
+        // }, 10)
+        setTimeout(() => {
+          this.changeImage(null, this.swipingLeft ? 'right' : 'left')
+        }, 100)
+      }
+
+      this.$emit('stopDrag')
+    },
+    mouseOutStopDrag(e) {
+      this.dragging = false
+    },
     getMainImageSize() {
       if (process.client) {
         let screenSize = window.innerWidth > 0 ? window.innerWidth : screen.width
@@ -192,9 +262,13 @@ export default {
       document.querySelector('.Event-header').style.display = 'flex'
       document.body.style.overflow = 'auto'
     },
-    changeImage(e) {
+    changeImage(e, direction = null) {
       this.currentThumbnailOffset = 0
-      e.target.getAttribute('chevronType') === 'left' ? this.$emit('changeImage', 'left') : this.$emit('changeImage', 'right')
+      e ? (
+        e.target.getAttribute('chevronType') === 'left' ? this.$emit('changeImage', 'left') : this.$emit('changeImage', 'right')
+      ) : (
+        direction === 'left' ? this.$emit('changeImage', 'left') : this.$emit('changeImage', 'right')
+      )
     },
     selectThumbnailImage(e) {
       this.$emit('selectThumbnailImage', +e.target.getAttribute('position'))
@@ -218,6 +292,7 @@ export default {
   object-fit: cover;
   max-height: 500px;
   width: 100%;
+  position: relative;
 }
 
 .cmp-carousel__chevron {
@@ -254,11 +329,11 @@ export default {
   .cmp-expendable-image__close-icon {
   cursor: pointer;
   transition: transform .15s;
-  opacity: .7;
+  opacity: .8;
   box-sizing: content-box;
   width: 30px;
   border-radius: 50%;
-  border: 3px solid #ffffff;
+  border: 2px solid #ffffff;
   padding: 6px;
 
   &:hover {
@@ -271,7 +346,7 @@ export default {
 
     &:hover {
       .cmp-expendable-image__chevron {
-        opacity: .7;
+        opacity: .8;
       }
     }
   }
@@ -327,7 +402,7 @@ export default {
 
   &:hover {
     .cmp-expendable-image__chevron {
-      opacity: .5;
+      opacity: .8;
     }
   }
 
@@ -355,8 +430,25 @@ export default {
   }
 
   .cmp-expendable-image__thumbnail-center {
-    border: solid 1px #cecece;
+    border: solid 2px #cecece;
     transform: scale(1.03)
+  }
+}
+
+@media screen and (max-width: size('large')) {
+  .cmp-expendable-image {
+    height: 100%;
+  }
+
+  .cmp-expendable-image__main-image {
+    max-height: 400px;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: size('small')) {
+  .cmp-expendable-image__main-image {
+    max-height: 300px;
   }
 }
 </style>

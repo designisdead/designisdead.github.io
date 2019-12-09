@@ -434,7 +434,7 @@ This component is used to render the Post content type on Storyblok
   }
 
   .Job-form-container {
-    background-color: color(dark);
+    background-color: color(medium);
     padding: $spacer 0;
     text-align: center;
   }
@@ -448,11 +448,10 @@ This component is used to render the Post content type on Storyblok
     text-align:left;
     padding:20px;
     box-sizing:border-box;
-    *zoom:1;
-    background:#fff !important;
-    border:0px solid #b0b0b0 !important;
+    background:transparent;
+    border:0px solid color(medium) !important;
     border-radius:0px !important;
-    color:#000 !important;
+    color:color(light);
 
     * {
       outline:0;
@@ -493,10 +492,39 @@ This component is used to render the Post content type on Storyblok
     textarea {
       padding:6px;
       height:auto;
-      border:#979797 1px solid;
-      border-radius:4px; color:#000 !important;
+      border:color(light) 1px solid;
+      color:color(light);
+      border-radius:4px;
       font-size:13px;
       box-sizing:border-box;
+      background:transparent;
+      transition: 0.3s ease;
+    }
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    textarea:focus {
+      opacity: 0.7;
+
+      ::-webkit-input-placeholder,
+      ::-moz-placeholder,
+      :-ms-input-placeholder,
+      :-moz-placeholder {
+        opacity: 0.7;
+      }
+    }
+
+    ::-webkit-input-placeholder {
+      color: color(light);
+    }
+    ::-moz-placeholder {
+      color: color(light);
+    }
+    :-ms-input-placeholder {
+      color: color(light);
+    }
+    :-moz-placeholder {
+      color: color(light);
     }
 
     textarea {
@@ -509,13 +537,19 @@ This component is used to render the Post content type on Storyblok
       font-family:arial, sans-serif;
       font-size:14px;
       text-align:center;
-      background:#333 !important;
-      border:0 !important;
+      border:2px solid color(light);
       -moz-border-radius:4px !important;
       -webkit-border-radius:4px !important;
       border-radius:4px !important;
-      color:#fff !important;
-      padding:10px !important;
+      color:color(light);
+      padding:7.5px !important;
+      background:transparent;
+      transition: 0.3s ease;
+
+      &:focus,
+      &:hover {
+        opacity: 0.7;
+      }
     }
 
     ._close-icon {
@@ -550,7 +584,7 @@ This component is used to render the Post content type on Storyblok
     }
 
     ._form-branding {
-      color:#fff;
+      color:color(light);
       font-size:10px;
       clear:both;
       text-align:left;
@@ -649,11 +683,11 @@ This component is used to render the Post content type on Storyblok
 
     input[type="text"]._has_error,
     textarea._has_error {
-      border:#f37c7b 1px solid;
+      border:color(copper) 1px solid;
     }
 
     input[type="checkbox"]._has_error {
-      outline:#f37c7b 1px solid;
+      outline:color(copper) 1px solid;
     }
 
     ._error {
@@ -680,7 +714,7 @@ This component is used to render the Post content type on Storyblok
       right:15px;
       border-left:5px solid transparent;
       border-right:5px solid transparent;
-      border-top:5px solid #f37c7b;
+      border-top:5px solid color(copper);
     }
 
     ._error._below ._error-arrow {
@@ -688,15 +722,15 @@ This component is used to render the Post content type on Storyblok
       right:15px;
       border-left:5px solid transparent;
       border-right:5px solid transparent;
-      border-bottom:5px solid #f37c7b;
+      border-bottom:5px solid color(copper);
     }
 
     ._error-inner {
       padding:8px 12px;
-      background-color:#f37c7b;
+      background-color:color(copper);
       font-size:13px;
       font-family:arial, sans-serif;
-      color:#fff;
+      color:color(light);
       text-align:center;
       text-decoration:none;
       border-radius:4px;
@@ -834,6 +868,7 @@ This component is used to render the Post content type on Storyblok
       button[type="submit"] {
         padding:20px;
         font-size:1.5em;
+        width: 150px;
       }
 
       ._inline-style {
@@ -860,7 +895,7 @@ This component is used to render the Post content type on Storyblok
 
     ._inline-style input[type="text"],
     ._inline-style input[type="date"] {
-      padding:10px 12px;
+      padding:9px 12px;
     }
 
     ._inline-style button._inline-style {

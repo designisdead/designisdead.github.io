@@ -61,6 +61,7 @@ stage("Deploy $acceptanceEnv") {
     milestone()
     env.k8s_namespace = "did-stg"
     env.k8s_nginxPort = "30001"
+    env.k8s_environment = "staging"
     timeout(time: 5, unit: 'DAYS') {
         input "About to deploy on $acceptanceEnv. Are you sure?"
     }
@@ -80,6 +81,7 @@ stage("Deploy PRD") {
     milestone()
     env.k8s_namespace = "did-prd"
     env.k8s_nginxPort = "30002"
+    env.k8s_environment = "production"
     timeout(time: 5, unit: 'DAYS') {
         input "About to deploy on PRD. Are you sure?"
     }

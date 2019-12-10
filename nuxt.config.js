@@ -2,6 +2,8 @@ const axios = require("axios");
 const webpack = require('webpack');
 const config = require('./plugins/config');
 
+console.log('Running in environment: ', process.env.NODE_ENV);
+
 module.exports = {
   mode: 'universal',
   modules: [

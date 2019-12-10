@@ -22,6 +22,9 @@ spec:
       - name: did-website-node
         image: designisdead/website:${buildNumber}
         imagePullPolicy: Always
+        env:
+          - name: NODE_ENV
+            value: ${k8s_environment}
         ports:
         - containerPort: 3000
         readinessProbe:

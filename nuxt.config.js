@@ -56,6 +56,9 @@ module.exports = {
   serverMiddleware: [
     '~/servermiddleware/seo.js',
   ],
+  router: {
+    middleware: 'stats'
+  },
   /*
   ** Headers of the page
   */

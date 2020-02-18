@@ -35,7 +35,7 @@ spec:
             httpHeaders:
             - name: Host
               value: localhost
-            path: /
+            path: /healthcheck
             port: 8080
           initialDelaySeconds: 20
           periodSeconds: 15

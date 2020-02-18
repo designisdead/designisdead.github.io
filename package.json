@@ -25,7 +25,8 @@
     "storyblok-nuxt": "1.0.1",
     "supports-webp": "^1.0.7",
     "vue-lazyload": "^1.2.6",
-    "vuex-persistedstate": "^2.5.4"
+    "vuex-persistedstate": "^2.5.4",
+    "consola": "^2.11.3"
   },
   "devDependencies": {
     "@nuxtjs/style-resources": "^0.1.1",

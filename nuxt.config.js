@@ -1,6 +1,7 @@
 const axios = require("axios");
 const webpack = require('webpack');
 const config = require('./plugins/config');
+const bodyParser = require('body-parser')
 
 console.log('Running in environment: ', process.env.NODE_ENV);
 
@@ -54,8 +55,18 @@ module.exports = {
     }
   ],
   serverMiddleware: [
+    // body-parser middleware
+    bodyParser.json(),
     '~/servermiddleware/seo.js',
+    // Will register file from project api directory to handle /api/* requires
+    { path: '/api', handler: '~/servermiddleware/echo.js' },
   ],
+  router: {
+    middleware: 'stats'
+  },
+  env: {
+    apiUrl: process.env.API_URL || 'http://localhost:3000/api/echo'
+  },
   /*
   ** Headers of the page
   */

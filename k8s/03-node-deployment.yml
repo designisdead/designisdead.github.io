@@ -25,6 +25,8 @@ spec:
         env:
           - name: NODE_ENV
             value: ${k8s_environment}
+          - name: API_URL
+            value: ${k8s_apiUrl}
         ports:
         - containerPort: 3000
         readinessProbe:

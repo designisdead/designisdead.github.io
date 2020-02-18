@@ -15,7 +15,11 @@ RUN npm install
 # Bundle app source
 COPY . .
 
-RUN npm run build
+RUN \
+  export API_URL='%%API_URL%%' && \
+  npm run build
+
+RUN chmod +x ./entrypoint.sh
 
 EXPOSE 3000
-CMD [ "npm", "run", "start" ]
+ENTRYPOINT ["./entrypoint.sh"]

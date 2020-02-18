@@ -28,5 +28,11 @@ $ docker build -t designisdead/website .
 # push image to docker hub (make sure you are logged in through the 'docker login' command
 $ docker push designisdead/website
 
-```
+```     
+
+## to support env variables we might need to get hacky
+
+https://github.com/nuxt/nuxt.js/issues/5100
+
+https://github.com/nuxt/nuxt.js/issues/5100#issuecomment-476032241
 

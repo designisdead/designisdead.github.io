@@ -5,7 +5,7 @@ export default function ({route, env}) {
   let now = new Date().toISOString();
   consola.debug('apiUrl', env.apiUrl);
   consola.debug('fullPath', route.fullPath);
-  if (route.fullPath && !route.fullPath.startsWith("/api")) {
+  if (route.fullPath && !route.fullPath.startsWith("/api") && !route.fullPath.startsWith("/healthcheck")) {
     consola.debug('send axios req', route.fullPath)
     return axios.post(env.apiUrl, {
       "type": "PageView",
@@ -21,7 +21,5 @@ export default function ({route, env}) {
         consola.warn(error.response.data);
       }
     });
-
-
   }
 }

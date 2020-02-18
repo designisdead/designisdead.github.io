@@ -31,7 +31,7 @@ spec:
         - containerPort: 3000
         readinessProbe:
           httpGet:
-            path: /
+            path: /healthcheck
             port: 3000
           initialDelaySeconds: 60
           periodSeconds: 10
@@ -39,7 +39,7 @@ spec:
           failureThreshold: 12
         livenessProbe:
           httpGet:
-            path: /
+            path: /healthcheck
             port: 3000
           initialDelaySeconds: 120
           periodSeconds: 10

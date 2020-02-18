@@ -8,6 +8,7 @@ console.log('Running in environment: ', process.env.NODE_ENV);
 module.exports = {
   mode: 'universal',
   modules: [
+    '@traum-ferienwohnungen/nuxt-advanced-healthcheck',
     ['storyblok-nuxt', {
       // accessToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
       accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',

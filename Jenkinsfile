@@ -32,16 +32,20 @@ node('master') {
     env.buildNumber = "${buildNumber}"
 
     stage('Build') {
-        try {
-            sh 'npm install'
-        } catch (e) {
+      docker.image('node:8-alpine').inside {
+        withEnv(['HOME=.']) {
+          try {
+            sh "npm install"
+
+          } catch (e) {
             // If there was an exception thrown, the build failed
             currentBuild.result = "FAILED"
             throw e
-        } finally {
-          
-        }
+          } finally {
 
+          }
+        }
+      }
     }
 
     stage('Building image') {

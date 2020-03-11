@@ -1,33 +1,22 @@
 <template>
   <div class="center">
-    <component
+    <card v-if="blok"
           :key="blok.full_slug"
-          :post="blok"
-          :is="card"/>
-    <div v-if="topBlogSlug" class="content">
-      <h2>{{ topBlogSlug }}</h2>
-      <p>author: {{ blok.content.author }}</p>
-    </div>
+          :post="blok"/>
   </div>
 </template>
 
 <script>
   export default {
-    props: {
-      topBlogSlug: {
-        type: String,
-        default: function () {
-          return "";
-        }
-      },
-      blok: {
-        type: Object,
-        default: function () {
-          return {};
+    data() {
+      return {
+        topBlogSlug: null,
+        blok: {
+          content: {}
         }
       }
     },
-    mounted() {
+    created() {
       this.fetchTopBlog();
     },
     methods: {
@@ -43,6 +32,7 @@
           });
         }).then((res) => {
           this.blok = res.data.story;
+          return res.data.story;
         });
       }
     }

@@ -1,3 +1,5 @@
+import consola from 'consola';
+
 const state = () => ({
   all: {}
 })
@@ -16,6 +18,7 @@ const actions = {
       per_page: '100',
       version: this.state.version
     }).then((res) => {
+      consola.info('These are the employees', res.data.stories)
       commit('setEmployees', res.data.stories)
     })
   },

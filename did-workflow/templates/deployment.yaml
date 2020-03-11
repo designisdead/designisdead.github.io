@@ -1,24 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "charts.fullname" . }}
+  name: {{ include "did-workflow.fullname" . }}
   labels:
-    {{- include "charts.labels" . | nindent 4 }}
+    {{- include "did-workflow.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "charts.selectorLabels" . | nindent 6 }}
+      {{- include "did-workflow.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        {{- include "charts.selectorLabels" . | nindent 8 }}
+        {{- include "did-workflow.selectorLabels" . | nindent 8 }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "charts.serviceAccountName" . }}
+      serviceAccountName: {{ include "did-workflow.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

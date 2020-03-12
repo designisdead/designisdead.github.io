@@ -27,7 +27,7 @@
     },
     computed: {
       Author() {
-        let author = this.$store.state.employees.all.find((employee) => {
+        const author = this.$store.state.employees.all.find((employee) => {
           return (employee.uuid == this.id) || (employee.id == this.id);
         });
         if (author) {

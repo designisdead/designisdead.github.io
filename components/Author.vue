@@ -1,31 +1,41 @@
 <template>
-  <span
-    class="Author"
-    rel="author">
+  <span v-if="Author.content"
+        class="Author"
+        rel="author">
     <picture class="Author-avatar">
-      <source :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny', filters: '/filters:format(webp)'})" type="image/webp">
+      <source
+        :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny', filters: '/filters:format(webp)'})"
+        type="image/webp">
       <source :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})" type="image/jpeg">
       <img
         :src="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})"
-        :title="'Written by ' + Author.name" />
+        :title="'Written by ' + Author.name"/>
     </picture>
     <span class="Author-name">{{ Author.name }}</span>
   </span>
+  <span v-else></span>
 </template>
 
 <script>
+  import consola from 'consola'
+
   export default {
     props: {
       id: {
-        type: Number,
         default: null
       },
     },
     computed: {
       Author() {
-        return this.$store.state.employees.all.find((employee) => {
-          return employee.id == this.id;
+        const author = this.$store.state.employees.all.find((employee) => {
+          return (employee.uuid == this.id) || (employee.id == this.id);
         });
+        if (author) {
+          return author
+        } else {
+          consola.warn('Did not find author with id:', this.id);
+          return {};
+        }
       }
     }
   }

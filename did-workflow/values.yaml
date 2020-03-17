@@ -32,18 +32,19 @@ securityContext: {}
   #   drop:
   #   - ALL
   # readOnlyRootFilesystem: true
-# runAsNonRoot: true
+  # runAsNonRoot: true
 # runAsUser: 1000
+
 
 service:
   type: ClusterIP
-  port: 8080
+  port: 3000
 
 ingress:
   enabled: false
   annotations: {}
-  # kubernetes.io/ingress.class: nginx
-  # kubernetes.io/tls-acme: "true"
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
   hosts:
     - host: did-website-node.local
       paths: []
@@ -62,11 +63,13 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
-#   cpu: 100m
-#   memory: 128Mi
+  #   cpu: 100m
+  #   memory: 128Mi
 
 nodeSelector: {}
 
 tolerations: []
 
 affinity: {}
+
+

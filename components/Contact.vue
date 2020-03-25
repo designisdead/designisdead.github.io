@@ -137,6 +137,21 @@
               <input type="text" name="email" placeholder="Type your email" style="font-size: 100%;" required/>
             </div>
           </div>
+          <div class="_form_element _field28 _full_width " >
+            <label class="_form-label">
+              Message intended for
+            </label>
+            <div class="_field-wrapper">
+              <select name="field[28]" style="height:47px;">
+                <option value="General" selected>
+                  General
+                </option>
+                <option value="Sales" >
+                  Sales
+                </option>
+              </select>
+            </div>
+          </div>
           <div class="_form_element _field16 _full_width " >
             <label class="_form-label">
               Inquiry*
@@ -245,6 +260,9 @@
           var fieldVal = getUrlParam(allInputs[i].dataset.name);
 
           if (fieldVal) {
+            if (allInputs[i].dataset.autofill === "false") {
+              continue;
+            }
             if (allInputs[i].type == "radio" || allInputs[i].type == "checkbox") {
               if (allInputs[i].value == fieldVal) {
                 allInputs[i].checked = true;

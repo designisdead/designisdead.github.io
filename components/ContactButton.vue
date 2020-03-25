@@ -1,7 +1,7 @@
 <template>
   <div>
     <a
-      href="/contact"
+      href="/contact-us"
       :class="[blok.style]"
       class="Button"
       @click="toggleContactModal($event)"

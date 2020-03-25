@@ -386,6 +386,7 @@
         <contact @closeContactModal="toggleContactModal()"></contact>
       </div>
     </transition>
+    <GlobalEvents @toggleContactModal="toggleContactModal()"></GlobalEvents>
   </div>
 </template>
 

@@ -58,11 +58,11 @@ This component is used to render the Post content type on Storyblok
             <wrapper size="medium">
               <div
                 class="Buttons"
-                style="justify-content: center;">
+                style="justify-content: left;">
                 <nuxt-link
                   :to="'/blog'"
-                  class="Button">
-                  View all posts
+                  class="Button outline">
+                  &#8592; To all blogs
                 </nuxt-link>
               </div>
             </wrapper>

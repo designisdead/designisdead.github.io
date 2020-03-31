@@ -26,9 +26,12 @@ metadata:
   spec:
     type: {{ .Values.didWebsiteNginx.service.type }}
     ports:
-      - port: {{ .Values.didWebsiteNginx.port }}
+      - port: {{ .Values.didWebsiteNginx.service.port }}
         targetPort:
         protocol: TCP
         nodePort: ${k8s_nginxPort}
+    selector:
+      app.kubernetes.io/name: {{ include "did-workflow.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
 
 

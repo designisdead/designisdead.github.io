@@ -36,11 +36,17 @@ didWebsiteNode:
   ## If false, did-website-node will not be installed
   enabled: true
   name: did-website-node
+
   replicaCount: 2
+
   image:
     repository: designisdead/website:${buildNumber}
     tag: stable
     pullPolicy: Always
+
+  service:
+      type: ClusterIP
+      port: 3000
 
 
 didWebsiteNginx:
@@ -62,8 +68,7 @@ securityContext: {}
 # runAsUser: 1000
 
 service:
-  type: ClusterIP
-  port:
+
 
 ingress:
   enabled: false

@@ -1,14 +1,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "did-workflow.fullname" . }}
+  name: did-website-node
   labels:
     {{ include "did-workflow.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.didWebsiteNode.replicaCount }}
   selector:
     matchLabels:
-      app.kubernetes.io/name: {{ include "did-workflow.name" . }}
+      app.kubernetes.io/name: {{ .Values.didWebsiteNode.name }}
       app.kubernetes.io/instance: {{ .Release.Name }}
   strategy:
     type: RollingUpdate
@@ -18,7 +18,7 @@ spec:
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: {{ include "did-workflow.name" . }}
+        app.kubernetes.io/name: {{ .Values.didWebsiteNode.name }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       {{- with .Values.imagePullSecrets }}
@@ -29,9 +29,9 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-      - name: {{ .Chart.Name }}
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-        imagePullPolicy: {{ .Values.image.pullPolicy }}
+      - name: {{ .Values.didWebsiteNode.name }}
+        image: "{{ .Values.didWebsiteNode.image.repository }}:{{ .Values.didWebsiteNode.image.tag }}"
+        imagePullPolicy: {{ .Values.didWebsiteNode.image.pullPolicy }}
         env:
           - name: NODE_ENV
             value: ${k8s_environment}

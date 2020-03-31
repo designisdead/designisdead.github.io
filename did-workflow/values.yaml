@@ -2,7 +2,7 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount: 2
+replicaCount:
 
 image:
   repository: designisdead/website:${buildNumber}
@@ -45,15 +45,21 @@ didWebsiteNode:
     pullPolicy: Always
 
   service:
-      type: ClusterIP
-      port: 3000
+    type: ClusterIP
+    port: 3000
 
 
 didWebsiteNginx:
   ## If false, did-website-nginx will not be installed
   enabled: true
+
   name: did-website-nginx
+
   replicaCount: 2
+
+  service:
+    type: NodePort
+    port: 8080
 
 
 podSecurityContext: {}
@@ -68,7 +74,7 @@ securityContext: {}
 # runAsUser: 1000
 
 service:
-
+  type: ClusterIP
 
 ingress:
   enabled: false

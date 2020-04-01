@@ -1,9 +1,10 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: did-website-node
+  name: {{ include "did-workflow.fullname" . }}
   labels:
-    {{ include "did-workflow.labels" . | nindent 4 }}
+    {{- include "did-workflow.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.didWebsiteNode.replicaCount }}
   selector:
@@ -73,3 +74,103 @@ spec:
 
 ---
 
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "did-workflow.fullname" . }}
+  labels:
+    {{ include "did-workflow.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.didWebsiteNginx.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.didWebsiteNginx.name }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.didWebsiteNginx.name }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "did-workflow.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: {{ .Values.didWebsiteNginx.image.name }}
+        image: "{{ .Values.didWebsiteNginx.image.repository }}:{{ .Values.didWebsiteNginx.image.tag }}"
+        imagePullPolicy: {{ .Values.didWebsiteNginx.image.pullPolicy }}
+        volumentMounts:
+          - name: nginx-config-volume
+            mounthPath: /etc/nginx/nginx.conf
+          - name: nginx-logs
+            mountPath: /var/log/nginx
+        ports:
+        - containerPort: 8080
+        readinessProbe:
+          httpGet:
+            httpHeaders:
+            - name: Host
+              value: localhost
+            path: /healthcheck
+            port: 8080
+          initialDelaySeconds: 20
+          periodSeconds: 15
+          timeoutSeconds: 5
+          failureThreshold: 6
+      - name: dnsmasq
+        image: "janeczku/go-dnsmasq:release-1.0.5"
+        args:
+          - --listen
+          - "127.0.0.1:53"
+          - --default-resolver
+          - --append-search-domains
+          - --hostsfile=/etc/hosts
+          - --verbose
+      - image: designisdead/fluent
+        name: fluent
+        env:
+          - name: FLUENTD_ARGS
+            value: -c /etc/td-agent/td-agent.conf
+          - name: LOG_GROUP_NAME
+            value: ${k8s_namespace}
+          - name: LOG_STREAM_NAME
+            value: "did-nginx"
+          - name: AWS_REGION
+            value: "eu-central-1"
+        volumeMounts:
+          - name: nginx-logs
+            mountPath: /var/log/nginx
+          - name: fluent-config-volume
+            mountPath: /etc/td-agent
+      restartPolicy: Always
+      volumes:
+        - name: nginx-config-volume
+          configMap:
+            name: nginx-config
+        - name: nginx-logs
+          emptyDir: {}
+        - name: fluent-config-volume
+          configMap:
+            name: nginx-fluentd-config
+
+      resources:
+        {{- toYaml .Values.resources | nindent 12 }}
+    {{- with .Values.nodeSelector }}
+    nodeSelector:
+      {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.affinity }}
+    affinity:
+      {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+    tolerations:
+      {{- toYaml . | nindent 8 }}
+    {{- end }}

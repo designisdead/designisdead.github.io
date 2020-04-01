@@ -48,6 +48,9 @@ didWebsiteNode:
     type: ClusterIP
     port: 3000
 
+node:
+  nodeEnv: k8s_environment
+  apiURL: k8s_apiUrl
 
 didWebsiteNginx:
   ## If false, did-website-nginx will not be installed
@@ -56,6 +59,12 @@ didWebsiteNginx:
   name: did-website-nginx
 
   replicaCount: 2
+
+  image:
+    name: webserver
+    repository: nginx
+    tag: stable
+    pullPolicy: Always
 
   service:
     type: NodePort

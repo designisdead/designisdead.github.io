@@ -2,13 +2,6 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-replicaCount:
-
-image:
-  repository: designisdead/website:${buildNumber}
-  tag: stable
-  pullPolicy: Always
-
 imagePullSecrets:
   - name: dockerhubcred
 

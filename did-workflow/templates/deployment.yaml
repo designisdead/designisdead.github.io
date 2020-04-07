@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "did-workflow.fullname" . }}
+  name: {{ template "did-workflow.didWebsiteNode.fullname" . }}
   labels:
     {{- include "did-workflow.labels" . | nindent 4 }}
 spec:
@@ -77,9 +77,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "did-workflow.fullname" . }}
+  name: {{ template "did-workflow.didWebsiteNginx.fullname" . }}
   labels:
-    {{ include "did-workflow.labels" . | nindent 4 }}
+    {{- include "did-workflow.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.didWebsiteNginx.replicaCount }}
   selector:

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "did-workflow.fullname" . }}
+  name: {{ template "did-workflow.didWebsiteNode.fullname" . }}
   labels:
     {{- include "did-workflow.labels" . | nindent 4 }}
 spec:
@@ -20,18 +20,18 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: did-website-ginx
+  name: {{ template "did-workflow.didWebsiteNginx.fullname" . }}
   labels:
     {{- include "did-workflow.labels" . | nindent 4 }}
-  spec:
-    type: {{ .Values.didWebsiteNginx.service.type }}
-    ports:
-      - port: {{ .Values.didWebsiteNginx.service.port }}
-        targetPort:
-        protocol: TCP
-        nodePort: ${k8s_nginxPort}
-    selector:
-      app.kubernetes.io/name: {{ include "did-workflow.name" . }}
-      app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  type: {{ .Values.didWebsiteNginx.service.type }}
+  ports:
+    - port: {{ .Values.didWebsiteNginx.service.port }}
+      targetPort:
+      protocol: TCP
+      # nodePort: ${k8s_nginxPort}
+  selector:
+    app.kubernetes.io/name: {{ include "did-workflow.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
 
 

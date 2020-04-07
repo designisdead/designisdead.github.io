@@ -32,6 +32,40 @@ Create chart name and version as used by the chart label.
 {{- end -}}
 
 {{/*
+Create a fully qualified didWebsiteNode name.
+*/}}
+
+{{- define "did-workflow.didWebsiteNode.fullname" -}}
+{{- if .Values.didWebsiteNode.fullnameOverride -}}
+{{- .Values.didWebsiteNode.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Create a fully qualified didWebsiteNginx name.
+*/}}
+
+{{- define "did-workflow.didWebsiteNginx.fullname" -}}
+{{- if .Values.didWebsiteNginx.fullnameOverride -}}
+{{- .Values.didWebsiteNginx.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- $name := default .Chart.Name .Values.nameOverride -}}
+{{- if contains $name .Release.Name -}}
+{{- .Release.Name | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
 Common labels
 */}}
 {{- define "did-workflow.labels" -}}

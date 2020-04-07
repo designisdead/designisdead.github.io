@@ -9,11 +9,11 @@ nameOverride: ""
 fullnameOverride: ""
 
 serviceAccount:
-  did-website-node:
+  didWebsiteNode:
     create: true
     annotations: {}
     name:
-  did-website-nginx:
+  didWebsiteNginx:
     create: true
     annotations: {}
     name:

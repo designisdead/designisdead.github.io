@@ -12,7 +12,7 @@
     </nuxt-link>
     <a
       v-if="externalLink"
-      href="blok.link.cached_url"
+      :href="blok.link.cached_url"
       :class="[blok.style]"
       class="Button"
       rel="noopener">

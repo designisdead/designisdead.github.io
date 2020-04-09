@@ -32,6 +32,7 @@
       <ul
         v-if="blok.listcontent.length > 0"
         :class="['List--' + blok.listtype]"
+        :id="blok.id"
         class="List">
         <component
           v-for="post in blok.listcontent"

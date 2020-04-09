@@ -28,6 +28,7 @@
     "supports-webp": "^1.0.7",
     "vue-global-events": "^1.1.2",
     "vue-lazyload": "^1.2.6",
+    "vue-scrollto": "^2.17.1",
     "vuex-persistedstate": "^2.5.4"
   },
   "devDependencies": {

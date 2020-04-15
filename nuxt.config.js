@@ -53,6 +53,10 @@ module.exports = {
       // ssr true required for gmap to work in staging
       ssr: true,
       src: '~/plugins/googleMapConfig.js'
+    },
+    {
+      ssr: false,
+      src: '~/plugins/vue-scrollto.js'
     }
   ],
   serverMiddleware: [

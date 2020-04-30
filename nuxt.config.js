@@ -9,6 +9,7 @@ module.exports = {
   mode: 'universal',
   modules: [
     '@traum-ferienwohnungen/nuxt-advanced-healthcheck',
+    'nuxt-webfontloader',
     ['storyblok-nuxt', {
       // accessToken: 'O2r6aDSsF6m26lYt5NNMzQtt',
       accessToken: 'AJwMQue3YmvF9GhvSrecTQtt',
@@ -25,6 +26,11 @@ module.exports = {
       id: 'GTM-TQWRSTX'
     }]
   ],
+  webfontloader: {
+    typekit: {
+      id: 'lzu3trk'
+    }
+  },
   styleResources: {
     scss: ['@/assets/scss/_config.scss'],
   },

@@ -1,0 +1,67 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nginx-fluentd-config
+data:
+  td-agent.conf: |
+    <source>
+      @type tail
+      format nginx
+      path /var/log/nginx/did_access*
+      path_key tailed_nginx_access_path
+      pos_file /var/log/nginx/did.access.pos
+      tag did.nginx.access
+    </source>
+    <source>
+      @type tail
+      format multiline
+      format_firstline /^\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2} \[\w+\] (?<pid>\d+).(?<tid>\d+): /
+      format1 /^(?<time>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?<log_level>\w+)\] (?<pid>\d+).(?<tid>\d+): (?<message>.*)/
+      multiline_flush_interval 3s
+      path /var/log/nginx/did_error*
+      path_key tailed_did_error_path
+      pos_file /var/log/nginx/did.error.pos
+      tag did.nginx.error
+    </source>
+    <filter **>
+      @type record_transformer
+      <record>
+        hostname ${hostname}
+        tag ${tag}
+      </record>
+    </filter>
+    <match **>
+      @type copy
+      <store>
+        @type cloudwatch_logs
+        @id out_cloudwatch_logs
+        log_group_name "#{ENV['LOG_GROUP_NAME']}"
+        log_stream_name "#{ENV['LOG_STREAM_NAME']}"
+        auto_create_stream true
+      </store>
+      <store>
+        @type kafka_buffered
+
+        # list of seed brokers
+        brokers data-platform-cp-kafka-0.data-platform-cp-kafka-headless.data-platform.svc.cluster.local:9092,data-platform-cp-kafka-1.data-platform-cp-kafka-headless.data-platform.svc.cluster.local:9092,data-platform-cp-kafka-2.data-platform-cp-kafka-headless.data-platform.svc.cluster.local:9092
+
+        # buffer settings
+        buffer_type file
+        buffer_path /buffer/td
+        flush_interval 3s
+
+        # topic settings
+        default_topic did-website-logs
+
+        get_kafka_client_log true
+
+        # data type settings
+        output_data_type json
+        compression_codec gzip
+
+        # producer settings
+        max_send_retries 1
+        required_acks -1
+      </store>
+    </match>
+

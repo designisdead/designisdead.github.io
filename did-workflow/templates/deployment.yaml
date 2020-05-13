@@ -108,6 +108,7 @@ spec:
         imagePullPolicy: {{ .Values.didWebsiteNginx.image.pullPolicy }}
         volumeMounts:
           - name: nginx-config-volume
+
             mountPath: /etc/nginx/nginx.conf
             subPath: nginx.conf
           - name: nginx-logs
@@ -140,7 +141,7 @@ spec:
           - name: FLUENTD_ARGS
             value: -c /etc/td-agent/td-agent.conf
           - name: LOG_GROUP_NAME
-            value: mia-test
+            value: {{ .Values.kubeNamespace }}
           - name: LOG_STREAM_NAME
             value: "did-nginx"
           - name: AWS_REGION

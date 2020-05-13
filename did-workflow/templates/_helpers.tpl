@@ -25,19 +25,12 @@ If release name contains chart name it will be used as a full name.
 {{- end -}}
 
 {{/*
-Create chart name and version as used by the chart label.
-*/}}
-{{- define "did-workflow.chart" -}}
-{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
-{{- end -}}
-
-{{/*
 Create a fully qualified didWebsiteNode name.
 */}}
 
 {{- define "did-workflow.didWebsiteNode.fullname" -}}
-{{- if .Values.didWebsiteNode.fullnameOverride -}}
-{{- .Values.didWebsiteNode.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.didWebsiteNode.name -}}
+{{- .Values.didWebsiteNode.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
@@ -53,8 +46,8 @@ Create a fully qualified didWebsiteNginx name.
 */}}
 
 {{- define "did-workflow.didWebsiteNginx.fullname" -}}
-{{- if .Values.didWebsiteNginx.fullnameOverride -}}
-{{- .Values.didWebsiteNginx.fullnameOverride | trunc 63 | trimSuffix "-" -}}
+{{- if .Values.didWebsiteNginx.name -}}
+{{- .Values.didWebsiteNginx.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
 {{- $name := default .Chart.Name .Values.nameOverride -}}
 {{- if contains $name .Release.Name -}}
@@ -64,6 +57,14 @@ Create a fully qualified didWebsiteNginx name.
 {{- end -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Create chart name and version as used by the chart label.
+*/}}
+{{- define "did-workflow.chart" -}}
+{{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
 
 {{/*
 Common labels
@@ -82,6 +83,16 @@ Selector labels
 */}}
 {{- define "did-workflow.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "did-workflow.name" . }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{- define "did-workflow.didWebsiteNode.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "did-workflow.name" . }}-node
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end -}}
+
+{{- define "did-workflow.didWebsiteNginx.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "did-workflow.name" . }}-nginx
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 

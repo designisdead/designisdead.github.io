@@ -35,9 +35,9 @@ spec:
         imagePullPolicy: {{ .Values.didWebsiteNode.image.pullPolicy }}
         env:
           - name: NODE_ENV
-            value: ${k8s_environment}
+            value: {{ .Values.didWebsiteNode.environment }}
           - name: API_URL
-            value: ${k8s_apiUrl}
+            value: {{ .Values.didWebsiteNode.apiUrl }}
         ports:
         - name: http
           containerPort: 3000
@@ -106,9 +106,10 @@ spec:
       - name: {{ .Values.didWebsiteNginx.image.name }}
         image: "{{ .Values.didWebsiteNginx.image.repository }}:{{ .Values.didWebsiteNginx.image.tag }}"
         imagePullPolicy: {{ .Values.didWebsiteNginx.image.pullPolicy }}
-        volumentMounts:
+        volumeMounts:
           - name: nginx-config-volume
-            mounthPath: /etc/nginx/nginx.conf
+            mountPath: /etc/nginx/nginx.conf
+            subPath: nginx.conf
           - name: nginx-logs
             mountPath: /var/log/nginx
         ports:
@@ -127,19 +128,19 @@ spec:
       - name: dnsmasq
         image: "janeczku/go-dnsmasq:release-1.0.5"
         args:
-          - --listen
-          - "127.0.0.1:53"
-          - --default-resolver
-          - --append-search-domains
-          - --hostsfile=/etc/hosts
-          - --verbose
+        - --listen
+        - "127.0.0.1:53"
+        - --default-resolver
+        - --append-search-domains
+        - --hostsfile=/etc/hosts
+        - --verbose
       - image: designisdead/fluent
         name: fluent
         env:
           - name: FLUENTD_ARGS
             value: -c /etc/td-agent/td-agent.conf
           - name: LOG_GROUP_NAME
-            value: ${k8s_namespace}
+            value: mia-test
           - name: LOG_STREAM_NAME
             value: "did-nginx"
           - name: AWS_REGION

@@ -41,9 +41,8 @@ didWebsiteNode:
     type: ClusterIP
     port: 3000
 
-node:
-  nodeEnv: k8s_environment
-  apiURL: k8s_apiUrl
+  environment: k8s_environment
+  apiUrl: k8s_apiUrl
 
 didWebsiteNginx:
   ## If false, did-website-nginx will not be installed
@@ -92,7 +91,7 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+#resources:
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -101,8 +100,8 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
   # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+     #cpu: 100m
+     #memory: 128Mi
 
 nodeSelector: {}
 

@@ -5,19 +5,11 @@ def jsonParse(def json) {
   new groovy.json.JsonSlurperClassic().parseText(json)
 }
 
-/*
-    Create the kubernetes namespace
- */
-
 def createNamespace(namespace) {
   echo "Creating namespace ${namespace} if needed"
 
   sh "[ ! -z \"\$(kubectl get ns ${namespace} -o name 2>/dev/null)\" ] || kubectl create ns ${namespace}"
 }
-
-/*
-    Helm install
- */
 
 def helmInstall(namespace, release, buildNumber, additionalSetParams) {
   echo "Installing ${release} in ${namespace}"
@@ -36,9 +28,6 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
   }
 }
 
-/*
-    Helm delete (if exists)
- */
 
 def helmDelete(namespace, release) {
   echo "Deleting ${release} in ${namespace} if deployed"
@@ -54,8 +43,9 @@ def majorVersion;
 def buildNumber;
 
 def registry = "designisdead/website"
+def imageName = ""
 def registryCredential = 'did-docker-hub'
-
+def didDevOpsChannel = ""
 
 node('master') {
   def websiteImage

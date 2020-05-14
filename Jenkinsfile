@@ -128,10 +128,10 @@ stage("Deploy $acceptanceEnv") {
                         '
 
             // Remove release if exists
-            // helmDelete (namespace, "${imageName}")
+            helmDelete (namespace, "${imageName}")
 
             // Deploy with helm
-            helmInstall(namespace, "${imageName}", "${buildNumber}", additionalSetParams)
+            helmInstall(namespace, "${imageName}", "${buildNumber}", addtionalSetParams)
         }
       }
       //TODO healthcheck

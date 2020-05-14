@@ -167,10 +167,11 @@ stage("Deploy PRD") {
           // make namespace if it doesn't exist
           createNamespace(namespace)
 
-          def addtionalSetParams = '--set ingress.hosts[0].host=$ingress_host \
-                        --set app.topicWebsiteEvents=$topic_website_events \
-                        --set app.topicTopBlog=$topic_top_blog \
-                        --set app.settingsPageId=$settings_page_id \
+          def addtionalSetParams = '--set namespace=$k8s_namespace\
+                        --set didWebsiteNginx.service.port=$k8s_nginxPort \
+                        --set didWebsiteNode.environment=$k8s_environment \
+                        --set didWebsiteNode.apiUrl=$k8s_apiUrl \
+                        --set ingress.hosts[0].host=$ingress_host \
                         '
 
           // Deploy with helm

@@ -125,6 +125,13 @@ stage("Deploy $acceptanceEnv") {
             // make namespace if it doesn't exist
             createNamespace(namespace)
 
+            def addtionalSetParams = '--set namespace=$k8s_namespace\
+                        --set didWebsiteNginx.service.port=$k8s_nginxPort \
+                        --set didWebsiteNode.environment=$k8s_environment \
+                        --set didWebsiteNode.apiUrl=$k8s_apiUrl \
+                        --set ingress.hosts[0].host=$ingress_host \
+                        '
+
             // Remove release if exists
             // helmDelete (namespace, "${imageName}")
 

@@ -129,7 +129,7 @@ stage("Deploy $acceptanceEnv") {
              helmDelete (namespace, "${imageName}")
 
             // Deploy with helm
-            helmInstall(namespace, "${imageName}", "${buildNumber}", addtionalSetParams)
+            helmInstall(namespace, "${imageName}", "${buildNumber}", additionalSetParams)
           }
         }
       }

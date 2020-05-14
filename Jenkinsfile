@@ -20,10 +20,9 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
     //TODO add a map of values to override
     sh """
             helm upgrade --install --namespace ${namespace} ${release} \
-                --set kubeNamespace=${namespace} \
-                --set didWebsiteNode.image.tag=${buildNumber} \
+                --set image.tag=${buildNumber} \
                 ${additionalSetParams} \
-                ./did-workflow
+                event-api/charts/event-api
         """
     sh "sleep 5"
   }
@@ -44,8 +43,9 @@ def majorVersion;
 def buildNumber;
 
 def registry = "designisdead/website"
+def imageName = ""
 def registryCredential = 'did-docker-hub'
-
+def didDevOpsChannel = ""
 
 node('master') {
   def websiteImage
@@ -126,7 +126,7 @@ stage("Deploy $acceptanceEnv") {
             createNamespace(namespace)
 
             // Remove release if exists
-             helmDelete (namespace, "${imageName}")
+            // helmDelete (namespace, "${imageName}")
 
             // Deploy with helm
             helmInstall(namespace, "${imageName}", "${buildNumber}", additionalSetParams)

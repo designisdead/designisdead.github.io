@@ -20,9 +20,9 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
     //TODO add a map of values to override
     sh """
             helm upgrade --install --namespace ${namespace} ${release} \
-                --set image.tag=${buildNumber} \
+                --set didWebsiteNode.image.tag=${buildNumber} \
                 ${additionalSetParams} \
-                event-api/charts/event-api
+                ./did-workflow
         """
     sh "sleep 5"
   }
@@ -167,8 +167,10 @@ stage("Deploy PRD") {
           // make namespace if it doesn't exist
           createNamespace(namespace)
 
-          def addtionalSetParams = '--set kafka.kafkaBrokers=$kafka_brokers \
-                        --set ingress.hosts[0].host=$ingress_host \
+          def addtionalSetParams = '--set ingress.hosts[0].host=$ingress_host \
+                        --set app.topicWebsiteEvents=$topic_website_events \
+                        --set app.topicTopBlog=$topic_top_blog \
+                        --set app.settingsPageId=$settings_page_id \
                         '
 
           // Deploy with helm

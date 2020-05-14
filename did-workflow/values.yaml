@@ -1,7 +1,7 @@
 # Default values for did-workflow.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-kubeNamespace: mia-test
+namespace: mia-test
 
 imagePullSecrets:
   - name: dockerhubcred

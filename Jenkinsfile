@@ -114,11 +114,6 @@ stage("Deploy $acceptanceEnv") {
           env.k8s_apiUrl = "https://event-api-stg.designisdead.com/api/event"
 
           env.ingress_host = "event-api-stg.designisdead.com"
-          withCredentials([string(credentialsId: 'did-website-confluent-cloud-api-key', variable: 'apiKey'),
-                           string(credentialsId: 'did-website-confluent-cloud-api-secret', variable: 'apiSecret')]) {
-            env.confluent_cloud_api_key = apiKey
-            env.confluent_cloud_api_secret = apiSecret
-
 
             sh "kubectl get pods -n ${namespace}"
 
@@ -137,7 +132,6 @@ stage("Deploy $acceptanceEnv") {
 
             // Deploy with helm
             helmInstall(namespace, "${imageName}", "${buildNumber}", additionalSetParams)
-          }
         }
       }
       //TODO healthcheck

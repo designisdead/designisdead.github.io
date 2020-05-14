@@ -4,7 +4,7 @@ kind: Service
 metadata:
   name: did-website-node
   labels:
-    {{- include "did-workflow.labels" . | nindent 4 }}
+    {{- include "did-website.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.didWebsiteNode.service.type }}
   ports:
@@ -22,14 +22,14 @@ kind: Service
 metadata:
   name: did-website-nginx
   labels:
-    {{- include "did-workflow.labels" . | nindent 4 }}
+    {{- include "did-website.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.didWebsiteNginx.service.type }}
   ports:
     - port: {{ .Values.didWebsiteNginx.service.port }}
       targetPort:
       protocol: TCP
-      #nodePort: {{ .Values.didWebsiteNginx.service.nodePort }}
+      nodePort: {{ .Values.didWebsiteNginx.service.nodePort }}
   selector:
     app.kubernetes.io/name: {{ .Values.didWebsiteNginx.name }}
     app.kubernetes.io/instance: {{ .Release.Name }}

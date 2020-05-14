@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "did-workflow.didWebsiteNode.fullname" . }}
+  name: {{ template "did-website.didWebsiteNode.fullname" . }}
   labels:
-    {{- include "did-workflow.labels" . | nindent 4 }}
+    {{- include "did-website.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.didWebsiteNode.replicaCount }}
   selector:
@@ -26,7 +26,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "did-workflow.serviceAccountName" . }}
+      serviceAccountName: {{ include "did-website.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -77,9 +77,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "did-workflow.didWebsiteNginx.fullname" . }}
+  name: {{ template "did-website.didWebsiteNginx.fullname" . }}
   labels:
-    {{- include "did-workflow.labels" . | nindent 4 }}
+    {{- include "did-website.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.didWebsiteNginx.replicaCount }}
   selector:
@@ -99,7 +99,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "did-workflow.serviceAccountName" . }}
+      serviceAccountName: {{ include "did-website.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -141,7 +141,7 @@ spec:
           - name: FLUENTD_ARGS
             value: -c /etc/td-agent/td-agent.conf
           - name: LOG_GROUP_NAME
-            value: {{ .Values.namespace }}
+            value: {{ .Values.cloudWatchLogGroup }}
           - name: LOG_STREAM_NAME
             value: "did-nginx"
           - name: AWS_REGION

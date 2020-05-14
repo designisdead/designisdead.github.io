@@ -2,7 +2,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "did-workflow.name" -}}
+{{- define "did-website.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -11,7 +11,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "did-workflow.fullname" -}}
+{{- define "did-website.fullname" -}}
 {{- if .Values.fullnameOverride -}}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -28,7 +28,7 @@ If release name contains chart name it will be used as a full name.
 Create a fully qualified didWebsiteNode name.
 */}}
 
-{{- define "did-workflow.didWebsiteNode.fullname" -}}
+{{- define "did-website.didWebsiteNode.fullname" -}}
 {{- if .Values.didWebsiteNode.name -}}
 {{- .Values.didWebsiteNode.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -45,7 +45,7 @@ Create a fully qualified didWebsiteNode name.
 Create a fully qualified didWebsiteNginx name.
 */}}
 
-{{- define "did-workflow.didWebsiteNginx.fullname" -}}
+{{- define "did-website.didWebsiteNginx.fullname" -}}
 {{- if .Values.didWebsiteNginx.name -}}
 {{- .Values.didWebsiteNginx.name | trunc 63 | trimSuffix "-" -}}
 {{- else -}}
@@ -61,7 +61,7 @@ Create a fully qualified didWebsiteNginx name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "did-workflow.chart" -}}
+{{- define "did-website.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
 
@@ -69,9 +69,9 @@ Create chart name and version as used by the chart label.
 {{/*
 Common labels
 */}}
-{{- define "did-workflow.labels" -}}
-helm.sh/chart: {{ include "did-workflow.chart" . }}
-{{ include "did-workflow.selectorLabels" . }}
+{{- define "did-website.labels" -}}
+helm.sh/chart: {{ include "did-website.chart" . }}
+{{ include "did-website.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -81,27 +81,27 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "did-workflow.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "did-workflow.name" . }}
+{{- define "did-website.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "did-website.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
-{{- define "did-workflow.didWebsiteNode.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "did-workflow.name" . }}-node
+{{- define "did-website.didWebsiteNode.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "did-website.name" . }}-node
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
-{{- define "did-workflow.didWebsiteNginx.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "did-workflow.name" . }}-nginx
+{{- define "did-website.didWebsiteNginx.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "did-website.name" . }}-nginx
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "did-workflow.serviceAccountName" -}}
+{{- define "did-website.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create -}}
-    {{ default (include "did-workflow.fullname" .) .Values.serviceAccount.name }}
+    {{ default (include "did-website.fullname" .) .Values.serviceAccount.name }}
 {{- else -}}
     {{ default "default" .Values.serviceAccount.name }}
 {{- end -}}

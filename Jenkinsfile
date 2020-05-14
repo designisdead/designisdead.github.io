@@ -22,7 +22,7 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
             helm upgrade --install --namespace ${namespace} ${release} \
                 --set didWebsiteNode.image.tag=${buildNumber} \
                 ${additionalSetParams} \
-                ./did-workflow
+                charts/did-website
         """
     sh "sleep 5"
   }
@@ -108,30 +108,24 @@ stage("Deploy $acceptanceEnv") {
         withKubeConfig([credentialsId: 'did-k8s-cluster-jenkins-token',
                         serverUrl    : 'https://172.31.17.254:6443'
         ]) {
-          env.k8s_namespace = namespace
+          env.k8s_cloudWatchLogGroup = namespace
           env.k8s_nginxPort = "30001"
           env.k8s_environment = "staging"
           env.k8s_apiUrl = "https://event-api-stg.designisdead.com/api/event"
 
-          env.ingress_host = "event-api-stg.designisdead.com"
+          // make namespace if it doesn't exist
+          createNamespace(namespace)
 
-            sh "kubectl get pods -n ${namespace}"
+          def addtionalSetParams = '--set cloudWatchLogGroup=$k8s_cloudWatchLogGroup\
+                      --set didWebsiteNginx.service.nodePort=$k8s_nginxPort \
+                      --set didWebsiteNode.environment=$k8s_environment \
+                      --set didWebsiteNode.apiUrl=$k8s_apiUrl \
+                      '
+          // Remove release if exists
+          // helmDelete (namespace, "${imageName}")
 
-            // make namespace if it doesn't exist
-            createNamespace(namespace)
-
-            def addtionalSetParams = '--set namespace=$k8s_namespace\
-                        --set didWebsiteNginx.service.port=$k8s_nginxPort \
-                        --set didWebsiteNode.environment=$k8s_environment \
-                        --set didWebsiteNode.apiUrl=$k8s_apiUrl \
-                        --set ingress.hosts[0].host=$ingress_host \
-                        '
-
-            // Remove release if exists
-            helmDelete (namespace, "${imageName}")
-
-            // Deploy with helm
-            helmInstall(namespace, "${imageName}", "${buildNumber}", addtionalSetParams)
+          // Deploy with helm
+          helmInstall(namespace, "${imageName}", "${buildNumber}", addtionalSetParams)
         }
       }
       //TODO healthcheck
@@ -157,22 +151,18 @@ stage("Deploy PRD") {
         withKubeConfig([credentialsId: 'did-k8s-cluster-jenkins-token',
                         serverUrl    : 'https://172.31.17.254:6443'
         ]) {
-          env.k8s_namespace = namespace
+          env.k8s_cloudWatchLogGroup = namespace
           env.k8s_nginxPort = "30002"
           env.k8s_environment = "production"
           env.k8s_apiUrl = "https://event-api.designisdead.com/api/event"
-          env.ingress_host = "event-api.designisdead.com"
-
-          sh "kubectl get pods -n ${namespace}"
 
           // make namespace if it doesn't exist
           createNamespace(namespace)
 
-          def addtionalSetParams = '--set namespace=$k8s_namespace\
-                        --set didWebsiteNginx.service.port=$k8s_nginxPort \
+          def addtionalSetParams = '--set cloudWatchLogGroup=$k8s_cloudWatchLogGroup\
+                        --set didWebsiteNginx.service.nodePort=$k8s_nginxPort \
                         --set didWebsiteNode.environment=$k8s_environment \
                         --set didWebsiteNode.apiUrl=$k8s_apiUrl \
-                        --set ingress.hosts[0].host=$ingress_host \
                         '
 
           // Deploy with helm

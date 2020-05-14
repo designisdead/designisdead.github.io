@@ -1,7 +1,7 @@
-# Default values for did-workflow.
+# Default values for did-website.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-namespace: mia-test
+cloudWatchLogGroup: mia-test
 
 imagePullSecrets:
   - name: dockerhubcred

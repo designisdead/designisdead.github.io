@@ -62,7 +62,7 @@ didWebsiteNginx:
   service:
     type: NodePort
     port: 8080
-    nodePort: k8s_nginxPort
+    nodePort: 30000
 
 
 podSecurityContext: {}

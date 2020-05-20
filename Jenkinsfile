@@ -1,5 +1,7 @@
 #!groovy​
 
+@Library('did-jenkins-shared-library')
+
 @NonCPS
 def jsonParse(def json) {
   new groovy.json.JsonSlurperClassic().parseText(json)
@@ -17,7 +19,6 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
   script {
     release = "${release}-${namespace}"
     //sh "helm repo add helm ${HELM_REPO}; helm repo update"  also removed --install from helm upgrade command
-    //TODO add a map of values to override
     sh """
             helm upgrade --install --namespace ${namespace} ${release} \
                 --set didWebsiteNode.image.tag=${buildNumber} \
@@ -42,12 +43,13 @@ def version;
 def majorVersion;
 def buildNumber;
 
-def registry = "designisdead/website"
-def imageName = ""
+def registry = "designisdead"
+def imageName = "website"
 def registryCredential = 'did-docker-hub'
-def didDevOpsChannel = ""
+def didDevOpsChannel = "devops-internal"
 
 node('master') {
+  notifySlack('STARTED', didDevOpsChannel)
   def websiteImage
   checkout scm
   def config = jsonParse(readFile("package.json"))
@@ -82,16 +84,32 @@ node('master') {
     }
   }
 
-  stage('Building image') {
-    websiteImage = docker.build(registry)
-  }
+        stage('Building image') {
+            try {
+                websiteImage = docker.build(registry + '/' + imageName)
+            }
+            catch (e) {
+                currentBuild.result = "FAILED"
+                notifySlack(currentBuild.result, didDevOpsChannel)
+                throw e
+            }
+        }
 
-  stage('Publish image') {
-    docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-      websiteImage.push("${buildNumber}")
-      websiteImage.push("latest")
+        stage('Publish image') {
+            milestone()
+            try {
+                docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+                    websiteImage.push("${buildNumber}")
+                    websiteImage.push("latest")
+                }
+            }
+            catch (e) {
+                currentBuild.result = "FAILED"
+                notifySlack(currentBuild.result, didDevOpsChannel)
+                throw e
+            }
+        }
     }
-  }
 }
 
 def acceptanceEnv = "STG"

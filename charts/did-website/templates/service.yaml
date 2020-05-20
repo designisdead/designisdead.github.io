@@ -30,6 +30,7 @@ spec:
       targetPort:
       protocol: TCP
       nodePort: {{ .Values.didWebsiteNginx.service.nodePort }}
+      #TODO: make nodePort optional
   selector:
     app.kubernetes.io/name: {{ .Values.didWebsiteNginx.name }}
     app.kubernetes.io/instance: {{ .Release.Name }}

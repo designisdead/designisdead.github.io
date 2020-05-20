@@ -84,32 +84,31 @@ node('master') {
     }
   }
 
-        stage('Building image') {
-            try {
-                websiteImage = docker.build(registry + '/' + imageName)
-            }
-            catch (e) {
-                currentBuild.result = "FAILED"
-                notifySlack(currentBuild.result, didDevOpsChannel)
-                throw e
-            }
-        }
-
-        stage('Publish image') {
-            milestone()
-            try {
-                docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
-                    websiteImage.push("${buildNumber}")
-                    websiteImage.push("latest")
-                }
-            }
-            catch (e) {
-                currentBuild.result = "FAILED"
-                notifySlack(currentBuild.result, didDevOpsChannel)
-                throw e
-            }
-        }
+  stage('Building image') {
+    try {
+      websiteImage = docker.build(registry + '/' + imageName)
     }
+    catch (e) {
+      currentBuild.result = "FAILED"
+      notifySlack(currentBuild.result, didDevOpsChannel)
+      throw e
+    }
+  }
+
+  stage('Publish image') {
+    milestone()
+    try {
+      docker.withRegistry('https://registry.hub.docker.com', registryCredential) {
+        websiteImage.push("${buildNumber}")
+        websiteImage.push("latest")
+      }
+    }
+    catch (e) {
+      currentBuild.result = "FAILED"
+      notifySlack(currentBuild.result, didDevOpsChannel)
+      throw e
+    }
+  }
 }
 
 def acceptanceEnv = "STG"

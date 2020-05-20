@@ -44,7 +44,7 @@
 
   .Teaser {
     position: relative;
-    font-family: 'Arial';
+    font-family: $font-primary;
 
     @media screen and (min-width: size('medium')) {
       min-height: 400px;

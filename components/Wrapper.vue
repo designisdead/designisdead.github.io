@@ -2,6 +2,7 @@
   <div v-editable="Blok" :data-parallax="Parallax">
     <div
       :class="[Blok.backgroundcolor, Blok.textcolor, Height]"
+      :id="blok.id"
       class="Wrapper">
       <div
         :class="[Blok.size, size]"

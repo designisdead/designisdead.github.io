@@ -3,10 +3,10 @@
     v-editable="blok"
     class="u-textAlignCenter">
     <div class="TextRotator">
-      <div class="TextRotator-slide">Secure Growth</div>
-      <div class="TextRotator-slide">Enable Business</div>
-      <div class="TextRotator-slide">Shorten Time2Market</div>
-      <div class="TextRotator-slide">Translate Complexity</div>
+      <div class="TextRotator-slide">We believe in People!</div>
+      <div class="TextRotator-slide">We believe in Long term!</div>
+      <div class="TextRotator-slide">We believe in Building!</div>
+      <div class="TextRotator-slide">We believe in Impact!</div>
     </div>
   </div>
 </template>

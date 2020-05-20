@@ -32,12 +32,17 @@ import EqualColumns from "@/components/EqualColumns.vue";
 import YoutubeEmbed from "@/components/YoutubeEmbed.vue";
 import Mailchimp from '@/components/Mailchimp.vue';
 import Timeline from '@/components/Timeline.vue';
+import TopBlogTeaser from '@/components/TopBlogTeaser.vue';
 import EventCard from '@/components/list/EventCard.vue';
 import Event from '@/components/Event.vue';
 import GoogleMap from '@/components/GoogleMap.vue';
 import SearchBar from '@/components/SearchBar.vue';
 import TextAndImage from "@/components/TextAndImage.vue";
 import Contact from '@/components/Contact.vue';
+import ContactButton from '@/components/ContactButton.vue';
+import GlobalEvents from 'vue-global-events';
+
+Vue.component("GlobalEvents", GlobalEvents);
 
 Vue.component("author", Author);
 Vue.component("icon", Icon);
@@ -72,8 +77,10 @@ Vue.component("equalcolumns", EqualColumns);
 Vue.component("youtubeEmbed", YoutubeEmbed);
 Vue.component("mailchimp", Mailchimp);
 Vue.component("timeline", Timeline);
+Vue.component("topblogteaser", TopBlogTeaser);
 Vue.component("eventcard", EventCard);
 Vue.component("event", Event);
 Vue.component("googlemap", GoogleMap);
 Vue.component("textandimage", TextAndImage);
 Vue.component("contact", Contact);
+Vue.component("vueContactbutton", ContactButton);

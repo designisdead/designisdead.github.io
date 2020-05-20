@@ -1,7 +1,6 @@
 const state = () => ({
   primaryNavigation: [
     {title: 'Blog', link: 'blog'},
-    {title: 'Events', link: 'events'},
     {title: 'Services', link: 'services'},
     {title: 'Technologies', link: 'technologies'},
     {title: 'Team', link: 'team'},

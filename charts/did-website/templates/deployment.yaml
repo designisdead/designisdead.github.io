@@ -84,7 +84,8 @@ spec:
   replicas: {{ .Values.didWebsiteNginx.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.didWebsiteNginx.name }}
+      app.kubernetes.io/name: {{ .Values.didWebsiteNginx.name }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -93,7 +94,8 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Values.didWebsiteNginx.name }}
+        app.kubernetes.io/name: {{ .Values.didWebsiteNginx.name }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

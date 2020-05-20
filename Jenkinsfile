@@ -20,10 +20,10 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
     release = "${release}-${namespace}"
     //sh "helm repo add helm ${HELM_REPO}; helm repo update"  also removed --install from helm upgrade command
     sh """
-            helm upgrade --install --namespace ${namespace} ${release} \
-                --set didWebsiteNode.image.tag=${buildNumber} \
-                ${additionalSetParams} \
-                charts/did-website
+        helm upgrade --install --namespace ${namespace} ${release} \
+            --set didWebsiteNode.image.tag=${buildNumber} \
+            ${additionalSetParams} \
+            charts/did-website
         """
     sh "sleep 5"
   }
@@ -57,7 +57,7 @@ node('master') {
   def pos = version.lastIndexOf(".")
   majorVersion = version.substring(0, pos)
   def revisionNumber = sh(returnStdout: true, script: 'git rev-list --count HEAD')
-  buildNumber = version + "-r" + revisionNumber
+  buildNumber = version + "-r" + revisionNumber.replaceAll("(?:\\n|\\r)", "")
   VersionNumber "${buildNumber}"
   currentBuild.displayName = buildNumber
   echo "Branch is ${env.BRANCH_NAME}"
@@ -133,7 +133,7 @@ stage("Deploy $acceptanceEnv") {
           // make namespace if it doesn't exist
           createNamespace(namespace)
 
-          def addtionalSetParams = '--set cloudWatchLogGroup=$k8s_cloudWatchLogGroup\
+          def addtionalSetParams = '--set cloudWatchLogGroup=$k8s_cloudWatchLogGroup \
                       --set didWebsiteNginx.service.nodePort=$k8s_nginxPort \
                       --set didWebsiteNode.environment=$k8s_environment \
                       --set didWebsiteNode.apiUrl=$k8s_apiUrl \

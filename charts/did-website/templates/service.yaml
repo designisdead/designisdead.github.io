@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: did-website-node
+  labels:
+    {{- include "did-website.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.didWebsiteNode.service.type }}
+  ports:
+    - port: {{ .Values.didWebsiteNode.service.port }}
+      targetPort: http
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: {{ .Values.didWebsiteNode.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: did-website-nginx
+  labels:
+    {{- include "did-website.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.didWebsiteNginx.service.type }}
+  ports:
+    - port: {{ .Values.didWebsiteNginx.service.port }}
+      targetPort:
+      protocol: TCP
+      nodePort: {{ .Values.didWebsiteNginx.service.nodePort }}
+      #TODO: make nodePort optional
+  selector:
+    app.kubernetes.io/name: {{ .Values.didWebsiteNginx.name }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+
+

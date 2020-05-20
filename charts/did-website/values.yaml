@@ -1,0 +1,114 @@
+# Default values for did-website.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+cloudWatchLogGroup: mia-test
+
+imagePullSecrets:
+  - name: dockerhubcred
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  didWebsiteNode:
+    create: true
+    annotations: {}
+    name:
+  didWebsiteNginx:
+    create: true
+    annotations: {}
+    name:
+  # Specifies whether a service account should be created
+  #create: true
+  # Annotations to add to the service account
+  #annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  #name:
+
+didWebsiteNode:
+  ## If false, did-website-node will not be installed
+  enabled: true
+  name: did-website-node
+
+  replicaCount: 2
+
+  image:
+    repository: designisdead/website
+    tag: 1.0.0-r406
+    pullPolicy: Always
+
+  service:
+    type: ClusterIP
+    port: 3000
+
+  environment: k8s_environment
+  apiUrl: k8s_apiUrl
+
+didWebsiteNginx:
+  ## If false, did-website-nginx will not be installed
+  enabled: true
+
+  name: did-website-nginx
+
+  replicaCount: 2
+
+  image:
+    name: webserver
+    repository: nginx
+    tag: stable
+    pullPolicy: Always
+
+  service:
+    type: NodePort
+    port: 8080
+    nodePort: 30000
+
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+
+service:
+  type: ClusterIP
+
+ingress:
+  enabled: false
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: did-website-node.local
+      paths: []
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+#resources:
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+     #cpu: 100m
+     #memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+

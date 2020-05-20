@@ -14,3 +14,4 @@ spec:
     nodePort: ${k8s_nginxPort}
   type: NodePort
 
+

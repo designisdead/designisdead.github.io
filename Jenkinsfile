@@ -29,13 +29,45 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
   }
 }
 
-
 def helmDelete(namespace, release) {
   echo "Deleting ${release} in ${namespace} if deployed"
 
   script {
     release = "${release}-${namespace}"
     sh "[ -z \"\$(helm ls --short ${release} 2>/dev/null)\" ] || helm delete --purge ${release}"
+  }
+}
+
+def healthCheck(url, descr, user, password, buildNumber, slackChannel) {
+  docker.image('node:10-alpine').inside {
+    withCredentials([
+      string(credentialsId: 'nexus-npm-token', variable: 'npmToken')
+    ]) {
+      withEnv(['HOME=.']) {
+        dir('devops-tools') {
+          git branch: 'master', url: 'https://bitbucket.org/designisdead/devops-tools.git', credentialsId: 'did-infra-bitbucket'
+
+          dir(path: 'health-checks') {
+            sh "echo \"//repo.designisdead.com/repository/npm-group/:_authToken=${npmToken}\" > .npmrc"
+            sh 'npm install --registry=https://repo.designisdead.com/repository/npm-group/'
+
+            def retries = 35
+            def delayBetween = 20000
+
+            echo "health-check [url: ${url}, retries: ${retries}, delay: ${delayBetween}, match: ${buildNumber}]"
+
+            def healthCheckResult = sh(returnStdout: true, script: "set +x && node scripts/health-check.js ${url} -r ${retries} -d ${delayBetween} -m ${buildNumber} -u ${user} -p \"${password}\"")
+
+            if (healthCheckResult.contains("Success")) {
+              notifySlack("DEPLOYED ON [ENV --> ${descr}] & HEALTH CHECK COMPLETED ", slackChannel)
+            } else {
+              currentBuild.result = "FAILED"
+              notifySlack(currentBuild.result, slackChannel)
+            }
+          }
+        }
+      }
+    }
   }
 }
 
@@ -146,6 +178,7 @@ stage("Deploy $acceptanceEnv") {
         }
       }
       //TODO healthcheck
+      healthCheck("https://${aemIp}/bin/version", 'STG',  username, password, "${buildNumber}", "${didDevOpsChannels}")
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)
@@ -188,6 +221,8 @@ stage("Deploy PRD") {
         }
       }
       //TODO healthcheck
+      healthCheck("https://designisdead.com/bin/version", 'PRD', username, password,"${buildNumber}","${didDevOpsChannels}")
+
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)

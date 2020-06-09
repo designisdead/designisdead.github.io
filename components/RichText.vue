@@ -51,5 +51,9 @@
         color: (blue);
       }
     }
+
+    strong {
+      color: orange;
+    }
   }
 </style>

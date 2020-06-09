@@ -41,6 +41,7 @@ import TextAndImage from "@/components/TextAndImage.vue";
 import Contact from '@/components/Contact.vue';
 import ContactButton from '@/components/ContactButton.vue';
 import GlobalEvents from 'vue-global-events';
+import RichText2 from "~/components/RichText2.vue";
 
 Vue.component("GlobalEvents", GlobalEvents);
 
@@ -84,3 +85,4 @@ Vue.component("googlemap", GoogleMap);
 Vue.component("textandimage", TextAndImage);
 Vue.component("contact", Contact);
 Vue.component("vueContactbutton", ContactButton);
+Vue.component("richtext2", RichText2);

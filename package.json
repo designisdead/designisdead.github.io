@@ -25,7 +25,6 @@
     "moment": "2.24.0",
     "nuxt": "2.4.2",
     "nuxt-webfontloader": "^1.1.0",
-    "storyblok-nuxt": "1.0.1",
     "supports-webp": "^1.0.7",
     "vue-global-events": "^1.1.2",
     "vue-lazyload": "^1.2.6",
@@ -53,6 +52,7 @@
     "sass-loader": "^7.1.0",
     "scrollmonitor": "^1.2.4",
     "sendmail": "^1.6.1",
+    "storyblok-nuxt": "^1.2.0",
     "validator": "^11.1.0",
     "vue2-google-maps": "^0.10.7",
     "xss-filters": "^1.2.7"

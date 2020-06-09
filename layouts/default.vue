@@ -592,11 +592,12 @@
     width: 100%;
     z-index: 1;
     top: 0;
-    transition: background-color .5s;
+    transition: background-color .5s, box-shadow .5s;
   }
 
   .header--opaque {
     background-color: color('primaryColor');
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   }
 
   .Page-logo {

@@ -615,6 +615,7 @@
   .Page-content {
     position: relative;
     z-index: 0;
+    background-color: color('primaryColor');
   }
 
   .Page-headerContent {

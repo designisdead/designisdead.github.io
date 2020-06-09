@@ -1,7 +1,7 @@
 <template>
   <div v-editable="Blok" :data-parallax="Parallax">
     <div
-      :class="[Blok.backgroundcolor, Blok.textcolor, Height]"
+      :class="[Blok.backgroundcolor, Blok.textcolor, Height, { 'wrapper--shrinked' : blok.layout == 'shrinked'}]"
       :id="blok.id"
       class="Wrapper">
       <div
@@ -145,5 +145,9 @@
     bottom: 0;
     right: 0;
     background-repeat: no-repeat;
+  }
+
+  .wrapper--shrinked {
+    margin: 0 50px;
   }
 </style>

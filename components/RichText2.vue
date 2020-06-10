@@ -47,7 +47,7 @@
   }
 
   p, h5, h6 {
-    font-family: $font-secondary;
+    font-family: $font-primary;
   }
 
   h1 {

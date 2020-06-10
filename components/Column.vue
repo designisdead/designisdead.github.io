@@ -9,7 +9,12 @@
         :blok="blok"
         :is="blok.component"/>
     </div>
-    <div class="Column-content">
+    <div
+      class="Column-content"
+      :class="{
+        'u-flexCenter': blok.contentalignment == 'center',
+        'u-flexEnd': blok.contentalignment == 'bottom'
+      }">
       <component
         v-for="blok in blok.blocks"
         :key="blok._uid"
@@ -35,6 +40,12 @@
 <style lang="scss">
   .Column {
     padding: 0 $spacer/2;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Column-content {
+    height: 100%;
     display: flex;
     flex-direction: column;
   }

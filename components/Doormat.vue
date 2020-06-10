@@ -21,40 +21,40 @@
           target="_blank"
           rel="noopener"
           title="Visit our twitter page"
-          class="u-color--twitter">
-          <icon
-            type="twitter"
-            size="small"/>
+          class="footer__social-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="19.045" height="15.468" viewBox="0 0 19.045 15.468" class="svg-icon">
+            <path d="M17.088 3.855c.012.169.012.338.012.508A11.03 11.03 0 015.994 15.468 11.03 11.03 0 010 13.719a8.075 8.075 0 00.943.048 7.817 7.817 0 004.846-1.668 3.91 3.91 0 01-3.65-2.707 4.922 4.922 0 00.737.06A4.128 4.128 0 003.9 9.319 3.9 3.9 0 01.773 5.486v-.048a3.931 3.931 0 001.764.5A3.909 3.909 0 011.329.713a11.1 11.1 0 008.049 4.084 4.406 4.406 0 01-.1-.894 3.907 3.907 0 016.755-2.671A7.685 7.685 0 0018.51.289a3.893 3.893 0 01-1.71 2.152 7.825 7.825 0 002.248-.6 8.391 8.391 0 01-1.96 2.014z" />
+          </svg>
         </a>
         <a
           href="https://www.facebook.com/DesignisDead/"
           target="_blank"
           rel="noopener"
           title="Visit our facebook page"
-          class="u-color--facebook">
-          <icon
-            type="facebook"
-            size="small"/>
+          class="footer__social-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="8.535" height="15.937" viewBox="0 0 8.535 15.937" class="svg-icon">
+            <path d="M7.976 8.964l.443-2.884H5.652V4.209A1.442 1.442 0 017.278 2.65h1.258V.195A15.342 15.342 0 006.303 0a3.521 3.521 0 00-3.769 3.882v2.2H0v2.882h2.534v6.972h3.118V8.964z" />
+          </svg>
         </a>
         <a
           href="https://www.linkedin.com/company/design-is-dead"
           target="_blank"
           rel="noopener"
           title="Visit our linkedin page"
-          class="u-color--linkedin">
-          <icon
-            type="linkedin"
-            size="small"/>
+          class="footer__social-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14.434" height="14.434" viewBox="0 0 14.434 14.434" class="svg-icon">
+            <path d="M3.231 14.435H.238V4.8h2.993zM1.733 3.483a1.741 1.741 0 111.733-1.75 1.748 1.748 0 01-1.733 1.75zm12.7 10.951h-2.988v-4.69c0-1.118-.023-2.552-1.556-2.552-1.556 0-1.794 1.215-1.794 2.471v4.772H5.106V4.8h2.87v1.312h.042a3.144 3.144 0 012.831-1.556c3.029 0 3.585 1.994 3.585 4.585v5.294z" />
+          </svg>
         </a>
         <a
           href="https://www.instagram.com/design.is.dead/"
           target="_blank"
           rel="noopener"
           title="Visit our instagram page"
-          class="u-color--instagram">
-          <icon
-            type="instagram"
-            size="small"/>
+          class="footer__social-wrapper">
+          <svg xmlns="http://www.w3.org/2000/svg" width="17.846" height="17.842" viewBox="0 0 17.846 17.842" class="svg-icon">
+            <path d="M8.925 4.346A4.575 4.575 0 1013.5 8.921a4.567 4.567 0 00-4.575-4.575zm0 7.549a2.974 2.974 0 112.974-2.974 2.979 2.979 0 01-2.974 2.974zm5.829-7.733a1.067 1.067 0 11-1.067-1.07 1.065 1.065 0 011.067 1.07zm3.03 1.083a5.28 5.28 0 00-1.441-3.738A5.315 5.315 0 0012.605.062c-1.473-.084-5.888-.084-7.362 0A5.307 5.307 0 001.505 1.5 5.3 5.3 0 00.062 5.238c-.084 1.473-.084 5.888 0 7.362a5.28 5.28 0 001.443 3.738 5.322 5.322 0 003.738 1.441c1.473.084 5.888.084 7.362 0a5.28 5.28 0 003.738-1.441 5.315 5.315 0 001.441-3.738c.084-1.473.084-5.884 0-7.358zm-1.9 8.938a3.011 3.011 0 01-1.7 1.7c-1.174.466-3.961.358-5.259.358s-4.089.1-5.259-.358a3.011 3.011 0 01-1.7-1.7c-.466-1.174-.358-3.961-.358-5.259s-.103-4.092.361-5.262a3.011 3.011 0 011.7-1.7c1.174-.466 3.961-.358 5.259-.358s4.089-.1 5.259.358a3.011 3.011 0 011.7 1.7c.466 1.174.358 3.961.358 5.259s.101 4.089-.365 5.259z" />
+          </svg>
         </a>
       </div>
     </div>
@@ -131,6 +131,24 @@
   .footer__socials-container {
     padding-left: 20px;
     flex: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  .footer__social-wrapper {
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: color('textLight');
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .svg-icon {
+    fill: color('primaryColor');
+    height: 16px;
   }
 
   .footer__policies-banner {

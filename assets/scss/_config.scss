@@ -41,7 +41,7 @@ $sizes: (
   small: 440px,
   medium: 800px,
   large: 1100px,
-  huge: 1400px
+  huge: 1400px,
 );
 @function size($size) {
   @return map-get($sizes, $size);

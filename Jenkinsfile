@@ -74,6 +74,7 @@ def healthCheck(url, descr, user, password, buildNumber, slackChannel) {
 def version;
 def majorVersion;
 def buildNumber;
+def gitHash;
 
 def registry = "designisdead"
 def imageName = "website"
@@ -89,6 +90,7 @@ node('master') {
   def pos = version.lastIndexOf(".")
   majorVersion = version.substring(0, pos)
   def revisionNumber = sh(returnStdout: true, script: 'git rev-list --count HEAD')
+  gitHash = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
   buildNumber = version + "-r" + revisionNumber.replaceAll("(?:\\n|\\r)", "")
   VersionNumber "${buildNumber}"
   currentBuild.displayName = buildNumber
@@ -118,7 +120,7 @@ node('master') {
 
   stage('Building image') {
     try {
-      websiteImage = docker.build(registry + '/' + imageName)
+      websiteImage = docker.build(registry + '/' + imageName, " --build-arg BUILD_NUMBER_ARG=${buildNumber} --build-arg VERSION_ARG=${version}  --build-arg GIT_HASH_ARG=${gitHash}")
     }
     catch (e) {
       currentBuild.result = "FAILED"
@@ -178,7 +180,7 @@ stage("Deploy $acceptanceEnv") {
         }
       }
       //TODO healthcheck
-      healthCheck("https://${aemIp}/bin/version", 'STG',  username, password, "${buildNumber}", "${didDevOpsChannels}")
+      healthCheck("https://www-stg.designisdead.com/healthcheck", 'STG',  username, password, "${buildNumber}", "${didDevOpsChannels}")
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)
@@ -221,7 +223,7 @@ stage("Deploy PRD") {
         }
       }
       //TODO healthcheck
-      healthCheck("https://designisdead.com/bin/version", 'PRD', username, password,"${buildNumber}","${didDevOpsChannels}")
+      healthCheck("https://designisdead.com/healthcheck", 'PRD', username, password,"${buildNumber}","${didDevOpsChannels}")
 
     } catch (e) {
       currentBuild.result = "FAILED"

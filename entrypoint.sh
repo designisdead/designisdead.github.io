@@ -6,3 +6,4 @@ find .nuxt/ \
   -exec sed -i "s+%%API_URL%%+${API_URL:?}+g" '{}' \;
 
 exec npm run start
+

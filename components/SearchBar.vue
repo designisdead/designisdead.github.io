@@ -1,81 +1,83 @@
 <template>
   <div class="search-bar__main-container">
-    <form
-      @submit="search"
-      class="search-bar__search-form"
-      autocomplete="off">
-      <input
-        type="text"
-        @keyup="search"
-        @click="startTyping()"
-        v-model="searchInput"
-        required
-        name="searchInput"
-        class="search-bar__search-input">
+    <div class="search-bar__form-wrapper">
+      <form
+        @submit="search"
+        class="search-bar__search-form"
+        autocomplete="off">
+        <input
+          type="text"
+          @keyup="search"
+          @click="startTyping()"
+          v-model="searchInput"
+          required
+          name="searchInput"
+          class="search-bar__search-input">
 
-      <span
-        class="search-bar__tag-filter-container">
         <span
-          class="search-bar__tag-filter-open-btn"
-          @click="openTagFilter()">
-          {{ displaySelectedTags }} &#9662;
+          class="search-bar__tag-filter-container">
+          <span
+            class="search-bar__tag-filter-open-btn"
+            @click="openTagFilter()">
+            {{ displaySelectedTags }} &#9662;
+          </span>
+
+          <transition name="slide-fade">
+            <div
+              v-if="tagFilterOpened"
+              class="search-bar__tag-filter-box">
+              <p class="search-bar__tag-filter-box__header">
+                <span>Tags</span>
+                <img
+                  src="/checkmark-icon.svg"
+                  alt="Close menu icon"
+                  class="search-bar__tag-filter-box__header__close"
+                  @click="openTagFilter()">
+              </p>
+              <ul class="search-bar__tag-list">
+                <li
+                  v-for="tag in tags"
+                  :key="tag.value"
+                  class="search-bar__tag-list-item">
+                  <input
+                    class="search-bar__tag-list-item__checkbox"
+                    type="checkbox"
+                    :value="tag.name"
+                    v-model="selectedTags"
+                    @change="tagToSelected()">
+                  <span>{{ tag.name }}</span>
+                </li>
+              </ul>
+              <p
+                class="search-bar__tag-filter-box__reset-filter">
+                <img
+                  src="/trash-icon.svg"
+                  alt="Trash icon"
+                  width="18"
+                  style="margin-right: 6px; cursor: pointer;"
+                  @click="resetSelectedTags()">
+                <span
+                  style="line-height: 14px; cursor: pointer;"
+                  @click="resetSelectedTags()">
+                  Clear filters
+                </span>
+              </p>
+            </div>
+          </transition>
         </span>
 
-        <transition name="slide-fade">
-          <div
-            v-if="tagFilterOpened"
-            class="search-bar__tag-filter-box">
-            <p class="search-bar__tag-filter-box__header">
-              <span>Tags</span>
-              <img
-                src="/checkmark-icon.svg"
-                alt="Close menu icon"
-                class="search-bar__tag-filter-box__header__close"
-                @click="openTagFilter()">
-            </p>
-            <ul class="search-bar__tag-list">
-              <li
-                v-for="tag in tags"
-                :key="tag.value"
-                class="search-bar__tag-list-item">
-                <input
-                  class="search-bar__tag-list-item__checkbox"
-                  type="checkbox"
-                  :value="tag.name"
-                  v-model="selectedTags"
-                  @change="tagToSelected()">
-                <span>{{ tag.name }}</span>
-              </li>
-            </ul>
-            <p
-              class="search-bar__tag-filter-box__reset-filter">
-              <img
-                src="/trash-icon.svg"
-                alt="Trash icon"
-                width="18"
-                style="margin-right: 6px; cursor: pointer;"
-                @click="resetSelectedTags()">
-              <span
-                style="line-height: 14px; cursor: pointer;"
-                @click="resetSelectedTags()">
-                Clear filters
-              </span>
-            </p>
-          </div>
-        </transition>
-      </span>
-
-      <label
-        for="searchInput"
-        class="search-bar__search-input-label">What {{ searchType }} are you looking for ?</label>
-      <button
-        type="submit"
-        class="search-bar__submit-button"
-      >
-        <img src="/search-icon.svg" alt="submit icon" width="16px">
-        <span>&nbsp;Search</span>
-      </button>
-    </form>
+        <label
+          for="searchInput"
+          class="search-bar__search-input-label">What {{ searchType }} are you looking for ?</label>
+        <button
+          type="submit"
+          class="search-bar__submit-button"
+        >
+          <img src="/search-icon.svg" alt="submit icon" width="16px">
+          <span>&nbsp;Search</span>
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -152,13 +154,19 @@ export default {
       let currentScrollPos = window.pageYOffset
       let searchBarMainContainer = document.querySelector('.search-bar__main-container')
       if (window.innerWidth > 800) this.tagFilterOpened = false
-      if (window.pageYOffset <= 0) {
-        searchBarMainContainer.style.top = "70px"
+      if (window.pageYOffset <= 32) {
+        searchBarMainContainer.style.top = "60px"
       } else {
         if (this.prevScrollpos > currentScrollPos) {
-          searchBarMainContainer.style.top = "70px"
+          searchBarMainContainer.style.opacity = "1"
+          if (this.currentScrollPos >= 120) {
+            searchBarMainContainer.style.top = "60px"
+          } else {
+            searchBarMainContainer.style.top = "-10px"
+          }
         } else {
-          searchBarMainContainer.style.top = "-24px"
+          searchBarMainContainer.style.top = "-164px"
+          searchBarMainContainer.style.opacity = "0"
         }
       }
       this.prevScrollpos = currentScrollPos
@@ -206,24 +214,34 @@ export default {
     position: fixed;
     z-index: 2;
     background: #fff;
-    width: 100%;
-    top: 70px;
+    width: calc(100vw - 100px);
+    max-width: size('huge');
+    margin: 0 50px;
+    top: 60px;
     left: 0;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    padding: 16px 20px;
-    transition: top 0.4s;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-direction: row;
+    transition: top 0.4s, opacity 0.4s;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 70px;
+      background-color: color('primaryColor');
+    }
+  }
+
+  .search-bar__form-wrapper {
+    padding: 22px 25px;
+    background-color: lighten(color('primaryColor'), 15%);
   }
 
   .search-bar__search-form {
     position: relative;
     display: flex;
-    width: 600px;
-    height: 38px;
-    margin-bottom: 5px;
+    width: 100%;
+    height: 44px;
+    background-color: color('light');
   }
 
   .search-bar__search-input-label {
@@ -244,9 +262,6 @@ export default {
     background-color: transparent;
     border: none;
     outline: none;
-    border-bottom: 2px solid #BBB;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 0px;
     color: black;
     font-size: 100%;
     &:required {
@@ -273,7 +288,6 @@ export default {
     position: relative;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #BBB;
   }
 
   .search-bar__tag-filter-open-btn {
@@ -384,8 +398,6 @@ export default {
     outline: none;
     cursor: pointer;
     height: auto;
-    border-bottom: 2px solid #BBB;
-    border-radius: 3px 3px 5px 0;
     vertical-align: bottom;
     padding: 8px 5px;
     display: flex;

@@ -174,7 +174,7 @@ export default {
 }
 
 .blog-list__container {
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 
 .List--list-image,

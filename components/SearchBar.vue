@@ -220,7 +220,7 @@ export default {
     top: 60px;
     left: 0;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    transition: top 0.4s, opacity 0.4s;
+    transition: top 0.4s, opacity 0.4s cubic-bezier(0,1.11,.44,1);
 
     &:before {
       content: '';

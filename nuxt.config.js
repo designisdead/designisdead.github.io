@@ -29,15 +29,11 @@ module.exports = {
   healthcheck: {
     path: '/healthcheck',
     handler: (req, res, next) => {
-      healthCheck {
-        buildNbr = buildNumber
-      }
       res.setHeader('application/json')
       res.end(JSON.stringify({
         buildNumber: process.env.BUILD_NUMBER,
         version: process.env.VERSION,
-        gitHash: process.env.GIT_HASH,
-        buildTime: 0
+        gitHash: process.env.GIT_HASH
       }))
     }
   },

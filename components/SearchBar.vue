@@ -73,8 +73,7 @@
           type="submit"
           class="search-bar__submit-button"
         >
-          <img src="/search-icon.svg" alt="submit icon" width="16px">
-          <span>&nbsp;Search</span>
+          <img src="/search-icon.svg" alt="submit icon" width="18px">
         </button>
       </form>
     </div>
@@ -250,36 +249,29 @@ export default {
     font-weight: normal;
     pointer-events: none;
     position: absolute;
-    top: 12px;
-    left: 5px;
-    transition: .5s;
+    top: 16px;
+    left: 14px;
+    transition: .4s;
   }
 
   .search-bar__search-input {
     position: relative;
     width: 100%;
-    padding: 10px 0 10px 5px;
+    padding: 10px 0 10px 14px;
     background-color: transparent;
     border: none;
     outline: none;
-    color: black;
-    font-size: 100%;
+    color: color('primaryColor');
+    font-size: 16px;
     &:required {
       box-shadow:none;
     }
     &:focus,
     &:valid {
-      border-bottom: 2px solid color('secondary');
       ~ .search-bar__search-input-label {
-        color: color('secondary');
-        top: -4px;
-        font-size: $font-size / 1.4;
-      }
-      ~ .search-bar__submit-button {
-        border-bottom: 2px solid color('secondary');
-      }
-      ~ .search-bar__tag-filter-container {
-        border-bottom: 2px solid color('secondary');
+        color: color('primaryColor');
+        top: 2px;
+        font-size: 10px;
       }
     }
   }
@@ -293,7 +285,8 @@ export default {
   .search-bar__tag-filter-open-btn {
     cursor: pointer;
     user-select: none;
-    font-size: 12px;
+    color: color('primaryColor');
+    font-size: 16px;
     padding-right: 16px;
     white-space: nowrap;
   }
@@ -399,14 +392,10 @@ export default {
     cursor: pointer;
     height: auto;
     vertical-align: bottom;
-    padding: 8px 5px;
+    padding: 0 16px;
     display: flex;
     justify-content: center;
-    color: #999;
-    &:hover {
-      background: #dddddd;
-      color: color('secondary');
-    }
+    background-color: color('primaryColor');
   }
 
   .search-bar__tags-container {

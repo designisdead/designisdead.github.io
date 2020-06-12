@@ -1,81 +1,74 @@
 <template>
   <div class="search-bar__main-container">
-    <form
-      @submit="search"
-      class="search-bar__search-form"
-      autocomplete="off">
-      <input
-        type="text"
-        @keyup="search"
-        @click="startTyping()"
-        v-model="searchInput"
-        required
-        name="searchInput"
-        class="search-bar__search-input">
+    <div class="search-bar__form-wrapper">
+      <form
+        @submit="search"
+        class="search-bar__search-form"
+        autocomplete="off">
+        <input
+          type="text"
+          @keyup="search"
+          @click="startTyping()"
+          v-model="searchInput"
+          required
+          name="searchInput"
+          class="search-bar__search-input">
 
-      <span
-        class="search-bar__tag-filter-container">
+        <span class="search-bar__reset-tags-container" v-if="this.selectedTags.length > 0">
+          <svg class="search-bar__reset-tags-icon" xmlns="http://www.w3.org/2000/svg" width=20 height=20 @click="resetSelectedTags()">
+            <path d="M17 2h-3.5l-1-1h-5l-1 1H3v2h14zM4 17a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5H4z"/>
+          </svg>
+          <span
+            class="search-bar__reset-tags-label"
+            @click="resetSelectedTags()">
+            Clear filters
+          </span>
+        </span>
+
         <span
-          class="search-bar__tag-filter-open-btn"
-          @click="openTagFilter()">
-          {{ displaySelectedTags }} &#9662;
+          :class="['search-bar__tag-filter-container', tagFilterOpened && 'u-backgroundColor--primaryColorLighten1']">
+          <span
+            :class="['search-bar__tag-filter-open-btn', tagFilterOpened && 'u-color--textLight']"
+            @click="openTagFilter()">
+            {{ displaySelectedTags }} <span :class="tagFilterOpened && 'u-rotate--180'">&#9662;</span>
+          </span>
         </span>
 
         <transition name="slide-fade">
           <div
             v-if="tagFilterOpened"
             class="search-bar__tag-filter-box">
-            <p class="search-bar__tag-filter-box__header">
-              <span>Tags</span>
-              <img
-                src="/checkmark-icon.svg"
-                alt="Close menu icon"
-                class="search-bar__tag-filter-box__header__close"
-                @click="openTagFilter()">
-            </p>
             <ul class="search-bar__tag-list">
               <li
                 v-for="tag in tags"
                 :key="tag.value"
                 class="search-bar__tag-list-item">
-                <input
+                <label class="search-bar__tag-list-item__checkbox-wrapper">
+                  <input
                   class="search-bar__tag-list-item__checkbox"
                   type="checkbox"
                   :value="tag.name"
                   v-model="selectedTags"
                   @change="tagToSelected()">
-                <span>{{ tag.name }}</span>
+                  <span class="checkmark"></span>
+                </label>
+                <span class="search-bar__tag-list-item__tag-name">{{ tag.name }}</span>
               </li>
             </ul>
-            <p
-              class="search-bar__tag-filter-box__reset-filter">
-              <img
-                src="/trash-icon.svg"
-                alt="Trash icon"
-                width="18"
-                style="margin-right: 6px; cursor: pointer;"
-                @click="resetSelectedTags()">
-              <span
-                style="line-height: 14px; cursor: pointer;"
-                @click="resetSelectedTags()">
-                Clear filters
-              </span>
-            </p>
           </div>
         </transition>
-      </span>
 
-      <label
-        for="searchInput"
-        class="search-bar__search-input-label">What {{ searchType }} are you looking for ?</label>
-      <button
-        type="submit"
-        class="search-bar__submit-button"
-      >
-        <img src="/search-icon.svg" alt="submit icon" width="16px">
-        <span>&nbsp;Search</span>
-      </button>
-    </form>
+        <label
+          for="searchInput"
+          class="search-bar__search-input-label">What {{ searchType }} are you looking for ?</label>
+        <button
+          type="submit"
+          class="search-bar__submit-button"
+        >
+          <img src="/search-icon.svg" alt="submit icon" width="18px">
+        </button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -152,13 +145,19 @@ export default {
       let currentScrollPos = window.pageYOffset
       let searchBarMainContainer = document.querySelector('.search-bar__main-container')
       if (window.innerWidth > 800) this.tagFilterOpened = false
-      if (window.pageYOffset <= 0) {
-        searchBarMainContainer.style.top = "70px"
+      if (window.pageYOffset <= 32) {
+        searchBarMainContainer.style.top = "60px"
       } else {
         if (this.prevScrollpos > currentScrollPos) {
-          searchBarMainContainer.style.top = "70px"
+          searchBarMainContainer.style.opacity = "1"
+          if (this.currentScrollPos >= 120) {
+            searchBarMainContainer.style.top = "60px"
+          } else {
+            searchBarMainContainer.style.top = "-10px"
+          }
         } else {
-          searchBarMainContainer.style.top = "-24px"
+          searchBarMainContainer.style.top = "-164px"
+          searchBarMainContainer.style.opacity = "0"
         }
       }
       this.prevScrollpos = currentScrollPos
@@ -205,196 +204,192 @@ export default {
   .search-bar__main-container {
     position: fixed;
     z-index: 2;
-    background: #fff;
-    width: 100%;
-    top: 70px;
+    background-color: color('light');
+    width: calc(100vw - 100px);
+    max-width: size('huge');
+    margin: 0 50px;
+    top: 60px;
     left: 0;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
-    padding: 16px 20px;
-    transition: top 0.4s;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    flex-direction: row;
+    transition: top 0.4s, opacity 0.4s cubic-bezier(0,1.11,.44,1);
+
+    &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 70px;
+      background-color: color('primaryColor');
+    }
+  }
+
+  .search-bar__form-wrapper {
+    padding: 22px 20px;
+    background-color: color('primaryColorLighten1');
   }
 
   .search-bar__search-form {
     position: relative;
     display: flex;
-    width: 600px;
-    height: 38px;
-    margin-bottom: 5px;
+    width: 100%;
+    height: 44px;
+    background-color: color('light');
   }
 
   .search-bar__search-input-label {
-    color: #BBB;
+    color: color('medium');
     font-size: $font-size / 1.3;
     font-weight: normal;
     pointer-events: none;
     position: absolute;
-    top: 12px;
-    left: 5px;
-    transition: .5s;
+    top: 16px;
+    left: 14px;
+    transition: .2s;
   }
 
   .search-bar__search-input {
     position: relative;
     width: 100%;
-    padding: 10px 0 10px 5px;
+    padding: 10px 14px;
     background-color: transparent;
     border: none;
     outline: none;
-    border-bottom: 2px solid #BBB;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 0px;
-    color: black;
-    font-size: 100%;
+    color: color('primaryColor');
+    font-size: 16px;
     &:required {
       box-shadow:none;
     }
     &:focus,
     &:valid {
-      border-bottom: 2px solid color('secondary');
       ~ .search-bar__search-input-label {
-        color: color('secondary');
-        top: -4px;
-        font-size: $font-size / 1.4;
-      }
-      ~ .search-bar__submit-button {
-        border-bottom: 2px solid color('secondary');
-      }
-      ~ .search-bar__tag-filter-container {
-        border-bottom: 2px solid color('secondary');
+        color: color('primaryColor');
+        top: 2px;
+        font-size: 10px;
       }
     }
+  }
+
+  .search-bar__reset-tags-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    color: color('medium');
+    font-size: $font-size / 1.3;
+    font-weight: normal;
+    white-space: nowrap;
+    cursor: pointer;
+    margin-right: 16px;
+  }
+
+  .search-bar__reset-tags-icon {
+    transform: scale(0.65, 0.65);
+    margin-right: 2px;
+    fill: color('medium');
   }
 
   .search-bar__tag-filter-container {
     position: relative;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #BBB;
+    padding: 0 16px;
   }
 
   .search-bar__tag-filter-open-btn {
     cursor: pointer;
     user-select: none;
-    font-size: 12px;
-    padding-right: 16px;
+    color: color('primaryColor');
+    font-size: 16px;
     white-space: nowrap;
+
+    span {
+      display: inline-block;
+    }
   }
 
   .search-bar__tag-filter-box {
     position: absolute;
     top: 44px;
-    right: -80px;
-    background: white;
-    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 3px;
-    min-width: 200px;
+    left: 0;
+    background: color('light');
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
     padding: 14px;
-  }
-
-  .search-bar__tag-filter-box:before {
-    content: "";
-    width: 0px;
-    height: 0px;
-    position: absolute;
-    top: -20px;
-    left: 45%;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid white;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-  }
-
-  .search-bar__tag-filter-box__header {
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid #BBB;
-    padding-bottom: 4px;
-    color: #999;
-  }
-
-  .search-bar__tag-filter-box__header__close {
-    cursor: pointer;
   }
 
   .search-bar__tag-list {
     list-style: none;
-    padding-top: 16px;
-    max-height: 220px;
-    overflow-y: auto;
+    padding: 16px 140px 0 40px;
     -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-wrap: wrap;
   }
 
   .search-bar__tag-list-item {
+    flex: 20%;
     margin: 0;
     padding-bottom: 16px;
     display: flex;
     align-items: center;
+    line-height: 1;
   }
 
-  .search-bar__tag-list-item__checkbox {
-    cursor: pointer;
-    align-self: center;
-    margin-right: 10px;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    background-color: #fafafa;
-    border: 1px solid #cacece;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
-    padding: 9px;
-    border-radius: 3px;
-    display: inline-block;
+  .search-bar__tag-list-item__checkbox-wrapper {
     position: relative;
-    &:focus {
-      outline: none;
+    align-self: center;
+    display: block;
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+
+    .search-bar__tag-list-item__checkbox {
+      opacity: 0;
+      height: 0;
+      width: 0;
+
+      &:checked ~ .checkmark:after {
+        display: block;
+      }
+    }
+
+    .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 16px;
+      width: 16px;
+      background-color: transparent;
+      border: 1px solid color('primaryColor');
+      cursor: pointer;
+
+      &:after {
+        content: "";
+        position: absolute;
+        display: none;
+        left: 4px;
+        top: 1px;
+        width: 5px;
+        height: 10px;
+        border: solid color('primaryColor');
+        border-width: 0 2px 2px 0;
+        border-radius: 3px;
+        transform: rotate(45deg);
+      }
     }
   }
 
-  .search-bar__tag-list-item__checkbox:active,
-  .search-bar__tag-list-item__checkbox:checked:active {
-	  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
-  }
-
-  .search-bar__tag-list-item__checkbox:checked {
-    border: 1px solid #adb8c0;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
-    color: #99a1a7;
-  }
-
-  .search-bar__tag-list-item__checkbox:checked:after {
-    content: url(/checkmark-icon.svg);
-    position: absolute;
-    top: -3px;
-    left: 0px;
-  }
-
-  .search-bar__tag-filter-box__reset-filter {
-    user-select: none;
-    border-top: 1px solid #BBB;
-    padding: 8px 0 0 0;
-    color: #999;
-    display: flex;
-    align-items: flex-end;
+  .search-bar__tag-list-item__tag-name {
+    font-size: 14px;
+    color: color('primaryColor');
   }
 
   .search-bar__submit-button {
     outline: none;
     cursor: pointer;
     height: auto;
-    border-bottom: 2px solid #BBB;
-    border-radius: 3px 3px 5px 0;
     vertical-align: bottom;
-    padding: 8px 5px;
+    padding: 0 16px;
     display: flex;
     justify-content: center;
-    color: #999;
-    &:hover {
-      background: #dddddd;
-      color: color('secondary');
-    }
+    background-color: color('primaryColor');
   }
 
   .search-bar__tags-container {
@@ -477,16 +472,6 @@ export default {
       border: none;
     }
 
-    .search-bar__tag-filter-box__header {
-      position: fixed;
-      z-index: 1;
-      background: #FFF;
-      width: 100%;
-      height: 40px;
-      left: 0;
-      padding: 8px 20px 4px 20px;
-    }
-
     .search-bar__tag-list {
       margin: 37px 0;
       padding: 16px 0 0 20px;
@@ -506,7 +491,7 @@ export default {
     }
 
     .slide-fade-enter-active, .slide-fade-leave-active {
-      transition: all .5s ease;
+      transition: all .2s ease;
     }
     /* .slide-fade-leave-active below version 2.1.8 */
     .slide-fade-enter, .slide-fade-leave-to {

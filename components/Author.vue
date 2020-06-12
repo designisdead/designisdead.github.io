@@ -2,7 +2,7 @@
   <span v-if="Author.content"
         class="Author"
         rel="author">
-    <picture class="Author-avatar">
+    <picture class="Author-avatar" v-if="portrait">
       <source
         :srcset="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny', filters: '/filters:format(webp)'})"
         type="image/webp">
@@ -11,7 +11,7 @@
         :src="$options.filters.imageApi({src: Author.content.secondaryimage, size: 'tiny'})"
         :title="'Written by ' + Author.name"/>
     </picture>
-    <span class="Author-name">{{ Author.name }}</span>
+    <span :class="['Author-name', firstLetterStyle && 'u-color-first-letter--secondaryColor']">{{ Author.name }}</span>
   </span>
   <span v-else></span>
 </template>
@@ -24,6 +24,12 @@
       id: {
         default: null
       },
+      portrait: {
+        default: true
+      },
+      firstLetterStyle: {
+        default: false
+      }
     },
     computed: {
       Author() {

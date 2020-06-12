@@ -87,6 +87,12 @@
       color: $value;
     }
   }
+
+  .u-color-first-letter--#{$key} {
+    &::first-letter {
+      color: $value;
+    }
+  }
 }
 
 .u-noScroll {

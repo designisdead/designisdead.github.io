@@ -652,7 +652,7 @@
       background-color: color('secondaryColor');
     }
 
-    &:hover {
+    &:hover:not(.nuxt-link-active) {
       opacity: 0.5;
     }
   }

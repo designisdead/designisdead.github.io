@@ -206,7 +206,6 @@ export default {
     z-index: 2;
     background-color: color('light');
     width: calc(100vw - 100px);
-    max-width: size('huge');
     margin: 0 50px;
     top: 60px;
     left: 0;
@@ -225,6 +224,10 @@ export default {
   .search-bar__form-wrapper {
     padding: 22px 20px;
     background-color: color('primaryColorLighten1');
+
+    @media screen and (min-width: size('huge')) {
+      padding: 22px 88px;
+    }
   }
 
   .search-bar__search-form {

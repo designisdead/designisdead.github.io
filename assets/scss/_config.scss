@@ -28,6 +28,7 @@ $colors: (
   textLight: #EDEDED,
   textDark: #454545,
   primaryColor: #2D0254,
+  primaryColorLighten1: lighten(#2D0254, 15%),
   secondaryColor: #DC7F64
 );
 

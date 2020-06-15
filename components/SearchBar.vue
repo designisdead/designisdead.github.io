@@ -382,6 +382,7 @@ export default {
   .search-bar__tag-list-item__tag-name {
     font-size: 14px;
     color: color('primaryColor');
+    text-transform: capitalize;
   }
 
   .search-bar__submit-button {

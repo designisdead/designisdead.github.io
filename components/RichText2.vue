@@ -44,10 +44,19 @@
 
   h1, h2, h3, h4 {
     font-family: $font-primary;
+    text-transform: uppercase;
+
+    &:not(:first-child) {
+      padding-top: 30px;
+    }
   }
 
   p, h5, h6 {
     font-family: $font-primary;
+
+    &:not(:first-child) {
+      padding-top: 20px;
+    }
   }
 
   h1 {
@@ -72,10 +81,6 @@
 
   p {
     font-size: 16px;
-
-    &:not(:first-child) {
-      padding-top: 20px;
-    }
   }
 
   .text--secondary {

@@ -37,7 +37,7 @@
     padding: 0;
     line-height: 1;
 
-    &:last-child {
+    &:last-child:not(li) {
       padding-bottom: 30px;
     }
   }
@@ -83,8 +83,14 @@
     font-size: 16px;
   }
 
-  li > p {
-    padding-bottom: 12px!important;
+  li {
+    & p {
+      padding-bottom: 12px!important;
+    }
+
+    &:last-child p {
+      padding-bottom: 0!important;
+    }
   }
 
   .text--secondary {

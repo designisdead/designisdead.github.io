@@ -32,21 +32,28 @@ This component is used to render the Post content type on Storyblok
       </div>
 
       <footer>
-        <spacer size="medium"/>
-        <wrapper size="medium">
+        <wrapper 
+          size="medium"
+          :blok="{
+            backgroundcolor: 'u-backgroundColor--textLight',
+            layout: 'shrinked'
+          }">
           <div
             class="Buttons"
             style="justify-content: center;">
-            <nuxt-link
-              :to="'/jobs'"
-              class="Button">
-              View all jobs
-            </nuxt-link>
+            <vueButton
+              :blok="{
+                link: {
+                  cached_url: '/jobs',
+                  url: '/jobs'
+                },
+                text: 'View all jobs',
+                style: 'outlinePrimary'
+              }"
+            />
           </div>
         </wrapper>
       </footer>
-
-      <spacer size="small"/>
 
       <doormat/>
     </article>

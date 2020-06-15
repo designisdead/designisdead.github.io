@@ -24,9 +24,6 @@
         return this.blok.text ? this.$storyapi.richTextResolver.render(this.blok.text) : ''
       }
     },
-    mounted() {
-      console.log(this.$storyapi.richTextResolver)
-    },
   }
 </script>
 
@@ -45,10 +42,6 @@
   h1, h2, h3, h4 {
     font-family: $font-primary;
     text-transform: uppercase;
-
-    &:not(:first-child) {
-      padding-top: 30px;
-    }
   }
 
   p, h5, h6, ul, ol {
@@ -56,6 +49,10 @@
 
     &:not(:first-child) {
       padding-top: 20px;
+    }
+
+    & + h1, + h2, + h3, + h4 {
+      padding-top: 30px;
     }
   }
 

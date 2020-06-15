@@ -1,6 +1,6 @@
 .Buttons {
   display: flex;
-  margin: 0 -#{$spacer/4};
+  margin: 0 -#{$spacer/8};
 
   .Button {
     display: flex;
@@ -22,7 +22,7 @@
   overflow: hidden;
   text-transform: uppercase;
   user-select: none;
-  margin: 0 $spacer/4;
+  margin: 0 $spacer/8;
   text-align: center;
 
   &:disabled {

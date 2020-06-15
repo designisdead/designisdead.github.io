@@ -3,7 +3,8 @@
     <div
       :class="[Blok.backgroundcolor, Blok.textcolor, Height, { 'wrapper--shrinked' : blok.layout == 'shrinked'}]"
       :id="blok.id"
-      class="Wrapper">
+      class="Wrapper"
+      :style="{ padding: blok.size === 'full' && 0 }">
       <div
         :class="[Blok.size, size]"
         class="Wrapper-content">
@@ -135,6 +136,10 @@
       &.#{$key} {
         max-width: $value;
       }
+    }
+
+    &.full {
+      padding: 0;
     }
   }
 

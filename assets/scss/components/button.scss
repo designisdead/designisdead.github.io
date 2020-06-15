@@ -1,6 +1,6 @@
 .Buttons {
   display: flex;
-  margin: 0 -#{$spacer/4};
+  margin: 0 -#{$spacer/8};
 
   .Button {
     display: flex;
@@ -14,16 +14,15 @@
   background-color: color('primary');
   color: color('light');
   border: 1px solid color('primary');
-  font-size: 1rem;
+  font-size: 12px;
   line-height: 1;
   vertical-align: bottom;
-  padding: 14px 16px;
+  padding: 14px 28px;
   margin-bottom: $spacer/2;
   overflow: hidden;
-  border-radius: 4px;
   text-transform: uppercase;
   user-select: none;
-  margin: 0 $spacer/4;
+  margin: 0 $spacer/8;
   text-align: center;
 
   &:disabled {
@@ -53,7 +52,13 @@
   // Button variations
   &.outline {
     background-color: transparent;
-    border-color: currentColor;
-    color: currentColor;
+    border-color: color('textLight');
+    color: color('textLight');
+  }
+
+  &.outlinePrimary {
+    background-color: transparent;
+    border-color: color('primaryColor');
+    color: color('primaryColor');
   }
 }

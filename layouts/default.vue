@@ -241,21 +241,28 @@
         <path
           fill="currentColor"
           d="M172.4,48.05a37.35,37.35,0,0,1-.28,5.23c-.39,2.66-1.52,4.51-3.37,5.55a14.07,14.07,0,0,1-6.61,1.23h-7.61V36h7.61a13.93,13.93,0,0,1,6.61,1.24c1.85,1,3,2.88,3.37,5.54A37.45,37.45,0,0,1,172.4,48.05Zm-3.65,0a34.38,34.38,0,0,0-.21-4.92,3.64,3.64,0,0,0-1.69-2.74,9.92,9.92,0,0,0-4.71-.81h-4v16.9h4a10.09,10.09,0,0,0,4.71-.79,3.6,3.6,0,0,0,1.69-2.75A33.66,33.66,0,0,0,168.75,48.05Z"/>
-        <path d="M199,60.06h-16V36h16v3.54H186.68v6.48h10.81v3.3H186.68v7.16H199Z"/>
         <path
+          fill="currentColor"
+          d="M199,60.06h-16V36h16v3.54H186.68v6.48h10.81v3.3H186.68v7.16H199Z"/>
+        <path
+          fill="currentColor"
           d="M227.09,53a6.54,6.54,0,0,1-2.75,5.5,9.65,9.65,0,0,1-6.06,1.93q-8.35,0-9.78-7.88l3.62-.62a6,6,0,0,0,2,3.79,6.73,6.73,0,0,0,4.18,1.13,6.45,6.45,0,0,0,3.44-.89,3.32,3.32,0,0,0,1.72-3q0-2.34-3.61-3.44l-6.71-1.93a5.54,5.54,0,0,1-3.62-5.34,5.64,5.64,0,0,1,2.55-4.92,9.66,9.66,0,0,1,5.54-1.52,9.94,9.94,0,0,1,5.51,1.35,10.46,10.46,0,0,1,3.55,4.44l-3.31,1.51a8.06,8.06,0,0,0-2.24-3,6.36,6.36,0,0,0-3.51-.75q-4.44,0-4.44,2.85,0,1.86,3.62,2.83a51.11,51.11,0,0,1,6.71,2.09A6.11,6.11,0,0,1,227.09,53Z"/>
-        <path d="M242,60.06h-3.75V36H242Z"/>
+        <path fill="currentColor" d="M242,60.06h-3.75V36H242Z"/>
         <path
+          fill="currentColor"
           d="M271.6,60.06h-2l-1.37-2.2a6.35,6.35,0,0,1-5.34,2.51,8.44,8.44,0,0,1-7.53-3.82,15.08,15.08,0,0,1-2.17-8.5,14.92,14.92,0,0,1,2.2-8.54,8.68,8.68,0,0,1,7.67-3.78A8.44,8.44,0,0,1,267.74,37a16.64,16.64,0,0,1,3.62,3.31l-2.82,2.3c-1.75-2.2-3.56-3.3-5.45-3.3q-6.22,0-6.23,8.74t6.06,8.74a4.49,4.49,0,0,0,4-2.06,7.88,7.88,0,0,0,1.24-4.54h-6V46.6h9.47Z"/>
-        <path d="M300.85,60.06h-3.34L287.29,43.44V60.06h-3.65V36H287l10.26,16.62V36h3.61Z"/>
-        <path d="M333.69,60.06h-3.75V36h3.75Z"/>
+        <path fill="currentColor" d="M300.85,60.06h-3.34L287.29,43.44V60.06h-3.65V36H287l10.26,16.62V36h3.61Z"/>
+        <path fill="currentColor" d="M333.69,60.06h-3.75V36h3.75Z"/>
         <path
+          fill="currentColor"
           d="M362.44,53a6.52,6.52,0,0,1-2.76,5.5,9.6,9.6,0,0,1-6.05,1.93q-8.37,0-9.78-7.88l3.61-.62a6.12,6.12,0,0,0,2,3.79,6.76,6.76,0,0,0,4.19,1.13,6.45,6.45,0,0,0,3.44-.89,3.32,3.32,0,0,0,1.72-3q0-2.34-3.62-3.44l-6.71-1.93a5.54,5.54,0,0,1-3.61-5.34,5.64,5.64,0,0,1,2.55-4.92,9.64,9.64,0,0,1,5.54-1.52,10,10,0,0,1,5.51,1.35A10.52,10.52,0,0,1,362,41.65l-3.3,1.51a8.17,8.17,0,0,0-2.24-3,6.38,6.38,0,0,0-3.51-.75q-4.44,0-4.44,2.85,0,1.86,3.61,2.83a51.52,51.52,0,0,1,6.72,2.09A6.13,6.13,0,0,1,362.44,53Z"/>
         <path
+          fill="currentColor"
           d="M408.18,48.05a37.67,37.67,0,0,1-.27,5.23c-.39,2.66-1.52,4.51-3.37,5.55a14.12,14.12,0,0,1-6.62,1.23h-7.6V36h7.6a14,14,0,0,1,6.62,1.24c1.85,1,3,2.88,3.37,5.54A37.77,37.77,0,0,1,408.18,48.05Zm-3.64,0a34.38,34.38,0,0,0-.21-4.92,3.64,3.64,0,0,0-1.69-2.74,9.94,9.94,0,0,0-4.72-.81H394v16.9h3.95a10.11,10.11,0,0,0,4.72-.79,3.6,3.6,0,0,0,1.69-2.75A33.66,33.66,0,0,0,404.54,48.05Z"/>
-        <path d="M434.14,60.06h-16V36h16v3.54H421.79v6.48h10.8v3.3h-10.8v7.16h12.35Z"/>
-        <path d="M464.23,60.06h-3.92l-2.69-6.74h-9.29l-2.68,6.74h-3.93l9.54-24h3.44Zm-8-10.22L453,41.58l-3.27,8.26Z"/>
+        <path fill="currentColor" d="M434.14,60.06h-16V36h16v3.54H421.79v6.48h10.8v3.3h-10.8v7.16h12.35Z"/>
+        <path fill="currentColor" d="M464.23,60.06h-3.92l-2.69-6.74h-9.29l-2.68,6.74h-3.93l9.54-24h3.44Zm-8-10.22L453,41.58l-3.27,8.26Z"/>
         <path
+          fill="currentColor"
           d="M490.54,48.05a37.35,37.35,0,0,1-.28,5.23c-.39,2.66-1.52,4.51-3.37,5.55a14.07,14.07,0,0,1-6.61,1.23h-7.61V36h7.61a13.93,13.93,0,0,1,6.61,1.24c1.85,1,3,2.88,3.37,5.54A37.45,37.45,0,0,1,490.54,48.05Zm-3.65,0a34.38,34.38,0,0,0-.21-4.92A3.66,3.66,0,0,0,485,40.39a9.94,9.94,0,0,0-4.72-.81h-4v16.9h4a10.11,10.11,0,0,0,4.72-.79,3.62,3.62,0,0,0,1.68-2.75A33.66,33.66,0,0,0,486.89,48.05Z"/>
         <path
           fill="currentColor"
@@ -417,12 +424,26 @@
           document.querySelector('html').removeAttribute('style'),
           document.querySelector('body').removeAttribute('style')
         )
+      },
+      updateHeaderMenuClass() {
+        const headerMenu = document.querySelector('.Page-header')
+        window.scrollY > 100 ? (
+          headerMenu.classList.add('header--opaque')
+        ) : (
+          headerMenu.classList.remove('header--opaque')
+        )
       }
     },
     computed: {
       draftMode() {
         return this.$store.state.settings.editMode;
       }
+    },
+    mounted: function() {
+      window.addEventListener('scroll', this.updateHeaderMenuClass)
+    },
+    destroyed: function() {
+      window.removeEventListener('scroll', this.updateHeaderMenuClass)
     }
   };
 </script>
@@ -430,7 +451,6 @@
 <style lang="scss">
   @import "../assets/scss/styles";
 
-  $pageHeaderHeight: 70px;
   $pageSidebarMinimumWidth: 310px;
 
   .fade-enter-active, .fade-leave-active {
@@ -570,43 +590,46 @@
   .Page-header {
     position: fixed;
     width: 100%;
-    height: $pageHeaderHeight;
-    background: color("light");
     z-index: 1;
     top: 0;
+    transition: background-color .5s, box-shadow .5s;
+  }
+
+  .header--opaque {
+    background-color: color('primaryColor');
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
   }
 
   .Page-logo {
+    color: color('textLight');
     width: 240px;
     height: 41px;
     margin-left: -20px;
+    margin-top: 12px;
     @media screen and (min-width: size("large")) {
       width: 300px;
-      height: 55px;
+      height: 45px;
     }
   }
 
   .Page-content {
     position: relative;
     z-index: 0;
-    padding-top: $pageHeaderHeight;
+    background-color: color('primaryColor');
   }
 
   .Page-headerContent {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     max-width: size("huge");
     margin: 0 auto;
     height: 100%;
-    padding: $spacer/2;
+    padding: 0 50px;
   }
 
   .Navigation {
     display: none;
     text-align: right;
-    line-height: $pageHeaderHeight;
     @media screen and (min-width: size("large")) {
       display: block;
     }
@@ -614,22 +637,22 @@
 
   .Navigation-link {
     display: inline-block;
-    padding: 7px 10px;
-    margin: 0 5px;
+    padding: 30px 5px 15px;
     text-decoration: none !important;
     transition: 0.25s ease opacity;
     opacity: 1;
-    line-height: 1;
     text-transform: uppercase;
     font-size: 0.85rem;
     border: 1px solid transparent;
+    color: color('textLight');
 
     &.nuxt-link-active {
       opacity: 1;
       font-weight: bold;
+      background-color: color('secondaryColor');
     }
 
-    &:hover {
+    &:hover:not(.nuxt-link-active) {
       opacity: 0.5;
     }
   }
@@ -645,6 +668,7 @@
     font-size: 1rem;
     transition: 0.25s ease opacity;
     will-change: opacity;
+    height: 100%;
     &:hover {
       text-decoration: none;
       opacity: 0.5;
@@ -652,7 +676,7 @@
   }
 
   .Navigation-contact {
-    color: black;
+    color: color('textLight');
     cursor: pointer;
     user-select: none;
   }

@@ -82,8 +82,14 @@
   }
 
   .u-color--#{$key} {
-    color: $value;
+    color: $value!important;
     a {
+      color: $value;
+    }
+  }
+
+  .u-color-first-letter--#{$key} {
+    &::first-letter {
       color: $value;
     }
   }
@@ -91,4 +97,8 @@
 
 .u-noScroll {
   overflow: hidden;
+}
+
+.u-rotate--180 {
+  transform: rotate(180deg);
 }

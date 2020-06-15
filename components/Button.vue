@@ -30,7 +30,11 @@
       blok: {
         type: Object,
         default: function () {
-          return {}
+          return {
+            link: {
+              cached_url: '/'
+            }
+          }
         }
       }
     },

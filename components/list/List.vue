@@ -30,7 +30,7 @@
         class="list__mobile-top-spacer blog-list__container"></div>
 
       <ul
-        v-if="blok.listcontent.length > 0"
+        v-if="blok.listcontent && blok.listcontent.length > 0"
         :class="['List--' + blok.listtype]"
         :id="blok.id"
         class="List">
@@ -52,10 +52,10 @@
 
     <div
       v-if="showMoreButton"
-      class="u-textAlignCenter">
+      class="list__bottom-button-wrapper u-textAlignCenter">
       <button
         :disabled="loading"
-        class="Button"
+        :class="['Button', blok.bottombuttonstyle]"
         @click="nextPage">Load more
       </button>
     </div>
@@ -174,7 +174,7 @@ export default {
 }
 
 .blog-list__container {
-  padding-top: 20px;
+  // padding-top: 20px;
 }
 
 .List--list-image,
@@ -189,6 +189,15 @@ export default {
   @media screen and (min-width: size("large")) {
     grid-template-columns: repeat(3, 1fr);
   }
+}
+
+.List--card {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.list__bottom-button-wrapper {
+  margin-top: 36px;
 }
 
 @media screen and (max-width: size("medium")-1) {

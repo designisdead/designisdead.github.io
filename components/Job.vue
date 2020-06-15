@@ -488,16 +488,15 @@ This component is used to render the Post content type on Storyblok
           <div
             class="Buttons"
             style="justify-content: center;">
-            <vueButton
-              :blok="{
-                link: {
-                  cached_url: '/jobs',
-                  url: '/jobs'
-                },
-                text: 'View all jobs',
-                style: 'outlinePrimary'
-              }"
-            />
+            <div
+                class="Buttons"
+                style="justify-content: center;">
+                <nuxt-link
+                  :to="'/jobs'"
+                  class="Button outlinePrimary">
+                  &#8592; To all jobs
+                </nuxt-link>
+              </div>
           </div>
         </wrapper>
       </footer>

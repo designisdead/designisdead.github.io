@@ -6,47 +6,56 @@ This component is used to render the Post content type on Storyblok
   <div>
     <main>
       <article class="Post">
-        <header
-          class="Post-header Wrapper u-backgroundColor--black u-color--light"
-          data-parallax="0.5">
-          <div class="Post-headerContent">
-            <wrapper size="medium">
+        <header class="Post-header">
+          <wrapper
+            size="large"
+            class="Post-headerContent__wrapper"
+            :blok="{
+              layout: 'shrinked',
+              backgroundimage: blok.content.primaryimage,
+              backgroundposition: 'center center',
+              backgroundsize: 'cover',
+            }"
+          >
+            <div class="Post-headerContent">
               <div class="Title tiny uppercase">
                 <span
                   v-if="tags.length > 0"
-                  class="Post-tags">
-                  <strong
+                  class="Post-tags-container">
+                  <span
                     v-for="(tag, index) in tags"
-                    :key="index">
+                    :key="index"
+                    class="Post-tag">
                     {{ tag }}
                     <span v-if="index < tags.length - 1">,</span>
-                  </strong> |
+                  </span>
                 </span>
-                <time :datetime="dataTime">{{ formattedDate }}</time>
+
+                <time class="Post-date" :datetime="dataTime">{{ formattedDate }}</time>
                 <br>
               </div>
 
               <h1 class="Post-title">{{ pagetitle }}</h1>
 
-              <div
-                v-if="blok.content.published"
-                class="Title tiny uppercase">
-                <author
-                  v-if="blok.content.author"
-                  :id="blok.content.author"/>
-              </div>
-            </wrapper>
-          </div>
-          <div
-            v-lazy:background-image="headerImage"
-            class="Post-headerBackground"/>
+              <p
+                v-if="blok.content.published && blok.content.author"
+                class="Post-author">
+                <author :id="blok.content.author" :portrait="false" />
+              </p>
+            </div>
+          </wrapper>
         </header>
         <div class="Post-content">
-          <spacer size="medium"/>
-
           <div
             v-editable="blok"
             class="page">
+            <wrapper
+              :blok="{
+                backgroundcolor: 'u-backgroundColor--textLight',
+                layout: 'shrinked',
+              }">
+              <spacer size="small" />
+            </wrapper>
             <component
               v-for="blok in blok.content.body"
               :key="blok._uid"
@@ -55,20 +64,24 @@ This component is used to render the Post content type on Storyblok
           </div>
 
           <footer>
-            <wrapper size="medium">
+            <wrapper
+              size="medium"
+              :blok="{
+                backgroundcolor: 'u-backgroundColor--textLight',
+                layout: 'shrinked'
+              }"
+            >
               <div
                 class="Buttons"
-                style="justify-content: left;">
+                style="justify-content: center;">
                 <nuxt-link
                   :to="'/blog'"
-                  class="Button outline">
+                  class="Button outlinePrimary">
                   &#8592; To all blogs
                 </nuxt-link>
               </div>
             </wrapper>
           </footer>
-
-          <spacer size="small"/>
 
           <doormat/>
         </div>
@@ -99,7 +112,8 @@ This component is used to render the Post content type on Storyblok
         return moment(this.blok.content.published).format('YYYY-MM-DD HH:mm');
       },
       formattedDate() {
-        return moment(this.blok.content.published).format('dddd MMMM D, YYYY');
+        // return moment(this.blok.content.published).format('dddd MMMM D, YYYY');
+        return moment(this.blok.content.published).format('DD-MM-YYYY');
       },
       fromNow() {
         return moment(this.blok.content.published).fromNow();
@@ -107,44 +121,83 @@ This component is used to render the Post content type on Storyblok
       tags() {
         return this.blok.tag_list ? this.blok.tag_list : [];
       },
-      headerImage() {
-        const filters = supportsWebP ? '/filters:format(webp)' : '';
-        return this.$options.filters.imageApi({src: this.blok.content.primaryimage, size: 'large', filters: filters});
-      }
     }
   }
 </script>
 
 <style lang="scss">
-  .Post-header {
-    margin-left: -6px; // Why?
-    position: relative;
-    vertical-align: top;
-    height: calc(100vh - 70px);
-    @media screen and (min-width: 600px) and (min-height: 600px) {
-      height: 50vh;
+  .Post {
+    padding-top: 120px;
+
+    p, li {
+      line-height: 1;
     }
   }
 
-  .Post-content {
-    min-height: 200vh;
-    background: white;
-    transform: translateZ(0);
-    padding: 10px 0;
+  .Post-header {
+    position: relative;
+    vertical-align: top;
+  }
+
+  .Post-headerContent__wrapper {
+    height: 160px;
+
+    > .Wrapper {
+      padding-top: 80px;
+    }
   }
 
   .Post-headerContent {
     width: 100%;
+    background: color('snowColor');
+    padding: 20px 24px;
   }
 
-  .Post-headerBackground {
-    position: absolute;
-    top: 0vh;
-    left: 0vw;
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    opacity: 0.4;
-    background-position: center center;
+  .Post-tags-container {
+    margin-bottom: 14px;
+  }
+
+  .Post-tag {
+    font-size: 10px;
+    padding: 4px 8px;
+    margin-right: 8px;
+    color: color('light');
+    background-color: color('primaryColor');
+  }
+
+  .Post-date {
+    font-size: 14px;
+    color: color('primaryColor');
+    margin-bottom: 14px;
+  }
+
+  .Post-title {
+    letter-spacing: 0;
+    line-height: 1;
+    margin-bottom: 14px;
+    padding: 0 90px;
+    font-size: 40px;
+    text-align: center;
+    color: color('secondaryColor');
+    text-transform: uppercase;
+    
+    &:first-line {
+      color: color('primaryColor');
+    }
+  }
+
+  .Post-author {
+    font-size: 16px;
+    text-transform: uppercase;
+    color: color('primaryColor');
+    padding: 0;
+
+    span {
+      margin: 0 auto;
+    }
+  }
+
+  .Post-content {
+    background: color('primaryColor');
   }
 </style>

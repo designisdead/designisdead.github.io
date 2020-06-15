@@ -32,7 +32,7 @@
 
 <style lang="scss">
 .RichText2 {
-  h1, h2, h3, h4, h5, h6, p {
+  h1, h2, h3, h4, h5, h6, p, ul, ol, li {
     color: color('textDark');
     padding: 0;
     line-height: 1;
@@ -51,7 +51,7 @@
     }
   }
 
-  p, h5, h6 {
+  p, h5, h6, ul, ol {
     font-family: $font-primary;
 
     &:not(:first-child) {
@@ -81,6 +81,10 @@
 
   p {
     font-size: 16px;
+  }
+
+  li > p {
+    padding-bottom: 12px!important;
   }
 
   .text--secondary {

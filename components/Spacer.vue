@@ -50,7 +50,7 @@
     padding-top: 74px;
   }
   &.xxHuge {
-    padding-top: 212px;
+    padding-top: 106px;
   }
 }
 
@@ -74,7 +74,7 @@
   }
 
   &.xxHuge:after {
-    height: 125%;
+    height: 134%;
   }
 
   &.xHuge:after {

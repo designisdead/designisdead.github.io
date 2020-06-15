@@ -30,7 +30,7 @@
         class="list__mobile-top-spacer blog-list__container"></div>
 
       <ul
-        v-if="blok.listcontent.length > 0"
+        v-if="blok.listcontent && blok.listcontent.length > 0"
         :class="['List--' + blok.listtype]"
         :id="blok.id"
         class="List">

@@ -181,6 +181,7 @@
 
   .card__location-content {
     padding: 0;
+    margin-bottom: 36px;
   }
 
   .Card-image {

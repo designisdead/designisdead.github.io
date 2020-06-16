@@ -43,11 +43,11 @@
   @each $key, $value in $sizes {
     $i: $i + 1;
     &.#{$key} {
-      padding: $i * 5px;
+      padding-top: $i * 5px * 2;
     }
   }
   &.xHuge {
-    padding: 37px;
+    padding-top: 74px;
   }
   &.xxHuge {
     padding-top: 106px;
@@ -67,12 +67,30 @@
     position: absolute;
     content: '';
     width: 28px;
-    height: 400%;
+    top: -16px;
     background-color: color('textLight');
-    top: -30px;
     transform: rotate(30deg);
     transform-origin: 0% 0%;
-    z-index: -1;
+  }
+
+  &.xxHuge:after {
+    height: 134%;
+  }
+
+  &.xHuge:after {
+    height: 142%;
+  }
+
+  &.huge:after {
+    height: 154%;
+  }
+
+  &.large:after {
+    height: 165%;
+  }
+
+  &.medium:after {
+    height: 180%;
   }
 }
 

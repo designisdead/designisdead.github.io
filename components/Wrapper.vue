@@ -19,9 +19,14 @@
         v-lazy:background-image="BackgroundImage"
         v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
         :class="{
-          'u-backgroundTopRight': Blok.backgroundposition == 'top right',
-          'u-backgroundCenterCenter': Blok.backgroundposition == 'center center',
           'u-backgroundTopLeft': Blok.backgroundposition == 'top left',
+          'u-backgroundTopCenter': Blok.backgroundposition == 'top center',
+          'u-backgroundTopRight': Blok.backgroundposition == 'top right',
+          'u-backgroundCenterLeft': Blok.backgroundposition == 'center left',
+          'u-backgroundCenterCenter': Blok.backgroundposition == 'center center',
+          'u-backgroundCenterRight': Blok.backgroundposition == 'center right',
+          'u-backgroundBottomLeft': Blok.backgroundposition == 'bottom left',
+          'u-backgroundBottomCenter': Blok.backgroundposition == 'bottom center',
           'u-backgroundBottomRight': Blok.backgroundposition == 'bottom right',
           'u-backgroundSizeCover': Blok.backgroundsize == 'cover',
           'u-backgroundSizeContain': Blok.backgroundsize == 'contain',

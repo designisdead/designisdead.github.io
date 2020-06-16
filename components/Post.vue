@@ -13,7 +13,7 @@ This component is used to render the Post content type on Storyblok
             :blok="{
               layout: 'shrinked',
               backgroundimage: blok.content.primaryimage,
-              backgroundposition: 'center center',
+              backgroundposition: blok.content.primaryimageposition,
               backgroundsize: 'cover',
             }"
           >
@@ -32,7 +32,6 @@ This component is used to render the Post content type on Storyblok
                 </span>
 
                 <time class="Post-date" :datetime="dataTime">{{ formattedDate }}</time>
-                <br>
               </div>
 
               <h1 class="Post-title">{{ pagetitle }}</h1>
@@ -140,10 +139,10 @@ This component is used to render the Post content type on Storyblok
   }
 
   .Post-headerContent__wrapper {
-    height: 160px;
+    height: 300px;
 
     > .Wrapper {
-      padding-top: 80px;
+      padding-top: 220px;
     }
   }
 

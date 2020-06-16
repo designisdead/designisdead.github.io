@@ -1,5 +1,5 @@
 <template>
-  <div v-editable="Blok" :data-parallax="Parallax">
+  <div v-editable="Blok" :data-parallax="Parallax" style="position: relative;">
     <div
       :class="[Blok.backgroundcolor, Blok.textcolor, Height, { 'wrapper--shrinked' : blok.layout == 'shrinked'}]"
       :id="blok.id"
@@ -15,7 +15,8 @@
           :is="Blok.component"/>
         <slot/>
       </div>
-      <div
+    </div>
+    <div
         v-lazy:background-image="BackgroundImage"
         v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
         :class="[
@@ -30,7 +31,6 @@
         v-if="Blok.backgroundvideosrc && Blok.backgroundimage"
         :src="Blok.backgroundvideosrc"
         :poster="Blok.backgroundimage"/>
-    </div>
   </div>
 </template>
 

@@ -9,7 +9,7 @@ This component is used to render the Post content type on Storyblok
         size="large" 
         :blok="{
           backgroundimage: '//a.storyblok.com/f/44470/2928x1602/fb173b049c/groupe-2-copie-9-3x.png', 
-          backgroundposition: 'top right',
+          backgroundposition: 'bottom-right',
           parallax: 0.5,
           backgroundsize: 'contain'
         }">

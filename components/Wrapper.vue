@@ -18,20 +18,12 @@
       <div
         v-lazy:background-image="BackgroundImage"
         v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
-        :class="{
-          'u-backgroundTopLeft': Blok.backgroundposition == 'top left',
-          'u-backgroundTopCenter': Blok.backgroundposition == 'top center',
-          'u-backgroundTopRight': Blok.backgroundposition == 'top right',
-          'u-backgroundCenterLeft': Blok.backgroundposition == 'center left',
-          'u-backgroundCenterCenter': Blok.backgroundposition == 'center center',
-          'u-backgroundCenterRight': Blok.backgroundposition == 'center right',
-          'u-backgroundBottomLeft': Blok.backgroundposition == 'bottom left',
-          'u-backgroundBottomCenter': Blok.backgroundposition == 'bottom center',
-          'u-backgroundBottomRight': Blok.backgroundposition == 'bottom right',
-          'u-backgroundSizeCover': Blok.backgroundsize == 'cover',
-          'u-backgroundSizeContain': Blok.backgroundsize == 'contain',
-          'u-backgroundAttachmentFixed' : Blok.backgroundfixed == 'fixed'
-        }"
+        :class="[
+          `u-backgroundPosition--${Blok.backgroundposition}`,
+          Blok.backgroundsize == 'cover' && 'u-backgroundSizeCover',
+          Blok.backgroundsize == 'contain' && 'u-backgroundSizeContain',
+          Blok.backgroundfixed == 'fixed' && 'u-backgroundAttachmentFixed'
+        ]"
         class="Wrapper-background"/>
       <particles v-if="Blok.backgroundeffect == 'particles'"/>
       <video-background

@@ -1,37 +1,7 @@
-.u-backgroundTopLeft {
-  background-position: top left;
-}
-
-.u-backgroundTopCenter {
-  background-position: top center;
-}
-
-.u-backgroundTopRight {
-  background-position: top right;
-}
-
-.u-backgroundCenterLeft {
-  background-position: center left;
-}
-
-.u-backgroundCenterCenter {
-  background-position: center center;
-}
-
-.u-backgroundCenterRight {
-  background-position: center right;
-}
-
-.u-backgroundBottomLeft {
-  background-position: bottom left;
-}
-
-.u-backgroundBottomCenter {
-  background-position: bottom center;
-}
-
-.u-backgroundBottomRight {
-  background-position: bottom right;
+@each $key, $value in $background-positions {
+  .u-backgroundPosition--#{$key} {
+    background-position: $value;
+  }
 }
 
 .u-backgroundSizeContain {

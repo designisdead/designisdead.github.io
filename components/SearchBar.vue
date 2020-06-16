@@ -503,4 +503,13 @@ export default {
       opacity: 1;
     }
   }
+
+  @media screen and (min-width: size(huge) + 100px) {
+    .search-bar__main-container {
+      margin: 0;
+      max-width: size(huge);
+      left: 50%;
+      margin-left: -700px;
+    }
+  }
 </style>

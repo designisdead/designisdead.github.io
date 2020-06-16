@@ -151,5 +151,10 @@
 
   .wrapper--shrinked {
     margin: 0 50px;
+
+    @media screen and (min-width: size(huge) + 100px) {
+      margin: 0 auto;
+      max-width: size(huge);
+    }
   }
 </style>

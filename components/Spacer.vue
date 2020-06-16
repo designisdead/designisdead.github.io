@@ -39,6 +39,8 @@
 <style lang="scss">
 .Spacer {
   position: relative;
+  max-width: size(huge);
+  margin: 0 auto;
   $i: 0;
   @each $key, $value in $sizes {
     $i: $i + 1;

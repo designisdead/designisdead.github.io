@@ -39,7 +39,7 @@ This component is used to render the Post content type on Storyblok
             layout: 'shrinked'
           }">
           <spacer size="small" />
-          <h1 class="job-footer__form-title"><span class="text--primary">One step closer to</span> <span class="text--secondary">Your goal</span></h1>
+          <h1 class="job-footer__form-title"><span class="text--primary">I want</span> <span class="text--secondary">The job</span></h1>
 
           <!-- Specific job form start -->
           <style>

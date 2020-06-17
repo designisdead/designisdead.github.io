@@ -577,6 +577,7 @@ This component is used to render the Post content type on Storyblok
       p {
         padding-bottom: 0px;
         font-size: 16px!important;
+        font-family: $font-primary!important;
       }
     }
 
@@ -587,6 +588,7 @@ This component is used to render the Post content type on Storyblok
       height: 42px!important;
       font-size: 16px!important;
       color: color('primaryColor')!important;
+      font-family: $font-primary!important;
 
       &::placeholder {
         color: color('medium')!important;
@@ -603,6 +605,7 @@ This component is used to render the Post content type on Storyblok
       height: 42px!important;
       padding-left: 28px!important;
       padding-right: 28px!important; 
+      font-family: $font-primary!important;
     }
   }
 </style>

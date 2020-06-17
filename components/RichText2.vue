@@ -90,6 +90,11 @@
     }
   }
 
+  a {
+    text-decoration: underline;
+    color: color('secondaryColor');
+  }
+
   .text--secondary {
     color: color('secondaryColor');
   }

@@ -1,5 +1,5 @@
 <template>
-  <div v-editable="Blok" :data-parallax="Parallax">
+  <div v-editable="Blok" :data-parallax="Parallax" style="position: relative;">
     <div
       :class="[Blok.backgroundcolor, Blok.textcolor, Height, { 'wrapper--shrinked' : blok.layout == 'shrinked'}]"
       :id="blok.id"
@@ -15,25 +15,22 @@
           :is="Blok.component"/>
         <slot/>
       </div>
-      <div
+    </div>
+    <div
         v-lazy:background-image="BackgroundImage"
         v-if="Blok.backgroundimage && !Blok.backgroundvideosrc"
-        :class="{
-          'u-backgroundTopRight': Blok.backgroundposition == 'top right',
-          'u-backgroundCenterCenter': Blok.backgroundposition == 'center center',
-          'u-backgroundTopLeft': Blok.backgroundposition == 'top left',
-          'u-backgroundBottomRight': Blok.backgroundposition == 'bottom right',
-          'u-backgroundSizeCover': Blok.backgroundsize == 'cover',
-          'u-backgroundSizeContain': Blok.backgroundsize == 'contain',
-          'u-backgroundAttachmentFixed' : Blok.backgroundfixed == 'fixed'
-        }"
+        :class="[
+          `u-backgroundPosition--${Blok.backgroundposition}`,
+          Blok.backgroundsize == 'cover' && 'u-backgroundSizeCover',
+          Blok.backgroundsize == 'contain' && 'u-backgroundSizeContain',
+          Blok.backgroundfixed == 'fixed' && 'u-backgroundAttachmentFixed'
+        ]"
         class="Wrapper-background"/>
       <particles v-if="Blok.backgroundeffect == 'particles'"/>
       <video-background
         v-if="Blok.backgroundvideosrc && Blok.backgroundimage"
         :src="Blok.backgroundvideosrc"
         :poster="Blok.backgroundimage"/>
-    </div>
   </div>
 </template>
 
@@ -154,5 +151,10 @@
 
   .wrapper--shrinked {
     margin: 0 50px;
+
+    @media screen and (min-width: size(huge) + 100px) {
+      margin: 0 auto;
+      max-width: size(huge);
+    }
   }
 </style>

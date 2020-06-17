@@ -1,17 +1,7 @@
-.u-backgroundTopRight {
-  background-position: top right;
-}
-
-.u-backgroundTopLeft {
-  background-position: top left;
-}
-
-.u-backgroundBottomRight {
-  background-position: bottom right;
-}
-
-.u-backgroundCenterCenter {
-  background-position: center center;
+@each $key, $value in $background-positions {
+  .u-backgroundPosition--#{$key} {
+    background-position: $value;
+  }
 }
 
 .u-backgroundSizeContain {

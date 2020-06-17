@@ -41,6 +41,7 @@ This component is used to render the Post content type on Storyblok
           <spacer size="small" />
           <h1 class="job-footer__form-title"><span class="text--primary">One step closer to</span> <span class="text--secondary">Your goal</span></h1>
 
+          <!-- Specific job form start -->
           <style>
             #_form_8_ { font-size:14px; line-height:1.6; font-family:arial, helvetica, sans-serif; margin:0!important; }
             #_form_8_ * { outline:0; }
@@ -492,6 +493,7 @@ This component is used to render the Post content type on Storyblok
             })();
 
           </script>
+          <!-- Specific job form end -->
 
           <spacer size="medium" />
 

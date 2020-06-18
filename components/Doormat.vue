@@ -153,9 +153,51 @@
 
   .footer__policies-banner {
     text-align: center;
+    color: color(light);
     background-color: color('primary');
     padding: 20px;
     font-size: 12px;
+  }
+
+
+  @media screen and (max-width: size('smedium')) {
+    .Page-footer {
+      padding-top: 56px;
+    }
+
+    .footer__details-container {
+      flex-direction: column;
+      padding-bottom: 56px;
+    }
+
+    .footer__contact-container {
+      text-align: center;
+      padding-right: 0;
+
+      &:after {
+        width: 52px;
+        height: 1px;
+        left: calc(50% - 26px);
+        bottom: 0;
+      }
+
+      span:last-child {
+        padding-bottom: 20px;
+      }
+    }
+
+    .footer__socials-container {
+      padding: 20px 0 0;
+      justify-content: center;
+    }
+
+    .footer__social-wrapper {
+      margin-right: 40px;
+
+      &:last-child {
+        margin: 0;
+      }
+    }
   }
 </style>
 

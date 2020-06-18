@@ -33,13 +33,17 @@ This component is used to render the Post content type on Storyblok
 
       <footer>
         <wrapper 
-          size="medium"
+          size="large"
           :blok="{
             backgroundcolor: 'u-backgroundColor--textLight',
             layout: 'shrinked'
           }">
+          <spacer size="small" />
+          <h1 class="job-footer__form-title"><span class="text--primary">I want</span> <span class="text--secondary">The job</span></h1>
+
+          <!-- Specific job form start -->
           <style>
-            #_form_8_ { font-size:14px; line-height:1.6; font-family:arial, helvetica, sans-serif; margin:0; }
+            #_form_8_ { font-size:14px; line-height:1.6; font-family:arial, helvetica, sans-serif; margin:0!important; }
             #_form_8_ * { outline:0; }
             ._form_hide { display:none; visibility:hidden; }
             ._form_show { display:block; visibility:visible; }
@@ -47,9 +51,9 @@ This component is used to render the Post content type on Storyblok
             #_form_8_._form-bottom { bottom:0; }
             #_form_8_._form-left { left:0; }
             #_form_8_._form-right { right:0; }
-            #_form_8_ input[type="text"],#_form_8_ input[type="date"],#_form_8_ textarea { padding:6px; height:auto; border:#979797 1px solid; border-radius:4px; color:#000 !important; font-size:13px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
+            #_form_8_ input[type="text"],#_form_8_ input[type="date"],#_form_8_ textarea { padding:6px; height:auto; border:#979797 1px solid; border-radius:4px; color:#000; font-size:14px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; }
             #_form_8_ textarea { resize:none; }
-            #_form_8_ ._submit { -webkit-appearance:none; cursor:pointer; font-family:arial, sans-serif; font-size:14px; text-align:center; background:#333 !important; border:0 !important; -moz-border-radius:4px !important; -webkit-border-radius:4px !important; border-radius:4px !important; color:#fff !important; padding:10px !important; }
+            #_form_8_ ._submit { -webkit-appearance:none; cursor:pointer; font-family:arial, sans-serif; font-size:14px; text-align:center; background:#333; border:0; -moz-border-radius:4px; -webkit-border-radius:4px; border-radius:4px; color:#fff; padding:10px; }
             #_form_8_ ._close-icon { cursor:pointer; background-image:url('https://d226aj4ao1t61q.cloudfront.net/esfkyjh1u_forms-close-dark.png'); background-repeat:no-repeat; background-size:14.2px 14.2px; position:absolute; display:block; top:11px; right:9px; overflow:hidden; width:16.2px; height:16.2px; }
             #_form_8_ ._close-icon:before { position:relative; }
             #_form_8_ ._form-body { margin-bottom:30px; }
@@ -57,7 +61,7 @@ This component is used to render the Post content type on Storyblok
             #_form_8_ ._form-content-right { margin-left:164px; }
             #_form_8_ ._form-branding { color:#fff; font-size:10px; clear:both; text-align:left; margin-top:30px; font-weight:100; }
             #_form_8_ ._form-branding ._logo { display:block; width:130px; height:14px; margin-top:6px; background-image:url('https://d226aj4ao1t61q.cloudfront.net/hh9ujqgv5_aclogo_li.png'); background-size:130px auto; background-repeat:no-repeat; }
-            #_form_8_ ._form-label,#_form_8_ ._form_element ._form-label { font-weight:bold; margin-bottom:5px; display:block; }
+            #_form_8_ ._form-label,#_form_8_ ._form_element ._form-label { font-weight:bold; margin-bottom:5px; display:none; }
             #_form_8_._dark ._form-branding { color:#333; }
             #_form_8_._dark ._form-branding ._logo { background-image:url('https://d226aj4ao1t61q.cloudfront.net/jftq2c8s_aclogo_dk.png'); }
             #_form_8_ ._form_element { position:relative; margin-bottom:10px; font-size:0; max-width:100%; }
@@ -75,18 +79,20 @@ This component is used to render the Post content type on Storyblok
             #_form_8_ ._form_full_field { display:block; width:100%; margin-bottom:10px; }
             #_form_8_ input[type="text"]._has_error,#_form_8_ textarea._has_error { border:#f37c7b 1px solid; }
             #_form_8_ input[type="checkbox"]._has_error { outline:#f37c7b 1px solid; }
-            #_form_8_ ._error { display:block; position:absolute; font-size:13px; z-index:10000001; }
+            #_form_8_ ._error { display:block; position:absolute; font-size:14px; z-index:10000001; }
             #_form_8_ ._error._above { padding-bottom:4px; bottom:39px; right:0; }
             #_form_8_ ._error._below { padding-top:4px; top:100%; right:0; }
             #_form_8_ ._error._above ._error-arrow { bottom:0; right:15px; border-left:5px solid transparent; border-right:5px solid transparent; border-top:5px solid #f37c7b; }
             #_form_8_ ._error._below ._error-arrow { top:0; right:15px; border-left:5px solid transparent; border-right:5px solid transparent; border-bottom:5px solid #f37c7b; }
-            #_form_8_ ._error-inner { padding:8px 12px; background-color:#f37c7b; font-size:13px; font-family:arial, sans-serif; color:#fff; text-align:center; text-decoration:none; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; }
+            #_form_8_ ._error-inner { padding:8px 12px; background-color:#f37c7b; font-size:14px; font-family:arial, sans-serif; color:#fff; text-align:center; text-decoration:none; -webkit-border-radius:4px; -moz-border-radius:4px; border-radius:4px; }
             #_form_8_ ._error-inner._form_error { margin-bottom:5px; text-align:left; }
             #_form_8_ ._button-wrapper ._error-inner._form_error { position:static; }
             #_form_8_ ._error-inner._no_arrow { margin-bottom:10px; }
             #_form_8_ ._error-arrow { position:absolute; width:0; height:0; }
             #_form_8_ ._error-html { margin-bottom:10px; }
             .pika-single { z-index:10000001 !important; }
+            #_form_8_ input[type="text"].datetime_date { width:69%; display:inline; }
+            #_form_8_ select.datetime_time { width:29%; display:inline; height:32px; }
             @media all and (min-width:320px) and (max-width:667px) { ::-webkit-scrollbar { display:none; }
             #_form_8_ { margin:0; width:100%; min-width:100%; max-width:100%; box-sizing:border-box; }
             #_form_8_ * { -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; font-size:1em; }
@@ -107,7 +113,7 @@ This component is used to render the Post content type on Storyblok
             #_form_8_ button[type="submit"] { padding:20px; font-size:1.5em; }
             #_form_8_ ._inline-style { margin:20px 0 0 !important; }
             }
-            #_form_8_ { position:relative; text-align:left; margin:25px auto 0; padding:20px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; *zoom:1; background:#fff !important; border:0px solid #b0b0b0 !important; -moz-border-radius:0px !important; -webkit-border-radius:0px !important; border-radius:0px !important; color:#000 !important; }
+            #_form_8_ { position:relative; text-align:left; margin:25px auto 0; padding:20px; -webkit-box-sizing:border-box; -moz-box-sizing:border-box; box-sizing:border-box; *zoom:1; background:transparent !important; border:0px solid #b0b0b0 !important; -moz-border-radius:0px !important; -webkit-border-radius:0px !important; border-radius:0px !important; color:#000 !important; }
             #_form_8_ ._form-title { font-size:22px; line-height:22px; font-weight:600; margin-bottom:0; }
             #_form_8_:before,#_form_8_:after { content:" "; display:table; }
             #_form_8_:after { clear:both; }
@@ -115,7 +121,7 @@ This component is used to render the Post content type on Storyblok
             #_form_8_._inline-style input[type="text"],#_form_8_._inline-style input[type="date"] { padding:10px 12px; }
             #_form_8_._inline-style button._inline-style { position:relative; top:27px; }
             #_form_8_._inline-style p { margin:0; }
-            #_form_8_._inline-style ._button-wrapper { position:relative; margin:27px 12.5px 0 20px; }
+            #_form_8_._inline-style ._button-wrapper { position:relative; }
             #_form_8_ ._form-thank-you { position:relative; left:0; right:0; text-align:center; font-size:18px; }
             @media all and (min-width:320px) and (max-width:667px) { #_form_8_._inline-form._inline-style ._inline-style._button-wrapper { margin-top:20px !important; margin-left:0 !important; }
             }
@@ -130,11 +136,6 @@ This component is used to render the Post content type on Storyblok
                 <input type="hidden" name="act" value="sub" />
                 <input type="hidden" name="v" value="2" />
                 <div class="_form-content">
-                  <div class="_form_element _x93248492 _inline-style _clear" >
-                    <div class="_form-title">
-                      I want the job!
-                    </div>
-                  </div>
                   <div class="_form_element _x22102590 _inline-style _clear" >
                     <div class="_html-code">
                       <p>
@@ -158,8 +159,8 @@ This component is used to render the Post content type on Storyblok
                       <input type="text" name="email" placeholder="Type your email" required/>
                     </div>
                   </div>
-                  <div class="_form_element _field11 _inline-style " >
-                    <input type="hidden" name="field[11]" value="Scrum Master" />
+                  <div class="_form_element _field11 _inline-style " style="display: none;">
+                    <input type="hidden" name="field[11]" value="" />
                   </div>
                   <div class="_button-wrapper _inline-style">
                     <button id="_form_8_submit" class="_submit" type="submit">
@@ -203,19 +204,19 @@ This component is used to render the Post content type on Storyblok
               }
             };
             window._load_script = function(url, callback) {
-                var head = document.querySelector('head'), script = document.createElement('script'), r = false;
-                script.type = 'text/javascript';
-                script.charset = 'utf-8';
-                script.src = url;
-                if (callback) {
-                  script.onload = script.onreadystatechange = function() {
+              var head = document.querySelector('head'), script = document.createElement('script'), r = false;
+              script.type = 'text/javascript';
+              script.charset = 'utf-8';
+              script.src = url;
+              if (callback) {
+                script.onload = script.onreadystatechange = function() {
                   if (!r && (!this.readyState || this.readyState == 'complete')) {
                     r = true;
                     callback();
-                    }
-                  };
-                }
-                head.appendChild(script);
+                  }
+                };
+              }
+              head.appendChild(script);
             };
             (function() {
               if (window.location.search.search("excludeform") !== -1) return false;
@@ -262,6 +263,9 @@ This component is used to render the Post content type on Storyblok
                 var fieldVal = getUrlParam(allInputs[i].dataset.name);
 
                 if (fieldVal) {
+                  if (allInputs[i].dataset.autofill === "false") {
+                    continue;
+                  }
                   if (allInputs[i].type == "radio" || allInputs[i].type == "checkbox") {
                     if (allInputs[i].value == fieldVal) {
                       allInputs[i].checked = true;
@@ -276,7 +280,7 @@ This component is used to render the Post content type on Storyblok
                 for (var i = 0; i < tooltips.length; i++) {
                   tooltips[i].tip.parentNode.removeChild(tooltips[i].tip);
                 }
-                  tooltips = [];
+                tooltips = [];
               };
               var remove_tooltip = function(elem) {
                 for (var i = 0; i < tooltips.length; i++) {
@@ -405,7 +409,13 @@ This component is used to render the Post content type on Storyblok
                 return no_error;
               };
               var needs_validate = function(el) {
-                return el.name == 'email' || el.getAttribute('required') !== null;
+                    if(el.getAttribute('required') !== null){
+                        return true
+                    }
+                    if(el.name === 'email' && el.value !== ""){
+                        return true
+                    }
+                    return false
               };
               var validate_form = function(e) {
                 var err = form_to_submit.querySelector('._form_error'), no_error = true;
@@ -481,9 +491,11 @@ This component is used to render the Post content type on Storyblok
               };
               addEvent(form_to_submit, 'submit', form_submit);
             })();
-          </script>
 
-          <spacer size="large" />
+          </script>
+          <!-- Specific job form end -->
+
+          <spacer size="medium" />
 
           <div
             class="Buttons"
@@ -540,5 +552,60 @@ This component is used to render the Post content type on Storyblok
   .Job__subtitle {
     font-size: 16px;
     width: 40%;
+  }
+
+  .job-footer__form-title {
+    font-size: 54px;
+    line-height: 1;
+    text-transform: uppercase;
+    text-align: center;
+    padding-bottom: 12px;
+
+    .text--primary {
+      color: color('primaryColor');
+    }
+
+    .text--secondary {
+      color: color('secondaryColor');
+    }
+  }
+
+  ._form_8 {
+    ._x22102590 {
+      color: color('primaryColor');
+
+      p {
+        padding-bottom: 0px;
+        font-size: 16px!important;
+        font-family: $font-primary!important;
+      }
+    }
+
+    input {
+      border: none!important;
+      border-radius: 0!important;
+      width: 200px!important;
+      height: 42px!important;
+      font-size: 16px!important;
+      color: color('primaryColor')!important;
+      font-family: $font-primary!important;
+
+      &::placeholder {
+        color: color('medium')!important;
+      }
+    }
+
+    #_form_8_submit {
+      background: transparent!important;
+      border-radius: 0!important;
+      border: 1px solid color('primaryColor')!important;
+      color: color('primaryColor')!important;
+      text-transform: uppercase!important;
+      font-size: 12px!important;
+      height: 42px!important;
+      padding-left: 28px!important;
+      padding-right: 28px!important; 
+      font-family: $font-primary!important;
+    }
   }
 </style>

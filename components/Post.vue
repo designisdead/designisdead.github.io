@@ -9,6 +9,7 @@ This component is used to render the Post content type on Storyblok
         <header class="Post-header">
           <wrapper
             size="large"
+            :backgroundIsInShrinked=true
             class="Post-headerContent__wrapper"
             :blok="{
               layout: 'shrinked',

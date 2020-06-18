@@ -34,8 +34,8 @@
 
     @each $key, $value in $sizes {
       &.#{$key} {
-        height: ceil($value/26);
-        width: ceil($value/26);
+        height: ceil($value/23);
+        width: ceil($value/23);
       }
     }
 

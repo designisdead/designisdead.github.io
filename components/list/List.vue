@@ -2,7 +2,7 @@
   <div v-editable="blok">
     <!-- If list type is masonry -->
     <div v-if="blok.listtype === 'masonry'">
-      <equalcolumns :cols="{default: 4, 1400: 3, 700: 2, 400: 1}">
+      <equalcolumns :cols="{default: 4, 1400: 3, 1000: 2, 650: 1}">
         <div
           v-for="(post, index) in blok.listcontent"
           :key="index">

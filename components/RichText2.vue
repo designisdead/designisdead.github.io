@@ -90,6 +90,19 @@
     }
   }
 
+  pre {
+    color: color(light);
+    background: color(black);
+    border-radius: 3px;
+    padding: 16px;
+    margin: 20px 0 0;
+  }
+
+  code {
+    border: solid 1px color(black);
+    border-radius: 3px;
+  }
+
   a {
     text-decoration: underline;
     color: color('secondaryColor');

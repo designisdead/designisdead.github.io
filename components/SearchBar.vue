@@ -392,6 +392,8 @@ export default {
     cursor: pointer;
     height: auto;
     vertical-align: bottom;
+    display: flex;
+    align-items: center;
     padding: 0 16px;
     display: flex;
     justify-content: center;

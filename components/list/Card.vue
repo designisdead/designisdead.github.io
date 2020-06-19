@@ -158,6 +158,7 @@
     font-size: 24px;
     color: color('primaryColor');
     text-transform: uppercase;
+    margin-bottom: auto;
     
     &:first-line {
       color: color('secondaryColor');
@@ -169,7 +170,7 @@
     text-transform: uppercase;
     color: color('primaryColor');
     padding: 0;
-    margin-bottom: 36px;
+    margin: 14px 0 auto;
   }
 
   .Card-cta {
@@ -178,7 +179,7 @@
     color: color('primaryColor');
     font-size: 12px;
     padding: 12px 34px;
-    margin-top: auto;
+    margin-top: 36px;
     align-self: start;
   }
 

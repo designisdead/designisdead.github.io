@@ -106,21 +106,22 @@ export default {
     },
     openTagFilter() {
       this.tagFilterOpened = !this.tagFilterOpened
-      if (window.innerWidth < 800) {
-        const body = document.querySelector('body')
-        const html = document.querySelector('html')
-        this.tagFilterOpened ? (
-          body.style.overflow = 'hidden',
-          body.style.height = '100%',
-          html.style.overflow = 'hidden',
-          html.style.height = '100%'
-        ) : (
-          body.style.overflow = 'auto',
-          body.style.height = 'auto',
-          html.style.overflow = 'auto',
-          html.style.height = 'auto'
-        )
-      }
+      // Prevent overflow when tags are open
+      // if (window.innerWidth < 800) {
+      //   const body = document.querySelector('body')
+      //   const html = document.querySelector('html')
+      //   this.tagFilterOpened ? (
+      //     body.style.overflow = 'hidden',
+      //     body.style.height = '100%',
+      //     html.style.overflow = 'hidden',
+      //     html.style.height = '100%'
+      //   ) : (
+      //     body.style.overflow = 'auto',
+      //     body.style.height = 'auto',
+      //     html.style.overflow = 'auto',
+      //     html.style.height = 'auto'
+      //   )
+      // }
     },
     startTyping() {
       const body = document.querySelector('body')
@@ -146,14 +147,14 @@ export default {
       let searchBarMainContainer = document.querySelector('.search-bar__main-container')
       if (window.innerWidth > 800) this.tagFilterOpened = false
       if (window.pageYOffset <= 32) {
-        searchBarMainContainer.style.top = "64px"
+        searchBarMainContainer.style.top = "30px"
       } else {
         if (this.prevScrollpos > currentScrollPos) {
           searchBarMainContainer.style.opacity = "1"
           if (this.currentScrollPos <= 120 && window.innerWidth > 480) {
             searchBarMainContainer.style.top = "-10px"
           } else {
-            searchBarMainContainer.style.top = "64px"
+            searchBarMainContainer.style.top = "30px"
           }
         } else {
           searchBarMainContainer.style.top = "-164px"
@@ -204,10 +205,10 @@ export default {
   .search-bar__main-container {
     position: fixed;
     z-index: 2;
-    background-color: color('light');
+    background-color: color('primaryColor');
     width: calc(100vw - 100px);
     margin: 0 50px;
-    top: 64px;
+    top: 30px;
     left: 0;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     transition: top 0.4s, opacity 0.4s cubic-bezier(0,1.11,.44,1);
@@ -391,6 +392,8 @@ export default {
     cursor: pointer;
     height: auto;
     vertical-align: bottom;
+    display: flex;
+    align-items: center;
     padding: 0 16px;
     display: flex;
     justify-content: center;
@@ -428,10 +431,6 @@ export default {
     .search-bar__main-container {
       margin: 0;
       width: 100%;
-
-      &:before {
-        display: none;
-      }
     }
 
     .search-bar__tags-container {
@@ -497,11 +496,10 @@ export default {
     }
 
     .slide-fade-enter-active, .slide-fade-leave-active {
-      transition: all .2s ease;
+      opacity: 1;
     }
     /* .slide-fade-leave-active below version 2.1.8 */
     .slide-fade-enter, .slide-fade-leave-to {
-      transform: translateY(-300px);
       opacity: 1;
     }
   }

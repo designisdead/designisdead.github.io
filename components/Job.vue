@@ -11,7 +11,8 @@ This component is used to render the Post content type on Storyblok
           backgroundimage: '//a.storyblok.com/f/44470/2928x1602/fb173b049c/groupe-2-copie-9-3x.png', 
           backgroundposition: 'center-right',
           parallax: 0.5,
-          backgroundsize: 'cover'
+          backgroundsize: 'cover',
+          layout: 'shrinked'
         }">
         <header class="Job-header Wrapper halfscreen u-color--textLight">
           <div class="Job__wrapper">
@@ -545,8 +546,10 @@ This component is used to render the Post content type on Storyblok
   }
 
   .Job__title {
+    line-height: 1;
     text-transform: uppercase;
     width: 40%;
+    font-size: 54px;
   }
 
   .Job__subtitle {
@@ -567,6 +570,21 @@ This component is used to render the Post content type on Storyblok
 
     .text--secondary {
       color: color('secondaryColor');
+    }
+  }
+
+  @media screen and (max-width: size('smedium')) {
+    .Job__wrapper {
+      text-align: center;
+    }
+
+    .Job__title {
+      width: 100%;
+      font-size: 37px;
+    }
+
+    .Job__subtitle {
+      width: 100%;
     }
   }
 
@@ -606,6 +624,36 @@ This component is used to render the Post content type on Storyblok
       padding-left: 28px!important;
       padding-right: 28px!important; 
       font-family: $font-primary!important;
+    }
+
+    @media screen and (max-width: size(medium)) {
+      ._form-content {
+        justify-content: flex-start;
+      }
+
+      ._button-wrapper {
+        margin-left: 0!important;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      ._x22102590 {
+        width: 100%;
+      }
+
+      ._x03259613 {
+        margin-left: 0!important;
+        width: 100%;
+      }
+
+      ._button-wrapper {
+        display: block;
+        width: 100%;
+      }
+
+      #_form_8_submit {
+        padding: 0;
+      }
     }
   }
 </style>

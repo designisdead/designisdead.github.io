@@ -152,6 +152,7 @@
 
   .Card-title {
     letter-spacing: 0;
+    word-break: break-word;
     line-height: 1;
     margin-bottom: 14px;
     padding: 0;

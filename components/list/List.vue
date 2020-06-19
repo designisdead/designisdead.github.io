@@ -25,9 +25,9 @@
       v-if="blok.contenttype === 'blog/'"
       @emitSearchFields="getSearchField"
       :searchType="'blog'"></search-bar>
-      <div
+      <!-- <div
         v-if="blok.contenttype === 'blog/'"
-        class="list__mobile-top-spacer blog-list__container"></div>
+        class="list__mobile-top-spacer blog-list__container"></div> -->
 
       <ul
         v-if="blok.listcontent && blok.listcontent.length > 0"
@@ -173,13 +173,10 @@ export default {
   }
 }
 
-.blog-list__container {
-  // padding-top: 20px;
-}
-
 .List--list-image,
 .List--card {
   margin: 0 (-$spacer/2);
+  padding-top: 0!important;
   // grid-auto-rows: repeat(2, 1fr);
   @media screen and (min-width: size("medium")) {
     display: grid;

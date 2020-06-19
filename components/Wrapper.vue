@@ -161,4 +161,16 @@
       max-width: size(huge);
     }
   }
+
+  @media screen and (max-width: size('small')) {
+    .Wrapper-content {
+      padding: 0 10px;
+    }
+  }
+
+  @media screen and (max-width: size('smedium')) {
+    .wrapper--shrinked {
+      margin: 0;
+    }
+  }
 </style>

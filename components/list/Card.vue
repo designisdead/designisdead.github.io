@@ -205,4 +205,11 @@
     }
   }
 
+  @media screen and (max-width: size('smedium')) {
+    .Card {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+
 </style>

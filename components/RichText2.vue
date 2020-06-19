@@ -106,5 +106,11 @@
   .text--light {
     color: color('textLight');
   }
+
+  @media screen and (max-width: size('smedium')) {
+    h1, h2 {
+      font-size: 37px;
+    }
+  }
 }
 </style>

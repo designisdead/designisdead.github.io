@@ -1,7 +1,7 @@
 <template>
-  <div v-editable="Blok" :data-parallax="Parallax" style="position: relative;">
+  <div v-editable="Blok" :data-parallax="Parallax" style="position: relative;" :class="{ 'wrapper--shrinked' : blok.layout == 'shrinked' && backgroundIsInShrinked }">
     <div
-      :class="[Blok.backgroundcolor, Blok.textcolor, Height, { 'wrapper--shrinked' : blok.layout == 'shrinked'}]"
+      :class="[Blok.backgroundcolor, Blok.textcolor, Height, { 'wrapper--shrinked' : blok.layout == 'shrinked' && !backgroundIsInShrinked }]"
       :id="blok.id"
       class="Wrapper"
       :style="{ padding: blok.size === 'full' && 0 }">
@@ -52,6 +52,10 @@
       height: {
         type: String,
         default: null
+      },
+      backgroundIsInShrinked: {
+        type: Boolean,
+        default: false
       }
     },
     computed: {
@@ -155,6 +159,18 @@
     @media screen and (min-width: size(huge) + 100px) {
       margin: 0 auto;
       max-width: size(huge);
+    }
+  }
+
+  @media screen and (max-width: size('small')) {
+    .Wrapper-content {
+      padding: 0 10px;
+    }
+  }
+
+  @media screen and (max-width: size('smedium')) {
+    .wrapper--shrinked {
+      margin: 0;
     }
   }
 </style>

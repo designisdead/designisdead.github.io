@@ -46,6 +46,15 @@ $background-positions: (
   bottom-right: bottom right
 );
 
+$grid-orders: (
+  1: 1,
+  2: 2,
+  3: 3,
+  4: 4,
+  5: 5,
+  6: 6
+);
+
 @function color($key) {
   @return map-get($colors, $key);
 }
@@ -54,6 +63,7 @@ $background-positions: (
 $sizes: (
   tiny: 330px,
   small: 440px,
+  smedium: 600px,
   medium: 800px,
   large: 1000px,
   huge: 1400px,

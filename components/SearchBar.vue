@@ -146,14 +146,14 @@ export default {
       let searchBarMainContainer = document.querySelector('.search-bar__main-container')
       if (window.innerWidth > 800) this.tagFilterOpened = false
       if (window.pageYOffset <= 32) {
-        searchBarMainContainer.style.top = "60px"
+        searchBarMainContainer.style.top = "64px"
       } else {
         if (this.prevScrollpos > currentScrollPos) {
           searchBarMainContainer.style.opacity = "1"
-          if (this.currentScrollPos >= 120) {
-            searchBarMainContainer.style.top = "60px"
-          } else {
+          if (this.currentScrollPos <= 120 && window.innerWidth > 480) {
             searchBarMainContainer.style.top = "-10px"
+          } else {
+            searchBarMainContainer.style.top = "64px"
           }
         } else {
           searchBarMainContainer.style.top = "-164px"
@@ -207,7 +207,7 @@ export default {
     background-color: color('light');
     width: calc(100vw - 100px);
     margin: 0 50px;
-    top: 60px;
+    top: 64px;
     left: 0;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     transition: top 0.4s, opacity 0.4s cubic-bezier(0,1.11,.44,1);
@@ -216,13 +216,13 @@ export default {
       content: '';
       display: block;
       width: 100%;
-      height: 70px;
+      height: 30px;
       background-color: color('primaryColor');
     }
   }
 
   .search-bar__form-wrapper {
-    padding: 22px 20px;
+    padding: 22px 18px;
     background-color: color('primaryColorLighten1');
 
     @media screen and (min-width: size('huge')) {
@@ -315,7 +315,7 @@ export default {
     background: color('light');
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    padding: 14px;
+    padding: 16px;
   }
 
   .search-bar__tag-list {
@@ -327,9 +327,10 @@ export default {
   }
 
   .search-bar__tag-list-item {
-    flex: 20%;
+    width: 25%;
     margin: 0;
     padding-bottom: 16px;
+    padding-right: 6px;
     display: flex;
     align-items: center;
     line-height: 1;
@@ -380,7 +381,7 @@ export default {
   }
 
   .search-bar__tag-list-item__tag-name {
-    font-size: 14px;
+    font-size: 16px;
     color: color('primaryColor');
     text-transform: capitalize;
   }
@@ -423,17 +424,14 @@ export default {
     color: color('greyLight');
   }
 
-  @media screen and (max-width: size('small')) {
-    .search-bar__search-form {
-      width: 100%;
-    }
-  }
-
-  @media screen and (max-width: size('medium') - 1) {
+  @media screen and (max-width: size('smedium')) {
     .search-bar__main-container {
-      height: 90px;
-      border-bottom: 1px solid #999;
-      box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.5);
+      margin: 0;
+      width: 100%;
+
+      &:before {
+        display: none;
+      }
     }
 
     .search-bar__tags-container {
@@ -441,14 +439,20 @@ export default {
     }
 
     .search-bar__search-form {
+      width: 100%;
       margin-bottom: 14px;
-      top: -12px;
+      top: -5px;
     }
 
     .search-bar__tag-filter-container {
       position: absolute;
-      top: 50px;
+      top: 58px;
+      padding: 0;
       border: none;
+    }
+
+    .search-bar__tag-filter-open-btn {
+      color: color(light);
     }
 
     .search-bar__search-input {
@@ -461,15 +465,10 @@ export default {
     }
 
     .search-bar__tag-filter-box {
-      position: fixed;
-      width: 100%;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      top: auto;
-      border-radius: 0;
-      border-top: 1px solid #999;
-      padding: 0;
+      top: 85px;
+      left: -20px;
+      width: calc(100% + 40px);
+      padding: 20px 18px;
     }
 
     .search-bar__tag-filter-box:before {
@@ -477,8 +476,11 @@ export default {
     }
 
     .search-bar__tag-list {
-      margin: 37px 0;
-      padding: 16px 0 0 20px;
+      padding: 0;
+    }
+
+    .search-bar__tag-list-item {
+      width: 50%;
     }
 
     .search-bar__tag-filter-box__reset-filter {
@@ -499,8 +501,26 @@ export default {
     }
     /* .slide-fade-leave-active below version 2.1.8 */
     .slide-fade-enter, .slide-fade-leave-to {
-      transform: translateY(300px);
+      transform: translateY(-300px);
       opacity: 1;
+    }
+  }
+
+  @media screen and (min-width: size('smedium')) {
+    .search-bar__tag-list-item {
+      width: 50%;
+    }
+  }
+
+  @media screen and (min-width: size('medium')) {
+    .search-bar__tag-list-item {
+      width: 25%;
+    }
+  }
+
+  @media screen and (min-width: size('large')) {
+    .search-bar__tag-list-item {
+      width: 20%;
     }
   }
 

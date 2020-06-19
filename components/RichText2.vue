@@ -90,6 +90,19 @@
     }
   }
 
+  pre {
+    color: color(light);
+    background: color(black);
+    border-radius: 3px;
+    padding: 16px;
+    margin: 20px 0 0;
+  }
+
+  code {
+    border: solid 1px color(black);
+    border-radius: 3px;
+  }
+
   a {
     text-decoration: underline;
     color: color('secondaryColor');
@@ -105,6 +118,12 @@
 
   .text--light {
     color: color('textLight');
+  }
+
+  @media screen and (max-width: size('smedium')) {
+    h1, h2 {
+      font-size: 37px;
+    }
   }
 }
 </style>

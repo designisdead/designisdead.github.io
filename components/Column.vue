@@ -1,7 +1,7 @@
 <template>
   <div
     v-editable="blok"
-    class="Column">
+    :class="['Column', blok.order && `column-order--${blok.order}`]">
     <div class="Column-header">
       <component
         v-for="blok in blok.columnheader"
@@ -33,7 +33,14 @@
 
 <script>
   export default {
-    props: {      blok: {        type: Object,        default: function () {          return {}        }      }    },
+    props: {
+      blok: { 
+        type: Object,
+        default: function () {
+          return {}
+        }
+      }
+    }
   }
 </script>
 
@@ -52,5 +59,13 @@
 
   .Column-footer {
     margin-top: auto;
+  }
+
+  @media screen and (max-width: size('medium')) {
+    @each $key, $value in $grid-orders {
+      .column-order--#{$key} {
+        order: $value;
+      }
+    }
   }
 </style>

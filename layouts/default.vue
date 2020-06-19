@@ -897,5 +897,46 @@
       padding-right: 28px!important; 
       font-family: $font-primary!important;
     }
+
+    @media screen and (max-width: size(medium)) {
+      ._form-content {
+        justify-content: flex-start;
+      }
+
+      ._field27 {
+        margin-left: 0!important;
+      }
+
+      ._button-wrapper {
+        margin-left: 0!important;
+      }
+
+      #_form_18_submit {
+        margin: 0;
+      }
+    }
+
+    @media screen and (max-width: 700px) {
+      ._x04713497 {
+        width: 100%;
+      }
+
+      ._x03259613 {
+        margin-left: 0!important;
+        width: 100%;
+
+        ._form-label {
+          display: none!important;
+        }
+      }
+
+      ._field27 {
+        flex-direction: column;
+
+        ._form-label {
+          flex: 1;
+        }
+      }
+    }
   }
 </style>

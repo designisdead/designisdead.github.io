@@ -176,7 +176,6 @@ export default {
 .List--list-image,
 .List--card {
   margin: 0 (-$spacer/2);
-  padding-top: 0!important;
   // grid-auto-rows: repeat(2, 1fr);
   @media screen and (min-width: size("medium")) {
     display: grid;

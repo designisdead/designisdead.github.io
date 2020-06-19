@@ -33,7 +33,6 @@ This component is used to render the Post content type on Storyblok
                     :key="index"
                     class="Post-tag">
                     {{ tag }}
-                    <span v-if="index < tags.length - 1">,</span>
                   </span>
                 </span>
 

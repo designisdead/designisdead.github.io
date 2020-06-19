@@ -1,7 +1,7 @@
 <template>
   <div
     v-editable="blok"
-    :class="['Column', blok.order && `column-order--${blok.order}`]">
+    :class="['Column', blok.mobileorder && `column-order--${blok.mobileorder}`]">
     <div class="Column-header">
       <component
         v-for="blok in blok.columnheader"

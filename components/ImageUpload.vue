@@ -84,4 +84,10 @@
     font-style: italic;
     padding-top: $spacer/4;
   }
+
+  @media screen and (max-width: size('medium')) {
+    .ImageUpload-imageWrapper {
+      justify-content: center;
+    }
+  }
 </style>

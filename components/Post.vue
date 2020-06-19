@@ -10,13 +10,18 @@ This component is used to render the Post content type on Storyblok
           <wrapper
             size="large"
             :backgroundIsInShrinked=true
-            class="Post-headerContent__wrapper"
+            class="Post-headerContent__background-wrapper"
             :blok="{
               layout: 'shrinked',
               backgroundimage: blok.content.primaryimage,
               backgroundposition: blok.content.primaryimageposition,
               backgroundsize: 'cover',
             }"
+          />
+          <wrapper
+            size="large"
+            class="Post-headerContent__wrapper"
+            :blok="{ layout: 'shrinked', backgroundcolor: 'u-backgroundColor--textLight' }"
           >
             <div class="Post-headerContent">
               <div class="Title tiny uppercase">
@@ -49,13 +54,6 @@ This component is used to render the Post content type on Storyblok
           <div
             v-editable="blok"
             class="page">
-            <wrapper
-              :blok="{
-                backgroundcolor: 'u-backgroundColor--textLight',
-                layout: 'shrinked',
-              }">
-              <spacer size="small" />
-            </wrapper>
             <component
               v-for="blok in blok.content.body"
               :key="blok._uid"
@@ -139,11 +137,13 @@ This component is used to render the Post content type on Storyblok
     vertical-align: top;
   }
 
-  .Post-headerContent__wrapper {
+  .Post-headerContent__background-wrapper {
     height: 300px;
+  }
 
+  .Post-headerContent__wrapper {
     > .Wrapper {
-      padding-top: 220px;
+      padding: 0;
     }
   }
 
@@ -151,6 +151,7 @@ This component is used to render the Post content type on Storyblok
     width: 100%;
     background: color('snowColor');
     padding: 20px 24px;
+    margin-top: -100px;
   }
 
   .Post-tags-container {
@@ -199,5 +200,21 @@ This component is used to render the Post content type on Storyblok
 
   .Post-content {
     background: color('primaryColor');
+  }
+
+  @media screen and (max-width: size('smedium')) {
+    .Post {
+      padding-top: 0;
+    }
+    
+    .Post-title {
+      font-size: 37px;
+    }
+  }
+
+  @media screen and (max-width: size('medium')) {
+    .Post-title {
+      padding: 0;
+    }
   }
 </style>

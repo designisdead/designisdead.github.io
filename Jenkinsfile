@@ -29,7 +29,6 @@ def helmInstall(namespace, release, buildNumber, additionalSetParams) {
   }
 }
 
-
 def helmDelete(namespace, release) {
   echo "Deleting ${release} in ${namespace} if deployed"
 
@@ -39,9 +38,43 @@ def helmDelete(namespace, release) {
   }
 }
 
+def healthCheck(url, descr, user, password, buildNumber, slackChannel) {
+  docker.image('node:10-alpine').inside {
+    withCredentials([
+      string(credentialsId: 'nexus-npm-token', variable: 'npmToken')
+    ]) {
+      withEnv(['HOME=.']) {
+        dir('devops-tools') {
+          git branch: 'master', url: 'https://bitbucket.org/designisdead/devops-tools.git', credentialsId: 'did-infra-bitbucket'
+
+          dir(path: 'health-checks') {
+            sh "echo \"//repo.designisdead.com/repository/npm-group/:_authToken=${npmToken}\" > .npmrc"
+            sh 'npm install --registry=https://repo.designisdead.com/repository/npm-group/'
+
+            def retries = 35
+            def delayBetween = 20000
+
+            echo "health-check [url: ${url}, retries: ${retries}, delay: ${delayBetween}, match: ${buildNumber}]"
+
+            def healthCheckResult = sh(returnStdout: true, script: "set +x && node scripts/health-check.js ${url} -r ${retries} -d ${delayBetween} -m ${buildNumber} -u ${user} -p \"${password}\"")
+
+            if (healthCheckResult.contains("Success")) {
+              notifySlack("DEPLOYED ON [ENV --> ${descr}] & HEALTH CHECK COMPLETED ", slackChannel)
+            } else {
+              currentBuild.result = "FAILED"
+              notifySlack(currentBuild.result, slackChannel)
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 def version;
 def majorVersion;
 def buildNumber;
+def gitHash;
 
 def registry = "designisdead"
 def imageName = "website"
@@ -57,6 +90,7 @@ node('master') {
   def pos = version.lastIndexOf(".")
   majorVersion = version.substring(0, pos)
   def revisionNumber = sh(returnStdout: true, script: 'git rev-list --count HEAD')
+  gitHash = sh(returnStdout: true, script: 'git rev-parse --short HEAD').trim()
   buildNumber = version + "-r" + revisionNumber.replaceAll("(?:\\n|\\r)", "")
   VersionNumber "${buildNumber}"
   currentBuild.displayName = buildNumber
@@ -86,7 +120,7 @@ node('master') {
 
   stage('Building image') {
     try {
-      websiteImage = docker.build(registry + '/' + imageName)
+      websiteImage = docker.build(registry + '/' + imageName, " --build-arg BUILD_NUMBER_ARG=${buildNumber} --build-arg VERSION_ARG=${version}  --build-arg GIT_HASH_ARG=${gitHash}")
     }
     catch (e) {
       currentBuild.result = "FAILED"
@@ -146,6 +180,7 @@ stage("Deploy $acceptanceEnv") {
         }
       }
       //TODO healthcheck
+      healthCheck("https://www-stg.designisdead.com/healthcheck", 'STG',  username, password, "${buildNumber}", "${didDevOpsChannels}")
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)
@@ -188,6 +223,8 @@ stage("Deploy PRD") {
         }
       }
       //TODO healthcheck
+      healthCheck("https://designisdead.com/healthcheck", 'PRD', username, password,"${buildNumber}","${didDevOpsChannels}")
+
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)

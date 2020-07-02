@@ -26,6 +26,17 @@ module.exports = {
       id: 'GTM-TQWRSTX'
     }]
   ],
+  healthcheck: {
+    path: '/healthcheck',
+    handler: (req, res, next) => {
+      res.setHeader('application/json')
+      res.end(JSON.stringify({
+        buildNumber: process.env.BUILD_NUMBER,
+        version: process.env.VERSION,
+        gitHash: process.env.GIT_HASH
+      }))
+    }
+  },
   webfontloader: {
     typekit: {
       id: 'lzu3trk'
@@ -76,7 +87,10 @@ module.exports = {
     middleware: 'stats'
   },
   env: {
-    apiUrl: process.env.API_URL || 'http://localhost:3000/api/echo'
+    apiUrl: process.env.API_URL || 'http://localhost:3000/api/echo',
+    buildNumber: process.env.BUILD_NUMBER,
+    version: process.env.VERSION,
+    gitHash: process.env.GIT_HASH
   },
   /*
   ** Headers of the page

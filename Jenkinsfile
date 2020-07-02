@@ -120,7 +120,7 @@ node('master') {
 
   stage('Building image') {
     try {
-      websiteImage = docker.build(registry + '/' + imageName, " --build-arg BUILD_NUMBER_ARG=${buildNumber} --build-arg VERSION_ARG=${version}  --build-arg GIT_HASH_ARG=${gitHash}")
+      websiteImage = docker.build(registry + '/' + imageName, " --build-arg BUILD_NUMBER_ARG=${buildNumber} --build-arg VERSION_ARG=${version}  --build-arg GIT_HASH_ARG=${gitHash} .")
     }
     catch (e) {
       currentBuild.result = "FAILED"

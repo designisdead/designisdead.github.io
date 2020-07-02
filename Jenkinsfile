@@ -180,7 +180,7 @@ stage("Deploy $acceptanceEnv") {
         }
       }
       //TODO healthcheck
-      healthCheck("https://www-stg.designisdead.com/healthcheck", 'STG', "${buildNumber}", "${didDevOpsChannels}")
+      healthCheck("https://www-stg.designisdead.com/healthcheck", 'STG', "${buildNumber}", "${didDevOpsChannel}")
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)
@@ -223,7 +223,7 @@ stage("Deploy PRD") {
         }
       }
       //TODO healthcheck
-      healthCheck("https://designisdead.com/healthcheck", 'PRD',"${buildNumber}","${didDevOpsChannels}")
+      healthCheck("https://designisdead.com/healthcheck", 'PRD',"${buildNumber}","${didDevOpsChannel}")
 
     } catch (e) {
       currentBuild.result = "FAILED"

@@ -41,6 +41,7 @@ def helmDelete(namespace, release) {
 def healthCheck(url, descr, buildNumber, slackChannel) {
   docker.image('node:10-alpine').inside {
     withCredentials([
+
       string(credentialsId: 'nexus-npm-token', variable: 'npmToken')
     ]) {
       withEnv(['HOME=.']) {

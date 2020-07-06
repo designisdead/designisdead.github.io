@@ -41,6 +41,7 @@ def helmDelete(namespace, release) {
 def healthCheck(url, descr, buildNumber, slackChannel) {
   docker.image('node:10-alpine').inside {
     withCredentials([
+
       string(credentialsId: 'nexus-npm-token', variable: 'npmToken')
     ]) {
       withEnv(['HOME=.']) {
@@ -180,7 +181,7 @@ stage("Deploy $acceptanceEnv") {
         }
       }
       //TODO healthcheck
-      healthCheck("https://www-stg.designisdead.com/healthcheck", 'STG', "${buildNumber}", "${didDevOpsChannels}")
+      healthCheck("https://www-stg.designisdead.com/healthcheck", 'STG', "${buildNumber}", "${didDevOpsChannel}")
     } catch (e) {
       currentBuild.result = "FAILED"
       notifySlack(currentBuild.result, didDevOpsChannel)
@@ -223,7 +224,7 @@ stage("Deploy PRD") {
         }
       }
       //TODO healthcheck
-      healthCheck("https://designisdead.com/healthcheck", 'PRD',"${buildNumber}","${didDevOpsChannels}")
+      healthCheck("https://designisdead.com/healthcheck", 'PRD',"${buildNumber}","${didDevOpsChannel}")
 
     } catch (e) {
       currentBuild.result = "FAILED"

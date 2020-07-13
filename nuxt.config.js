@@ -29,7 +29,7 @@ module.exports = {
   healthcheck: {
     path: '/healthcheck',
     handler: (req, res, next) => {
-      res.setHeader('application/json')
+      res.setHeader('Content-Type', 'application/json')
       res.end(JSON.stringify({
         buildNumber: process.env.BUILD_NUMBER,
         version: process.env.VERSION,
